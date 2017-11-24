@@ -19,7 +19,7 @@
                         <table>
                             <tr>
                                 <td><label class="control-label">Employer Name:</label></td>
-                                <td>@Html.TextBoxFor(model => model.Business.BusinessName, new { @class = "form-control" })</td>
+                                <td>@Html.TextBoxFor(model => model.Business.BusinessNm, new { @class = "form-control" })</td>
                                 <td ><label class="control-label">Employer Type:</label></td>
                                 <td>
                                     @Html.DropDownList("BusinessType", new[] {
@@ -36,49 +36,49 @@
                                 <td> <label class="control-label">EIN:</label> </td>
                                 <td>@Html.TextBoxFor(model => model.Business.EIN, new { @class = "form-control" })</td>
                                 <td><label class="control-label">Address Line1:</label></td>
-                                <td>@Html.TextBoxFor(model => model.Business.AddressLine1, new { @class = "form-control" })</td>
+                                <td>@Html.TextBoxFor(model => model.Business.Address1, new { @class = "form-control" })</td>
                             </tr>
                             <tr><td class="spacer10"></td></tr>
                             <tr>
                                 <td><label class="control-label">Address Line2:</label></td>
-                                <td>@Html.TextBoxFor(model => model.Business.AddressLine2, new { @class = "form-control" })</td>
+                                <td>@Html.TextBoxFor(model => model.Business.Address2, new { @class = "form-control" })</td>
                                 <td><label class="control-label">City:</label></td>
                                 <td>@Html.TextBoxFor(model => model.Business.City, new { @class = "form-control" })</td>
                             </tr>
                             <tr><td class="spacer10"></td></tr>
                             <tr>
                                 <td><label class="control-label">State:</label></td>
-                                <td>@Html.TextBoxFor(model => model.Business.State, new { @class = "form-control" })</td>
+                                <td>@Html.TextBoxFor(model => model.Business.USState, new { @class = "form-control" })</td>
                                 <td><label class="control-label">Zip Code:</label></td>
-                                <td>@Html.TextBoxFor(model => model.Business.ZipCode, new { @class = "form-control" })</td>
+                                <td>@Html.TextBoxFor(model => model.Business.PostalCd, new { @class = "form-control" })</td>
                             </tr>
                             <tr><td class="spacer10"></td></tr>
                             <tr>
                                 <td><label class="control-label">Country:</label></td>
                                 <td>@Html.TextBoxFor(model => model.Business.Country, new { @class = "form-control" })</td>
                                 <td><label class="control-labeld">Contact Name:</label></td>
-                                <td>@Html.TextBoxFor(model => model.Business.ContactName, new { @class = "form-control" })</td>
+                                <td>@Html.TextBoxFor(model => model.Business.ContactNm, new { @class = "form-control" })</td>
                             </tr>
                             <tr><td class="spacer10"></td></tr>
                             <tr>
                                 <td><label class="control-label">Email Address:</label></td>
-                                <td>@Html.TextBoxFor(model => model.Business.EmailAddress, new { @class = "form-control" })</td>
+                                <td>@Html.TextBoxFor(model => model.Business.Email, new { @class = "form-control" })</td>
                                 <td><label class="control-label">Phone Number:</label></td>
-                                <td>@Html.TextBoxFor(model => model.Business.PhoneNumber, new { @class = "form-control" })</td>
+                                <td>@Html.TextBoxFor(model => model.Business.Phone, new { @class = "form-control" })</td>
                             </tr>
                             <tr><td class="spacer10"></td></tr>
                             <tr>
                                 <td><label class="control-label">Phone Extn:</label></td>
                                 <td>@Html.TextBoxFor(model => model.Business.PhoneExtn, new { @class = "form-control" })</td>
                                 <td><label class="control-label">Fax Number:</label></td>
-                                <td>@Html.TextBoxFor(model => model.Business.FaxNumber, new { @class = "form-control" })</td>
+                                <td>@Html.TextBoxFor(model => model.Business.Fax, new { @class = "form-control" })</td>
                             </tr>
                             <tr><td class="spacer10"></td></tr>
                             <tr>
                                 <td><label class="control-label">Kind Of Employer:</label></td>
                                 <td>@Html.TextBoxFor(model => model.Business.KindOfEmployer, new { @class = "form-control" })</td>
                                 <td><label class="control-label">Employment Code:</label></td>
-                                <td>@Html.TextBoxFor(model => model.Business.EmploymentCode, new { @class = "form-control" })</td>
+                                <td>@Html.TextBoxFor(model => model.Business.EmploymentCd, new { @class = "form-control" })</td>
                             </tr>
                         </table>
                     </div>
@@ -101,13 +101,13 @@
                         <div class="form-group">
                             <label class="control-label col-sm-2">First Name:</label>
                             <div class="col-sm-10">
-                                @Html.TextBoxFor(model => model.Employee.FirstName, new { })
+                                @Html.TextBoxFor(model => model.Employee.FirstNm, new { })
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-2">Last Name:</label>
                             <div class="col-sm-10">
-                                @Html.TextBoxFor(model => model.Employee.LastName, new { })
+                                @Html.TextBoxFor(model => model.Employee.LastNm, new { })
                             </div>
                         </div>
                         <div class="form-group">
@@ -166,125 +166,119 @@
                         <div class="form-group">
                             <label class="control-label col-sm-2">Wages and tips:</label>
                             <div class="col-sm-10">
-                                @Html.TextBoxFor(model => model.FormDetails.Line1, new { })
+                                @Html.TextBoxFor(model => model.FormW2Details.Box1, new { })
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-2">Federal income tax withheld:</label>
                             <div class="col-sm-10">
-                                @Html.TextBoxFor(model => model.FormDetails.Line2, new { })
+                                @Html.TextBoxFor(model => model.FormW2Details.Box2, new { })
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-2">Social security wages:</label>
                             <div class="col-sm-10">
-                                @Html.TextBoxFor(model => model.FormDetails.Line3, new { })
+                                @Html.TextBoxFor(model => model.FormW2Details.Box3, new { })
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-2">Social security tax withheld:</label>
                             <div class="col-sm-10">
-                                @Html.TextBoxFor(model => model.FormDetails.Line4, new { })
+                                @Html.TextBoxFor(model => model.FormW2Details.Box4, new { })
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-2">Medicare wages and tips:</label>
                             <div class="col-sm-10">
-                                @Html.TextBoxFor(model => model.FormDetails.Line5, new { })
+                                @Html.TextBoxFor(model => model.FormW2Details.Box5, new { })
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-2">Medicare tax withheld:</label>
                             <div class="col-sm-10">
-                                @Html.TextBoxFor(model => model.FormDetails.Line6, new { })
+                                @Html.TextBoxFor(model => model.FormW2Details.Box6, new { })
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-2">Social security tips:</label>
                             <div class="col-sm-10">
-                                @Html.TextBoxFor(model => model.FormDetails.Line7, new { })
+                                @Html.TextBoxFor(model => model.FormW2Details.Box7, new { })
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-2">Allocated tips:</label>
                             <div class="col-sm-10">
-                                @Html.TextBoxFor(model => model.FormDetails.Line8, new { })
+                                @Html.TextBoxFor(model => model.FormW2Details.Box8, new { })
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-2">Verification code:</label>
                             <div class="col-sm-10">
-                                @Html.TextBoxFor(model => model.FormDetails.Line9, new { })
+                                @Html.TextBoxFor(model => model.FormW2Details.Box9, new { })
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-2">Dependent care benefits:</label>
                             <div class="col-sm-10">
-                                @Html.TextBoxFor(model => model.FormDetails.Line10, new { })
+                                @Html.TextBoxFor(model => model.FormW2Details.Box10, new { })
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-2">Nonqualified plans:</label>
                             <div class="col-sm-10">
-                                @Html.TextBoxFor(model => model.FormDetails.Line11NonqualifiedPlan, new { })
+                                @Html.TextBoxFor(model => model.FormW2Details.Box11NonqualifiedPlan, new { })
                             </div>
                         </div>
-                        @*<div class="form-group">
-                                <label class="control-label col-sm-2">Social security tax withheld:</label>
-                                <div class="col-sm-10">
-                                    @Html.TextBoxFor(model => model.FormDetails.Line11NonSectionPlan, new { })
-                                </div>
-                            </div>*@
                         <div class="form-group">
                             <label class="control-label col-sm-2">12a See instructions for box 12</label>
                             <div class="col-sm-10">
-                                @Html.TextBoxFor(model => model.FormDetails.Line12aCd, new { })
-                                @Html.TextBoxFor(model => model.FormDetails.Line12aAmt, new { })
+                                @Html.TextBoxFor(model => model.FormW2Details.Box12aCd, new { })
+                                @Html.TextBoxFor(model => model.FormW2Details.Box12aAmt, new { })
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-2">12b See instructions for box 12</label>
                             <div class="col-sm-10">
-                                @Html.TextBoxFor(model => model.FormDetails.Line12bCd, new { })
-                                @Html.TextBoxFor(model => model.FormDetails.Line12bAmt, new { })
+                                @Html.TextBoxFor(model => model.FormW2Details.Box12bCd, new { })
+                                @Html.TextBoxFor(model => model.FormW2Details.Box12bAmt, new { })
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-2">12c See instructions for box 12</label>
                             <div class="col-sm-10">
-                                @Html.TextBoxFor(model => model.FormDetails.Line12cCd, new { })
-                                @Html.TextBoxFor(model => model.FormDetails.Line12cAmt, new { })
+                                @Html.TextBoxFor(model => model.FormW2Details.Box12cCd, new { })
+                                @Html.TextBoxFor(model => model.FormW2Details.Box12cAmt, new { })
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-2">12d See instructions for box 12</label>
                             <div class="col-sm-10">
-                                @Html.TextBoxFor(model => model.FormDetails.Line12dCd, new { })
-                                @Html.TextBoxFor(model => model.FormDetails.Line12dAmt, new { })
+                                @Html.TextBoxFor(model => model.FormW2Details.Box12dCd, new { })
+                                @Html.TextBoxFor(model => model.FormW2Details.Box12dAmt, new { })
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-2">Statutory Employee</label>
                             <div class="col-sm-10">
-                                @Html.TextBoxFor(model => model.FormDetails.Line13IsStatutoryEmployee, new { })
+                                @Html.TextBoxFor(model => model.FormW2Details.Box13IsStatutoryEmployee, new { })
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-2">Retirement plan</label>
                             <div class="col-sm-10">
-                                @Html.TextBoxFor(model => model.FormDetails.Line13IsRetirementPlan, new { })
+                                @Html.TextBoxFor(model => model.FormW2Details.Box13IsRetirementPlan, new { })
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-2">Third-party sick pay</label>
                             <div class="col-sm-10">
-                                @Html.TextBoxFor(model => model.FormDetails.Line13IsThirdPartySickpay, new { })
+                                @Html.TextBoxFor(model => model.FormW2Details.Box13IsThirdPartySickpay, new { })
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-2">Other</label>
                             <div class="col-sm-10">
-                                @Html.TextBoxFor(model => model.FormDetails.Line14, new { })
+                                @Html.TextBoxFor(model => model.FormW2Details.Box14, new { })
                             </div>
                         </div>
                     </div>
@@ -302,85 +296,85 @@
                         <div class="form-group">
                             <label class="control-label col-sm-2">State:</label>
                             <div class="col-sm-10">
-                                @Html.TextBoxFor(model => model.FormDetails.Line15State1, new { })
+                                @Html.TextBoxFor(model => model.FormW2Details.Box15State1, new { })
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-2">Employer’s state ID number:</label>
                             <div class="col-sm-10">
-                                @Html.TextBoxFor(model => model.FormDetails.Line15State1IDNumber, new { })
+                                @Html.TextBoxFor(model => model.FormW2Details.Box15State1IDNumber, new { })
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-2">State wages, tips, etc.:</label>
                             <div class="col-sm-10">
-                                @Html.TextBoxFor(model => model.FormDetails.Line16State1Wages, new { })
+                                @Html.TextBoxFor(model => model.FormW2Details.Box16State1Wages, new { })
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-2">State income tax:</label>
                             <div class="col-sm-10">
-                                @Html.TextBoxFor(model => model.FormDetails.Line17State1Tax, new { })
+                                @Html.TextBoxFor(model => model.FormW2Details.Box17State1Tax, new { })
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-2">Local wages, tips, etc.:</label>
                             <div class="col-sm-10">
-                                @Html.TextBoxFor(model => model.FormDetails.Line18Local1Wages, new { })
+                                @Html.TextBoxFor(model => model.FormW2Details.Box18Local1Wages, new { })
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-2">Local income tax:</label>
                             <div class="col-sm-10">
-                                @Html.TextBoxFor(model => model.FormDetails.Line19Local1Tax, new { })
+                                @Html.TextBoxFor(model => model.FormW2Details.Box19Local1Tax, new { })
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-2">Locality name:</label>
                             <div class="col-sm-10">
-                                @Html.TextBoxFor(model => model.FormDetails.Line20Locality1Name, new { })
+                                @Html.TextBoxFor(model => model.FormW2Details.Box20Locality1Name, new { })
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-2">State:</label>
                             <div class="col-sm-10">
-                                @Html.TextBoxFor(model => model.FormDetails.Line15State2, new { })
+                                @Html.TextBoxFor(model => model.FormW2Details.Box15State2, new { })
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-2">Employer’s state ID number:</label>
                             <div class="col-sm-10">
-                                @Html.TextBoxFor(model => model.FormDetails.Line15State2IdNumber, new { })
+                                @Html.TextBoxFor(model => model.FormW2Details.Box15State2IdNumber, new { })
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-2">State wages, tips, etc.:</label>
                             <div class="col-sm-10">
-                                @Html.TextBoxFor(model => model.FormDetails.Line16State2Wages, new { })
+                                @Html.TextBoxFor(model => model.FormW2Details.Box16State2Wages, new { })
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-2">State income tax:</label>
                             <div class="col-sm-10">
-                                @Html.TextBoxFor(model => model.FormDetails.Line17State2Tax, new { })
+                                @Html.TextBoxFor(model => model.FormW2Details.Box17State2Tax, new { })
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-2">Local wages, tips, etc.:</label>
                             <div class="col-sm-10">
-                                @Html.TextBoxFor(model => model.FormDetails.Line18Local2Wages, new { })
+                                @Html.TextBoxFor(model => model.FormW2Details.Box18Local2Wages, new { })
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-2">Local income tax:</label>
                             <div class="col-sm-10">
-                                @Html.TextBoxFor(model => model.FormDetails.Line19Local2Tax, new { })
+                                @Html.TextBoxFor(model => model.FormW2Details.Box19Local2Tax, new { })
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-2">Locality name:</label>
                             <div class="col-sm-10">
-                                @Html.TextBoxFor(model => model.FormDetails.Line20Locality2Name, new { })
+                                @Html.TextBoxFor(model => model.FormW2Details.Box20Locality2Name, new { })
                             </div>
                         </div>
                     </div>
@@ -402,22 +396,7 @@
     });
 
     function GetStatus() {
-        ShowAPIStatus();
-        //var formdata = $("#createreturnForm").serialize();
-        //$.ajax({
-        //    url: "/FormW2/GetReturnCreateStatus/",
-        //    cache: false,
-        //    data: formdata,
-        //    success: function (data) {
-        //        if (data != null) {
-        //            ShowAPIStatus(data);
-        //            //toastr.success(data);
-        //        }
-        //    },
-        //    error: function (err) {
-        //        console.log(err.responseText);
-        //    }
-        //});
+        ShowAPIStatus();       
     }
 
 

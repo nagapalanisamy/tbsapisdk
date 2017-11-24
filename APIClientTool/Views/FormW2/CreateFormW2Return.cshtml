@@ -9,9 +9,9 @@
         <h3>Create FormW2 Return</h3>
         <div class="panel-group" id="accordion">
             <div class="panel panel-default">
-                <div class="panel-heading">
+                <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapse1">
                     <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">Employer Details</a>
+                        Employer Details
                     </h4>
                 </div>
                 <div id="collapse1" class="panel-collapse collapse in">
@@ -20,15 +20,15 @@
                             <tr>
                                 <td><label class="control-label">Employer Name:</label></td>
                                 <td>@Html.TextBoxFor(model => model.Business.BusinessNm, new { @class = "form-control" })</td>
-                                <td ><label class="control-label">Employer Type:</label></td>
+                                <td><label class="control-label">Employer Type:</label></td>
                                 <td>
-                                    @Html.DropDownList("BusinessType", new[] {
+                                    @Html.DropDownList("Business.BusinessType", new[] {
                        new SelectListItem{ Text = "Estate", Value = "ESTE"},
                         new SelectListItem{ Text = "Partnership", Value = "PART"},
                          new SelectListItem{ Text = "Corporation", Value = "CORP"},
                           new SelectListItem{ Text = "Exempt Organization", Value = "EORG"},
                            new SelectListItem{ Text = "Sole Proprietorship", Value = "SPRO"}
-                         }, "Select Employer Type", new { })
+                         }, "Select Employer Type", new { @class = "form-control" })
                                 </td>
                             </tr>
                             <tr><td class="spacer10"></td></tr>
@@ -48,9 +48,74 @@
                             <tr><td class="spacer10"></td></tr>
                             <tr>
                                 <td><label class="control-label">State:</label></td>
-                                <td>@Html.TextBoxFor(model => model.Business.USState, new { @class = "form-control" })</td>
+                                <td>
+                                    @Html.DropDownList("Business.USState", new[] {
+                       new SelectListItem{ Text = "Alabama (AL)", Value = "AL"},
+                        new SelectListItem{ Text = "Alaska (AK)", Value = "AK"},
+                         new SelectListItem{ Text = "Arizona (AZ)", Value = "AZ"},
+                          new SelectListItem{ Text = "Arkansas (AR)", Value = "AR"},
+                           new SelectListItem{ Text = "California (CA)", Value = "CA"},
+                             new SelectListItem{ Text = "Colorado (CO)", Value = "CO"},
+                        new SelectListItem{ Text = "Connecticut (CT)", Value = "CT"},
+                         new SelectListItem{ Text = "Delaware (DE)", Value = "DE"},
+                          new SelectListItem{ Text = "District of Columbia (DC)", Value = "DC"},
+                           new SelectListItem{ Text = "Florida (FL)", Value = "FL"},
+                             new SelectListItem{ Text = "Georgia (GA)", Value = "GA"},
+                        new SelectListItem{ Text = "Hawaii (HI)", Value = "HI"},
+                         new SelectListItem{ Text = "Idaho (ID)", Value = "ID"},
+                          new SelectListItem{ Text = "Illinois (IL)", Value = "IL"},
+                           new SelectListItem{ Text = "Indiana (IN)", Value = "IN"},
+                             new SelectListItem{ Text = "Iowa (IA)", Value = "IA"},
+                        new SelectListItem{ Text = "Kansas (KS)", Value = "KS"},
+                         new SelectListItem{ Text = "Kentucky (KY)", Value = "KY"},
+                          new SelectListItem{ Text = "Louisiana (LA)", Value = "LA"},
+                           new SelectListItem{ Text = "Maine (ME)", Value = "ME"},
+                             new SelectListItem{ Text = "Maryland (MD)", Value = "MD"},
+                        new SelectListItem{ Text = "Massachusetts (MA)", Value = "MA"},
+                         new SelectListItem{ Text = "Michigan (MI)", Value = "MI"},
+                          new SelectListItem{ Text = "Minnesota (MN)", Value = "MN"},
+                           new SelectListItem{ Text = "Mississippi (MS)", Value = "MS"},
+                             new SelectListItem{ Text = "Missouri (MO)", Value = "MO"},
+                        new SelectListItem{ Text = "Montana (MT)", Value = "MT"},
+                         new SelectListItem{ Text = "Nebraska (NE)", Value = "NE"},
+                          new SelectListItem{ Text = "Nevada (NV)", Value = "NV"},
+                           new SelectListItem{ Text = "New Hampshire (NH)", Value = "NH"},
+                             new SelectListItem{ Text = "New Jersey (NJ)", Value = "NJ"},
+                        new SelectListItem{ Text = "New Mexico (NM)", Value = "NM"},
+                         new SelectListItem{ Text = "New York (NY)", Value = "NY"},
+                          new SelectListItem{ Text = "North Carolina (NC)", Value = "NC"},
+                           new SelectListItem{ Text = "North Dakota (ND)", Value = "ND"},
+                             new SelectListItem{ Text = "Ohio (OH)", Value = "OH"},
+                        new SelectListItem{ Text = "Oklahoma (OK)", Value = "OK"},
+                         new SelectListItem{ Text = "Oregon (OR)", Value = "OR"},
+                          new SelectListItem{ Text = "Pennsylvania (PA)", Value = "PA"},
+                           new SelectListItem{ Text = "Rhode Island (RI)", Value = "RI"},
+                           new SelectListItem{ Text = "South Carolina (SC)", Value = "SC"},
+                        new SelectListItem{ Text = "South Dakota (SD)", Value = "SD"},
+                         new SelectListItem{ Text = "Tennessee (TN)", Value = "TN"},
+                          new SelectListItem{ Text = "Texas (TX)", Value = "TX"},
+                           new SelectListItem{ Text = "Utah (UT)", Value = "UT"},
+                            new SelectListItem{ Text = "Vermont (VT)", Value = "VT"},
+                             new SelectListItem{ Text = "Virginia (VA)", Value = "VA"},
+                              new SelectListItem{ Text = "Washington (WA)", Value = "WA"},
+                               new SelectListItem{ Text = "West Virginia (WV)", Value = "WV"},
+                                new SelectListItem{ Text = "Wisconsin (WI)", Value = "WI"},
+                                 new SelectListItem{ Text = "Wyoming (WY)", Value = "WY"},
+                                  new SelectListItem{ Text = "American Samoa (AS)", Value = "AS"},
+                                    new SelectListItem{ Text = "Federated States of Micronesia (FM)", Value = "FM"},
+                               new SelectListItem{ Text = "Guam (GU)", Value = "GU"},
+                                new SelectListItem{ Text = "Marshall Islands (MH)", Value = "MH"},
+                                 new SelectListItem{ Text = "Northern Mariana Islands (MP)", Value = "MP"},
+                                  new SelectListItem{ Text = "Palau (PW)", Value = "PW"},
+                                    new SelectListItem{ Text = "Puerto Rico (PR)", Value = "PR"},
+                               new SelectListItem{ Text = "Virgin Islands (VI)", Value = "VI"},
+                                new SelectListItem{ Text = "Armed Forces Americas (AA)", Value = "AA"},
+                                 new SelectListItem{ Text = "Armed Forces Europe (AE)", Value = "AE"},
+                                  new SelectListItem{ Text = "Armed Forces Pacific (AP)", Value = "AP"}
+                         }, "Select State", new { @class = "form-control" })
+                                </td>
                                 <td><label class="control-label">Zip Code:</label></td>
-                                <td>@Html.TextBoxFor(model => model.Business.PostalCd, new { @class = "form-control" })</td>
+                                <td>@Html.TextBoxFor(model => model.Business.USZip, new { @class = "form-control" })</td>
                             </tr>
                             <tr><td class="spacer10"></td></tr>
                             <tr>
@@ -85,298 +150,272 @@
                 </div>
             </div>
             <div class="panel panel-default">
-                <div class="panel-heading">
+                <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapse2">
                     <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">Employee Details</a>
+                        Employee Details
                     </h4>
                 </div>
                 <div id="collapse2" class="panel-collapse collapse">
                     <div class="panel-body">
-                        <div class="form-group">
-                            <label class="control-label col-sm-2">SSN:</label>
-                            <div class="col-sm-10">
-                                @Html.TextBoxFor(model => model.Employee.SSN, new { })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-2">First Name:</label>
-                            <div class="col-sm-10">
-                                @Html.TextBoxFor(model => model.Employee.FirstNm, new { })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-2">Last Name:</label>
-                            <div class="col-sm-10">
-                                @Html.TextBoxFor(model => model.Employee.LastNm, new { })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-2">Suffix:</label>
-                            <div class="col-sm-10">
-                                @Html.TextBoxFor(model => model.Employee.Suffix, new { })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-2" for="pwd">Address Line1:</label>
-                            <div class="col-sm-10">
-                                @Html.TextBoxFor(model => model.Business.Address1, new { })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-2" for="pwd">Address Line2:</label>
-                            <div class="col-sm-10">
-                                @Html.TextBoxFor(model => model.Business.Address2, new { })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-2" for="pwd">City:</label>
-                            <div class="col-sm-10">
-                                @Html.TextBoxFor(model => model.Business.City, new { })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-2" for="pwd">State:</label>
-                            <div class="col-sm-10">
-                                @Html.TextBoxFor(model => model.Business.USState, new { })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-2" for="pwd">Zip Code:</label>
-                            <div class="col-sm-10">
-                                @Html.TextBoxFor(model => model.Business.USZip, new { })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-2" for="pwd">Country:</label>
-                            <div class="col-sm-10">
-                                @Html.TextBoxFor(model => model.Business.Country, new { })
-                            </div>
-                        </div>
+                        <table>
+                            <tr>
+                                <td><label class="control-label">SSN:</label></td>
+                                <td>@Html.TextBoxFor(model => model.Employee.SSN, new { @class = "form-control" })</td>
+                                <td><label class="control-label">First Name:</label></td>
+                                <td>@Html.TextBoxFor(model => model.Employee.FirstNm, new { @class = "form-control" })</td>
+                            </tr>
+                            <tr><td class="spacer10"></td></tr>
+                            <tr>
+                                <td><label class="control-label">Last Name:</label></td>
+                                <td>@Html.TextBoxFor(model => model.Employee.LastNm, new { @class = "form-control" })</td>
+                                <td><label class="control-label">Suffix:</label></td>
+                                <td>@Html.TextBoxFor(model => model.Employee.Suffix, new { @class = "form-control" })</td>
+                            </tr>
+                            <tr><td class="spacer10"></td></tr>
+                            <tr>
+                                <td><label class="control-label">Address Line1:</label></td>
+                                <td>@Html.TextBoxFor(model => model.Employee.Address1, new { @class = "form-control" })</td>
+                                <td><label class="control-label">Address Line2:</label></td>
+                                <td>@Html.TextBoxFor(model => model.Employee.Address2, new { @class = "form-control" })</td>
+                            </tr>
+                            <tr><td class="spacer10"></td></tr>
+                            <tr>
+                                <td><label class="control-label">City:</label></td>
+                                <td>@Html.TextBoxFor(model => model.Employee.City, new { @class = "form-control" })</td>
+                                <td><label class="control-label">State:</label></td>
+                                <td>
+                                    @Html.DropDownList("Employee.USState", new[] {
+                       new SelectListItem{ Text = "Alabama (AL)", Value = "AL"},
+                        new SelectListItem{ Text = "Alaska (AK)", Value = "AK"},
+                         new SelectListItem{ Text = "Arizona (AZ)", Value = "AZ"},
+                          new SelectListItem{ Text = "Arkansas (AR)", Value = "AR"},
+                           new SelectListItem{ Text = "California (CA)", Value = "CA"},
+                             new SelectListItem{ Text = "Colorado (CO)", Value = "CO"},
+                        new SelectListItem{ Text = "Connecticut (CT)", Value = "CT"},
+                         new SelectListItem{ Text = "Delaware (DE)", Value = "DE"},
+                          new SelectListItem{ Text = "District of Columbia (DC)", Value = "DC"},
+                           new SelectListItem{ Text = "Florida (FL)", Value = "FL"},
+                             new SelectListItem{ Text = "Georgia (GA)", Value = "GA"},
+                        new SelectListItem{ Text = "Hawaii (HI)", Value = "HI"},
+                         new SelectListItem{ Text = "Idaho (ID)", Value = "ID"},
+                          new SelectListItem{ Text = "Illinois (IL)", Value = "IL"},
+                           new SelectListItem{ Text = "Indiana (IN)", Value = "IN"},
+                             new SelectListItem{ Text = "Iowa (IA)", Value = "IA"},
+                        new SelectListItem{ Text = "Kansas (KS)", Value = "KS"},
+                         new SelectListItem{ Text = "Kentucky (KY)", Value = "KY"},
+                          new SelectListItem{ Text = "Louisiana (LA)", Value = "LA"},
+                           new SelectListItem{ Text = "Maine (ME)", Value = "ME"},
+                             new SelectListItem{ Text = "Maryland (MD)", Value = "MD"},
+                        new SelectListItem{ Text = "Massachusetts (MA)", Value = "MA"},
+                         new SelectListItem{ Text = "Michigan (MI)", Value = "MI"},
+                          new SelectListItem{ Text = "Minnesota (MN)", Value = "MN"},
+                           new SelectListItem{ Text = "Mississippi (MS)", Value = "MS"},
+                             new SelectListItem{ Text = "Missouri (MO)", Value = "MO"},
+                        new SelectListItem{ Text = "Montana (MT)", Value = "MT"},
+                         new SelectListItem{ Text = "Nebraska (NE)", Value = "NE"},
+                          new SelectListItem{ Text = "Nevada (NV)", Value = "NV"},
+                           new SelectListItem{ Text = "New Hampshire (NH)", Value = "NH"},
+                             new SelectListItem{ Text = "New Jersey (NJ)", Value = "NJ"},
+                        new SelectListItem{ Text = "New Mexico (NM)", Value = "NM"},
+                         new SelectListItem{ Text = "New York (NY)", Value = "NY"},
+                          new SelectListItem{ Text = "North Carolina (NC)", Value = "NC"},
+                           new SelectListItem{ Text = "North Dakota (ND)", Value = "ND"},
+                             new SelectListItem{ Text = "Ohio (OH)", Value = "OH"},
+                        new SelectListItem{ Text = "Oklahoma (OK)", Value = "OK"},
+                         new SelectListItem{ Text = "Oregon (OR)", Value = "OR"},
+                          new SelectListItem{ Text = "Pennsylvania (PA)", Value = "PA"},
+                           new SelectListItem{ Text = "Rhode Island (RI)", Value = "RI"},
+                           new SelectListItem{ Text = "South Carolina (SC)", Value = "SC"},
+                        new SelectListItem{ Text = "South Dakota (SD)", Value = "SD"},
+                         new SelectListItem{ Text = "Tennessee (TN)", Value = "TN"},
+                          new SelectListItem{ Text = "Texas (TX)", Value = "TX"},
+                           new SelectListItem{ Text = "Utah (UT)", Value = "UT"},
+                            new SelectListItem{ Text = "Vermont (VT)", Value = "VT"},
+                             new SelectListItem{ Text = "Virginia (VA)", Value = "VA"},
+                              new SelectListItem{ Text = "Washington (WA)", Value = "WA"},
+                               new SelectListItem{ Text = "West Virginia (WV)", Value = "WV"},
+                                new SelectListItem{ Text = "Wisconsin (WI)", Value = "WI"},
+                                 new SelectListItem{ Text = "Wyoming (WY)", Value = "WY"},
+                                  new SelectListItem{ Text = "American Samoa (AS)", Value = "AS"},
+                                    new SelectListItem{ Text = "Federated States of Micronesia (FM)", Value = "FM"},
+                               new SelectListItem{ Text = "Guam (GU)", Value = "GU"},
+                                new SelectListItem{ Text = "Marshall Islands (MH)", Value = "MH"},
+                                 new SelectListItem{ Text = "Northern Mariana Islands (MP)", Value = "MP"},
+                                  new SelectListItem{ Text = "Palau (PW)", Value = "PW"},
+                                    new SelectListItem{ Text = "Puerto Rico (PR)", Value = "PR"},
+                               new SelectListItem{ Text = "Virgin Islands (VI)", Value = "VI"},
+                                new SelectListItem{ Text = "Armed Forces Americas (AA)", Value = "AA"},
+                                 new SelectListItem{ Text = "Armed Forces Europe (AE)", Value = "AE"},
+                                  new SelectListItem{ Text = "Armed Forces Pacific (AP)", Value = "AP"}
+                         }, "Select State", new { @class = "form-control" })
+                                </td>
+                            </tr>
+                            <tr><td class="spacer10"></td></tr>
+                            <tr>
+                                <td><label class="control-label">Zip Code:</label></td>
+                                <td>@Html.TextBoxFor(model => model.Employee.USZip, new { @class = "form-control" })</td>
+                                <td><label class="control-label">Country:</label></td>
+                                <td>@Html.TextBoxFor(model => model.Employee.Country, new { @class = "form-control" })</td>
+                            </tr>
+                        </table>
                     </div>
                 </div>
             </div>
             <div class="panel panel-default">
-                <div class="panel-heading">
+                <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapse3">
                     <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">FormW2 Details</a>
+                        FormW2 Details
                     </h4>
                 </div>
                 <div id="collapse3" class="panel-collapse collapse">
                     <div class="panel-body">
-                        <div class="form-group">
-                            <label class="control-label col-sm-2">Wages and tips:</label>
-                            <div class="col-sm-10">
-                                @Html.TextBoxFor(model => model.FormW2Details.Box1, new { })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-2">Federal income tax withheld:</label>
-                            <div class="col-sm-10">
-                                @Html.TextBoxFor(model => model.FormW2Details.Box2, new { })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-2">Social security wages:</label>
-                            <div class="col-sm-10">
-                                @Html.TextBoxFor(model => model.FormW2Details.Box3, new { })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-2">Social security tax withheld:</label>
-                            <div class="col-sm-10">
-                                @Html.TextBoxFor(model => model.FormW2Details.Box4, new { })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-2">Medicare wages and tips:</label>
-                            <div class="col-sm-10">
-                                @Html.TextBoxFor(model => model.FormW2Details.Box5, new { })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-2">Medicare tax withheld:</label>
-                            <div class="col-sm-10">
-                                @Html.TextBoxFor(model => model.FormW2Details.Box6, new { })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-2">Social security tips:</label>
-                            <div class="col-sm-10">
-                                @Html.TextBoxFor(model => model.FormW2Details.Box7, new { })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-2">Allocated tips:</label>
-                            <div class="col-sm-10">
-                                @Html.TextBoxFor(model => model.FormW2Details.Box8, new { })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-2">Verification code:</label>
-                            <div class="col-sm-10">
-                                @Html.TextBoxFor(model => model.FormW2Details.Box9, new { })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-2">Dependent care benefits:</label>
-                            <div class="col-sm-10">
-                                @Html.TextBoxFor(model => model.FormW2Details.Box10, new { })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-2">Nonqualified plans:</label>
-                            <div class="col-sm-10">
-                                @Html.TextBoxFor(model => model.FormW2Details.Box11NonqualifiedPlan, new { })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-2">12a See instructions for box 12</label>
-                            <div class="col-sm-10">
-                                @Html.TextBoxFor(model => model.FormW2Details.Box12aCd, new { })
-                                @Html.TextBoxFor(model => model.FormW2Details.Box12aAmt, new { })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-2">12b See instructions for box 12</label>
-                            <div class="col-sm-10">
-                                @Html.TextBoxFor(model => model.FormW2Details.Box12bCd, new { })
-                                @Html.TextBoxFor(model => model.FormW2Details.Box12bAmt, new { })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-2">12c See instructions for box 12</label>
-                            <div class="col-sm-10">
-                                @Html.TextBoxFor(model => model.FormW2Details.Box12cCd, new { })
-                                @Html.TextBoxFor(model => model.FormW2Details.Box12cAmt, new { })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-2">12d See instructions for box 12</label>
-                            <div class="col-sm-10">
-                                @Html.TextBoxFor(model => model.FormW2Details.Box12dCd, new { })
-                                @Html.TextBoxFor(model => model.FormW2Details.Box12dAmt, new { })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-2">Statutory Employee</label>
-                            <div class="col-sm-10">
-                                @Html.TextBoxFor(model => model.FormW2Details.Box13IsStatutoryEmployee, new { })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-2">Retirement plan</label>
-                            <div class="col-sm-10">
-                                @Html.TextBoxFor(model => model.FormW2Details.Box13IsRetirementPlan, new { })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-2">Third-party sick pay</label>
-                            <div class="col-sm-10">
-                                @Html.TextBoxFor(model => model.FormW2Details.Box13IsThirdPartySickpay, new { })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-2">Other</label>
-                            <div class="col-sm-10">
-                                @Html.TextBoxFor(model => model.FormW2Details.Box14, new { })
-                            </div>
-                        </div>
+
+                        <table>
+                            <tr>
+                                <td><label class="control-label">Wages and tips:</label></td>
+                                <td>@Html.TextBoxFor(model => model.FormW2Details.Box1, new { @class = "form-control" })</td>
+                                <td><label class="control-label">Federal income tax withheld:</label></td>
+                                <td>@Html.TextBoxFor(model => model.FormW2Details.Box2, new { @class = "form-control" })</td>
+                            </tr>
+                            <tr><td class="spacer10"></td></tr>
+                            <tr>
+                                <td><label class="control-label">Social security wages:</label></td>
+                                <td>@Html.TextBoxFor(model => model.FormW2Details.Box3, new { @class = "form-control" })</td>
+                                <td><label class="control-label">Social security tax withheld:</label></td>
+                                <td>@Html.TextBoxFor(model => model.FormW2Details.Box4, new { @class = "form-control" })</td>
+                            </tr>
+                            <tr><td class="spacer10"></td></tr>
+                            <tr>
+                                <td><label class="control-label">Medicare wages and tips:</label></td>
+                                <td>@Html.TextBoxFor(model => model.FormW2Details.Box5, new { @class = "form-control" })</td>
+                                <td><label class="control-label">Medicare tax withheld:</label></td>
+                                <td>@Html.TextBoxFor(model => model.FormW2Details.Box6, new { @class = "form-control" })</td>
+                            </tr>
+                            <tr><td class="spacer10"></td></tr>
+                            <tr>
+                                <td><label class="control-label">Social security tips:</label></td>
+                                <td>@Html.TextBoxFor(model => model.FormW2Details.Box7, new { @class = "form-control" })</td>
+                                <td><label class="control-label">Allocated tips:</label></td>
+                                <td>@Html.TextBoxFor(model => model.FormW2Details.Box8, new { @class = "form-control" })</td>
+                            </tr>
+                            <tr><td class="spacer10"></td></tr>
+                            <tr>
+                                <td><label class="control-label">Verification code:</label></td>
+                                <td>@Html.TextBoxFor(model => model.FormW2Details.Box9, new { @class = "form-control" })</td>
+                                <td><label class="control-label">Dependent care benefits:</label></td>
+                                <td>@Html.TextBoxFor(model => model.FormW2Details.Box10, new { @class = "form-control" })</td>
+                            </tr>
+                            <tr><td class="spacer10"></td></tr>
+                            <tr>
+                                <td><label class="control-label">Nonqualified plans:</label></td>
+                                <td>@Html.TextBoxFor(model => model.FormW2Details.Box11NonqualifiedPlan, new { @class = "form-control" })</td>
+                                <td><label class="control-label">12a See instructions for box 12:</label></td>
+                                <td>
+                                    @Html.TextBoxFor(model => model.FormW2Details.Box12aCd, new { @class = "form-control" })
+                                    @Html.TextBoxFor(model => model.FormW2Details.Box12aAmt, new { @class = "form-control" })
+                                </td>
+                            </tr>
+                            <tr><td class="spacer10"></td></tr>
+                            <tr>
+                                <td><label class="control-label">12b See instructions for box 12:</label></td>
+                                <td>
+                                    @Html.TextBoxFor(model => model.FormW2Details.Box12bCd, new { @class = "form-control" })
+                                    @Html.TextBoxFor(model => model.FormW2Details.Box12bAmt, new { @class = "form-control" })
+                                </td>
+                                <td><label class="control-label">12c See instructions for box 12:</label></td>
+                                <td>
+                                    @Html.TextBoxFor(model => model.FormW2Details.Box12cCd, new { @class = "form-control" })
+                                    @Html.TextBoxFor(model => model.FormW2Details.Box12cAmt, new { @class = "form-control" })
+                                </td>
+                            </tr>
+                            <tr><td class="spacer10"></td></tr>
+                            <tr>
+                                <td><label class="control-label">12d See instructions for box 12:</label></td>
+                                <td>
+                                    @Html.TextBoxFor(model => model.FormW2Details.Box12dCd, new { @class = "form-control" })
+                                    @Html.TextBoxFor(model => model.FormW2Details.Box12dAmt, new { @class = "form-control" })
+                                </td>
+                                <td><label class="control-label">Statutory Employee:</label></td>
+                                <td>
+                                    @Html.TextBoxFor(model => model.FormW2Details.Box13IsStatutoryEmployee, new { @class = "form-control" })
+                                </td>
+                            </tr>
+                            <tr><td class="spacer10"></td></tr>
+                            <tr>
+                                <td><label class="control-label">Retirement plan:</label></td>
+                                <td>@Html.TextBoxFor(model => model.FormW2Details.Box13IsRetirementPlan, new { @class = "form-control" })</td>
+                                <td><label class="control-label">Third-party sick pay:</label></td>
+                                <td>@Html.TextBoxFor(model => model.FormW2Details.Box13IsThirdPartySickpay, new { @class = "form-control" })</td>
+                            </tr>
+                            <tr><td class="spacer10"></td></tr>
+                            <tr>
+                                <td><label class="control-label">Other</label></td>
+                                <td>@Html.TextBoxFor(model => model.FormW2Details.Box14, new { @class = "form-control" })</td>
+                            </tr>
+                        </table>
                     </div>
                 </div>
             </div>
 
             <div class="panel panel-default">
-                <div class="panel-heading">
+                <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapse4">
                     <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse4">State Details</a>
+                        State Details
                     </h4>
                 </div>
                 <div id="collapse4" class="panel-collapse collapse">
                     <div class="panel-body">
-                        <div class="form-group">
-                            <label class="control-label col-sm-2">State:</label>
-                            <div class="col-sm-10">
-                                @Html.TextBoxFor(model => model.FormW2Details.Box15State1, new { })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-2">Employer’s state ID number:</label>
-                            <div class="col-sm-10">
-                                @Html.TextBoxFor(model => model.FormW2Details.Box15State1IDNumber, new { })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-2">State wages, tips, etc.:</label>
-                            <div class="col-sm-10">
-                                @Html.TextBoxFor(model => model.FormW2Details.Box16State1Wages, new { })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-2">State income tax:</label>
-                            <div class="col-sm-10">
-                                @Html.TextBoxFor(model => model.FormW2Details.Box17State1Tax, new { })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-2">Local wages, tips, etc.:</label>
-                            <div class="col-sm-10">
-                                @Html.TextBoxFor(model => model.FormW2Details.Box18Local1Wages, new { })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-2">Local income tax:</label>
-                            <div class="col-sm-10">
-                                @Html.TextBoxFor(model => model.FormW2Details.Box19Local1Tax, new { })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-2">Locality name:</label>
-                            <div class="col-sm-10">
-                                @Html.TextBoxFor(model => model.FormW2Details.Box20Locality1Name, new { })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-2">State:</label>
-                            <div class="col-sm-10">
-                                @Html.TextBoxFor(model => model.FormW2Details.Box15State2, new { })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-2">Employer’s state ID number:</label>
-                            <div class="col-sm-10">
-                                @Html.TextBoxFor(model => model.FormW2Details.Box15State2IdNumber, new { })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-2">State wages, tips, etc.:</label>
-                            <div class="col-sm-10">
-                                @Html.TextBoxFor(model => model.FormW2Details.Box16State2Wages, new { })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-2">State income tax:</label>
-                            <div class="col-sm-10">
-                                @Html.TextBoxFor(model => model.FormW2Details.Box17State2Tax, new { })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-2">Local wages, tips, etc.:</label>
-                            <div class="col-sm-10">
-                                @Html.TextBoxFor(model => model.FormW2Details.Box18Local2Wages, new { })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-2">Local income tax:</label>
-                            <div class="col-sm-10">
-                                @Html.TextBoxFor(model => model.FormW2Details.Box19Local2Tax, new { })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-2">Locality name:</label>
-                            <div class="col-sm-10">
-                                @Html.TextBoxFor(model => model.FormW2Details.Box20Locality2Name, new { })
-                            </div>
-                        </div>
+
+                        <table>
+                            <tr>
+                                <td><label class="control-label">State:</label></td>
+                                <td>@Html.TextBoxFor(model => model.FormW2Details.Box15State1, new { @class = "form-control" })</td>
+                                <td><label class="control-label">Employer’s state ID number:</label></td>
+                                <td>@Html.TextBoxFor(model => model.FormW2Details.Box15State1IDNumber, new { @class = "form-control" })</td>
+                            </tr>
+                            <tr><td class="spacer10"></td></tr>
+                            <tr>
+                                <td><label class="control-label">State wages, tips, etc.:</label></td>
+                                <td>@Html.TextBoxFor(model => model.FormW2Details.Box16State1Wages, new { @class = "form-control" })</td>
+                                <td><label class="control-label">State income tax:</label></td>
+                                <td>@Html.TextBoxFor(model => model.FormW2Details.Box17State1Tax, new { @class = "form-control" })</td>
+                            </tr>
+                            <tr><td class="spacer10"></td></tr>
+                            <tr>
+                                <td><label class="control-label">Local wages, tips, etc.:</label></td>
+                                <td>@Html.TextBoxFor(model => model.FormW2Details.Box18Local1Wages, new { @class = "form-control" })</td>
+                                <td><label class="control-label">Local income tax:</label></td>
+                                <td>@Html.TextBoxFor(model => model.FormW2Details.Box19Local1Tax, new { @class = "form-control" })</td>
+                            </tr>
+                            <tr><td class="spacer10"></td></tr>
+                            <tr>
+                                <td><label class="control-label">Locality name:</label></td>
+                                <td>@Html.TextBoxFor(model => model.FormW2Details.Box20Locality1Name, new { @class = "form-control" })</td>
+                                <td><label class="control-label">State:</label></td>
+                                <td>@Html.TextBoxFor(model => model.FormW2Details.Box15State2, new { @class = "form-control" })</td>
+                            </tr>
+                            <tr><td class="spacer10"></td></tr>
+                            <tr>
+                                <td><label class="control-label">Employer’s state ID number:</label></td>
+                                <td>@Html.TextBoxFor(model => model.FormW2Details.Box15State2IdNumber, new { @class = "form-control" })</td>
+                                <td><label class="control-label">State wages, tips, etc.:</label></td>
+                                <td>@Html.TextBoxFor(model => model.FormW2Details.Box16State2Wages, new { @class = "form-control" })</td>
+                            </tr>
+                            <tr><td class="spacer10"></td></tr>
+                            <tr>
+                                <td><label class="control-label">State income tax:</label></td>
+                                <td>@Html.TextBoxFor(model => model.FormW2Details.Box17State2Tax, new { @class = "form-control" })</td>
+                                <td><label class="control-label">Local wages, tips, etc.:</label></td>
+                                <td>@Html.TextBoxFor(model => model.FormW2Details.Box18Local2Wages, new { @class = "form-control" })</td>
+                            </tr>
+                            <tr><td class="spacer10"></td></tr>
+                            <tr>
+                                <td><label class="control-label">Local income tax:</label></td>
+                                <td>@Html.TextBoxFor(model => model.FormW2Details.Box19Local2Tax, new { @class = "form-control" })</td>
+                                <td><label class="control-label">Locality name:</label></td>
+                                <td>@Html.TextBoxFor(model => model.FormW2Details.Box20Locality2Name, new { @class = "form-control" })</td>
+                            </tr>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -396,7 +435,7 @@
     });
 
     function GetStatus() {
-        ShowAPIStatus();       
+        ShowAPIStatus();
     }
 
 

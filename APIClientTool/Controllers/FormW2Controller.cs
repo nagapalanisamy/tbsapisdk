@@ -21,9 +21,9 @@ namespace APIClientTool.Controllers
         {
             FormW2 formw2 = new FormW2();
             bool _prePopulate = id ?? false;
-            if(_prePopulate)
+            if (_prePopulate)
             {
-               
+
                 formw2.Sequence = "1";
                 //Mapping BusinessDetails
                 formw2.Business = new BusinessDetails();
@@ -84,56 +84,50 @@ namespace APIClientTool.Controllers
         }
         #endregion
 
-        #region GetReturnCreateStatus
-        public ActionResult GetReturnCreateStatus(FormW2 formw2)
-        {
-            var responseJson = string.Empty;
-            var requestText = JsonConvert.SerializeObject(formw2, Formatting.Indented);
-            using (var client = new PublicAPIClient())
-            {
-                var createRequest = new JavaScriptSerializer().Deserialize<Object>(requestText);
-                string requestUri = "Return/Create";
-                APIGenerateAuthHeader.GenerateAuthHeader(client, requestUri, "POST");
-                var _response = client.PostAsJsonAsync(requestUri, createRequest).Result;
-                if (_response != null)
-                {
-                    var createResponse = _response.Content.ReadAsAsync<Object>().Result;
-                    if (createResponse != null)
-                    {
-                        responseJson = JsonConvert.SerializeObject(createResponse, Formatting.Indented);
-                    }
-                }
+        #region API Response Status
 
-            }
-            return Json(responseJson, JsonRequestBehavior.AllowGet);
-        }
+        //public ActionResult APIResponseStatus(FormW2 formw2)
+        //{
+        //    var responseJson = string.Empty;
+
+        //    var requestText = JsonConvert.SerializeObject(formw2, Formatting.Indented);
+        //    using (var client = new PublicAPIClient())
+        //    {
+        //        var createRequest = new JavaScriptSerializer().Deserialize<Object>(requestText);
+        //        string requestUri = "Return/Create";
+        //        APIGenerateAuthHeader.GenerateAuthHeader(client, requestUri, "POST");
+        //        var _response = client.PostAsJsonAsync(requestUri, createRequest).Result;
+        //        if (_response != null)
+        //        {
+        //            var createResponse = _response.Content.ReadAsAsync<Object>().Result;
+        //            if (createResponse != null)
+        //            {
+        //                responseJson = JsonConvert.SerializeObject(createResponse, Formatting.Indented);
+        //            }
+        //        }
+        //    }
+        //    ViewBag.responseJson = responseJson;
+        //    return PartialView();
+        //}
         #endregion
 
-        #region Status
-
-        public ActionResult APIResponseStatus(FormW2 formw2)
+        public ActionResult APIResponseStatus()
         {
-            var responseJson = string.Empty;
-            var requestText = JsonConvert.SerializeObject(formw2, Formatting.Indented);
+            var id = 1;
             using (var client = new PublicAPIClient())
             {
-                var createRequest = new JavaScriptSerializer().Deserialize<Object>(requestText);
-                string requestUri = "Return/Create";
-                APIGenerateAuthHeader.GenerateAuthHeader(client, requestUri, "POST");
-                var _response = client.PostAsJsonAsync(requestUri, createRequest).Result;
-                if (_response != null)
+                var requestUri = $"Values/Get?Id={id}";
+                APIGenerateAuthHeader.GenerateAuthHeader(client, requestUri, "GET");
+                var response = client.GetAsync(requestUri).Result;
+                if (response != null && response.IsSuccessStatusCode)
                 {
-                    var createResponse = _response.Content.ReadAsAsync<Object>().Result;
-                    if (createResponse != null)
-                    {
-                        responseJson = JsonConvert.SerializeObject(createResponse, Formatting.Indented);
-                    }
+                    var responseJson = response.Content.ReadAsAsync<string>().Result;
+                    ViewBag.responseJson = responseJson;
                 }
             }
-            ViewBag.responseJson = responseJson;
+
             return PartialView();
         }
-        #endregion
 
     }
 }

@@ -1,10 +1,10 @@
-﻿using APIClient.Core.Models;
-using APIClientTool.Utilities;
+﻿using APIClientTool.Utilities;
 using Newtonsoft.Json;
 using System;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
 using System.Net.Http;
+using APIClientTool.ViewModels;
 
 namespace APIClientTool.Controllers
 {

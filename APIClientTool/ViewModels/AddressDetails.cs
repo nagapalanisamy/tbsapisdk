@@ -1,4 +1,4 @@
-﻿namespace APIClient.Core.Models
+﻿namespace APIClientTool.ViewModels
 {
     public class AddressDetails
     {

@@ -212,6 +212,13 @@
     <Compile Include="Utilities\APIGenerateAuthHeader.cs" />
     <Compile Include="Utilities\PublicAPIClient.cs" />
     <Compile Include="Utilities\Utility.cs" />
+    <Compile Include="ViewModels\AddressDetails.cs" />
+    <Compile Include="ViewModels\BusinessDetails.cs" />
+    <Compile Include="ViewModels\Employee.cs" />
+    <Compile Include="ViewModels\EntityBase.cs" />
+    <Compile Include="ViewModels\FormW2.cs" />
+    <Compile Include="ViewModels\SigningAuthority.cs" />
+    <Compile Include="ViewModels\W2FormDetails.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -285,12 +292,6 @@
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\APIClient.Core\APIClient.Core.csproj">
-      <Project>{ba0b75a7-6ad8-4a9f-be07-02a3f2440f25}</Project>
-      <Name>APIClient.Core</Name>
-    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

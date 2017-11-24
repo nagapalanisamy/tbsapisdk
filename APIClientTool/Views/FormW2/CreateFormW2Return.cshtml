@@ -1,11 +1,11 @@
-﻿@model APIClient.Core.Models.FormW2
+﻿@model APIClientTool.ViewModels.FormW2
 @{
     ViewBag.Title = "CreateFormW2Return";
 }
 @using (Html.BeginForm("", "", FormMethod.Post, new { id = "createreturnForm" }))
 {
     <div class="container">
-        <h2>Create FormW2 Return</h2>
+        <h3>Create FormW2 Return</h3>
         <div class="panel-group" id="accordion">
             <div class="panel panel-default">
                 <div class="panel-heading">
@@ -188,7 +188,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">FormW2 Setails</a>
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">FormW2 Details</a>
                     </h4>
                 </div>
                 <div id="collapse3" class="panel-collapse collapse">
@@ -324,7 +324,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse4">State Setails</a>
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse4">State Details</a>
                     </h4>
                 </div>
                 <div id="collapse4" class="panel-collapse collapse">
@@ -450,7 +450,3 @@
     }
 
 </script>
-
-
-
-

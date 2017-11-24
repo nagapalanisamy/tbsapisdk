@@ -1,10 +1,10 @@
 ﻿using APIClient.Core.Models;
+using APIClientTool.Utilities;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
+using System.Net.Http;
 
 namespace APIClientTool.Controllers
 {
@@ -26,9 +26,25 @@ namespace APIClientTool.Controllers
         #region GetReturnCreateStatus
         public ActionResult GetReturnCreateStatus(FormW2 formw2)
         {
-            var responseText = string.Empty;
+            var responseJson = string.Empty;
             var requestText = JsonConvert.SerializeObject(formw2, Formatting.Indented);
-            return Json(requestText, JsonRequestBehavior.AllowGet);
+            using (var client = new PublicAPIClient())
+            {
+                var createRequest = new JavaScriptSerializer().Deserialize<Object>(requestText);
+                string requestUri = "Return/Create";
+                APIGenerateAuthHeader.GenerateAuthHeader(client, requestUri, "POST");
+                var _response = client.PostAsJsonAsync(requestUri, createRequest).Result;
+                if (_response != null)
+                {
+                    var createResponse = _response.Content.ReadAsAsync<Object>().Result;
+                    if (createResponse != null)
+                    {
+                        responseJson = JsonConvert.SerializeObject(createResponse, Formatting.Indented);
+                    }
+                }
+
+            }
+            return Json(responseJson, JsonRequestBehavior.AllowGet);
         }
         #endregion
 

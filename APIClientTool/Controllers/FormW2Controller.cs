@@ -1,4 +1,6 @@
-﻿using System;
+﻿using APIClient.Core.Models;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -18,6 +20,15 @@ namespace APIClientTool.Controllers
         public ActionResult CreateFormW2Return()
         {
             return View();
+        }
+        #endregion
+
+        #region GetReturnCreateStatus
+        public ActionResult GetReturnCreateStatus(FormW2 formw2)
+        {
+            var responseText = string.Empty;
+            var requestText = JsonConvert.SerializeObject(formw2, Formatting.Indented);
+            return Json(requestText, JsonRequestBehavior.AllowGet);
         }
         #endregion
 

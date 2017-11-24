@@ -10,8 +10,6 @@ namespace APIClient.Core.Models
         [DataMember]
         public string TradeName { get; set; }
         [DataMember]
-        public string Email { get; set; }
-        [DataMember]
         public string EIN { get; set; }
         [DataMember]
         public string ContactName { get; set; }

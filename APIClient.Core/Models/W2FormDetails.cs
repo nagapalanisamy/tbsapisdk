@@ -133,7 +133,7 @@ namespace APIClient.Core.Models
         #region State Details
 
         [DataMember]
-        public string Line15State1Cd { get; set; }
+        public string Line15State1 { get; set; }
 
         /// <summary>
         /// State 1 - Employer’s state ID number
@@ -173,7 +173,7 @@ namespace APIClient.Core.Models
 
         //State 2
         [DataMember]
-        public string Line15State2Cd { get; set; }
+        public string Line15State2 { get; set; }
 
         /// <summary>
         /// State 2 - Employer’s state ID number

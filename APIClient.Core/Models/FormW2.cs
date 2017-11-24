@@ -1,12 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Runtime.Serialization;
 
 namespace APIClient.Core.Models
 {
-    class FormW2
+    [DataContract]
+    public class FormW2
     {
+        [DataMember]
+        public BusinessDetails Business { get; set; }
+        [DataMember]
+        public Employee Employee { get; set; }
+        [DataMember]
+        public W2FormDetails FormDetails { get; set; }
     }
 }

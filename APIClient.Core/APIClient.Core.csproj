@@ -32,6 +32,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -40,7 +41,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\AddressDetails.cs" />
+    <Compile Include="Models\BusinessDetails.cs" />
+    <Compile Include="Models\Employee.cs" />
+    <Compile Include="Models\EntityBase.cs" />
     <Compile Include="Models\FormW2.cs" />
+    <Compile Include="Models\SigningAuthority.cs" />
+    <Compile Include="Models\W2FormDetails.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

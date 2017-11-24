@@ -5,12 +5,18 @@ using System.Web.Mvc;
 using System.Web.Script.Serialization;
 using System.Net.Http;
 using APIClientTool.ViewModels;
+using APIClientTool.Repository;
 
 namespace APIClientTool.Controllers
 {
     public class FormW2Controller : Controller
     {
         // GET: FormW2
+        ReturnRepository _repository;
+        public FormW2Controller()
+        {
+            _repository = new ReturnRepository();
+        }
         public ActionResult Index()
         {
             return View();
@@ -56,7 +62,7 @@ namespace APIClientTool.Controllers
                 formw2.Employee.IsForeign = false;
                 formw2.Employee.Country = "US";
                 formw2.Employee.Address1 = "First Street";
-                formw2.Employee.City = "Rickhill";
+                formw2.Employee.City = "Rockhill";
                 formw2.Employee.USState = "SC";
                 formw2.Employee.USZip = "29727";
                 formw2.Employee.Phone = "9884523450";
@@ -128,6 +134,23 @@ namespace APIClientTool.Controllers
 
             return PartialView();
         }
+
+        #region Status
+        public ActionResult APITestStatus()
+        {
+            using (var client = new PublicAPIClient())
+            {
+                string requestUri = "Values/Get/1";
+                APIGenerateAuthHeader.GenerateAuthHeader(client, requestUri, "GET");
+                var _response = client.GetAsync(requestUri).Result;
+                if (_response != null)
+                {
+                    var createResponse = _response.Content.ReadAsAsync<string>().Result;
+                }
+            }
+            return PartialView();
+        }
+        #endregion
 
     }
 }

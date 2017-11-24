@@ -151,7 +151,7 @@ namespace APIClientTool.Controllers
             {
                 string requestUri = "Values/Get/1";
                 APIGenerateAuthHeader.GenerateAuthHeader(client, requestUri, "GET");
-                var _response = client.GetAsync(requestUri,).Result;
+                var _response = client.GetAsync(requestUri).Result;
                 if (_response != null)
                 {
                     var createResponse = _response.Content.ReadAsAsync<string>().Result;

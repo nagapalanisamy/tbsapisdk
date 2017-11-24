@@ -1,0 +1,169 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="TaxBanditsAPIClientModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="APIResponse">
+          <Key>
+            <PropertyRef Name="ReponseId" />
+          </Key>
+          <Property Name="ReponseId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SubmissionId" Type="uniqueidentifier" />
+          <Property Name="Code" Type="int" />
+          <Property Name="Message" Type="varchar(max)" />
+          <Property Name="Name" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="ErrorStatus">
+          <Key>
+            <PropertyRef Name="Error_Status_Id" />
+          </Key>
+          <Property Name="Error_Status_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Sequence" Type="varchar(max)" />
+          <Property Name="Response_Id" Type="int" />
+        </EntityType>
+        <EntityType Name="RecordError">
+          <Key>
+            <PropertyRef Name="Record_Error_Id" />
+          </Key>
+          <Property Name="Record_Error_Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="varchar(max)" />
+          <Property Name="Name" Type="varchar(max)" />
+          <Property Name="Message" Type="varchar(max)" />
+          <Property Name="Error_Status_Id" Type="int" />
+        </EntityType>
+        <EntityType Name="SuccessStatus">
+          <Key>
+            <PropertyRef Name="Success_Status_Id" />
+          </Key>
+          <Property Name="Success_Status_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Sequence" Type="varchar" MaxLength="1000" />
+          <Property Name="Record_Id" Type="uniqueidentifier" />
+          <Property Name="Response_Id" Type="int" />
+        </EntityType>
+        <EntityContainer Name="TaxBanditsAPIClientModelStoreContainer">
+          <EntitySet Name="APIResponse" EntityType="Self.APIResponse" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ErrorStatus" EntityType="Self.ErrorStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RecordError" EntityType="Self.RecordError" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SuccessStatus" EntityType="Self.SuccessStatus" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TaxBanditsAPIClientModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="APIResponse">
+          <Key>
+            <PropertyRef Name="ReponseId" />
+          </Key>
+          <Property Name="ReponseId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SubmissionId" Type="Guid" />
+          <Property Name="Code" Type="Int32" />
+          <Property Name="Message" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="ErrorStatu">
+          <Key>
+            <PropertyRef Name="Error_Status_Id" />
+          </Key>
+          <Property Name="Error_Status_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Sequence" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Response_Id" Type="Int32" />
+        </EntityType>
+        <EntityType Name="RecordError">
+          <Key>
+            <PropertyRef Name="Record_Error_Id" />
+          </Key>
+          <Property Name="Record_Error_Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Message" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Error_Status_Id" Type="Int32" />
+        </EntityType>
+        <EntityType Name="SuccessStatu">
+          <Key>
+            <PropertyRef Name="Success_Status_Id" />
+          </Key>
+          <Property Name="Success_Status_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Sequence" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="Record_Id" Type="Guid" />
+          <Property Name="Response_Id" Type="Int32" />
+        </EntityType>
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="APIResponses" EntityType="Self.APIResponse" />
+          <EntitySet Name="ErrorStatus" EntityType="Self.ErrorStatu" />
+          <EntitySet Name="RecordErrors" EntityType="Self.RecordError" />
+          <EntitySet Name="SuccessStatus" EntityType="Self.SuccessStatu" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TaxBanditsAPIClientModelStoreContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="APIResponses">
+            <EntityTypeMapping TypeName="TaxBanditsAPIClientModel.APIResponse">
+              <MappingFragment StoreEntitySet="APIResponse">
+                <ScalarProperty Name="ReponseId" ColumnName="ReponseId" />
+                <ScalarProperty Name="SubmissionId" ColumnName="SubmissionId" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ErrorStatus">
+            <EntityTypeMapping TypeName="TaxBanditsAPIClientModel.ErrorStatu">
+              <MappingFragment StoreEntitySet="ErrorStatus">
+                <ScalarProperty Name="Error_Status_Id" ColumnName="Error_Status_Id" />
+                <ScalarProperty Name="Sequence" ColumnName="Sequence" />
+                <ScalarProperty Name="Response_Id" ColumnName="Response_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RecordErrors">
+            <EntityTypeMapping TypeName="TaxBanditsAPIClientModel.RecordError">
+              <MappingFragment StoreEntitySet="RecordError">
+                <ScalarProperty Name="Record_Error_Id" ColumnName="Record_Error_Id" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="Error_Status_Id" ColumnName="Error_Status_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SuccessStatus">
+            <EntityTypeMapping TypeName="TaxBanditsAPIClientModel.SuccessStatu">
+              <MappingFragment StoreEntitySet="SuccessStatus">
+                <ScalarProperty Name="Success_Status_Id" ColumnName="Success_Status_Id" />
+                <ScalarProperty Name="Sequence" ColumnName="Sequence" />
+                <ScalarProperty Name="Record_Id" ColumnName="Record_Id" />
+                <ScalarProperty Name="Response_Id" ColumnName="Response_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

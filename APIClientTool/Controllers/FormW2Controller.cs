@@ -5,12 +5,18 @@ using System.Web.Mvc;
 using System.Web.Script.Serialization;
 using System.Net.Http;
 using APIClientTool.ViewModels;
+using APIClientTool.Repository;
 
 namespace APIClientTool.Controllers
 {
     public class FormW2Controller : Controller
     {
         // GET: FormW2
+        ReturnRepository _repository;
+        public FormW2Controller()
+        {
+            _repository = new ReturnRepository();
+        }
         public ActionResult Index()
         {
             return View();
@@ -89,6 +95,7 @@ namespace APIClientTool.Controllers
         public ActionResult APIResponseStatus(FormW2 formw2)
         {
             var responseJson = string.Empty;
+            W2ReturnResponse response = new W2ReturnResponse();
             var requestText = JsonConvert.SerializeObject(formw2, Formatting.Indented);
             using (var client = new PublicAPIClient())
             {
@@ -102,10 +109,29 @@ namespace APIClientTool.Controllers
                     if (createResponse != null)
                     {
                         responseJson = JsonConvert.SerializeObject(createResponse, Formatting.Indented);
+                        response = new JavaScriptSerializer().Deserialize<W2ReturnResponse>(responseJson);
+                        _repository.SaveAPIResponse(response);
                     }
                 }
             }
             ViewBag.responseJson = responseJson;
+            return PartialView();
+        }
+        #endregion
+
+        #region Status
+        public ActionResult APITestStatus()
+        {
+            using (var client = new PublicAPIClient())
+            {
+                string requestUri = "Values/Get/1";
+                APIGenerateAuthHeader.GenerateAuthHeader(client, requestUri, "GET");
+                var _response = client.GetAsync(requestUri,).Result;
+                if (_response != null)
+                {
+                    var createResponse = _response.Content.ReadAsAsync<string>().Result;
+                }
+            }
             return PartialView();
         }
         #endregion

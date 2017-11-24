@@ -432,21 +432,39 @@
     });
 
     function GetStatus() {
-        debugger;
+        ShowAPIStatus();
+        //var formdata = $("#createreturnForm").serialize();
+        //$.ajax({
+        //    url: "/FormW2/GetReturnCreateStatus/",
+        //    cache: false,
+        //    data: formdata,
+        //    success: function (data) {
+        //        if (data != null) {
+        //            ShowAPIStatus(data);
+        //            //toastr.success(data);
+        //        }
+        //    },
+        //    error: function (err) {
+        //        console.log(err.responseText);
+        //    }
+        //});
+    }
+
+
+    function ShowAPIStatus() {
         var formdata = $("#createreturnForm").serialize();
         $.ajax({
-            url: "/FormW2/GetReturnCreateStatus/",
+            url: "/FormW2/APIResponseStatus/",
             cache: false,
             data: formdata,
             success: function (data) {
-                if (data != null) {
-                    toastr.success(data);
-                }
+                $(".modal-dialog").addClass("edit-dialog");
+                $('#ModelBody').html(data);
+                $('#myModal').modal("show");
             },
             error: function (err) {
                 console.log(err.responseText);
             }
         });
     }
-
 </script>

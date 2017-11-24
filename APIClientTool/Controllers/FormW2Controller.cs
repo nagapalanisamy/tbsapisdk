@@ -48,5 +48,31 @@ namespace APIClientTool.Controllers
         }
         #endregion
 
+        #region Status
+
+        public ActionResult APIResponseStatus(FormW2 formw2)
+        {
+            var responseJson = string.Empty;
+            var requestText = JsonConvert.SerializeObject(formw2, Formatting.Indented);
+            using (var client = new PublicAPIClient())
+            {
+                var createRequest = new JavaScriptSerializer().Deserialize<Object>(requestText);
+                string requestUri = "Return/Create";
+                APIGenerateAuthHeader.GenerateAuthHeader(client, requestUri, "POST");
+                var _response = client.PostAsJsonAsync(requestUri, createRequest).Result;
+                if (_response != null)
+                {
+                    var createResponse = _response.Content.ReadAsAsync<Object>().Result;
+                    if (createResponse != null)
+                    {
+                        responseJson = JsonConvert.SerializeObject(createResponse, Formatting.Indented);
+                    }
+                }
+            }
+            ViewBag.responseJson = responseJson;
+            return PartialView();
+        }
+        #endregion
+
     }
 }

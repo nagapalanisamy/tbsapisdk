@@ -2,6 +2,7 @@
 @{
     ViewBag.Title = "CreateFormW2Return";
 }
+
 @using (Html.BeginForm("", "", FormMethod.Post, new { id = "createreturnForm" }))
 {
     <div class="container">
@@ -15,102 +16,71 @@
                 </div>
                 <div id="collapse1" class="panel-collapse collapse in">
                     <div class="panel-body">
-                        <div class="form-group">
-                            <label class="control-label col-sm-2">Employer Name:</label>
-                            <div class="col-sm-10">
-                                @Html.TextBoxFor(model => model.Business.BusinessName, new { })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-2">Employer Type:</label>
-                            <div class="col-sm-10">
-                                @Html.TextBoxFor(model => model.Business.BusinessType, new { })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-2" for="pwd">EIN:</label>
-                            <div class="col-sm-10">
-                                @Html.TextBoxFor(model => model.Business.EIN, new { })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-2" for="pwd">Address Line1:</label>
-                            <div class="col-sm-10">
-                                @Html.TextBoxFor(model => model.Business.AddressLine1, new { })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-2" for="pwd">Address Line2:</label>
-                            <div class="col-sm-10">
-                                @Html.TextBoxFor(model => model.Business.AddressLine2, new { })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-2" for="pwd">City:</label>
-                            <div class="col-sm-10">
-                                @Html.TextBoxFor(model => model.Business.City, new { })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-2" for="pwd">State:</label>
-                            <div class="col-sm-10">
-                                @Html.TextBoxFor(model => model.Business.State, new { })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-2" for="pwd">Zip Code:</label>
-                            <div class="col-sm-10">
-                                @Html.TextBoxFor(model => model.Business.ZipCode, new { })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-2" for="pwd">Country:</label>
-                            <div class="col-sm-10">
-                                @Html.TextBoxFor(model => model.Business.Country, new { })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-2" for="pwd">Contact Name:</label>
-                            <div class="col-sm-10">
-                                @Html.TextBoxFor(model => model.Business.ContactName, new { })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-2" for="pwd">Email Address:</label>
-                            <div class="col-sm-10">
-                                @Html.TextBoxFor(model => model.Business.EmailAddress, new { })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-2" for="pwd">Phone Number:</label>
-                            <div class="col-sm-10">
-                                @Html.TextBoxFor(model => model.Business.PhoneNumber, new { })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-2" for="pwd">Phone Extn:</label>
-                            <div class="col-sm-10">
-                                @Html.TextBoxFor(model => model.Business.PhoneExtn, new { })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-2" for="pwd">Fax Number:</label>
-                            <div class="col-sm-10">
-                                @Html.TextBoxFor(model => model.Business.FaxNumber, new { })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-2" for="pwd">Kind Of Employer:</label>
-                            <div class="col-sm-10">
-                                @Html.TextBoxFor(model => model.Business.KindOfEmployer, new { })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-2" for="pwd">Employment Code:</label>
-                            <div class="col-sm-10">
-                                @Html.TextBoxFor(model => model.Business.EmploymentCode, new { })
-                            </div>
-                        </div>
+                        <table>
+                            <tr>
+                                <td><label class="control-label">Employer Name:</label></td>
+                                <td>@Html.TextBoxFor(model => model.Business.BusinessName, new { @class = "form-control" })</td>
+                                <td ><label class="control-label">Employer Type:</label></td>
+                                <td>
+                                    @Html.DropDownList("BusinessType", new[] {
+                       new SelectListItem{ Text = "Estate", Value = "ESTE"},
+                        new SelectListItem{ Text = "Partnership", Value = "PART"},
+                         new SelectListItem{ Text = "Corporation", Value = "CORP"},
+                          new SelectListItem{ Text = "Exempt Organization", Value = "EORG"},
+                           new SelectListItem{ Text = "Sole Proprietorship", Value = "SPRO"}
+                         }, "Select Employer Type", new { })
+                                </td>
+                            </tr>
+                            <tr><td class="spacer10"></td></tr>
+                            <tr>
+                                <td> <label class="control-label">EIN:</label> </td>
+                                <td>@Html.TextBoxFor(model => model.Business.EIN, new { @class = "form-control" })</td>
+                                <td><label class="control-label">Address Line1:</label></td>
+                                <td>@Html.TextBoxFor(model => model.Business.AddressLine1, new { @class = "form-control" })</td>
+                            </tr>
+                            <tr><td class="spacer10"></td></tr>
+                            <tr>
+                                <td><label class="control-label">Address Line2:</label></td>
+                                <td>@Html.TextBoxFor(model => model.Business.AddressLine2, new { @class = "form-control" })</td>
+                                <td><label class="control-label">City:</label></td>
+                                <td>@Html.TextBoxFor(model => model.Business.City, new { @class = "form-control" })</td>
+                            </tr>
+                            <tr><td class="spacer10"></td></tr>
+                            <tr>
+                                <td><label class="control-label">State:</label></td>
+                                <td>@Html.TextBoxFor(model => model.Business.State, new { @class = "form-control" })</td>
+                                <td><label class="control-label">Zip Code:</label></td>
+                                <td>@Html.TextBoxFor(model => model.Business.ZipCode, new { @class = "form-control" })</td>
+                            </tr>
+                            <tr><td class="spacer10"></td></tr>
+                            <tr>
+                                <td><label class="control-label">Country:</label></td>
+                                <td>@Html.TextBoxFor(model => model.Business.Country, new { @class = "form-control" })</td>
+                                <td><label class="control-labeld">Contact Name:</label></td>
+                                <td>@Html.TextBoxFor(model => model.Business.ContactName, new { @class = "form-control" })</td>
+                            </tr>
+                            <tr><td class="spacer10"></td></tr>
+                            <tr>
+                                <td><label class="control-label">Email Address:</label></td>
+                                <td>@Html.TextBoxFor(model => model.Business.EmailAddress, new { @class = "form-control" })</td>
+                                <td><label class="control-label">Phone Number:</label></td>
+                                <td>@Html.TextBoxFor(model => model.Business.PhoneNumber, new { @class = "form-control" })</td>
+                            </tr>
+                            <tr><td class="spacer10"></td></tr>
+                            <tr>
+                                <td><label class="control-label">Phone Extn:</label></td>
+                                <td>@Html.TextBoxFor(model => model.Business.PhoneExtn, new { @class = "form-control" })</td>
+                                <td><label class="control-label">Fax Number:</label></td>
+                                <td>@Html.TextBoxFor(model => model.Business.FaxNumber, new { @class = "form-control" })</td>
+                            </tr>
+                            <tr><td class="spacer10"></td></tr>
+                            <tr>
+                                <td><label class="control-label">Kind Of Employer:</label></td>
+                                <td>@Html.TextBoxFor(model => model.Business.KindOfEmployer, new { @class = "form-control" })</td>
+                                <td><label class="control-label">Employment Code:</label></td>
+                                <td>@Html.TextBoxFor(model => model.Business.EmploymentCode, new { @class = "form-control" })</td>
+                            </tr>
+                        </table>
                     </div>
                 </div>
             </div>

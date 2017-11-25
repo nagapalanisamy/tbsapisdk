@@ -18,6 +18,7 @@ namespace APIClientTool.Models
         public string Code { get; set; }
         public string Name { get; set; }
         public string Message { get; set; }
+        public string Type { get; set; }
         public Nullable<int> Error_Status_Id { get; set; }
     }
 }

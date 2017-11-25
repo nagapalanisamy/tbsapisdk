@@ -16,6 +16,7 @@ namespace APIClientTool.Models
     {
         public int Error_Status_Id { get; set; }
         public string Sequence { get; set; }
+        public Nullable<long> Record_Error_Id { get; set; }
         public Nullable<int> Response_Id { get; set; }
     }
 }

@@ -14,8 +14,8 @@ namespace APIClientTool.Models
     
     public partial class APIResponse
     {
-        public int ReponseId { get; set; }
-        public Nullable<System.Guid> SubmissionId { get; set; }
+        public int Reponse_Id { get; set; }
+        public Nullable<System.Guid> Submission_Id { get; set; }
         public Nullable<int> Code { get; set; }
         public string Message { get; set; }
         public string Name { get; set; }

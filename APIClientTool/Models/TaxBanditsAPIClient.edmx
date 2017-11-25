@@ -7,10 +7,10 @@
       <Schema Namespace="TaxBanditsAPIClientModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="APIResponse">
           <Key>
-            <PropertyRef Name="ReponseId" />
+            <PropertyRef Name="Reponse_Id" />
           </Key>
-          <Property Name="ReponseId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="SubmissionId" Type="uniqueidentifier" />
+          <Property Name="Reponse_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Submission_Id" Type="uniqueidentifier" />
           <Property Name="Code" Type="int" />
           <Property Name="Message" Type="varchar(max)" />
           <Property Name="Name" Type="varchar(max)" />
@@ -21,6 +21,7 @@
           </Key>
           <Property Name="Error_Status_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Sequence" Type="varchar(max)" />
+          <Property Name="Record_Error_Id" Type="bigint" />
           <Property Name="Response_Id" Type="int" />
         </EntityType>
         <EntityType Name="RecordError">
@@ -31,6 +32,7 @@
           <Property Name="Code" Type="varchar(max)" />
           <Property Name="Name" Type="varchar(max)" />
           <Property Name="Message" Type="varchar(max)" />
+          <Property Name="Type" Type="varchar(max)" />
           <Property Name="Error_Status_Id" Type="int" />
         </EntityType>
         <EntityType Name="SuccessStatus">
@@ -55,10 +57,10 @@
       <Schema Namespace="TaxBanditsAPIClientModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="APIResponse">
           <Key>
-            <PropertyRef Name="ReponseId" />
+            <PropertyRef Name="Reponse_Id" />
           </Key>
-          <Property Name="ReponseId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="SubmissionId" Type="Guid" />
+          <Property Name="Reponse_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Submission_Id" Type="Guid" />
           <Property Name="Code" Type="Int32" />
           <Property Name="Message" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
@@ -69,6 +71,7 @@
           </Key>
           <Property Name="Error_Status_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Sequence" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Record_Error_Id" Type="Int64" />
           <Property Name="Response_Id" Type="Int32" />
         </EntityType>
         <EntityType Name="RecordError">
@@ -79,6 +82,7 @@
           <Property Name="Code" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Message" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Type" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Error_Status_Id" Type="Int32" />
         </EntityType>
         <EntityType Name="SuccessStatu">
@@ -105,8 +109,8 @@
           <EntitySetMapping Name="APIResponses">
             <EntityTypeMapping TypeName="TaxBanditsAPIClientModel.APIResponse">
               <MappingFragment StoreEntitySet="APIResponse">
-                <ScalarProperty Name="ReponseId" ColumnName="ReponseId" />
-                <ScalarProperty Name="SubmissionId" ColumnName="SubmissionId" />
+                <ScalarProperty Name="Reponse_Id" ColumnName="Reponse_Id" />
+                <ScalarProperty Name="Submission_Id" ColumnName="Submission_Id" />
                 <ScalarProperty Name="Code" ColumnName="Code" />
                 <ScalarProperty Name="Message" ColumnName="Message" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -118,6 +122,7 @@
               <MappingFragment StoreEntitySet="ErrorStatus">
                 <ScalarProperty Name="Error_Status_Id" ColumnName="Error_Status_Id" />
                 <ScalarProperty Name="Sequence" ColumnName="Sequence" />
+                <ScalarProperty Name="Record_Error_Id" ColumnName="Record_Error_Id" />
                 <ScalarProperty Name="Response_Id" ColumnName="Response_Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -129,6 +134,7 @@
                 <ScalarProperty Name="Code" ColumnName="Code" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
                 <ScalarProperty Name="Error_Status_Id" ColumnName="Error_Status_Id" />
               </MappingFragment>
             </EntityTypeMapping>

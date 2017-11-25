@@ -114,15 +114,22 @@ namespace APIClientTool.Controllers
                 string requestUri = "FormW2/Create";
                 APIGenerateAuthHeader.GenerateAuthHeader(client, requestUri, "POST");
                 var _response = client.PostAsJsonAsync(requestUri, createRequest).Result;
-                if (_response != null)
+                if (_response != null && _response.IsSuccessStatusCode)
                 {
                     var createResponse = _response.Content.ReadAsAsync<W2CreateReturnResponse>().Result;
                     if (createResponse != null)
                     {
                         responseJson = JsonConvert.SerializeObject(createResponse, Formatting.Indented);
                         w2response = new JavaScriptSerializer().Deserialize<W2CreateReturnResponse>(responseJson);
-                        _repository.SaveAPIResponse(w2response);
+                        if (w2response.SubmissionId != null && w2response.SubmissionId != Guid.Empty)
+                        {
+                            _repository.SaveAPIResponse(w2response);
+                        }
                     }
+                }
+                else
+                {
+                    ViewBag.ReasonPhrase = _response.ReasonPhrase;
                 }
             }
             return PartialView(w2response);

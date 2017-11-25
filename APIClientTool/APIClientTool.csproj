@@ -261,6 +261,8 @@
     <Compile Include="ViewModels\ErrorResponse.cs" />
     <Compile Include="ViewModels\FormW2.cs" />
     <Compile Include="ViewModels\SigningAuthority.cs" />
+    <Compile Include="ViewModels\TransmitFormW2.cs" />
+    <Compile Include="ViewModels\TransmitFormW2Response.cs" />
     <Compile Include="ViewModels\W2CreateReturnRequest.cs" />
     <Compile Include="ViewModels\W2FormDetails.cs" />
     <Compile Include="ViewModels\W2ReturnResponse.cs" />

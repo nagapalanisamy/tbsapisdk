@@ -102,7 +102,6 @@ namespace APIClientTool.Controllers
         {
             var responseJson = string.Empty;
             formw2.TaxYear = 2017;
-            //formw2.Business.BusinessId = Guid.Empty;
             W2CreateReturnResponse w2response = new W2CreateReturnResponse();
             W2CreateReturnRequest request = new W2CreateReturnRequest();
             ErrorResponse errorResponse = new ErrorResponse();
@@ -122,9 +121,7 @@ namespace APIClientTool.Controllers
                     {
                         responseJson = JsonConvert.SerializeObject(createResponse, Formatting.Indented);
                         w2response = new JavaScriptSerializer().Deserialize<W2CreateReturnResponse>(responseJson);
-                        //errorResponse = new JavaScriptSerializer().Deserialize<ErrorResponse>(responseJson);
                         _repository.SaveAPIResponse(w2response);
-                        //_repository.SaveAPIErrorResponse(errorResponse);
                     }
                 }
             }

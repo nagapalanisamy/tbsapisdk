@@ -14,9 +14,14 @@ namespace APIClientTool.ViewModels
             Success = 200,
             MultipleChoices = 300,
             BadRequest = 400,
+            Unauthorized = 401,
+            NotSufficient = 402,
             Forbidden = 403,
             NotFound = 404,
-            InternalServerError = 500
+            MethodNotAllowsed = 405,
+            RequestLimitExceeded = 429,
+            InternalServerError = 500,
+            NotAvailable = 503
         }
     }
 }

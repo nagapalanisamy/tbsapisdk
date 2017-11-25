@@ -115,16 +115,44 @@
         </div>
     }
 
-    @if (!string.IsNullOrWhiteSpace(ViewBag.ReasonPhrase))
+    @if (Model != null && Model.Errors != null)
     {
-        <table class="responsive">
-            <tr>
-                <div class="taC">
-                    <label class="control-label">@ViewBag.ReasonPhrase</label>
-                </div>
-            </tr>
+        <h3 style="font-size:medium;font-weight:600">Error Records</h3>
+        <div class="spacer15"> </div>
+        <table class="table table-bordered">
+            <thead class="thead-inverse">
+                <tr>
+                    <th>Code</th>
+                    <th>Name</th>
+                    <th>Message</th>
+                    <th>Type</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var itemerror in Model.Errors)
+                {
+                    <tr>
+                        <td>@itemerror.Code</td>
+                        <td>@itemerror.Name</td>
+                        <td>@itemerror.Message</td>
+                        <td>@itemerror.Type</td>
+                    </tr>
+                }
+            </tbody>
         </table>
     }
+
+
+    @*@if (!string.IsNullOrWhiteSpace(ViewBag.ReasonPhrase))
+        {
+            <table class="responsive">
+                <tr>
+                    <div class="taC">
+                        <label class="control-label">@ViewBag.ReasonPhrase</label>
+                    </div>
+                </tr>
+            </table>
+        }*@
 
 </div>
 

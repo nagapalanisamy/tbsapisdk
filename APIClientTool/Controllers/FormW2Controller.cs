@@ -54,7 +54,7 @@ namespace APIClientTool.Controllers
 
                 formw2.Business.KindOfEmployer = "Regular(941)";
                 formw2.Business.EmploymentCd = "FederalGovt";
-                formw2.Business.IsForeign = false;
+                //formw2.Business.IsForeign = false;
                 formw2.Business.Country = "US";
                 formw2.Business.Address1 = "109 Pangbourne Way";
                 formw2.Business.City = "Hanover";
@@ -63,9 +63,10 @@ namespace APIClientTool.Controllers
 
                 //Mapping Employee
                 formw2.Employee = new Employee();
+                formw2.Employee.SSN = "123456789";
                 formw2.Employee.FirstNm = "Peter";
                 formw2.Employee.LastNm = "Yengaran";
-                formw2.Employee.IsForeign = false;
+                //formw2.Employee.IsForeign = false;
                 formw2.Employee.Country = "US";
                 formw2.Employee.Address1 = "First Street";
                 formw2.Employee.City = "Rockhill";
@@ -82,15 +83,16 @@ namespace APIClientTool.Controllers
                 formw2.Business.PhoneExtn = "";
                 formw2.Business.Fax = "";
                 formw2.Business.Address2 = "";
-                formw2.Business.ProvinceState = "";
-                formw2.Business.PostalCd = "";
+                //formw2.Business.ProvinceState = "";
+                //formw2.Business.PostalCd = "";
 
                 //Optional Employee
+                formw2.Employee.MiddleNm = "";
                 formw2.Employee.Suffix = "";
                 formw2.Employee.Fax = "";
                 formw2.Employee.Address2 = "";
-                formw2.Employee.ProvinceState = "";
-                formw2.Employee.PostalCd = "";
+                //formw2.Employee.ProvinceState = "";
+                //formw2.Employee.PostalCd = "";
             }
             return View(formw2);
         }
@@ -102,6 +104,7 @@ namespace APIClientTool.Controllers
         {
             var responseJson = string.Empty;
             formw2.TaxYear = 2017;
+            formw2.Sequence = "WEFGH123";
             W2CreateReturnResponse w2response = new W2CreateReturnResponse();
             W2CreateReturnRequest request = new W2CreateReturnRequest();
             ErrorResponse errorResponse = new ErrorResponse();
@@ -129,7 +132,10 @@ namespace APIClientTool.Controllers
                 }
                 else
                 {
-                    ViewBag.ReasonPhrase = _response.ReasonPhrase;
+                    var createResponse = _response.Content.ReadAsAsync<Object>().Result;
+                    responseJson = JsonConvert.SerializeObject(createResponse, Formatting.Indented);
+                    w2response = new JavaScriptSerializer().Deserialize<W2CreateReturnResponse>(responseJson);
+                    //ViewBag.ReasonPhrase = _response.ReasonPhrase;
                 }
             }
             return PartialView(w2response);

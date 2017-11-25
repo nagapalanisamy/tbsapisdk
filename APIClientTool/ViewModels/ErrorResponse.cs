@@ -7,6 +7,6 @@ namespace APIClientTool.ViewModels
 {
     public class ErrorResponse
     {
-        public List<Error> Messages { get; set; }
+        public List<Error> Errors { get; set; }
     }
 }

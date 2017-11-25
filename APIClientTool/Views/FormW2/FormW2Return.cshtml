@@ -562,6 +562,13 @@
                                 <td class="labelName"><label class="control-label">Country:</label></td>
                                 <td class="fieldName">@Html.DropDownListFor(model => model.Employee.Country, new SelectList(_countryList, "value", "text", null), "Select Country", new { @class = "form-control" })</td>
                             </tr>
+                            <tr><td class="spacer10"></td></tr>
+                            <tr>
+                                <td class="labelName"><label class="control-label">Email:</label></td>
+                                <td class="fieldName">@Html.TextBoxFor(model => model.Employee.Email, new { @class = "form-control" })</td>
+                                <td class="labelName"><label class="control-label">Phone:</label></td>
+                                <td class="fieldName">@Html.TextBoxFor(model => model.Employee.Phone, new { @class = "form-control" })</td>
+                            </tr>
                         </table>
                     </div>
                 </div>

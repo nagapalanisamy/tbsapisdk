@@ -24,9 +24,9 @@ namespace APIClientTool.Repository
                 using (TaxBanditsAPIClientEntities dbContext = new TaxBanditsAPIClientEntities())
                 {
                     var apiResponse = new APIResponse();
-                    apiResponse.Code = returnResponse.Code;
-                    apiResponse.Message = returnResponse.Message;
-                    apiResponse.Name = returnResponse.Name;
+                    apiResponse.Code = returnResponse.StatusCode;
+                    apiResponse.Message = returnResponse.StatusMessage;
+                    apiResponse.Name = returnResponse.StatusName;
                     apiResponse.Submission_Id = returnResponse.SubmissionId;
                     dbContext.APIResponses.Add(apiResponse);
                     dbContext.SaveChanges();

@@ -280,7 +280,7 @@
     <Content Include="Content\Images\logo.png" />
     <Content Include="Content\Images\logoHead.png" />
     <Content Include="Content\Images\phone_icon.png" />
-    <Content Include="Content\toastr.css" />
+    <Content Include="Scripts\toastr.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />

@@ -27,7 +27,7 @@ namespace APIClientTool.Repository
                     apiResponse.Code = returnResponse.Code;
                     apiResponse.Message = returnResponse.Message;
                     apiResponse.Name = returnResponse.Name;
-                    apiResponse.SubmissionId = returnResponse.SubmissionId;
+                    apiResponse.Submission_Id = returnResponse.SubmissionId;
                     dbContext.APIResponses.Add(apiResponse);
                     dbContext.SaveChanges();
 
@@ -40,7 +40,7 @@ namespace APIClientTool.Repository
                                 var successStatus = new SuccessStatu();
                                 successStatus.Record_Id = successRecord.RecordId;
                                 successStatus.Sequence = successRecord.Sequence;
-                                successStatus.Response_Id = apiResponse.ReponseId;
+                                successStatus.Response_Id = apiResponse.Reponse_Id;
                                 dbContext.SuccessStatus.Add(successStatus);
                                 dbContext.SaveChanges();
                             }
@@ -52,7 +52,7 @@ namespace APIClientTool.Repository
                             {
                                 var errorStatus = new ErrorStatu();
                                 errorStatus.Sequence = errorRecord.Sequence;
-                                errorStatus.Response_Id = apiResponse.ReponseId;
+                                errorStatus.Response_Id = apiResponse.Reponse_Id;
                                 dbContext.ErrorStatus.Add(errorStatus);
                                 dbContext.SaveChanges();
 

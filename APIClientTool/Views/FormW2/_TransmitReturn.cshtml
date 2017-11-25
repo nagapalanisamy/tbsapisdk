@@ -1,10 +1,107 @@
-﻿<div class="modal-header edit-modal-header">
+﻿@model  APIClientTool.ViewModels.TransmitFormW2Response
+<div class="modal-header edit-modal-header">
     <button type="button" class="close" data-dismiss="modal"></button>
     <h4 id="form_heading" class="modal-title">
         Transmit Return
     </h4>
 </div>
 <div class="modal-body edit-modal-body white_bg">
+
+    @if (Model != null && Model.Errors != null)
+    {
+        <h3 style="font-size:medium;font-weight:600">Error Records</h3>
+        <div class="spacer15"> </div>
+        <table class="table table-bordered">
+            <thead class="thead-inverse">
+                <tr>
+                    <th>Code</th>
+                    <th>Name</th>
+                    <th>Message</th>
+                    <th>Type</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var itemerror in Model.Errors)
+                {
+                    <tr>
+                        <td>@itemerror.Code</td>
+                        <td>@itemerror.Name</td>
+                        <td>@itemerror.Message</td>
+                        <td>@itemerror.Type</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+
+    @if (Model != null && Model.SuccessStatus != null && Model.SuccessStatus.RecordId != null)
+    {
+        <h3 style="font-size:medium;font-weight:600">Success Records</h3>
+        <div class="spacer15"> </div>
+        <table class="table table-bordered">
+            <thead class="thead-inverse">
+                <tr>
+                    <th>Record Id</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var itemerror in Model.SuccessStatus.RecordId)
+                {
+                    <tr>
+                        <td>@itemerror</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+
+    @if (Model != null && Model.ErrorStatus != null && Model.ErrorStatus.Errors != null)
+    {
+        <h3 style="font-size:medium;font-weight:600">Error Status Records</h3>
+        <div class="spacer15"> </div>
+
+        <table class="table table-bordered">
+            <thead class="thead-inverse">
+                <tr>
+                    <th>
+                        Record Id
+                    </th>
+                    <th>
+                        Error
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>@Model.ErrorStatus.RecordId</td>
+                    <td>
+                        <table class="table table-bordered">
+                            <thead class="thead-inverse">
+                                <tr>
+                                    <th>Code</th>
+                                    <th>Name</th>
+                                    <th>Message</th>
+                                    <th>Type</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var itemerror in Model.ErrorStatus.Errors)
+                                {
+                                    <tr>
+                                        <td>@itemerror.Code</td>
+                                        <td>@itemerror.Name</td>
+                                        <td>@itemerror.Message</td>
+                                        <td>@itemerror.Type</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    }
 
 </div>
 

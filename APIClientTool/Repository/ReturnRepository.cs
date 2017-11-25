@@ -34,7 +34,7 @@ namespace APIClientTool.Repository
 
                     if (returnResponse.FormW2Record != null)
                     {
-                        if (returnResponse.FormW2Record.SuccessRecords != null && returnResponse.FormW2Record.SuccessRecords.Count > 1)
+                        if (returnResponse.FormW2Record.SuccessRecords != null && returnResponse.FormW2Record.SuccessRecords.Count > 0)
                         {
                             foreach (var successRecord in returnResponse.FormW2Record.SuccessRecords)
                             {
@@ -47,7 +47,7 @@ namespace APIClientTool.Repository
                             }
                         }
 
-                        if (returnResponse.FormW2Record.ErrorRecords != null && returnResponse.FormW2Record.ErrorRecords.Count > 1)
+                        if (returnResponse.FormW2Record.ErrorRecords != null && returnResponse.FormW2Record.ErrorRecords.Count > 0)
                         {
                             foreach (var errorRecord in returnResponse.FormW2Record.ErrorRecords)
                             {
@@ -57,7 +57,7 @@ namespace APIClientTool.Repository
                                 dbContext.ErrorStatus.Add(errorStatus);
                                 dbContext.SaveChanges();
 
-                                if (errorRecord.Errors != null && errorRecord.Errors.Count > 1)
+                                if (errorRecord.Errors != null && errorRecord.Errors.Count > 0)
                                 {
                                     foreach (var error in errorRecord.Errors)
                                     {
@@ -125,6 +125,7 @@ namespace APIClientTool.Repository
             TransmitFormW2 transmitFormW2 = new TransmitFormW2();
             if (submissionId != Guid.Empty)
             {
+                transmitFormW2.SubmissionId = submissionId;
                 transmitFormW2.RecordIds = new List<Guid>();
                 using (TaxBanditsAPIClientEntities dbContext = new TaxBanditsAPIClientEntities())
                 {

@@ -1,7 +1,99 @@
-﻿
+﻿@model List<APIClientTool.ViewModels.TransmitFormW2>
 @{
     ViewBag.Title = "EFileStatus";
 }
 
-<h2>EFileStatus</h2>
+<h1 class="pageTitle">Form W-2 Efile Status</h1>
 
+<div>
+    <table class="table table-bordered">
+        <thead class="thead-inverse">
+            <tr>
+                <th>SubmissionId</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null && Model.Any())
+            {
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @item.SubmissionId
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn_sm btn_second" onclick="APIValidate('@item.SubmissionId')">APIValidate</button>
+                            <button type="button" class="btn btn_sm btn_second" onclick="Transmit('@item.SubmissionId')">Transmit</button>
+                            <button type="button" class="btn btn_sm btn_second" onclick="EfileStatus('@item.SubmissionId')">EfileStatus</button>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="2" class="taC">No result found</td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+</div>
+
+<script type="text/javascript">
+
+    $(function () {
+
+    });
+
+
+    function APIValidate(id) {
+        $.ajax({
+            url: "/FormW2/_APIValidate/",
+            cache: false,
+            data: { submissionId: id },
+            success: function (data) {
+                $(".modal-dialog").addClass("edit-dialog");
+                $('#ModelBody').html(data);
+                $('#myModal').modal("show");
+            },
+            error: function (err) {
+                console.log(err.responseText);
+            }
+        });
+    }
+
+    function Transmit(id) {
+        $.ajax({
+            url: "/FormW2/_TransmitReturn/",
+            cache: false,
+            data: { submissionId: id },
+            success: function (data) {
+                $(".modal-dialog").addClass("edit-dialog");
+                $('#ModelBody').html(data);
+                $('#myModal').modal("show");
+            },
+            error: function (err) {
+                console.log(err.responseText);
+            }
+        });
+    }
+
+    function EfileStatus(id) {
+        $.ajax({
+            url: "/FormW2/_GetEfileStatus/",
+            cache: false,
+            data: { submissionId: id },
+            success: function (data) {
+                $(".modal-dialog").addClass("edit-dialog");
+                $('#ModelBody').html(data);
+                $('#myModal').modal("show");
+            },
+            error: function (err) {
+                console.log(err.responseText);
+            }
+        });
+    }
+
+</script>

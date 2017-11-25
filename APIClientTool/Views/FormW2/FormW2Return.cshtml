@@ -736,7 +736,10 @@
     }
     <div class="spacer10"></div>
     <div class="taC">
-        <button type="button" class="btn btn_lg btn_primary" onclick="GetStatus()"> Create Return</button>
+        <button type="button" class="btn btn_lg btn_primary" onclick="GetStatus()">
+            Create Return
+            <i class="fa fa-spinner fa-spin" aria-hidden="true" id="CreateSpinner" style="display:none"></i>
+        </button>
     </div>
 </div>
 
@@ -748,12 +751,8 @@
     });
 
     function GetStatus() {
-        ShowAPIStatus();
-    }
-
-
-    function ShowAPIStatus() {
         var formdata = $("#createreturnForm").serialize();
+        $("#CreateSpinner").show();
         $.ajax({
             url: "/FormW2/APIResponseStatus/",
             cache: false,
@@ -762,6 +761,7 @@
                 $(".modal-dialog").addClass("edit-dialog");
                 $('#ModelBody').html(data);
                 $('#myModal').modal("show");
+                $("#CreateSpinner").hide();
             },
             error: function (err) {
                 console.log(err.responseText);

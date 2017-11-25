@@ -367,6 +367,9 @@
     <Content Include="Scripts\jquery-3.2.1.min.map" />
     <Content Include="Views\Shared\_SubMenu.cshtml" />
     <Content Include="Views\FormW2\EFileStatus.cshtml" />
+    <Content Include="Views\FormW2\_APIValidate.cshtml" />
+    <Content Include="Views\FormW2\_TransmitReturn.cshtml" />
+    <Content Include="Views\FormW2\_GetEfileStatus.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

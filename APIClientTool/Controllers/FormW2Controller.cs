@@ -195,7 +195,9 @@ namespace APIClientTool.Controllers
         #region  EFile Status
         public ActionResult EFileStatus()
         {
-            return View();
+            List<TransmitFormW2> _transmitFormw2List = new List<TransmitFormW2>();
+            _transmitFormw2List = _repository.GetAPIResponse();
+            return View(_transmitFormw2List);
         }
         #endregion
 

@@ -103,20 +103,21 @@ namespace APIClientTool.Repository
         //#endregion
 
         #region Get API Response 
-        public List<TransmitFormW2> GetAPIResponse()
+        public List<EFileStatus> GetAPIResponse()
         {
-            List<TransmitFormW2> transmitFormW2list = new List<TransmitFormW2>();
+            List<EFileStatus> formW2list = new List<EFileStatus>();
             using (TaxBanditsAPIClientEntities dbContext = new TaxBanditsAPIClientEntities())
             {
                 var apiResponse = dbContext.APIResponses.Where(a => a.Code == (int)StatusCode.Success && a.Submission_Id != Guid.Empty).ToList();
                 foreach (var submission in apiResponse)
                 {
-                    var transmitFormW2 = new TransmitFormW2();
-                    transmitFormW2.SubmissionId = submission.Submission_Id ?? Guid.Empty;
-                    transmitFormW2list.Add(transmitFormW2);
+                    var formW2 = new EFileStatus();
+                    formW2.SubmissionId = submission.Submission_Id ?? Guid.Empty;
+                    formW2.IsReturnTransmitted = submission.Is_Return_Transmitted ?? false;
+                    formW2list.Add(formW2);
                 }
             }
-            return transmitFormW2list;
+            return formW2list;
         }
         #endregion
 

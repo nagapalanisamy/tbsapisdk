@@ -17,7 +17,7 @@ namespace APIClientTool.Repository
         #endregion
 
         #region Save API Response
-        public void SaveAPIResponse(W2ReturnResponse returnResponse)
+        public void SaveAPIResponse(W2CreateReturnResponse returnResponse)
         {
             if (returnResponse != null)
             {

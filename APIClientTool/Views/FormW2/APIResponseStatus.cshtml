@@ -1,5 +1,4 @@
-﻿@*@model APIClientTool.ViewModels.ErrorResponse*@
-@model APIClientTool.ViewModels.W2ReturnResponse
+﻿@model APIClientTool.ViewModels.W2CreateReturnResponse
 <div class="modal-header edit-modal-header">
     <button type="button" class="close" data-dismiss="modal"></button>
     <h4 id="form_heading" class="modal-title">
@@ -7,7 +6,7 @@
     </h4>
 </div>
 <div class="modal-body edit-modal-body white_bg">
-    @if (Model != null)
+    @if (Model != null && Model.StatusCode > 0)
     {
         <table class="responsive">
             <tr>
@@ -31,9 +30,10 @@
             </tr>
         </table>
     }
-    <div class="spacer15"> </div>
+  
     @if (Model != null && Model.FormW2Record != null && Model.FormW2Record.ErrorRecords != null && Model.FormW2Record.ErrorRecords.Count > 0)
     {
+        <div class="spacer15"> </div>
         <h3 style="font-size:medium;font-weight:600">Error Records</h3>
         <div>
             <table class="table table-bordered">
@@ -82,10 +82,11 @@
             </table>
         </div>
     }
-    <div class="spacer15"> </div>
+
 
     @if (Model != null && Model.FormW2Record != null && Model.FormW2Record.SuccessRecords != null)
             {
+        <div class="spacer15"> </div>
         <h3 style="font-size:medium;font-weight:600">Success Records</h3>
         <div>
             <table class="table table-bordered">
@@ -113,6 +114,7 @@
             </table>
         </div>
     }
+
 </div>
 
 <div class="modal-footer edit-modal-footer mTopNo">

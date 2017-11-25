@@ -5,7 +5,7 @@ using System.Web;
 
 namespace APIClientTool.ViewModels
 {
-    public class W2ReturnResponse
+    public class W2CreateReturnResponse
     {
         public Guid SubmissionId { get; set; }
         public FormW2Records FormW2Record { get; set; }

@@ -103,7 +103,7 @@ namespace APIClientTool.Controllers
             var responseJson = string.Empty;
             formw2.TaxYear = 2017;
             //formw2.Business.BusinessId = Guid.Empty;
-            W2ReturnResponse w2response = new W2ReturnResponse();
+            W2CreateReturnResponse w2response = new W2CreateReturnResponse();
             W2CreateReturnRequest request = new W2CreateReturnRequest();
             ErrorResponse errorResponse = new ErrorResponse();
             request.W2Forms = new List<FormW2>();
@@ -111,17 +111,17 @@ namespace APIClientTool.Controllers
             var requestText = JsonConvert.SerializeObject(request, Formatting.Indented);
             using (var client = new PublicAPIClient())
             {
-                var createRequest = new JavaScriptSerializer().Deserialize<Object>(requestText);
+                var createRequest = new JavaScriptSerializer().Deserialize<W2CreateReturnRequest>(requestText);
                 string requestUri = "FormW2/Create";
                 APIGenerateAuthHeader.GenerateAuthHeader(client, requestUri, "POST");
                 var _response = client.PostAsJsonAsync(requestUri, createRequest).Result;
                 if (_response != null)
                 {
-                    var createResponse = _response.Content.ReadAsAsync<Object>().Result;
+                    var createResponse = _response.Content.ReadAsAsync<W2CreateReturnResponse>().Result;
                     if (createResponse != null)
                     {
                         responseJson = JsonConvert.SerializeObject(createResponse, Formatting.Indented);
-                        w2response = new JavaScriptSerializer().Deserialize<W2ReturnResponse>(responseJson);
+                        w2response = new JavaScriptSerializer().Deserialize<W2CreateReturnResponse>(responseJson);
                         //errorResponse = new JavaScriptSerializer().Deserialize<ErrorResponse>(responseJson);
                         _repository.SaveAPIResponse(w2response);
                         //_repository.SaveAPIErrorResponse(errorResponse);

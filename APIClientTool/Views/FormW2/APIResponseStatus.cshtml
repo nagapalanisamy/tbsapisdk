@@ -30,7 +30,7 @@
             </tr>
         </table>
     }
-  
+
     @if (Model != null && Model.FormW2Record != null && Model.FormW2Record.ErrorRecords != null && Model.FormW2Record.ErrorRecords.Count > 0)
     {
         <div class="spacer15"> </div>
@@ -39,12 +39,12 @@
             <table class="table table-bordered">
                 <thead class="thead-inverse">
                     <tr>
-                        <td>
+                        <th>
                             Sequence
-                        </td>
-                        <td>
+                        </th>
+                        <th>
                             Error
-                        </td>
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -56,10 +56,10 @@
                                 <table class="table table-bordered">
                                     <thead class="thead-inverse">
                                         <tr>
-                                            <td>Code</td>
-                                            <td>Name</td>
-                                            <td>Message</td>
-                                            <td>Type</td>
+                                            <th>Code</th>
+                                            <th>Name</th>
+                                            <th>Message</th>
+                                            <th>Type</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -92,11 +92,11 @@
             <table class="table table-bordered">
                 <thead class="thead-inverse">
                     <tr>
-                        <td>Sequence</td>
-                        <td>Record Id</td>
-                        <td>Record Status</td>
-                        <td>Created Ts</td>
-                        <td>Updated Ts</td>
+                        <th>Sequence</th>
+                        <th>Record Id</th>
+                        <th>Record Status</th>
+                        <th>Created Ts</th>
+                        <th>Updated Ts</th>
                     </tr>
                 </thead>
                 <tbody>

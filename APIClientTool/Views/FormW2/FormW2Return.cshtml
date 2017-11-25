@@ -411,328 +411,333 @@
     _countryList.Add(new SelectListItem { Text = "USA ", Value = "US" });
 }
 
-@using (Html.BeginForm("", "", FormMethod.Post, new { id = "createreturnForm" }))
-{
-    <h1 class="pageTitle">Form W-2</h1>
-    <div class="panel-group" id="accordion">
-        <div class="panel panel-default">
-            <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapse1">
-                <h4 class="panel-title">
-                    Employer Details
-                </h4>
-            </div>
-            <div id="collapse1" class="panel-collapse collapse in">
-                <div class="panel-body">
-                    <table class="responsive">
-                        <tr>
-                            <td class="labelName"><label class="control-label">Employer Name:</label></td>
-                            <td class="fieldName">@Html.TextBoxFor(model => model.Business.BusinessNm, new { @class = "form-control" })</td>
-                            <td class="labelName"><label class="control-label">Employer Type:</label></td>
-                            <td>
-                                @Html.DropDownListFor(model => model.Business.BusinessType, new SelectList(_businessTypeList, "value", "text", null), "Select Employer Type", new { @class = "form-control" })
-                            </td>
-                        </tr>
-                        <tr><td class="spacer10"></td></tr>
-                        <tr>
-                            <td class="labelName"> <label class="control-label">EIN:</label> </td>
-                            <td class="fieldName">@Html.TextBoxFor(model => model.Business.EIN, new { @class = "form-control" })</td>
-                            <td class="labelName"><label class="control-label">Address Line1:</label></td>
-                            <td class="fieldName">@Html.TextBoxFor(model => model.Business.Address1, new { @class = "form-control" })</td>
-                        </tr>
-                        <tr><td class="spacer10"></td></tr>
-
-                        <tr>
-                            <td class="labelName"><label class="control-label">Address Line2:</label></td>
-                            <td class="fieldName">@Html.TextBoxFor(model => model.Business.Address2, new { @class = "form-control" })</td>
-                            <td class="labelName"><label class="control-label">City:</label></td>
-                            <td class="fieldName">@Html.TextBoxFor(model => model.Business.City, new { @class = "form-control" })</td>
-                        </tr>
-                        <tr><td class="spacer10"></td></tr>
-                        <tr>
-                            <td class="labelName"><label class="control-label">State:</label></td>
-                            <td>
-                                @Html.DropDownListFor(model => model.Business.USState, new SelectList(_USStates, "value", "text", null), "Select State", new { @class = "form-control" })
-                            </td>
-                            <td class="labelName"><label class="control-label">Zip Code:</label></td>
-                            <td class="fieldName">@Html.TextBoxFor(model => model.Business.USZip, new { @class = "form-control" })</td>
-                        </tr>
-                        <tr><td class="spacer10"></td></tr>
-                        @*<tr>
-                                <td class="labelName"><label class="control-label">Province State:</label></td>
+@*<div class="col-md-3 col-lg-3">
+        @Html.Partial("_SubMenu")
+    </div>*@
+<div class="col-md-12 col-lg-12">
+    @using (Html.BeginForm("", "", FormMethod.Post, new { id = "createreturnForm" }))
+    {
+        <h1 class="pageTitle">Form W-2</h1>
+        <div class="panel-group" id="accordion">
+            <div class="panel panel-default">
+                <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapse1">
+                    <h4 class="panel-title">
+                        Employer Details
+                    </h4>
+                </div>
+                <div id="collapse1" class="panel-collapse collapse in">
+                    <div class="panel-body">
+                        <table class="responsive">
+                            <tr>
+                                <td class="labelName"><label class="control-label">Employer Name:</label></td>
+                                <td class="fieldName">@Html.TextBoxFor(model => model.Business.BusinessNm, new { @class = "form-control" })</td>
+                                <td class="labelName"><label class="control-label">Employer Type:</label></td>
                                 <td>
-                                    @Html.DropDownListFor(model => model.Business.ProvinceState, new SelectList(_USStates, "value", "text", null), "Select State", new { @class = "form-control" })
+                                    @Html.DropDownListFor(model => model.Business.BusinessType, new SelectList(_businessTypeList, "value", "text", null), "Select Employer Type", new { @class = "form-control" })
                                 </td>
-                                <td class="labelName"><label class="control-label">Is Foreign:</label></td>
-                                <td class="fieldName">@Html.TextBoxFor(model => model.Business.IsForeign, new { @class = "form-control" })</td>
                             </tr>
-                            <tr><td class="spacer10"></td></tr>*@
-                        <tr>
-                            <td class="labelName"><label class="control-label">Country:</label></td>
-                            <td>
-                                @Html.DropDownListFor(model => model.Business.Country, new SelectList(_countryList, "value", "text", null), "Select Country", new { @class = "form-control" })
-                            </td>
-                            <td class="labelName"><label class="control-labeld">Contact Name:</label></td>
-                            <td class="fieldName">@Html.TextBoxFor(model => model.Business.ContactNm, new { @class = "form-control" })</td>
-                        </tr>
-                        <tr><td class="spacer10"></td></tr>
-                        <tr>
-                            <td class="labelName"><label class="control-label">Email Address:</label></td>
-                            <td class="fieldName">@Html.TextBoxFor(model => model.Business.Email, new { @class = "form-control" })</td>
-                            <td class="labelName"><label class="control-label">Phone Number:</label></td>
-                            <td class="fieldName">@Html.TextBoxFor(model => model.Business.Phone, new { @class = "form-control" })</td>
-                        </tr>
-                        <tr><td class="spacer10"></td></tr>
-                        <tr>
-                            <td class="labelName"><label class="control-label">Phone Extn:</label></td>
-                            <td class="fieldName">@Html.TextBoxFor(model => model.Business.PhoneExtn, new { @class = "form-control" })</td>
-                            <td class="labelName"><label class="control-label">Fax Number:</label></td>
-                            <td class="fieldName">@Html.TextBoxFor(model => model.Business.Fax, new { @class = "form-control" })</td>
-                        </tr>
-                        <tr><td class="spacer10"></td></tr>
-                        <tr>
-                            <td class="labelName"><label class="control-label">Kind Of Employer:</label></td>
-                            <td class="fieldName">@Html.DropDownListFor(model => model.Business.KindOfEmployer, new SelectList(_kindOfEmployer, "value", "text", null), "Select Employer Type", new { @class = "form-control" })</td>
-                            <td class="labelName"><label class="control-label">Employment Code:</label></td>
-                            <td class="fieldName">@Html.DropDownListFor(model => model.Business.EmploymentCd, new SelectList(_employmentCd, "value", "text", null), "Select Employer Type", new { @class = "form-control" })</td>
-                        </tr>
-                        @*<tr><td class="spacer10"></td></tr>
-                        <tr>
-                            <td class="labelName"><label class="control-label">SigningAuthority Name:</label></td>
-                            <td class="fieldName">@Html.TextBoxFor(model => model.Business.SigningAuthority.Name, new { @class = "form-control" })</td>
-                            <td class="labelName"><label class="control-label">SigningAuthority Day Time Phone:</label></td>
-                            <td class="fieldName">@Html.TextBoxFor(model => model.Business.SigningAuthority.DayTimePhone, new { @class = "form-control" })</td>
-                        </tr>
-                        <tr><td class="spacer10"></td></tr>
-                        <tr>
-                            <td class="labelName"><label class="control-label">SigningAuthority Business Members:</label></td>
-                            <td class="fieldName">@Html.TextBoxFor(model => model.Business.SigningAuthority.BusinessMembers, new { @class = "form-control" })</td>
-                            <td class="labelName"></td>
-                            <td class="fieldName"></td>
-                        </tr>*@
-                    </table>
+                            <tr><td class="spacer10"></td></tr>
+                            <tr>
+                                <td class="labelName"> <label class="control-label">EIN:</label> </td>
+                                <td class="fieldName">@Html.TextBoxFor(model => model.Business.EIN, new { @class = "form-control" })</td>
+                                <td class="labelName"><label class="control-label">Address Line1:</label></td>
+                                <td class="fieldName">@Html.TextBoxFor(model => model.Business.Address1, new { @class = "form-control" })</td>
+                            </tr>
+                            <tr><td class="spacer10"></td></tr>
+
+                            <tr>
+                                <td class="labelName"><label class="control-label">Address Line2:</label></td>
+                                <td class="fieldName">@Html.TextBoxFor(model => model.Business.Address2, new { @class = "form-control" })</td>
+                                <td class="labelName"><label class="control-label">City:</label></td>
+                                <td class="fieldName">@Html.TextBoxFor(model => model.Business.City, new { @class = "form-control" })</td>
+                            </tr>
+                            <tr><td class="spacer10"></td></tr>
+                            <tr>
+                                <td class="labelName"><label class="control-label">State:</label></td>
+                                <td>
+                                    @Html.DropDownListFor(model => model.Business.USState, new SelectList(_USStates, "value", "text", null), "Select State", new { @class = "form-control" })
+                                </td>
+                                <td class="labelName"><label class="control-label">Zip Code:</label></td>
+                                <td class="fieldName">@Html.TextBoxFor(model => model.Business.USZip, new { @class = "form-control" })</td>
+                            </tr>
+                            <tr><td class="spacer10"></td></tr>
+                            @*<tr>
+                                    <td class="labelName"><label class="control-label">Province State:</label></td>
+                                    <td>
+                                        @Html.DropDownListFor(model => model.Business.ProvinceState, new SelectList(_USStates, "value", "text", null), "Select State", new { @class = "form-control" })
+                                    </td>
+                                    <td class="labelName"><label class="control-label">Is Foreign:</label></td>
+                                    <td class="fieldName">@Html.TextBoxFor(model => model.Business.IsForeign, new { @class = "form-control" })</td>
+                                </tr>
+                                <tr><td class="spacer10"></td></tr>*@
+                            <tr>
+                                <td class="labelName"><label class="control-label">Country:</label></td>
+                                <td>
+                                    @Html.DropDownListFor(model => model.Business.Country, new SelectList(_countryList, "value", "text", null), "Select Country", new { @class = "form-control" })
+                                </td>
+                                <td class="labelName"><label class="control-labeld">Contact Name:</label></td>
+                                <td class="fieldName">@Html.TextBoxFor(model => model.Business.ContactNm, new { @class = "form-control" })</td>
+                            </tr>
+                            <tr><td class="spacer10"></td></tr>
+                            <tr>
+                                <td class="labelName"><label class="control-label">Email Address:</label></td>
+                                <td class="fieldName">@Html.TextBoxFor(model => model.Business.Email, new { @class = "form-control" })</td>
+                                <td class="labelName"><label class="control-label">Phone Number:</label></td>
+                                <td class="fieldName">@Html.TextBoxFor(model => model.Business.Phone, new { @class = "form-control" })</td>
+                            </tr>
+                            <tr><td class="spacer10"></td></tr>
+                            <tr>
+                                <td class="labelName"><label class="control-label">Phone Extn:</label></td>
+                                <td class="fieldName">@Html.TextBoxFor(model => model.Business.PhoneExtn, new { @class = "form-control" })</td>
+                                <td class="labelName"><label class="control-label">Fax Number:</label></td>
+                                <td class="fieldName">@Html.TextBoxFor(model => model.Business.Fax, new { @class = "form-control" })</td>
+                            </tr>
+                            <tr><td class="spacer10"></td></tr>
+                            <tr>
+                                <td class="labelName"><label class="control-label">Kind Of Employer:</label></td>
+                                <td class="fieldName">@Html.DropDownListFor(model => model.Business.KindOfEmployer, new SelectList(_kindOfEmployer, "value", "text", null), "Select Employer Type", new { @class = "form-control" })</td>
+                                <td class="labelName"><label class="control-label">Employment Code:</label></td>
+                                <td class="fieldName">@Html.DropDownListFor(model => model.Business.EmploymentCd, new SelectList(_employmentCd, "value", "text", null), "Select Employer Type", new { @class = "form-control" })</td>
+                            </tr>
+                            @*<tr><td class="spacer10"></td></tr>
+                                <tr>
+                                    <td class="labelName"><label class="control-label">SigningAuthority Name:</label></td>
+                                    <td class="fieldName">@Html.TextBoxFor(model => model.Business.SigningAuthority.Name, new { @class = "form-control" })</td>
+                                    <td class="labelName"><label class="control-label">SigningAuthority Day Time Phone:</label></td>
+                                    <td class="fieldName">@Html.TextBoxFor(model => model.Business.SigningAuthority.DayTimePhone, new { @class = "form-control" })</td>
+                                </tr>
+                                <tr><td class="spacer10"></td></tr>
+                                <tr>
+                                    <td class="labelName"><label class="control-label">SigningAuthority Business Members:</label></td>
+                                    <td class="fieldName">@Html.TextBoxFor(model => model.Business.SigningAuthority.BusinessMembers, new { @class = "form-control" })</td>
+                                    <td class="labelName"></td>
+                                    <td class="fieldName"></td>
+                                </tr>*@
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapse2">
+                    <h4 class="panel-title">
+                        Employee Details
+                    </h4>
+                </div>
+                <div id="collapse2" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <table class="responsive">
+                            <tr>
+                                <td class="labelName"><label class="control-label">SSN:</label></td>
+                                <td class="fieldName">@Html.TextBoxFor(model => model.Employee.SSN, new { @class = "form-control" })</td>
+                                <td class="labelName"><label class="control-label">First Name:</label></td>
+                                <td class="fieldName">@Html.TextBoxFor(model => model.Employee.FirstNm, new { @class = "form-control" })</td>
+                            </tr>
+                            <tr><td class="spacer10"></td></tr>
+                            <tr>
+                                <td class="labelName"><label class="control-label">Last Name:</label></td>
+                                <td class="fieldName">@Html.TextBoxFor(model => model.Employee.LastNm, new { @class = "form-control" })</td>
+                                <td class="labelName"><label class="control-label">Suffix:</label></td>
+                                <td class="fieldName">@Html.TextBoxFor(model => model.Employee.Suffix, new { @class = "form-control" })</td>
+                            </tr>
+                            <tr><td class="spacer10"></td></tr>
+                            <tr>
+                                <td class="labelName"><label class="control-label">Address Line1:</label></td>
+                                <td class="fieldName">@Html.TextBoxFor(model => model.Employee.Address1, new { @class = "form-control" })</td>
+                                <td class="labelName"><label class="control-label">Address Line2:</label></td>
+                                <td class="fieldName">@Html.TextBoxFor(model => model.Employee.Address2, new { @class = "form-control" })</td>
+                            </tr>
+                            <tr><td class="spacer10"></td></tr>
+                            <tr>
+                                <td class="labelName"><label class="control-label">City:</label></td>
+                                <td class="fieldName">@Html.TextBoxFor(model => model.Employee.City, new { @class = "form-control" })</td>
+                                <td class="labelName"><label class="control-label">State:</label></td>
+                                <td>
+                                    @Html.DropDownListFor(model => model.Employee.State, new SelectList(_USStates, "value", "text", null), "Select State", new { @class = "form-control floatL" })
+                                </td>
+                            </tr>
+                            <tr><td class="spacer10"></td></tr>
+                            <tr>
+                                <td class="labelName"><label class="control-label">Zip Code:</label></td>
+                                <td class="fieldName">@Html.TextBoxFor(model => model.Employee.Zip, new { @class = "form-control" })</td>
+                                <td class="labelName"><label class="control-label">Country:</label></td>
+                                <td class="fieldName">@Html.DropDownListFor(model => model.Employee.Country, new SelectList(_countryList, "value", "text", null), "Select Country", new { @class = "form-control" })</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapse3">
+                    <h4 class="panel-title">
+                        FormW2 Details
+                    </h4>
+                </div>
+                <div id="collapse3" class="panel-collapse collapse">
+                    <div class="panel-body">
+
+                        <table class="responsive">
+                            <tr>
+                                <td class="labelName"><label class="control-label">Wages and tips:</label></td>
+                                <td class="fieldName">@Html.TextBoxFor(model => model.FormDetails.Box1, new { @class = "form-control" })</td>
+                                <td class="labelName"><label class="control-label">Federal income tax withheld:</label></td>
+                                <td class="fieldName">@Html.TextBoxFor(model => model.FormDetails.Box2, new { @class = "form-control" })</td>
+                            </tr>
+                            <tr><td class="spacer10"></td></tr>
+                            <tr>
+                                <td class="labelName"><label class="control-label">Social security wages:</label></td>
+                                <td class="fieldName">@Html.TextBoxFor(model => model.FormDetails.Box3, new { @class = "form-control" })</td>
+                                <td class="labelName"><label class="control-label">Social security tax withheld:</label></td>
+                                <td class="fieldName">@Html.TextBoxFor(model => model.FormDetails.Box4, new { @class = "form-control" })</td>
+                            </tr>
+                            <tr><td class="spacer10"></td></tr>
+                            <tr>
+                                <td class="labelName"><label class="control-label">Medicare wages and tips:</label></td>
+                                <td class="fieldName">@Html.TextBoxFor(model => model.FormDetails.Box5, new { @class = "form-control" })</td>
+                                <td class="labelName"><label class="control-label">Medicare tax withheld:</label></td>
+                                <td class="fieldName">@Html.TextBoxFor(model => model.FormDetails.Box6, new { @class = "form-control" })</td>
+                            </tr>
+                            <tr><td class="spacer10"></td></tr>
+                            <tr>
+                                <td class="labelName"><label class="control-label">Social security tips:</label></td>
+                                <td class="fieldName">@Html.TextBoxFor(model => model.FormDetails.Box7, new { @class = "form-control" })</td>
+                                <td class="labelName"><label class="control-label">Allocated tips:</label></td>
+                                <td class="fieldName">@Html.TextBoxFor(model => model.FormDetails.Box8, new { @class = "form-control" })</td>
+                            </tr>
+                            <tr><td class="spacer10"></td></tr>
+                            <tr>
+                                <td class="labelName"><label class="control-label">Verification code:</label></td>
+                                <td class="fieldName">@Html.TextBoxFor(model => model.FormDetails.Box9, new { @class = "form-control" })</td>
+                                <td class="labelName"><label class="control-label">Dependent care benefits:</label></td>
+                                <td class="fieldName">@Html.TextBoxFor(model => model.FormDetails.Box10, new { @class = "form-control" })</td>
+                            </tr>
+                            <tr><td class="spacer10"></td></tr>
+                            <tr>
+                                <td class="labelName"><label class="control-label">Nonqualified plans:</label></td>
+                                <td class="fieldName">@Html.TextBoxFor(model => model.FormDetails.Box11NonqualifiedPlan, new { @class = "form-control" })</td>
+                                <td class="labelName"><label class="control-label">12a See instructions for box 12:</label></td>
+                                <td>
+                                    @Html.DropDownListFor(model => model.FormDetails.Box12aCd, new SelectList(_Line12CodeList, "text", "value", null), "Select Code", new { @class = "form-control floatL", @style = "Width:60px" })
+                                    @Html.TextBoxFor(model => model.FormDetails.Box12aAmt, new { @class = "form-control", @style = "Width:185px;margin-left: 5px;" })
+                                </td>
+                            </tr>
+                            <tr><td class="spacer10"></td></tr>
+                            <tr>
+                                <td class="labelName"><label class="control-label">12b See instructions for box 12:</label></td>
+                                <td>
+                                    @Html.DropDownListFor(model => model.FormDetails.Box12bCd, new SelectList(_Line12CodeList, "text", "value", null), "Select Code", new { @class = "form-control floatL", @style = "Width:60px" })
+                                    @Html.TextBoxFor(model => model.FormDetails.Box12bAmt, new { @class = "form-control", @style = "Width:185px;margin-left: 5px;" })
+                                </td>
+                                <td class="labelName"><label class="control-label">12c See instructions for box 12:</label></td>
+                                <td>
+                                    @Html.DropDownListFor(model => model.FormDetails.Box12cCd, new SelectList(_Line12CodeList, "text", "value", null), "Select Code", new { @class = "form-control floatL", @style = "Width:60px" })
+                                    @Html.TextBoxFor(model => model.FormDetails.Box12cAmt, new { @class = "form-control", @style = "Width:185px;margin-left: 5px;" })
+                                </td>
+                            </tr>
+                            <tr><td class="spacer10"></td></tr>
+                            <tr>
+                                <td class="labelName"><label class="control-label">12d See instructions for box 12:</label></td>
+                                <td>
+                                    @Html.DropDownListFor(model => model.FormDetails.Box12dCd, new SelectList(_Line12CodeList, "text", "value", null), "Select Code", new { @class = "form-control floatL", @style = "Width:60px" })
+                                    @Html.TextBoxFor(model => model.FormDetails.Box12dAmt, new { @class = "form-control", @style = "Width:185px;margin-left: 5px;" })
+                                </td>
+                                <td class="labelName"><label class="control-label">Statutory Employee:</label></td>
+                                <td>
+                                    @Html.TextBoxFor(model => model.FormDetails.Box13IsStatutoryEmployee, new { @class = "form-control" })
+                                </td>
+                            </tr>
+                            <tr><td class="spacer10"></td></tr>
+                            <tr>
+                                <td class="labelName"><label class="control-label">Retirement plan:</label></td>
+                                <td class="fieldName">@Html.TextBoxFor(model => model.FormDetails.Box13IsRetirementPlan, new { @class = "form-control" })</td>
+                                <td class="labelName"><label class="control-label">Third-party sick pay:</label></td>
+                                <td class="fieldName">@Html.TextBoxFor(model => model.FormDetails.Box13IsThirdPartySickpay, new { @class = "form-control" })</td>
+                            </tr>
+                            <tr><td class="spacer10"></td></tr>
+                            <tr>
+                                <td class="labelName"><label class="control-label">Other</label></td>
+                                <td class="fieldName">@Html.TextBoxFor(model => model.FormDetails.Box14, new { @class = "form-control" })</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapse4">
+                    <h4 class="panel-title">
+                        State Details
+                    </h4>
+                </div>
+                <div id="collapse4" class="panel-collapse collapse">
+                    <div class="panel-body">
+
+                        <table class="responsive">
+                            <tr>
+
+                                <td class="labelName"></td>
+                                <td class="fieldText font15">State 1 Detail</td>
+                                <td class="labelName"></td>
+                                <td class="fieldText font15">State 2 Detail</td>
+                            </tr>
+                            <tr><td class="spacer10"></td></tr>
+                            <tr>
+                                <td class="labelName"><label class="control-label">State Code:</label></td>
+                                <td class="fieldName">@Html.TextBoxFor(model => model.FormDetails.Box15State1, new { @class = "form-control" })</td>
+                                <td class="labelName"><label class="control-label">State Code:</label></td>
+                                <td class="fieldName">@Html.TextBoxFor(model => model.FormDetails.Box15State2, new { @class = "form-control" })</td>
+                            </tr>
+                            <tr><td class="spacer10"></td></tr>
+                            <tr>
+                                <td class="labelName"><label class="control-label">Employer’s state ID number:</label></td>
+                                <td class="fieldName">@Html.TextBoxFor(model => model.FormDetails.Box15State1IDNumber, new { @class = "form-control" })</td>
+                                <td class="labelName"><label class="control-label">Employer’s state ID number:</label></td>
+                                <td class="fieldName">@Html.TextBoxFor(model => model.FormDetails.Box15State2IdNumber, new { @class = "form-control" })</td>
+                            </tr>
+                            <tr><td class="spacer10"></td></tr>
+                            <tr>
+                                <td class="labelName"><label class="control-label">State wages, tips, etc.:</label></td>
+                                <td class="fieldName">@Html.TextBoxFor(model => model.FormDetails.Box16State1Wages, new { @class = "form-control" })</td>
+                                <td class="labelName"><label class="control-label">State wages, tips, etc.:</label></td>
+                                <td class="fieldName">@Html.TextBoxFor(model => model.FormDetails.Box16State2Wages, new { @class = "form-control" })</td>
+                            </tr>
+                            <tr><td class="spacer10"></td></tr>
+                            <tr>
+                                <td class="labelName"><label class="control-label">State income tax:</label></td>
+                                <td class="fieldName">@Html.TextBoxFor(model => model.FormDetails.Box17State1Tax, new { @class = "form-control" })</td>
+                                <td class="labelName"><label class="control-label">State income tax:</label></td>
+                                <td class="fieldName">@Html.TextBoxFor(model => model.FormDetails.Box17State2Tax, new { @class = "form-control" })</td>
+                            </tr>
+                            <tr><td class="spacer10"></td></tr>
+                            <tr>
+                                <td class="labelName"><label class="control-label">Local wages, tips, etc.:</label></td>
+                                <td class="fieldName">@Html.TextBoxFor(model => model.FormDetails.Box18Local1Wages, new { @class = "form-control" })</td>
+                                <td class="labelName"><label class="control-label">Local wages, tips, etc.:</label></td>
+                                <td class="fieldName">@Html.TextBoxFor(model => model.FormDetails.Box18Local2Wages, new { @class = "form-control" })</td>
+                            </tr>
+                            <tr><td class="spacer10"></td></tr>
+                            <tr>
+                                <td class="labelName"><label class="control-label">Local income tax:</label></td>
+                                <td class="fieldName">@Html.TextBoxFor(model => model.FormDetails.Box19Local1Tax, new { @class = "form-control" })</td>
+                                <td class="labelName"><label class="control-label">Local income tax:</label></td>
+                                <td class="fieldName">@Html.TextBoxFor(model => model.FormDetails.Box19Local2Tax, new { @class = "form-control" })</td>
+                            </tr>
+                            <tr><td class="spacer10"></td></tr>
+                            <tr>
+                                <td class="labelName"><label class="control-label">Locality name:</label></td>
+                                <td class="fieldName">@Html.TextBoxFor(model => model.FormDetails.Box20Locality2Name, new { @class = "form-control" })</td>
+                                <td class="labelName"><label class="control-label">Locality name:</label></td>
+                                <td class="fieldName">@Html.TextBoxFor(model => model.FormDetails.Box20Locality1Name, new { @class = "form-control" })</td>
+                            </tr>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="panel panel-default">
-            <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapse2">
-                <h4 class="panel-title">
-                    Employee Details
-                </h4>
-            </div>
-            <div id="collapse2" class="panel-collapse collapse">
-                <div class="panel-body">
-                    <table class="responsive">
-                        <tr>
-                            <td class="labelName"><label class="control-label">SSN:</label></td>
-                            <td class="fieldName">@Html.TextBoxFor(model => model.Employee.SSN, new { @class = "form-control" })</td>
-                            <td class="labelName"><label class="control-label">First Name:</label></td>
-                            <td class="fieldName">@Html.TextBoxFor(model => model.Employee.FirstNm, new { @class = "form-control" })</td>
-                        </tr>
-                        <tr><td class="spacer10"></td></tr>
-                        <tr>
-                            <td class="labelName"><label class="control-label">Last Name:</label></td>
-                            <td class="fieldName">@Html.TextBoxFor(model => model.Employee.LastNm, new { @class = "form-control" })</td>
-                            <td class="labelName"><label class="control-label">Suffix:</label></td>
-                            <td class="fieldName">@Html.TextBoxFor(model => model.Employee.Suffix, new { @class = "form-control" })</td>
-                        </tr>
-                        <tr><td class="spacer10"></td></tr>
-                        <tr>
-                            <td class="labelName"><label class="control-label">Address Line1:</label></td>
-                            <td class="fieldName">@Html.TextBoxFor(model => model.Employee.Address1, new { @class = "form-control" })</td>
-                            <td class="labelName"><label class="control-label">Address Line2:</label></td>
-                            <td class="fieldName">@Html.TextBoxFor(model => model.Employee.Address2, new { @class = "form-control" })</td>
-                        </tr>
-                        <tr><td class="spacer10"></td></tr>
-                        <tr>
-                            <td class="labelName"><label class="control-label">City:</label></td>
-                            <td class="fieldName">@Html.TextBoxFor(model => model.Employee.City, new { @class = "form-control" })</td>
-                            <td class="labelName"><label class="control-label">State:</label></td>
-                            <td>
-                                @Html.DropDownListFor(model => model.Employee.State, new SelectList(_USStates, "value", "text", null), "Select State", new { @class = "form-control floatL" })
-                            </td>
-                        </tr>
-                        <tr><td class="spacer10"></td></tr>
-                        <tr>
-                            <td class="labelName"><label class="control-label">Zip Code:</label></td>
-                            <td class="fieldName">@Html.TextBoxFor(model => model.Employee.Zip, new { @class = "form-control" })</td>
-                            <td class="labelName"><label class="control-label">Country:</label></td>
-                            <td class="fieldName">@Html.DropDownListFor(model => model.Employee.Country, new SelectList(_countryList, "value", "text", null), "Select Country", new { @class = "form-control" })</td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-        </div>
-        <div class="panel panel-default">
-            <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapse3">
-                <h4 class="panel-title">
-                    FormW2 Details
-                </h4>
-            </div>
-            <div id="collapse3" class="panel-collapse collapse">
-                <div class="panel-body">
-
-                    <table class="responsive">
-                        <tr>
-                            <td class="labelName"><label class="control-label">Wages and tips:</label></td>
-                            <td class="fieldName">@Html.TextBoxFor(model => model.FormDetails.Box1, new { @class = "form-control" })</td>
-                            <td class="labelName"><label class="control-label">Federal income tax withheld:</label></td>
-                            <td class="fieldName">@Html.TextBoxFor(model => model.FormDetails.Box2, new { @class = "form-control" })</td>
-                        </tr>
-                        <tr><td class="spacer10"></td></tr>
-                        <tr>
-                            <td class="labelName"><label class="control-label">Social security wages:</label></td>
-                            <td class="fieldName">@Html.TextBoxFor(model => model.FormDetails.Box3, new { @class = "form-control" })</td>
-                            <td class="labelName"><label class="control-label">Social security tax withheld:</label></td>
-                            <td class="fieldName">@Html.TextBoxFor(model => model.FormDetails.Box4, new { @class = "form-control" })</td>
-                        </tr>
-                        <tr><td class="spacer10"></td></tr>
-                        <tr>
-                            <td class="labelName"><label class="control-label">Medicare wages and tips:</label></td>
-                            <td class="fieldName">@Html.TextBoxFor(model => model.FormDetails.Box5, new { @class = "form-control" })</td>
-                            <td class="labelName"><label class="control-label">Medicare tax withheld:</label></td>
-                            <td class="fieldName">@Html.TextBoxFor(model => model.FormDetails.Box6, new { @class = "form-control" })</td>
-                        </tr>
-                        <tr><td class="spacer10"></td></tr>
-                        <tr>
-                            <td class="labelName"><label class="control-label">Social security tips:</label></td>
-                            <td class="fieldName">@Html.TextBoxFor(model => model.FormDetails.Box7, new { @class = "form-control" })</td>
-                            <td class="labelName"><label class="control-label">Allocated tips:</label></td>
-                            <td class="fieldName">@Html.TextBoxFor(model => model.FormDetails.Box8, new { @class = "form-control" })</td>
-                        </tr>
-                        <tr><td class="spacer10"></td></tr>
-                        <tr>
-                            <td class="labelName"><label class="control-label">Verification code:</label></td>
-                            <td class="fieldName">@Html.TextBoxFor(model => model.FormDetails.Box9, new { @class = "form-control" })</td>
-                            <td class="labelName"><label class="control-label">Dependent care benefits:</label></td>
-                            <td class="fieldName">@Html.TextBoxFor(model => model.FormDetails.Box10, new { @class = "form-control" })</td>
-                        </tr>
-                        <tr><td class="spacer10"></td></tr>
-                        <tr>
-                            <td class="labelName"><label class="control-label">Nonqualified plans:</label></td>
-                            <td class="fieldName">@Html.TextBoxFor(model => model.FormDetails.Box11NonqualifiedPlan, new { @class = "form-control" })</td>
-                            <td class="labelName"><label class="control-label">12a See instructions for box 12:</label></td>
-                            <td>
-                                @Html.DropDownListFor(model => model.FormDetails.Box12aCd, new SelectList(_Line12CodeList, "text", "value", null), "Select Code", new { @class = "form-control floatL", @style = "Width:60px" })
-                                @Html.TextBoxFor(model => model.FormDetails.Box12aAmt, new { @class = "form-control", @style = "Width:185px;margin-left: 5px;" })
-                            </td>
-                        </tr>
-                        <tr><td class="spacer10"></td></tr>
-                        <tr>
-                            <td class="labelName"><label class="control-label">12b See instructions for box 12:</label></td>
-                            <td>
-                                @Html.DropDownListFor(model => model.FormDetails.Box12bCd, new SelectList(_Line12CodeList, "text", "value", null), "Select Code", new { @class = "form-control floatL", @style = "Width:60px" })
-                                @Html.TextBoxFor(model => model.FormDetails.Box12bAmt, new { @class = "form-control", @style = "Width:185px;margin-left: 5px;" })
-                            </td>
-                            <td class="labelName"><label class="control-label">12c See instructions for box 12:</label></td>
-                            <td>
-                                @Html.DropDownListFor(model => model.FormDetails.Box12cCd, new SelectList(_Line12CodeList, "text", "value", null), "Select Code", new { @class = "form-control floatL", @style = "Width:60px" })
-                                @Html.TextBoxFor(model => model.FormDetails.Box12cAmt, new { @class = "form-control", @style = "Width:185px;margin-left: 5px;" })
-                            </td>
-                        </tr>
-                        <tr><td class="spacer10"></td></tr>
-                        <tr>
-                            <td class="labelName"><label class="control-label">12d See instructions for box 12:</label></td>
-                            <td>
-                                @Html.DropDownListFor(model => model.FormDetails.Box12dCd, new SelectList(_Line12CodeList, "text", "value", null), "Select Code", new { @class = "form-control floatL", @style = "Width:60px" })
-                                @Html.TextBoxFor(model => model.FormDetails.Box12dAmt, new { @class = "form-control", @style = "Width:185px;margin-left: 5px;" })
-                            </td>
-                            <td class="labelName"><label class="control-label">Statutory Employee:</label></td>
-                            <td>
-                                @Html.TextBoxFor(model => model.FormDetails.Box13IsStatutoryEmployee, new { @class = "form-control" })
-                            </td>
-                        </tr>
-                        <tr><td class="spacer10"></td></tr>
-                        <tr>
-                            <td class="labelName"><label class="control-label">Retirement plan:</label></td>
-                            <td class="fieldName">@Html.TextBoxFor(model => model.FormDetails.Box13IsRetirementPlan, new { @class = "form-control" })</td>
-                            <td class="labelName"><label class="control-label">Third-party sick pay:</label></td>
-                            <td class="fieldName">@Html.TextBoxFor(model => model.FormDetails.Box13IsThirdPartySickpay, new { @class = "form-control" })</td>
-                        </tr>
-                        <tr><td class="spacer10"></td></tr>
-                        <tr>
-                            <td class="labelName"><label class="control-label">Other</label></td>
-                            <td class="fieldName">@Html.TextBoxFor(model => model.FormDetails.Box14, new { @class = "form-control" })</td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-        </div>
-
-        <div class="panel panel-default">
-            <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapse4">
-                <h4 class="panel-title">
-                    State Details
-                </h4>
-            </div>
-            <div id="collapse4" class="panel-collapse collapse">
-                <div class="panel-body">
-
-                    <table class="responsive">
-                        <tr>
-
-                            <td class="labelName"></td>
-                            <td class="fieldText font15">State 1 Detail</td>
-                            <td class="labelName"></td>
-                            <td class="fieldText font15">State 2 Detail</td>
-                        </tr>
-                        <tr><td class="spacer10"></td></tr>
-                        <tr>
-                            <td class="labelName"><label class="control-label">State Code:</label></td>
-                            <td class="fieldName">@Html.TextBoxFor(model => model.FormDetails.Box15State1, new { @class = "form-control" })</td>
-                            <td class="labelName"><label class="control-label">State Code:</label></td>
-                            <td class="fieldName">@Html.TextBoxFor(model => model.FormDetails.Box15State2, new { @class = "form-control" })</td>
-                        </tr>
-                        <tr><td class="spacer10"></td></tr>
-                        <tr>
-                            <td class="labelName"><label class="control-label">Employer’s state ID number:</label></td>
-                            <td class="fieldName">@Html.TextBoxFor(model => model.FormDetails.Box15State1IDNumber, new { @class = "form-control" })</td>
-                            <td class="labelName"><label class="control-label">Employer’s state ID number:</label></td>
-                            <td class="fieldName">@Html.TextBoxFor(model => model.FormDetails.Box15State2IdNumber, new { @class = "form-control" })</td>
-                        </tr>
-                        <tr><td class="spacer10"></td></tr>
-                        <tr>
-                            <td class="labelName"><label class="control-label">State wages, tips, etc.:</label></td>
-                            <td class="fieldName">@Html.TextBoxFor(model => model.FormDetails.Box16State1Wages, new { @class = "form-control" })</td>
-                            <td class="labelName"><label class="control-label">State wages, tips, etc.:</label></td>
-                            <td class="fieldName">@Html.TextBoxFor(model => model.FormDetails.Box16State2Wages, new { @class = "form-control" })</td>
-                        </tr>
-                        <tr><td class="spacer10"></td></tr>
-                        <tr>
-                            <td class="labelName"><label class="control-label">State income tax:</label></td>
-                            <td class="fieldName">@Html.TextBoxFor(model => model.FormDetails.Box17State1Tax, new { @class = "form-control" })</td>
-                            <td class="labelName"><label class="control-label">State income tax:</label></td>
-                            <td class="fieldName">@Html.TextBoxFor(model => model.FormDetails.Box17State2Tax, new { @class = "form-control" })</td>
-                        </tr>
-                        <tr><td class="spacer10"></td></tr>
-                        <tr>
-                            <td class="labelName"><label class="control-label">Local wages, tips, etc.:</label></td>
-                            <td class="fieldName">@Html.TextBoxFor(model => model.FormDetails.Box18Local1Wages, new { @class = "form-control" })</td>
-                            <td class="labelName"><label class="control-label">Local wages, tips, etc.:</label></td>
-                            <td class="fieldName">@Html.TextBoxFor(model => model.FormDetails.Box18Local2Wages, new { @class = "form-control" })</td>
-                        </tr>
-                        <tr><td class="spacer10"></td></tr>
-                        <tr>
-                            <td class="labelName"><label class="control-label">Local income tax:</label></td>
-                            <td class="fieldName">@Html.TextBoxFor(model => model.FormDetails.Box19Local1Tax, new { @class = "form-control" })</td>
-                            <td class="labelName"><label class="control-label">Local income tax:</label></td>
-                            <td class="fieldName">@Html.TextBoxFor(model => model.FormDetails.Box19Local2Tax, new { @class = "form-control" })</td>
-                        </tr>
-                        <tr><td class="spacer10"></td></tr>
-                        <tr>
-                            <td class="labelName"><label class="control-label">Locality name:</label></td>
-                            <td class="fieldName">@Html.TextBoxFor(model => model.FormDetails.Box20Locality2Name, new { @class = "form-control" })</td>
-                            <td class="labelName"><label class="control-label">Locality name:</label></td>
-                            <td class="fieldName">@Html.TextBoxFor(model => model.FormDetails.Box20Locality1Name, new { @class = "form-control" })</td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-        </div>
+    }
+    <div class="spacer10"></div>
+    <div class="taC">
+        <button type="button" class="btn btn_lg btn_primary" onclick="GetStatus()"> Efile Now</button>
     </div>
-}
-<div class="spacer10"></div>
-<div class="taC">
-    <button type="button" class="btn btn_lg btn_primary" onclick="GetStatus()"> Efile Now</button>
 </div>
 
 

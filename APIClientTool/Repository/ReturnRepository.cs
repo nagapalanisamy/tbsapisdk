@@ -29,6 +29,7 @@ namespace APIClientTool.Repository
                     apiResponse.Message = returnResponse.StatusMessage;
                     apiResponse.Name = returnResponse.StatusName;
                     apiResponse.Submission_Id = returnResponse.SubmissionId;
+                    apiResponse.Is_Return_Transmitted = false;
                     dbContext.APIResponses.Add(apiResponse);
                     dbContext.SaveChanges();
 

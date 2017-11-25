@@ -79,27 +79,27 @@ namespace APIClientTool.Repository
 
         #endregion
 
-        #region Save API Error Response
-        public void SaveAPIErrorResponse(ErrorResponse errorResponse)
-        {
-            if (errorResponse != null && errorResponse.Errors != null && errorResponse.Errors.Any())
-            {
-                using (TaxBanditsAPIClientEntities dbContext = new TaxBanditsAPIClientEntities())
-                {
-                    foreach (var error in errorResponse.Errors)
-                    {
-                        var recordError = new RecordError();
-                        recordError.Code = error.Code;
-                        recordError.Message = error.Message;
-                        recordError.Name = error.Name;
-                        //recordError.Type = error.Type;
-                        dbContext.RecordErrors.Add(recordError);
-                        dbContext.SaveChanges();
-                    }
-                }
-            }
-        }
-        #endregion
+        //#region Save API Error Response
+        //public void SaveAPIErrorResponse(ErrorResponse errorResponse)
+        //{
+        //    if (errorResponse != null && errorResponse.Errors != null && errorResponse.Errors.Any())
+        //    {
+        //        using (TaxBanditsAPIClientEntities dbContext = new TaxBanditsAPIClientEntities())
+        //        {
+        //            foreach (var error in errorResponse.Errors)
+        //            {
+        //                var recordError = new RecordError();
+        //                recordError.Code = error.Code;
+        //                recordError.Message = error.Message;
+        //                recordError.Name = error.Name;
+        //                //recordError.Type = error.Type;
+        //                dbContext.RecordErrors.Add(recordError);
+        //                dbContext.SaveChanges();
+        //            }
+        //        }
+        //    }
+        //}
+        //#endregion
 
         #region Get API Response 
         public List<TransmitFormW2> GetAPIResponse()

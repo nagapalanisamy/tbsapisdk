@@ -254,14 +254,13 @@
     <Compile Include="Utilities\APIGenerateAuthHeader.cs" />
     <Compile Include="Utilities\PublicAPIClient.cs" />
     <Compile Include="Utilities\Utility.cs" />
-    <Compile Include="ViewModels\AddressDetails.cs" />
     <Compile Include="ViewModels\BusinessDetails.cs" />
     <Compile Include="ViewModels\EFileStatus.cs" />
     <Compile Include="ViewModels\EfileStatusResponse.cs" />
     <Compile Include="ViewModels\Employee.cs" />
     <Compile Include="ViewModels\EntityBase.cs" />
-    <Compile Include="ViewModels\ErrorResponse.cs" />
     <Compile Include="ViewModels\FormW2.cs" />
+    <Compile Include="ViewModels\FormW2Response.cs" />
     <Compile Include="ViewModels\SigningAuthority.cs" />
     <Compile Include="ViewModels\TransmitFormW2.cs" />
     <Compile Include="ViewModels\TransmitFormW2Response.cs" />

@@ -5,7 +5,7 @@ using System.Web;
 
 namespace APIClientTool.ViewModels
 {
-    public class EfileStatusResponse
+    public class EfileStatusResponse : FormW2Response
     {
 
     }

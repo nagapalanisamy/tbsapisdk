@@ -6,6 +6,60 @@
     </h4>
 </div>
 <div class="modal-body edit-modal-body white_bg">
+    @if (Model != null && Model.StatusCode > 0)
+    {
+        <table class="responsive">
+            <tr>
+                <td class="labelName"><label class="control-label">SubmissionId:</label></td>
+                <td class="fieldName">@Model.SubmissionId</td>
+            </tr>
+            <tr><td class="spacer10"></td></tr>
+            <tr>
+                <td class="labelName"><label class="control-label">Status Code:</label></td>
+                <td class="fieldName">@Model.StatusCode</td>
+            </tr>
+            <tr><td class="spacer10"></td></tr>
+            <tr>
+                <td class="labelName"><label class="control-label">Status Message:</label></td>
+                <td class="fieldName">@Model.StatusMessage</td>
+            </tr>
+            <tr><td class="spacer10"></td></tr>
+            <tr>
+                <td class="labelName"><label class="control-label">Status Name:</label></td>
+                <td class="fieldName">@Model.StatusName</td>
+            </tr>
+        </table>
+    }
+    @if (Model != null && Model.FormW2Record != null && Model.FormW2Record.SuccessRecords != null)
+            {
+        <div class="spacer15"> </div>
+        <h3 style="font-size:medium;font-weight:600">Success Records</h3>
+        <div>
+            <table class="table table-bordered">
+                <thead class="thead-inverse">
+                    <tr>
+                        <th>Sequence</th>
+                        <th>Record Id</th>
+                        <th>Record Status</th>
+                        <th>Created Ts</th>
+                        <th>Updated Ts</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.FormW2Record.SuccessRecords)
+                    {
+                        <tr>
+                            <td>@item.Sequence</td>
+                            <td>@item.RecordId</td>
+                            <td>@item.RecordStatus</td>
+                            <td>@item.CreatedTs</td>
+                            <td>@item.UpdatedTs</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
 
     @if (Model != null && Model.Errors != null)
     {
@@ -32,75 +86,6 @@
                 }
             </tbody>
         </table>
-    }
-
-    @if (Model != null && Model.SuccessStatus != null && Model.SuccessStatus.RecordId != null)
-    {
-        <h3 style="font-size:medium;font-weight:600">Success Records</h3>
-        <div class="spacer15"> </div>
-        <table class="table table-bordered">
-            <thead class="thead-inverse">
-                <tr>
-                    <th>Record Id</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var itemerror in Model.SuccessStatus.RecordId)
-                {
-                    <tr>
-                        <td>@itemerror</td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-    }
-
-    @if (Model != null && Model.ErrorStatus != null && Model.ErrorStatus.Errors != null)
-    {
-        <h3 style="font-size:medium;font-weight:600">Error Status Records</h3>
-        <div class="spacer15"> </div>
-
-        <table class="table table-bordered">
-            <thead class="thead-inverse">
-                <tr>
-                    <th>
-                        Record Id
-                    </th>
-                    <th>
-                        Error
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>@Model.ErrorStatus.RecordId</td>
-                    <td>
-                        <table class="table table-bordered">
-                            <thead class="thead-inverse">
-                                <tr>
-                                    <th>Code</th>
-                                    <th>Name</th>
-                                    <th>Message</th>
-                                    <th>Type</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (var itemerror in Model.ErrorStatus.Errors)
-                                {
-                                    <tr>
-                                        <td>@itemerror.Code</td>
-                                        <td>@itemerror.Name</td>
-                                        <td>@itemerror.Message</td>
-                                        <td>@itemerror.Type</td>
-                                    </tr>
-                                }
-                            </tbody>
-                        </table>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-
     }
 
 </div>

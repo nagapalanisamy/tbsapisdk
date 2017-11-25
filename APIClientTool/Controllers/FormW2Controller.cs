@@ -99,24 +99,20 @@ namespace APIClientTool.Controllers
         #endregion
 
         #region API Response Status
-
         public ActionResult APIResponseStatus(FormW2 formw2)
         {
             var responseJson = string.Empty;
             formw2.TaxYear = 2017;
-            formw2.Sequence = "WEFGH123";
+            formw2.Sequence = "SEQ123";
             W2CreateReturnResponse w2response = new W2CreateReturnResponse();
-            W2CreateReturnRequest request = new W2CreateReturnRequest();
-            ErrorResponse errorResponse = new ErrorResponse();
-            request.W2Forms = new List<FormW2>();
-            request.W2Forms.Add(formw2);
-            var requestText = JsonConvert.SerializeObject(request, Formatting.Indented);
+            W2CreateReturnRequest w2ReturnList = new W2CreateReturnRequest();
+            w2ReturnList.W2Forms = new List<FormW2>();
+            w2ReturnList.W2Forms.Add(formw2);
             using (var client = new PublicAPIClient())
             {
-                var createRequest = new JavaScriptSerializer().Deserialize<W2CreateReturnRequest>(requestText);
                 string requestUri = "FormW2/Create";
                 APIGenerateAuthHeader.GenerateAuthHeader(client, requestUri, "POST");
-                var _response = client.PostAsJsonAsync(requestUri, createRequest).Result;
+                var _response = client.PostAsJsonAsync(requestUri, w2ReturnList).Result;
                 if (_response != null && _response.IsSuccessStatusCode)
                 {
                     var createResponse = _response.Content.ReadAsAsync<W2CreateReturnResponse>().Result;
@@ -135,7 +131,6 @@ namespace APIClientTool.Controllers
                     var createResponse = _response.Content.ReadAsAsync<Object>().Result;
                     responseJson = JsonConvert.SerializeObject(createResponse, Formatting.Indented);
                     w2response = new JavaScriptSerializer().Deserialize<W2CreateReturnResponse>(responseJson);
-                    //ViewBag.ReasonPhrase = _response.ReasonPhrase;
                 }
             }
             return PartialView(w2response);
@@ -232,16 +227,14 @@ namespace APIClientTool.Controllers
                 transmitFormW2 = _repository.GetRecordIdsBySubmissionId(submissionId);
                 if (transmitFormW2 != null)
                 {
-                    var requestText = JsonConvert.SerializeObject(transmitFormW2, Formatting.Indented);
                     using (var client = new PublicAPIClient())
                     {
-                        var createRequest = new JavaScriptSerializer().Deserialize<W2CreateReturnRequest>(requestText);
                         string requestUri = "FormW2/Transmit";
                         APIGenerateAuthHeader.GenerateAuthHeader(client, requestUri, "POST");
-                        var _response = client.PostAsJsonAsync(requestUri, createRequest).Result;
+                        var _response = client.PostAsJsonAsync(requestUri, transmitFormW2).Result;
                         if (_response != null && _response.IsSuccessStatusCode)
                         {
-                            var createResponse = _response.Content.ReadAsAsync<W2CreateReturnResponse>().Result;
+                            var createResponse = _response.Content.ReadAsAsync<TransmitFormW2Response>().Result;
                             if (createResponse != null)
                             {
                                 transmitFormW2ResponseJSON = JsonConvert.SerializeObject(createResponse, Formatting.Indented);

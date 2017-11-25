@@ -9,10 +9,14 @@ namespace APIClientTool.Repository
 {
     public class ReturnRepository
     {
+
+        #region Constructor
         public ReturnRepository()
         {
         }
+        #endregion
 
+        #region Save API Response
         public void SaveAPIResponse(W2ReturnResponse returnResponse)
         {
             if (returnResponse != null)
@@ -27,11 +31,11 @@ namespace APIClientTool.Repository
                     dbContext.APIResponses.Add(apiResponse);
                     dbContext.SaveChanges();
 
-                    if(returnResponse.FormW2Record != null)
+                    if (returnResponse.FormW2Record != null)
                     {
-                        if(returnResponse.FormW2Record.SuccessRecords != null && returnResponse.FormW2Record.SuccessRecords.Count > 1)
+                        if (returnResponse.FormW2Record.SuccessRecords != null && returnResponse.FormW2Record.SuccessRecords.Count > 1)
                         {
-                            foreach(var successRecord in returnResponse.FormW2Record.SuccessRecords)
+                            foreach (var successRecord in returnResponse.FormW2Record.SuccessRecords)
                             {
                                 var successStatus = new SuccessStatu();
                                 successStatus.Record_Id = successRecord.RecordId;
@@ -52,7 +56,7 @@ namespace APIClientTool.Repository
                                 dbContext.ErrorStatus.Add(errorStatus);
                                 dbContext.SaveChanges();
 
-                                if(errorRecord.Errors != null && errorRecord.Errors.Count > 1)
+                                if (errorRecord.Errors != null && errorRecord.Errors.Count > 1)
                                 {
                                     foreach (var error in errorRecord.Errors)
                                     {
@@ -71,5 +75,29 @@ namespace APIClientTool.Repository
                 }
             }
         }
+
+        #endregion
+
+        #region Save API Error Response
+        public void SaveAPIErrorResponse(ErrorResponse errorResponse)
+        {
+            if (errorResponse != null && errorResponse.Messages != null && errorResponse.Messages.Any())
+            {
+                using (TaxBanditsAPIClientEntities dbContext = new TaxBanditsAPIClientEntities())
+                {
+                    foreach (var error in errorResponse.Messages)
+                    {
+                        var recordError = new RecordError();
+                        recordError.Code = error.Code;
+                        recordError.Message = error.Message;
+                        recordError.Name = error.Name;
+                        //recordError.Type = error.Type;
+                        dbContext.RecordErrors.Add(recordError);
+                        dbContext.SaveChanges();
+                    }
+                }
+            }
+        }
+        #endregion
     }
 }

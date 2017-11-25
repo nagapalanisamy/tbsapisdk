@@ -258,6 +258,7 @@
     <Compile Include="ViewModels\BusinessDetails.cs" />
     <Compile Include="ViewModels\Employee.cs" />
     <Compile Include="ViewModels\EntityBase.cs" />
+    <Compile Include="ViewModels\ErrorResponse.cs" />
     <Compile Include="ViewModels\FormW2.cs" />
     <Compile Include="ViewModels\SigningAuthority.cs" />
     <Compile Include="ViewModels\W2CreateReturnRequest.cs" />

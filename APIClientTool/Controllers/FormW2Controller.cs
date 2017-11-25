@@ -114,7 +114,9 @@ namespace APIClientTool.Controllers
                     {
                         responseJson = JsonConvert.SerializeObject(createResponse, Formatting.Indented);
                         response = new JavaScriptSerializer().Deserialize<W2ReturnResponse>(responseJson);
+                        //var errorResponse = new JavaScriptSerializer().Deserialize<ErrorResponse>(responseJson);
                         _repository.SaveAPIResponse(response);
+                        //_repository.SaveAPIErrorResponse(errorResponse);
                     }
                 }
             }

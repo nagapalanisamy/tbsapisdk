@@ -748,11 +748,6 @@
     });
 
     function GetStatus() {
-        ShowAPIStatus();
-    }
-
-
-    function ShowAPIStatus() {
         var formdata = $("#createreturnForm").serialize();
         $.ajax({
             url: "/FormW2/APIResponseStatus/",

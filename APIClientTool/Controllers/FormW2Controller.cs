@@ -199,5 +199,28 @@ namespace APIClientTool.Controllers
         }
         #endregion
 
+        #region _APIValidate
+        public ActionResult _APIValidate()
+        {
+            return PartialView();
+        }
+        #endregion
+
+        #region _TransmitReturn
+        public ActionResult _TransmitReturn()
+        {
+            return PartialView();
+        }
+        #endregion
+
+        #region _GetEfileStatus
+        public ActionResult _GetEfileStatus()
+        {
+            return PartialView();
+        }
+        #endregion
+
+
+
     }
 }

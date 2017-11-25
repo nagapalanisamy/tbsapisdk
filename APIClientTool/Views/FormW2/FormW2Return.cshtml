@@ -495,7 +495,7 @@
                             <td class="labelName"><label class="control-label">Employment Code:</label></td>
                             <td class="fieldName">@Html.DropDownListFor(model => model.Business.EmploymentCd, new SelectList(_employmentCd, "value", "text", null), "Select Employer Type", new { @class = "form-control" })</td>
                         </tr>
-                        <tr><td class="spacer10"></td></tr>
+                        @*<tr><td class="spacer10"></td></tr>
                         <tr>
                             <td class="labelName"><label class="control-label">SigningAuthority Name:</label></td>
                             <td class="fieldName">@Html.TextBoxFor(model => model.Business.SigningAuthority.Name, new { @class = "form-control" })</td>
@@ -508,7 +508,7 @@
                             <td class="fieldName">@Html.TextBoxFor(model => model.Business.SigningAuthority.BusinessMembers, new { @class = "form-control" })</td>
                             <td class="labelName"></td>
                             <td class="fieldName"></td>
-                        </tr>
+                        </tr>*@
                     </table>
                 </div>
             </div>
@@ -548,7 +548,7 @@
                             <td class="fieldName">@Html.TextBoxFor(model => model.Employee.City, new { @class = "form-control" })</td>
                             <td class="labelName"><label class="control-label">State:</label></td>
                             <td>
-                                @Html.DropDownListFor(model => model.Employee.USState, new SelectList(_USStates, "value", "text", null), "Select State", new { @class = "form-control floatL" })
+                                @Html.DropDownListFor(model => model.Employee.State, new SelectList(_USStates, "value", "text", null), "Select State", new { @class = "form-control floatL" })
                             </td>
                         </tr>
                         <tr><td class="spacer10"></td></tr>

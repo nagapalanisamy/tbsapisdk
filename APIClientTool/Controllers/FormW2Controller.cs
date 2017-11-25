@@ -69,7 +69,7 @@ namespace APIClientTool.Controllers
                 formw2.Employee.Country = "US";
                 formw2.Employee.Address1 = "First Street";
                 formw2.Employee.City = "Rockhill";
-                formw2.Employee.USState = "SC";
+                formw2.Employee.State = "SC";
                 formw2.Employee.Zip = "29727";
                 formw2.Employee.Phone = "9884523450";
                 formw2.Employee.Email = "peter@spanenterprises.com";
@@ -102,8 +102,8 @@ namespace APIClientTool.Controllers
         {
             var responseJson = string.Empty;
             formw2.TaxYear = 2017;
-            formw2.Business.BusinessId = Guid.Empty;
-            W2ReturnResponse response = new W2ReturnResponse();
+            //formw2.Business.BusinessId = Guid.Empty;
+            W2ReturnResponse w2response = new W2ReturnResponse();
             W2CreateReturnRequest request = new W2CreateReturnRequest();
             ErrorResponse errorResponse = new ErrorResponse();
             request.W2Forms = new List<FormW2>();
@@ -121,15 +121,14 @@ namespace APIClientTool.Controllers
                     if (createResponse != null)
                     {
                         responseJson = JsonConvert.SerializeObject(createResponse, Formatting.Indented);
-                        response = new JavaScriptSerializer().Deserialize<W2ReturnResponse>(responseJson);
-                        errorResponse = new JavaScriptSerializer().Deserialize<ErrorResponse>(responseJson);
-                        _repository.SaveAPIResponse(response);
+                        w2response = new JavaScriptSerializer().Deserialize<W2ReturnResponse>(responseJson);
+                        //errorResponse = new JavaScriptSerializer().Deserialize<ErrorResponse>(responseJson);
+                        _repository.SaveAPIResponse(w2response);
                         //_repository.SaveAPIErrorResponse(errorResponse);
                     }
                 }
             }
-            ViewBag.responseJson = response.StatusMessage;
-            return PartialView(errorResponse);
+            return PartialView(w2response);
         }
         #endregion
 

@@ -311,29 +311,29 @@
                                 <td>@Html.TextBoxFor(model => model.FormW2Details.Box11NonqualifiedPlan, new { @class = "form-control" })</td>
                                 <td><label class="control-label">12a See instructions for box 12:</label></td>
                                 <td>
-                                    @Html.TextBoxFor(model => model.FormW2Details.Box12aCd, new { @class = "form-control" })
-                                    @Html.TextBoxFor(model => model.FormW2Details.Box12aAmt, new { @class = "form-control" })
+                                    @Html.TextBoxFor(model => model.FormW2Details.Box12aCd, new { @class = "form-control floatL", @style = "Width:50px" })
+                                    @Html.TextBoxFor(model => model.FormW2Details.Box12aAmt, new { @class = "form-control", @style = "Width:140px" })
                                 </td>
                             </tr>
                             <tr><td class="spacer10"></td></tr>
                             <tr>
                                 <td><label class="control-label">12b See instructions for box 12:</label></td>
                                 <td>
-                                    @Html.TextBoxFor(model => model.FormW2Details.Box12bCd, new { @class = "form-control" })
-                                    @Html.TextBoxFor(model => model.FormW2Details.Box12bAmt, new { @class = "form-control" })
+                                    @Html.TextBoxFor(model => model.FormW2Details.Box12bCd, new { @class = "form-control floatL", @style = "Width:50px" })
+                                    @Html.TextBoxFor(model => model.FormW2Details.Box12bAmt, new { @class = "form-control", @style = "Width:140px" })
                                 </td>
                                 <td><label class="control-label">12c See instructions for box 12:</label></td>
                                 <td>
-                                    @Html.TextBoxFor(model => model.FormW2Details.Box12cCd, new { @class = "form-control" })
-                                    @Html.TextBoxFor(model => model.FormW2Details.Box12cAmt, new { @class = "form-control" })
+                                    @Html.TextBoxFor(model => model.FormW2Details.Box12cCd, new { @class = "form-control floatL", @style = "Width:50px" })
+                                    @Html.TextBoxFor(model => model.FormW2Details.Box12cAmt, new { @class = "form-control", @style = "Width:140px" })
                                 </td>
                             </tr>
                             <tr><td class="spacer10"></td></tr>
                             <tr>
                                 <td><label class="control-label">12d See instructions for box 12:</label></td>
                                 <td>
-                                    @Html.TextBoxFor(model => model.FormW2Details.Box12dCd, new { @class = "form-control" })
-                                    @Html.TextBoxFor(model => model.FormW2Details.Box12dAmt, new { @class = "form-control" })
+                                    @Html.TextBoxFor(model => model.FormW2Details.Box12dCd, new { @class = "form-control floatL", @style = "Width:50px" })
+                                    @Html.TextBoxFor(model => model.FormW2Details.Box12dAmt, new { @class = "form-control", @style = "Width:140px" })
                                 </td>
                                 <td><label class="control-label">Statutory Employee:</label></td>
                                 <td>
@@ -368,52 +368,57 @@
 
                         <table>
                             <tr>
-                                <td><label class="control-label">State:</label></td>
+                                <td colspan="2" class="taC"><label class="control-label">State 1 Detail</label></td>
+                                <td colspan="2" class="taC"><label class="control-label">State 2 Detail</label></td>
+                            </tr>
+                            <tr><td class="spacer10"></td></tr>
+                            <tr>
+                                <td><label class="control-label">State Code:</label></td>
                                 <td>@Html.TextBoxFor(model => model.FormW2Details.Box15State1, new { @class = "form-control" })</td>
-                                <td><label class="control-label">Employer’s state ID number:</label></td>
-                                <td>@Html.TextBoxFor(model => model.FormW2Details.Box15State1IDNumber, new { @class = "form-control" })</td>
-                            </tr>
-                            <tr><td class="spacer10"></td></tr>
-                            <tr>
-                                <td><label class="control-label">State wages, tips, etc.:</label></td>
-                                <td>@Html.TextBoxFor(model => model.FormW2Details.Box16State1Wages, new { @class = "form-control" })</td>
-                                <td><label class="control-label">State income tax:</label></td>
-                                <td>@Html.TextBoxFor(model => model.FormW2Details.Box17State1Tax, new { @class = "form-control" })</td>
-                            </tr>
-                            <tr><td class="spacer10"></td></tr>
-                            <tr>
-                                <td><label class="control-label">Local wages, tips, etc.:</label></td>
-                                <td>@Html.TextBoxFor(model => model.FormW2Details.Box18Local1Wages, new { @class = "form-control" })</td>
-                                <td><label class="control-label">Local income tax:</label></td>
-                                <td>@Html.TextBoxFor(model => model.FormW2Details.Box19Local1Tax, new { @class = "form-control" })</td>
-                            </tr>
-                            <tr><td class="spacer10"></td></tr>
-                            <tr>
-                                <td><label class="control-label">Locality name:</label></td>
-                                <td>@Html.TextBoxFor(model => model.FormW2Details.Box20Locality1Name, new { @class = "form-control" })</td>
-                                <td><label class="control-label">State:</label></td>
+                                <td><label class="control-label">State Code:</label></td>
                                 <td>@Html.TextBoxFor(model => model.FormW2Details.Box15State2, new { @class = "form-control" })</td>
                             </tr>
                             <tr><td class="spacer10"></td></tr>
                             <tr>
                                 <td><label class="control-label">Employer’s state ID number:</label></td>
+                                <td>@Html.TextBoxFor(model => model.FormW2Details.Box15State1IDNumber, new { @class = "form-control" })</td>
+                                <td><label class="control-label">Employer’s state ID number:</label></td>
                                 <td>@Html.TextBoxFor(model => model.FormW2Details.Box15State2IdNumber, new { @class = "form-control" })</td>
+                            </tr>
+                            <tr><td class="spacer10"></td></tr>
+                            <tr>
+                                <td><label class="control-label">State wages, tips, etc.:</label></td>
+                                <td>@Html.TextBoxFor(model => model.FormW2Details.Box16State1Wages, new { @class = "form-control" })</td>
                                 <td><label class="control-label">State wages, tips, etc.:</label></td>
                                 <td>@Html.TextBoxFor(model => model.FormW2Details.Box16State2Wages, new { @class = "form-control" })</td>
                             </tr>
                             <tr><td class="spacer10"></td></tr>
                             <tr>
                                 <td><label class="control-label">State income tax:</label></td>
+                                <td>@Html.TextBoxFor(model => model.FormW2Details.Box17State1Tax, new { @class = "form-control" })</td>
+                                <td><label class="control-label">State income tax:</label></td>
                                 <td>@Html.TextBoxFor(model => model.FormW2Details.Box17State2Tax, new { @class = "form-control" })</td>
+                            </tr>
+                            <tr><td class="spacer10"></td></tr>
+                            <tr>
+                                <td><label class="control-label">Local wages, tips, etc.:</label></td>
+                                <td>@Html.TextBoxFor(model => model.FormW2Details.Box18Local1Wages, new { @class = "form-control" })</td>
                                 <td><label class="control-label">Local wages, tips, etc.:</label></td>
                                 <td>@Html.TextBoxFor(model => model.FormW2Details.Box18Local2Wages, new { @class = "form-control" })</td>
                             </tr>
                             <tr><td class="spacer10"></td></tr>
                             <tr>
                                 <td><label class="control-label">Local income tax:</label></td>
+                                <td>@Html.TextBoxFor(model => model.FormW2Details.Box19Local1Tax, new { @class = "form-control" })</td>
+                                <td><label class="control-label">Local income tax:</label></td>
                                 <td>@Html.TextBoxFor(model => model.FormW2Details.Box19Local2Tax, new { @class = "form-control" })</td>
+                            </tr>
+                            <tr><td class="spacer10"></td></tr>
+                            <tr>
                                 <td><label class="control-label">Locality name:</label></td>
                                 <td>@Html.TextBoxFor(model => model.FormW2Details.Box20Locality2Name, new { @class = "form-control" })</td>
+                                <td><label class="control-label">Locality name:</label></td>
+                                <td>@Html.TextBoxFor(model => model.FormW2Details.Box20Locality1Name, new { @class = "form-control" })</td>
                             </tr>
                         </table>
                     </div>

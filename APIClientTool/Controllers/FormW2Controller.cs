@@ -222,15 +222,56 @@ namespace APIClientTool.Controllers
         #endregion
 
         #region _TransmitReturn
-        public ActionResult _TransmitReturn()
+        public ActionResult _TransmitReturn(Guid submissionId)
         {
-            return PartialView();
+            TransmitFormW2 transmitFormW2 = new TransmitFormW2();
+            TransmitFormW2Response transmitFormW2Response = new TransmitFormW2Response();
+            var transmitFormW2ResponseJSON = string.Empty;
+            if (submissionId != null && submissionId != Guid.Empty)
+            {
+                transmitFormW2 = _repository.GetRecordIdsBySubmissionId(submissionId);
+                if (transmitFormW2 != null)
+                {
+                    var requestText = JsonConvert.SerializeObject(transmitFormW2, Formatting.Indented);
+                    using (var client = new PublicAPIClient())
+                    {
+                        var createRequest = new JavaScriptSerializer().Deserialize<W2CreateReturnRequest>(requestText);
+                        string requestUri = "FormW2/Transmit";
+                        APIGenerateAuthHeader.GenerateAuthHeader(client, requestUri, "POST");
+                        var _response = client.PostAsJsonAsync(requestUri, createRequest).Result;
+                        if (_response != null && _response.IsSuccessStatusCode)
+                        {
+                            var createResponse = _response.Content.ReadAsAsync<W2CreateReturnResponse>().Result;
+                            if (createResponse != null)
+                            {
+                                transmitFormW2ResponseJSON = JsonConvert.SerializeObject(createResponse, Formatting.Indented);
+                                transmitFormW2Response = new JavaScriptSerializer().Deserialize<TransmitFormW2Response>(transmitFormW2ResponseJSON);
+                            }
+                        }
+                        else
+                        {
+                            var createResponse = _response.Content.ReadAsAsync<Object>().Result;
+                            transmitFormW2ResponseJSON = JsonConvert.SerializeObject(createResponse, Formatting.Indented);
+                            transmitFormW2Response = new JavaScriptSerializer().Deserialize<TransmitFormW2Response>(transmitFormW2ResponseJSON);
+                        }
+                    }
+                }
+            }
+            return PartialView(transmitFormW2Response);
         }
         #endregion
 
         #region _GetEfileStatus
-        public ActionResult _GetEfileStatus()
+        public ActionResult _GetEfileStatus(Guid submissionId)
         {
+            if (submissionId != null && submissionId != Guid.Empty)
+            {
+                var RecordIds = _repository.GetRecordIdsBySubmissionId(submissionId);
+                if (RecordIds != null)
+                {
+
+                }
+            }
             return PartialView();
         }
         #endregion

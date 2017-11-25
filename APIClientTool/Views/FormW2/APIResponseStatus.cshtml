@@ -28,6 +28,25 @@
             </tbody>
         </table>
     }
+    else
+    {
+        <table>
+            <tr>
+                @if (!string.IsNullOrWhiteSpace(ViewBag.responseJson))
+                {
+                    <td class="taC">
+                        @ViewBag.responseJson
+                    </td>
+                }
+                else
+                {
+                    <td class="taC">
+                        No Result
+                    </td>
+                }
+            </tr>
+        </table>
+    }
 </div>
 
 <div class="modal-footer edit-modal-footer mTopNo">

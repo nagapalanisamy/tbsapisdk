@@ -126,7 +126,7 @@ namespace APIClientTool.Controllers
                     }
                 }
             }
-            //ViewBag.responseJson = responseJson;
+            ViewBag.responseJson = response.Message;
             return PartialView(errorResponse);
         }
         #endregion

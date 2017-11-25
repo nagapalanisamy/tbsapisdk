@@ -1,6 +1,113 @@
 ﻿@model APIClientTool.ViewModels.FormW2
 @{
-    ViewBag.Title = "CreateFormW2Return";
+    ViewBag.Title = "Create FormW2 Return";
+
+    List<SelectListItem> _Line12CodeList = new List<SelectListItem>();
+    _Line12CodeList.Add(new SelectListItem { Text = "A", Value = "A" });
+    _Line12CodeList.Add(new SelectListItem { Text = "B", Value = "B" });
+    _Line12CodeList.Add(new SelectListItem { Text = "C", Value = "C" });
+    _Line12CodeList.Add(new SelectListItem { Text = "D", Value = "D" });
+    _Line12CodeList.Add(new SelectListItem { Text = "E", Value = "E" });
+    _Line12CodeList.Add(new SelectListItem { Text = "F", Value = "F" });
+    _Line12CodeList.Add(new SelectListItem { Text = "G", Value = "G" });
+    _Line12CodeList.Add(new SelectListItem { Text = "H", Value = "H" });
+    _Line12CodeList.Add(new SelectListItem { Text = "J", Value = "J" });
+    _Line12CodeList.Add(new SelectListItem { Text = "K", Value = "K" });
+    _Line12CodeList.Add(new SelectListItem { Text = "L", Value = "L" });
+    _Line12CodeList.Add(new SelectListItem { Text = "M", Value = "M" });
+    _Line12CodeList.Add(new SelectListItem { Text = "N", Value = "N" });
+    _Line12CodeList.Add(new SelectListItem { Text = "P", Value = "P" });
+    _Line12CodeList.Add(new SelectListItem { Text = "Q", Value = "Q" });
+    _Line12CodeList.Add(new SelectListItem { Text = "R", Value = "R" });
+    _Line12CodeList.Add(new SelectListItem { Text = "S", Value = "S" });
+    _Line12CodeList.Add(new SelectListItem { Text = "T", Value = "T" });
+    _Line12CodeList.Add(new SelectListItem { Text = "V", Value = "V" });
+    _Line12CodeList.Add(new SelectListItem { Text = "W", Value = "W" });
+    _Line12CodeList.Add(new SelectListItem { Text = "Y", Value = "Y" });
+    _Line12CodeList.Add(new SelectListItem { Text = "Z", Value = "Z" });
+    _Line12CodeList.Add(new SelectListItem { Text = "AA", Value = "AA" });
+    _Line12CodeList.Add(new SelectListItem { Text = "BB", Value = "BB" });
+    _Line12CodeList.Add(new SelectListItem { Text = "CC", Value = "CC" });
+    _Line12CodeList.Add(new SelectListItem { Text = "DD", Value = "DD" });
+    _Line12CodeList.Add(new SelectListItem { Text = "EE", Value = "EE" });
+    _Line12CodeList.Add(new SelectListItem { Text = "FF", Value = "FF" });
+
+    List<SelectListItem> _USStates = new List<SelectListItem>();
+    _USStates.Add(new SelectListItem { Text = "Alabama (AL)", Value = "AL" });
+    _USStates.Add(new SelectListItem { Text = "Alaska (AK)", Value = "AK" });
+    _USStates.Add(new SelectListItem { Text = "Arizona (AZ)", Value = "AZ" });
+    _USStates.Add(new SelectListItem { Text = "Arkansas (AR)", Value = "AR" });
+    _USStates.Add(new SelectListItem { Text = "California (CA)", Value = "CA" });
+    _USStates.Add(new SelectListItem { Text = "Colorado (CO)", Value = "CO" });
+    _USStates.Add(new SelectListItem { Text = "Connecticut (CT)", Value = "CT" });
+    _USStates.Add(new SelectListItem { Text = "Delaware (DE)", Value = "DE" });
+    _USStates.Add(new SelectListItem { Text = "District of Columbia (DC)", Value = "DC" });
+    _USStates.Add(new SelectListItem { Text = "Florida (FL)", Value = "FL" });
+    _USStates.Add(new SelectListItem { Text = "Georgia (GA)", Value = "GA" });
+    _USStates.Add(new SelectListItem { Text = "Hawaii (HI)", Value = "HI" });
+    _USStates.Add(new SelectListItem { Text = "Idaho (ID)", Value = "ID" });
+    _USStates.Add(new SelectListItem { Text = "Illinois (IL)", Value = "IL" });
+    _USStates.Add(new SelectListItem { Text = "Indiana (IN)", Value = "IN" });
+    _USStates.Add(new SelectListItem { Text = "Iowa (IA)", Value = "IA" });
+    _USStates.Add(new SelectListItem { Text = "Kansas (KS)", Value = "KS" });
+    _USStates.Add(new SelectListItem { Text = "Kentucky (KY)", Value = "KY" });
+    _USStates.Add(new SelectListItem { Text = "Louisiana (LA)", Value = "LA" });
+    _USStates.Add(new SelectListItem { Text = "Maine (ME)", Value = "ME" });
+    _USStates.Add(new SelectListItem { Text = "Maryland (MD)", Value = "MD" });
+    _USStates.Add(new SelectListItem { Text = "Massachusetts (MA)", Value = "MA" });
+    _USStates.Add(new SelectListItem { Text = "Michigan (MI)", Value = "MI" });
+    _USStates.Add(new SelectListItem { Text = "Minnesota (MN)", Value = "MN" });
+    _USStates.Add(new SelectListItem { Text = "Mississippi (MS)", Value = "MS" });
+    _USStates.Add(new SelectListItem { Text = "Missouri (MO)", Value = "MO" });
+    _USStates.Add(new SelectListItem { Text = "Montana (MT)", Value = "MT" });
+    _USStates.Add(new SelectListItem { Text = "Nebraska (NE)", Value = "NE" });
+    _USStates.Add(new SelectListItem { Text = "Nevada (NV)", Value = "NV" });
+    _USStates.Add(new SelectListItem { Text = "New Hampshire (NH)", Value = "NH" });
+    _USStates.Add(new SelectListItem { Text = "New Jersey (NJ)", Value = "NJ" });
+    _USStates.Add(new SelectListItem { Text = "New Mexico (NM)", Value = "NM" });
+    _USStates.Add(new SelectListItem { Text = "New York (NY)", Value = "NY" });
+    _USStates.Add(new SelectListItem { Text = "North Carolina (NC)", Value = "NC" });
+    _USStates.Add(new SelectListItem { Text = "North Dakota (ND)", Value = "ND" });
+    _USStates.Add(new SelectListItem { Text = "Ohio (OH)", Value = "OH" });
+    _USStates.Add(new SelectListItem { Text = "Oklahoma (OK)", Value = "OK" });
+    _USStates.Add(new SelectListItem { Text = "Oregon (OR)", Value = "OR" });
+    _USStates.Add(new SelectListItem { Text = "Pennsylvania (PA)", Value = "PA" });
+    _USStates.Add(new SelectListItem { Text = "Rhode Island (RI)", Value = "RI" });
+    _USStates.Add(new SelectListItem { Text = "South Carolina (SC)", Value = "SC" });
+    _USStates.Add(new SelectListItem { Text = "South Dakota (SD)", Value = "SD" });
+    _USStates.Add(new SelectListItem { Text = "Tennessee (TN)", Value = "TN" });
+    _USStates.Add(new SelectListItem { Text = "Texas (TX)", Value = "TX" });
+    _USStates.Add(new SelectListItem { Text = "Utah (UT)", Value = "UT" });
+    _USStates.Add(new SelectListItem { Text = "Vermont (VT)", Value = "VT" });
+    _USStates.Add(new SelectListItem { Text = "Virginia (VA)", Value = "VA" });
+    _USStates.Add(new SelectListItem { Text = "Washington (WA)", Value = "WA" });
+    _USStates.Add(new SelectListItem { Text = "West Virginia (WV)", Value = "WV" });
+    _USStates.Add(new SelectListItem { Text = "Wisconsin (WI)", Value = "WI" });
+    _USStates.Add(new SelectListItem { Text = "Wyoming (WY)", Value = "WY" });
+    _USStates.Add(new SelectListItem { Text = "American Samoa (AS)", Value = "AS" });
+    _USStates.Add(new SelectListItem { Text = "Federated States of Micronesia (FM)", Value = "FM" });
+    _USStates.Add(new SelectListItem { Text = "Guam (GU)", Value = "GU" });
+    _USStates.Add(new SelectListItem { Text = "Marshall Islands (MH)", Value = "MH" });
+    _USStates.Add(new SelectListItem { Text = "Northern Mariana Islands (MP)", Value = "MP" });
+    _USStates.Add(new SelectListItem { Text = "Palau (PW)", Value = "PW" });
+    _USStates.Add(new SelectListItem { Text = "Puerto Rico (PR)", Value = "PR" });
+    _USStates.Add(new SelectListItem { Text = "Virgin Islands (VI)", Value = "VI" });
+    _USStates.Add(new SelectListItem { Text = "Armed Forces Americas (AA)", Value = "AA" });
+    _USStates.Add(new SelectListItem { Text = "Armed Forces Europe (AE)", Value = "AE" });
+    _USStates.Add(new SelectListItem { Text = "Armed Forces Pacific (AP)", Value = "AP" });
+
+    List<SelectListItem> _businessTypeList = new List<SelectListItem>();
+    _businessTypeList.Add(new SelectListItem { Text = "Estate", Value = "ESTE" });
+    _businessTypeList.Add(new SelectListItem { Text = "Partnership", Value = "PART" });
+    _businessTypeList.Add(new SelectListItem { Text = "Corporation", Value = "CORP" });
+    _businessTypeList.Add(new SelectListItem { Text = "Exempt Organization", Value = "EORG" });
+    _businessTypeList.Add(new SelectListItem { Text = "Sole Proprietorship", Value = "SPRO" });
+
+    List<SelectListItem> _kindOfEmployer = new List<SelectListItem>();
+
+    List<SelectListItem> _employmentCd = new List<SelectListItem>();
+
+    List<SelectListItem> _countryList = new List<SelectListItem>();
 }
 
 @using (Html.BeginForm("", "", FormMethod.Post, new { id = "createreturnForm" }))
@@ -22,13 +129,7 @@
                                 <td>@Html.TextBoxFor(model => model.Business.BusinessNm, new { @class = "form-control" })</td>
                                 <td><label class="control-label">Employer Type:</label></td>
                                 <td>
-                                    @Html.DropDownList("Business.BusinessType", new[] {
-                       new SelectListItem{ Text = "Estate", Value = "ESTE"},
-                        new SelectListItem{ Text = "Partnership", Value = "PART"},
-                         new SelectListItem{ Text = "Corporation", Value = "CORP"},
-                          new SelectListItem{ Text = "Exempt Organization", Value = "EORG"},
-                           new SelectListItem{ Text = "Sole Proprietorship", Value = "SPRO"}
-                         }, "Select Employer Type", new { @class = "form-control" })
+                                    @Html.DropDownListFor(model => model.Business.BusinessType, new SelectList(_businessTypeList, "value", "text", null), "Select Employer Type", new { @class = "form-control floatL" })
                                 </td>
                             </tr>
                             <tr><td class="spacer10"></td></tr>
@@ -49,70 +150,7 @@
                             <tr>
                                 <td><label class="control-label">State:</label></td>
                                 <td>
-                                    @Html.DropDownList("Business.USState", new[] {
-                       new SelectListItem{ Text = "Alabama (AL)", Value = "AL"},
-                        new SelectListItem{ Text = "Alaska (AK)", Value = "AK"},
-                         new SelectListItem{ Text = "Arizona (AZ)", Value = "AZ"},
-                          new SelectListItem{ Text = "Arkansas (AR)", Value = "AR"},
-                           new SelectListItem{ Text = "California (CA)", Value = "CA"},
-                             new SelectListItem{ Text = "Colorado (CO)", Value = "CO"},
-                        new SelectListItem{ Text = "Connecticut (CT)", Value = "CT"},
-                         new SelectListItem{ Text = "Delaware (DE)", Value = "DE"},
-                          new SelectListItem{ Text = "District of Columbia (DC)", Value = "DC"},
-                           new SelectListItem{ Text = "Florida (FL)", Value = "FL"},
-                             new SelectListItem{ Text = "Georgia (GA)", Value = "GA"},
-                        new SelectListItem{ Text = "Hawaii (HI)", Value = "HI"},
-                         new SelectListItem{ Text = "Idaho (ID)", Value = "ID"},
-                          new SelectListItem{ Text = "Illinois (IL)", Value = "IL"},
-                           new SelectListItem{ Text = "Indiana (IN)", Value = "IN"},
-                             new SelectListItem{ Text = "Iowa (IA)", Value = "IA"},
-                        new SelectListItem{ Text = "Kansas (KS)", Value = "KS"},
-                         new SelectListItem{ Text = "Kentucky (KY)", Value = "KY"},
-                          new SelectListItem{ Text = "Louisiana (LA)", Value = "LA"},
-                           new SelectListItem{ Text = "Maine (ME)", Value = "ME"},
-                             new SelectListItem{ Text = "Maryland (MD)", Value = "MD"},
-                        new SelectListItem{ Text = "Massachusetts (MA)", Value = "MA"},
-                         new SelectListItem{ Text = "Michigan (MI)", Value = "MI"},
-                          new SelectListItem{ Text = "Minnesota (MN)", Value = "MN"},
-                           new SelectListItem{ Text = "Mississippi (MS)", Value = "MS"},
-                             new SelectListItem{ Text = "Missouri (MO)", Value = "MO"},
-                        new SelectListItem{ Text = "Montana (MT)", Value = "MT"},
-                         new SelectListItem{ Text = "Nebraska (NE)", Value = "NE"},
-                          new SelectListItem{ Text = "Nevada (NV)", Value = "NV"},
-                           new SelectListItem{ Text = "New Hampshire (NH)", Value = "NH"},
-                             new SelectListItem{ Text = "New Jersey (NJ)", Value = "NJ"},
-                        new SelectListItem{ Text = "New Mexico (NM)", Value = "NM"},
-                         new SelectListItem{ Text = "New York (NY)", Value = "NY"},
-                          new SelectListItem{ Text = "North Carolina (NC)", Value = "NC"},
-                           new SelectListItem{ Text = "North Dakota (ND)", Value = "ND"},
-                             new SelectListItem{ Text = "Ohio (OH)", Value = "OH"},
-                        new SelectListItem{ Text = "Oklahoma (OK)", Value = "OK"},
-                         new SelectListItem{ Text = "Oregon (OR)", Value = "OR"},
-                          new SelectListItem{ Text = "Pennsylvania (PA)", Value = "PA"},
-                           new SelectListItem{ Text = "Rhode Island (RI)", Value = "RI"},
-                           new SelectListItem{ Text = "South Carolina (SC)", Value = "SC"},
-                        new SelectListItem{ Text = "South Dakota (SD)", Value = "SD"},
-                         new SelectListItem{ Text = "Tennessee (TN)", Value = "TN"},
-                          new SelectListItem{ Text = "Texas (TX)", Value = "TX"},
-                           new SelectListItem{ Text = "Utah (UT)", Value = "UT"},
-                            new SelectListItem{ Text = "Vermont (VT)", Value = "VT"},
-                             new SelectListItem{ Text = "Virginia (VA)", Value = "VA"},
-                              new SelectListItem{ Text = "Washington (WA)", Value = "WA"},
-                               new SelectListItem{ Text = "West Virginia (WV)", Value = "WV"},
-                                new SelectListItem{ Text = "Wisconsin (WI)", Value = "WI"},
-                                 new SelectListItem{ Text = "Wyoming (WY)", Value = "WY"},
-                                  new SelectListItem{ Text = "American Samoa (AS)", Value = "AS"},
-                                    new SelectListItem{ Text = "Federated States of Micronesia (FM)", Value = "FM"},
-                               new SelectListItem{ Text = "Guam (GU)", Value = "GU"},
-                                new SelectListItem{ Text = "Marshall Islands (MH)", Value = "MH"},
-                                 new SelectListItem{ Text = "Northern Mariana Islands (MP)", Value = "MP"},
-                                  new SelectListItem{ Text = "Palau (PW)", Value = "PW"},
-                                    new SelectListItem{ Text = "Puerto Rico (PR)", Value = "PR"},
-                               new SelectListItem{ Text = "Virgin Islands (VI)", Value = "VI"},
-                                new SelectListItem{ Text = "Armed Forces Americas (AA)", Value = "AA"},
-                                 new SelectListItem{ Text = "Armed Forces Europe (AE)", Value = "AE"},
-                                  new SelectListItem{ Text = "Armed Forces Pacific (AP)", Value = "AP"}
-                         }, "Select State", new { @class = "form-control" })
+                                    @Html.DropDownListFor(model => model.Business.USState, new SelectList(_USStates, "value", "text", null), "Select State", new { @class = "form-control floatL" })
                                 </td>
                                 <td><label class="control-label">Zip Code:</label></td>
                                 <td>@Html.TextBoxFor(model => model.Business.USZip, new { @class = "form-control" })</td>
@@ -184,70 +222,7 @@
                                 <td>@Html.TextBoxFor(model => model.Employee.City, new { @class = "form-control" })</td>
                                 <td><label class="control-label">State:</label></td>
                                 <td>
-                                    @Html.DropDownList("Employee.USState", new[] {
-                       new SelectListItem{ Text = "Alabama (AL)", Value = "AL"},
-                        new SelectListItem{ Text = "Alaska (AK)", Value = "AK"},
-                         new SelectListItem{ Text = "Arizona (AZ)", Value = "AZ"},
-                          new SelectListItem{ Text = "Arkansas (AR)", Value = "AR"},
-                           new SelectListItem{ Text = "California (CA)", Value = "CA"},
-                             new SelectListItem{ Text = "Colorado (CO)", Value = "CO"},
-                        new SelectListItem{ Text = "Connecticut (CT)", Value = "CT"},
-                         new SelectListItem{ Text = "Delaware (DE)", Value = "DE"},
-                          new SelectListItem{ Text = "District of Columbia (DC)", Value = "DC"},
-                           new SelectListItem{ Text = "Florida (FL)", Value = "FL"},
-                             new SelectListItem{ Text = "Georgia (GA)", Value = "GA"},
-                        new SelectListItem{ Text = "Hawaii (HI)", Value = "HI"},
-                         new SelectListItem{ Text = "Idaho (ID)", Value = "ID"},
-                          new SelectListItem{ Text = "Illinois (IL)", Value = "IL"},
-                           new SelectListItem{ Text = "Indiana (IN)", Value = "IN"},
-                             new SelectListItem{ Text = "Iowa (IA)", Value = "IA"},
-                        new SelectListItem{ Text = "Kansas (KS)", Value = "KS"},
-                         new SelectListItem{ Text = "Kentucky (KY)", Value = "KY"},
-                          new SelectListItem{ Text = "Louisiana (LA)", Value = "LA"},
-                           new SelectListItem{ Text = "Maine (ME)", Value = "ME"},
-                             new SelectListItem{ Text = "Maryland (MD)", Value = "MD"},
-                        new SelectListItem{ Text = "Massachusetts (MA)", Value = "MA"},
-                         new SelectListItem{ Text = "Michigan (MI)", Value = "MI"},
-                          new SelectListItem{ Text = "Minnesota (MN)", Value = "MN"},
-                           new SelectListItem{ Text = "Mississippi (MS)", Value = "MS"},
-                             new SelectListItem{ Text = "Missouri (MO)", Value = "MO"},
-                        new SelectListItem{ Text = "Montana (MT)", Value = "MT"},
-                         new SelectListItem{ Text = "Nebraska (NE)", Value = "NE"},
-                          new SelectListItem{ Text = "Nevada (NV)", Value = "NV"},
-                           new SelectListItem{ Text = "New Hampshire (NH)", Value = "NH"},
-                             new SelectListItem{ Text = "New Jersey (NJ)", Value = "NJ"},
-                        new SelectListItem{ Text = "New Mexico (NM)", Value = "NM"},
-                         new SelectListItem{ Text = "New York (NY)", Value = "NY"},
-                          new SelectListItem{ Text = "North Carolina (NC)", Value = "NC"},
-                           new SelectListItem{ Text = "North Dakota (ND)", Value = "ND"},
-                             new SelectListItem{ Text = "Ohio (OH)", Value = "OH"},
-                        new SelectListItem{ Text = "Oklahoma (OK)", Value = "OK"},
-                         new SelectListItem{ Text = "Oregon (OR)", Value = "OR"},
-                          new SelectListItem{ Text = "Pennsylvania (PA)", Value = "PA"},
-                           new SelectListItem{ Text = "Rhode Island (RI)", Value = "RI"},
-                           new SelectListItem{ Text = "South Carolina (SC)", Value = "SC"},
-                        new SelectListItem{ Text = "South Dakota (SD)", Value = "SD"},
-                         new SelectListItem{ Text = "Tennessee (TN)", Value = "TN"},
-                          new SelectListItem{ Text = "Texas (TX)", Value = "TX"},
-                           new SelectListItem{ Text = "Utah (UT)", Value = "UT"},
-                            new SelectListItem{ Text = "Vermont (VT)", Value = "VT"},
-                             new SelectListItem{ Text = "Virginia (VA)", Value = "VA"},
-                              new SelectListItem{ Text = "Washington (WA)", Value = "WA"},
-                               new SelectListItem{ Text = "West Virginia (WV)", Value = "WV"},
-                                new SelectListItem{ Text = "Wisconsin (WI)", Value = "WI"},
-                                 new SelectListItem{ Text = "Wyoming (WY)", Value = "WY"},
-                                  new SelectListItem{ Text = "American Samoa (AS)", Value = "AS"},
-                                    new SelectListItem{ Text = "Federated States of Micronesia (FM)", Value = "FM"},
-                               new SelectListItem{ Text = "Guam (GU)", Value = "GU"},
-                                new SelectListItem{ Text = "Marshall Islands (MH)", Value = "MH"},
-                                 new SelectListItem{ Text = "Northern Mariana Islands (MP)", Value = "MP"},
-                                  new SelectListItem{ Text = "Palau (PW)", Value = "PW"},
-                                    new SelectListItem{ Text = "Puerto Rico (PR)", Value = "PR"},
-                               new SelectListItem{ Text = "Virgin Islands (VI)", Value = "VI"},
-                                new SelectListItem{ Text = "Armed Forces Americas (AA)", Value = "AA"},
-                                 new SelectListItem{ Text = "Armed Forces Europe (AE)", Value = "AE"},
-                                  new SelectListItem{ Text = "Armed Forces Pacific (AP)", Value = "AP"}
-                         }, "Select State", new { @class = "form-control" })
+                                    @Html.DropDownListFor(model => model.Employee.USState, new SelectList(_USStates, "value", "text", null), "Select State", new { @class = "form-control floatL" })
                                 </td>
                             </tr>
                             <tr><td class="spacer10"></td></tr>
@@ -311,7 +286,7 @@
                                 <td>@Html.TextBoxFor(model => model.FormW2Details.Box11NonqualifiedPlan, new { @class = "form-control" })</td>
                                 <td><label class="control-label">12a See instructions for box 12:</label></td>
                                 <td>
-                                    @Html.TextBoxFor(model => model.FormW2Details.Box12aCd, new { @class = "form-control floatL", @style = "Width:50px" })
+                                    @Html.DropDownListFor(model => model.FormW2Details.Box12aCd, new SelectList(_Line12CodeList, "text", "value", null), "Select Code", new { @class = "form-control floatL", @style = "Width:50px" })
                                     @Html.TextBoxFor(model => model.FormW2Details.Box12aAmt, new { @class = "form-control", @style = "Width:140px" })
                                 </td>
                             </tr>
@@ -319,12 +294,12 @@
                             <tr>
                                 <td><label class="control-label">12b See instructions for box 12:</label></td>
                                 <td>
-                                    @Html.TextBoxFor(model => model.FormW2Details.Box12bCd, new { @class = "form-control floatL", @style = "Width:50px" })
+                                    @Html.DropDownListFor(model => model.FormW2Details.Box12bCd, new SelectList(_Line12CodeList, "text", "value", null), "Select Code", new { @class = "form-control floatL", @style = "Width:50px" })
                                     @Html.TextBoxFor(model => model.FormW2Details.Box12bAmt, new { @class = "form-control", @style = "Width:140px" })
                                 </td>
                                 <td><label class="control-label">12c See instructions for box 12:</label></td>
                                 <td>
-                                    @Html.TextBoxFor(model => model.FormW2Details.Box12cCd, new { @class = "form-control floatL", @style = "Width:50px" })
+                                    @Html.DropDownListFor(model => model.FormW2Details.Box12cCd, new SelectList(_Line12CodeList, "text", "value", null), "Select Code", new { @class = "form-control floatL", @style = "Width:50px" })
                                     @Html.TextBoxFor(model => model.FormW2Details.Box12cAmt, new { @class = "form-control", @style = "Width:140px" })
                                 </td>
                             </tr>
@@ -332,7 +307,7 @@
                             <tr>
                                 <td><label class="control-label">12d See instructions for box 12:</label></td>
                                 <td>
-                                    @Html.TextBoxFor(model => model.FormW2Details.Box12dCd, new { @class = "form-control floatL", @style = "Width:50px" })
+                                    @Html.DropDownListFor(model => model.FormW2Details.Box12dCd, new SelectList(_Line12CodeList, "text", "value", null), "Select Code", new { @class = "form-control floatL", @style = "Width:50px" })
                                     @Html.TextBoxFor(model => model.FormW2Details.Box12dAmt, new { @class = "form-control", @style = "Width:140px" })
                                 </td>
                                 <td><label class="control-label">Statutory Employee:</label></td>
@@ -429,7 +404,7 @@
 }
 <div class="spacer10"></div>
 <div class="taC">
-    <button type="button" class="btn btn-success btn-md" onclick="GetStatus()"> Efile Now</button>
+    <button type="button" class="btn btn-success btn-lg" onclick="GetStatus()"> Efile Now</button>
 </div>
 
 

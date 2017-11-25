@@ -82,11 +82,11 @@ namespace APIClientTool.Repository
         #region Save API Error Response
         public void SaveAPIErrorResponse(ErrorResponse errorResponse)
         {
-            if (errorResponse != null && errorResponse.Messages != null && errorResponse.Messages.Any())
+            if (errorResponse != null && errorResponse.Errors != null && errorResponse.Errors.Any())
             {
                 using (TaxBanditsAPIClientEntities dbContext = new TaxBanditsAPIClientEntities())
                 {
-                    foreach (var error in errorResponse.Messages)
+                    foreach (var error in errorResponse.Errors)
                     {
                         var recordError = new RecordError();
                         recordError.Code = error.Code;

@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using static APIClientTool.ViewModels.EntityBase;
 
 namespace APIClientTool.Repository
 {
@@ -97,6 +98,24 @@ namespace APIClientTool.Repository
                     }
                 }
             }
+        }
+        #endregion
+
+        #region Get API Response 
+        public List<TransmitFormW2> GetAPIResponse()
+        {
+            List<TransmitFormW2> transmitFormW2list = new List<TransmitFormW2>();
+            using (TaxBanditsAPIClientEntities dbContext = new TaxBanditsAPIClientEntities())
+            {
+                var apiResponse = dbContext.APIResponses.Where(a => a.Code == (int)StatusCode.Success && a.Submission_Id != Guid.Empty).ToList();
+                foreach (var submission in apiResponse)
+                {
+                    var transmitFormW2 = new TransmitFormW2();
+                    transmitFormW2.SubmissionId = submission.Submission_Id ?? Guid.Empty;
+                    transmitFormW2list.Add(transmitFormW2);
+                }
+            }
+            return transmitFormW2list;
         }
         #endregion
     }

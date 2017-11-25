@@ -63,6 +63,7 @@ namespace APIClientTool.Controllers
 
                 //Mapping Employee
                 formw2.Employee = new Employee();
+                formw2.Employee.SSN = "123456789";
                 formw2.Employee.FirstNm = "Peter";
                 formw2.Employee.LastNm = "Yengaran";
                 formw2.Employee.IsForeign = false;
@@ -86,11 +87,12 @@ namespace APIClientTool.Controllers
                 formw2.Business.PostalCd = "";
 
                 //Optional Employee
+                formw2.Employee.MiddleNm = "";
                 formw2.Employee.Suffix = "";
                 formw2.Employee.Fax = "";
                 formw2.Employee.Address2 = "";
-                formw2.Employee.ProvinceState = "";
-                formw2.Employee.PostalCd = "";
+                //formw2.Employee.ProvinceState = "";
+                //formw2.Employee.PostalCd = "";
             }
             return View(formw2);
         }

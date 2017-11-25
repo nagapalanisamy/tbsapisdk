@@ -1,9 +1,33 @@
-﻿<div class="modal-header edit-modal-header">
+﻿@model APIClientTool.ViewModels.ErrorResponse
+<div class="modal-header edit-modal-header">
     <button type="button" class="close" data-dismiss="modal"></button>
     <span class="modal-title edit-title ">Reponse Status</span>
 </div>
 <div class="modal-body edit-modal-body white_bg">
-    @ViewBag.responseJson
+    @if (Model != null && Model.Messages != null && Model.Messages != null)
+    {
+        <table class="table tab-content">
+            <thead>
+                <tr>
+                    <td>Code</td>
+                    <td>Name</td>
+                    <td>Message</td>
+                    <td>Type</td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Messages)
+                {
+                    <tr>
+                        <td>@item.Code</td>
+                        <td>@item.Name</td>
+                        <td>@item.Message</td>
+                        <td>@item.Type</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
 </div>
 
 <div class="modal-footer edit-modal-footer mTopNo">

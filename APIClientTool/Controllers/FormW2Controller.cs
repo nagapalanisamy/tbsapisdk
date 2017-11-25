@@ -12,16 +12,21 @@ namespace APIClientTool.Controllers
 {
     public class FormW2Controller : Controller
     {
-        // GET: FormW2
         ReturnRepository _repository;
+
+        #region Constructor
         public FormW2Controller()
         {
             _repository = new ReturnRepository();
         }
+        #endregion
+
+        #region Index
         public ActionResult Index()
         {
             return View();
         }
+        #endregion
 
         #region CreateFormW2Return
         public ActionResult FormW2Return(bool? id)
@@ -98,6 +103,7 @@ namespace APIClientTool.Controllers
             var responseJson = string.Empty;
             W2ReturnResponse response = new W2ReturnResponse();
             W2CreateReturnRequest request = new W2CreateReturnRequest();
+            ErrorResponse errorResponse = new ErrorResponse();
             request.W2Forms = new List<FormW2>();
             request.W2Forms.Add(formw2);
             var requestText = JsonConvert.SerializeObject(request, Formatting.Indented);
@@ -114,14 +120,14 @@ namespace APIClientTool.Controllers
                     {
                         responseJson = JsonConvert.SerializeObject(createResponse, Formatting.Indented);
                         response = new JavaScriptSerializer().Deserialize<W2ReturnResponse>(responseJson);
-                        //var errorResponse = new JavaScriptSerializer().Deserialize<ErrorResponse>(responseJson);
+                        errorResponse = new JavaScriptSerializer().Deserialize<ErrorResponse>(responseJson);
                         _repository.SaveAPIResponse(response);
                         //_repository.SaveAPIErrorResponse(errorResponse);
                     }
                 }
             }
-            ViewBag.responseJson = responseJson;
-            return PartialView();
+            //ViewBag.responseJson = responseJson;
+            return PartialView(errorResponse);
         }
         #endregion
 

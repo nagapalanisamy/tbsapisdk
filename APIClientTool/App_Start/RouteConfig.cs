@@ -16,7 +16,7 @@ namespace APIClientTool
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "formw2", action = "formw2return", id = UrlParameter.Optional }
             );
         }
     }

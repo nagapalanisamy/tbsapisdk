@@ -258,8 +258,10 @@
     <Compile Include="ViewModels\BusinessDetails.cs" />
     <Compile Include="ViewModels\Employee.cs" />
     <Compile Include="ViewModels\EntityBase.cs" />
+    <Compile Include="ViewModels\ErrorResponse.cs" />
     <Compile Include="ViewModels\FormW2.cs" />
     <Compile Include="ViewModels\SigningAuthority.cs" />
+    <Compile Include="ViewModels\W2CreateReturnRequest.cs" />
     <Compile Include="ViewModels\W2FormDetails.cs" />
     <Compile Include="ViewModels\W2ReturnResponse.cs" />
   </ItemGroup>
@@ -272,6 +274,10 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Images\favicon.ico" />
+    <Content Include="Content\Images\logo.png" />
+    <Content Include="Content\Images\logoHead.png" />
+    <Content Include="Content\Images\phone_icon.png" />
     <Content Include="Content\toastr.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -344,7 +350,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\FormW2\CreateFormW2Return.cshtml" />
+    <Content Include="Views\FormW2\FormW2Return.cshtml" />
     <Content Include="Views\FormW2\APIResponseStatus.cshtml" />
     <Content Include="Scripts\jquery-3.2.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.2.1.min.map" />

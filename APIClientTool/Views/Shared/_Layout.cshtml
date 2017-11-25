@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title</title>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
@@ -12,6 +12,7 @@
     <link href="~/Content/Site.css" rel="stylesheet" />
     <link href="~/Content/toastr.css" rel="stylesheet" />
     <script src="~/Scripts/toastr.js"></script>
+    <link rel="icon" href="~/Content/Images/favicon.ico" type="image/x-icon">
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -22,16 +23,17 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("TaxBandits API", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    @*<li>@Html.ActionLink("Home", "Index", "Home")</li>
-                        <li>@Html.ActionLink("About", "About", "Home")</li>
-                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>*@
-                    <li>@Html.ActionLink("FormW2", "createformw2return", "formw2")</li>
-                </ul>
-                @* @Html.Partial("_LoginPartial")*@
+                <div>
+                    <img src="~/Content/Images/logoHead.png" />
+                </div>
+                <div style="float:right;font-size:medium">
+                    <a href="tel:7046844751">
+                        <img src="~/Content/Images/phone_icon.png" alt="" title="" class="" style="width:20px;height:20px" />
+                        <b></b>704.684.4751
+                    </a>
+                </div>
             </div>
         </div>
     </div>
@@ -41,12 +43,7 @@
         <footer>
             <div class="row">
                 <div class="col-md-6 col-sm-6 col-sm-12 pTop5">
-                    <span>
-                        &copy; @DateTime.Now.Year.ToString() TaxBandits.com,
-                        <a href="http://www.spanenterprises.com/" target="_blank" title="SPAN Enterprises LLC">SPAN Enterprises LLC</a>. All rights reserved.
-                    </span>
-                    <br />
-                    <a href="/site-map/">Sitemap</a> | <a title="Terms and Conditions">Terms of Use</a> | <a href="#" title="Privacy Policy">Privacy Policy</a>
+
                 </div>
             </div>
         </footer>

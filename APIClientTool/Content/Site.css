@@ -276,7 +276,7 @@ img { border: none; }
 .form-group { margin-bottom: 10px; }
 
 header { background: #fff; }
-header .linkText { padding-top: 13px; display: inline-block; font-size: 17px; }
+header .linkText { padding-top: 13px; display: inline-block; font-size: 17px; color: #60b9ca; font-weight: 700; }
 header .linkText img { padding-right: 2px; max-width: 23px; }
 .navbar { padding: 10px 0; border-bottom: 1px solid #ccc; background: #fff; height: 71px; }
 .body-content { padding: 15px; }
@@ -291,7 +291,7 @@ header .linkText img { padding-right: 2px; max-width: 23px; }
 .pageTitle { font-size: 21px; color: #333; margin: 0px 0 15px; }
 .form-control { width: 250px; display: inline-block; }
 .btn.btn_primary, .btn_primary, .btn_primary:hover, .btn_primary:focus { background: #fb7310; padding: 5px 12px 7px 12px; height: auto !important; color: #fff !important; text-align: left; cursor: pointer !important; font: 600 15px 'Open Sans', sans-serif; border-radius: 4px; border: 1px solid #da6610; text-decoration: none; }
-.btn.btn_second, .btn_second { background: #60b9ca; padding: 5px 12px 5px 12px; height: auto !important; color: #fff !important; text-align: left; cursor: pointer; font: 600 15px 'Open Sans', sans-serif; border-radius: 4px; border: 1px solid #006fd3; text-decoration: none; }
+.btn.btn_second, .btn_second { background: #60b9ca; padding: 5px 12px 5px 12px; height: auto !important; color: #fff !important; text-align: left; cursor: pointer; font: 600 15px 'Open Sans', sans-serif; border-radius: 4px; border: 1px solid #403d3d; text-decoration: none; }
 .btn.btn_grey { background: #333333; padding: 5px 12px 5px 12px; height: auto !important; color: #fff !important; text-align: left; cursor: pointer; font: 600 15px 'Open Sans', sans-serif; border-radius: 4px; border: 1px solid #333333; text-decoration: none; }
 .btn.btn_lg { padding: 6px 20px !important; font-size: 22px !important; }
 .btn.btn_md { padding: 6px 10px !important; font-size: 16px !important; }

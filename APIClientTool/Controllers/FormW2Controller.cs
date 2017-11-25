@@ -134,8 +134,8 @@ namespace APIClientTool.Controllers
                 {
                     var createResponse = _response.Content.ReadAsAsync<Object>().Result;
                     responseJson = JsonConvert.SerializeObject(createResponse, Formatting.Indented);
-                    errorResponse = new JavaScriptSerializer().Deserialize<ErrorResponse>(responseJson);
-                    ViewBag.ReasonPhrase = _response.ReasonPhrase;
+                    w2response = new JavaScriptSerializer().Deserialize<W2CreateReturnResponse>(responseJson);
+                    //ViewBag.ReasonPhrase = _response.ReasonPhrase;
                 }
             }
             return PartialView(w2response);

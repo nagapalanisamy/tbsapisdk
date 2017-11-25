@@ -12,6 +12,7 @@ namespace APIClientTool.ViewModels
         public int StatusCode { get; set; }
         public string StatusMessage { get; set; }
         public string StatusName { get; set; }
+        public List<Error> Errors { get; set; }
     }
 
     public class FormW2Records

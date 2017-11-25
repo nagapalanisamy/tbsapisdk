@@ -192,5 +192,12 @@ namespace APIClientTool.Controllers
         }
         #endregion
 
+        #region  EFile Status
+        public ActionResult EFileStatus()
+        {
+            return View();
+        }
+        #endregion
+
     }
 }

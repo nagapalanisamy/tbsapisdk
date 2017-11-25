@@ -366,6 +366,7 @@
     <Content Include="Scripts\jquery-3.2.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.2.1.min.map" />
     <Content Include="Views\Shared\_SubMenu.cshtml" />
+    <Content Include="Views\FormW2\EFileStatus.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

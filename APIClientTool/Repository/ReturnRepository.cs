@@ -150,5 +150,24 @@ namespace APIClientTool.Repository
             return transmitFormW2;
         }
         #endregion
+
+        #region Get API Response 
+        public bool UpdateFilingStatus(Guid submissionId)
+        {
+            bool isUpdated = false;
+            if(submissionId != Guid.Empty)
+            {
+                using (TaxBanditsAPIClientEntities dbContext = new TaxBanditsAPIClientEntities())
+                {
+                    var apiResponse = dbContext.APIResponses.Where(a => a.Submission_Id == submissionId).SingleOrDefault();
+                    apiResponse.Is_Return_Transmitted = true;
+                    dbContext.SaveChanges();
+                    isUpdated = true;
+                }
+            }
+            
+            return isUpdated;
+        }
+        #endregion
     }
 }

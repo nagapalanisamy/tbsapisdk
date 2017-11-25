@@ -118,5 +118,34 @@ namespace APIClientTool.Repository
             return transmitFormW2list;
         }
         #endregion
+
+        #region Get API Response 
+        public TransmitFormW2 GetRecordIdsBySubmissionId(Guid submissionId)
+        {
+            TransmitFormW2 transmitFormW2 = new TransmitFormW2();
+            if (submissionId != Guid.Empty)
+            {
+                transmitFormW2.RecordIds = new List<Guid>();
+                using (TaxBanditsAPIClientEntities dbContext = new TaxBanditsAPIClientEntities())
+                {
+                    var recordIds = (from api in dbContext.APIResponses
+                                     join ss in dbContext.SuccessStatus on api.Reponse_Id equals ss.Response_Id
+                                     where api.Submission_Id == submissionId && ss.Record_Id != Guid.Empty
+                                     select new
+                                     {
+                                         Record_Id = ss.Record_Id ?? Guid.Empty
+                                     }).ToList();
+                    if (recordIds != null && recordIds.Any())
+                    {
+                        foreach (var recordId in recordIds)
+                        {
+                            transmitFormW2.RecordIds.Add(recordId.Record_Id);
+                        }
+                    }
+                }
+            }
+            return transmitFormW2;
+        }
+        #endregion
     }
 }

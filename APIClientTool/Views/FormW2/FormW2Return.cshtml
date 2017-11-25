@@ -1,6 +1,6 @@
 ﻿@model APIClientTool.ViewModels.FormW2
 @{
-    ViewBag.Title = "Create FormW2 Return";
+    ViewBag.Title = "FormW2 Return";
 
     List<SelectListItem> _Line12CodeList = new List<SelectListItem>();
     _Line12CodeList.Add(new SelectListItem { Text = "A", Value = "A" });
@@ -414,7 +414,7 @@
 @using (Html.BeginForm("", "", FormMethod.Post, new { id = "createreturnForm" }))
 {
     <div class="container">
-        <h3>Create FormW2 Return</h3>
+        <h3>FormW2 Return</h3>
         <div class="panel-group" id="accordion">
             <div class="panel panel-default">
                 <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapse1">

@@ -345,7 +345,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\FormW2\CreateFormW2Return.cshtml" />
+    <Content Include="Views\FormW2\FormW2Return.cshtml" />
     <Content Include="Views\FormW2\APIResponseStatus.cshtml" />
     <Content Include="Scripts\jquery-3.2.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.2.1.min.map" />

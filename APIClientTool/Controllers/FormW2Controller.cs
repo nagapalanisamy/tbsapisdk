@@ -24,7 +24,7 @@ namespace APIClientTool.Controllers
         }
 
         #region CreateFormW2Return
-        public ActionResult CreateFormW2Return(bool? id)
+        public ActionResult FormW2Return(bool? id)
         {
             FormW2 formw2 = new FormW2();
             bool _prePopulate = id ?? false;

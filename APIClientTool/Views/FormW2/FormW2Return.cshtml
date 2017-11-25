@@ -495,6 +495,20 @@
                             <td class="labelName"><label class="control-label">Employment Code:</label></td>
                             <td class="fieldName">@Html.DropDownListFor(model => model.Business.EmploymentCd, new SelectList(_employmentCd, "value", "text", null), "Select Employer Type", new { @class = "form-control" })</td>
                         </tr>
+                        <tr><td class="spacer10"></td></tr>
+                        <tr>
+                            <td class="labelName"><label class="control-label">SigningAuthority Name:</label></td>
+                            <td class="fieldName">@Html.TextBoxFor(model => model.Business.SigningAuthority.Name, new { @class = "form-control" })</td>
+                            <td class="labelName"><label class="control-label">SigningAuthority Day Time Phone:</label></td>
+                            <td class="fieldName">@Html.TextBoxFor(model => model.Business.SigningAuthority.DayTimePhone, new { @class = "form-control" })</td>
+                        </tr>
+                        <tr><td class="spacer10"></td></tr>
+                        <tr>
+                            <td class="labelName"><label class="control-label">SigningAuthority Business Members:</label></td>
+                            <td class="fieldName">@Html.TextBoxFor(model => model.Business.SigningAuthority.BusinessMembers, new { @class = "form-control" })</td>
+                            <td class="labelName"></td>
+                            <td class="fieldName"></td>
+                        </tr>
                     </table>
                 </div>
             </div>

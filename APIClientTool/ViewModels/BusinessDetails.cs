@@ -1,7 +1,10 @@
-﻿namespace APIClientTool.ViewModels
+﻿using System;
+
+namespace APIClientTool.ViewModels
 {
     public class BusinessDetails
     {
+        public Guid BusinessId { get; set; }
         public string BusinessNm { get; set; }
         public string TradeNm { get; set; }
         public string EIN { get; set; }

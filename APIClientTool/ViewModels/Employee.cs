@@ -16,7 +16,7 @@
         public string City { get; set; }
         public string USState { get; set; }
         public string Country { get; set; }
-        public string USZip { get; set; }
+        public string Zip { get; set; }
         public bool IsForeign { get; set; }
         public string PostalCd { get; set; }
         public string ProvinceState { get; set; }

@@ -35,7 +35,7 @@ namespace APIClientTool.Controllers
             bool _prePopulate = id ?? false;
             if (_prePopulate)
             {
-
+                formw2.TaxYear = 2017;
                 formw2.Sequence = "1";
                 //Mapping BusinessDetails
                 formw2.Business = new BusinessDetails();
@@ -70,13 +70,13 @@ namespace APIClientTool.Controllers
                 formw2.Employee.Address1 = "First Street";
                 formw2.Employee.City = "Rockhill";
                 formw2.Employee.USState = "SC";
-                formw2.Employee.USZip = "29727";
+                formw2.Employee.Zip = "29727";
                 formw2.Employee.Phone = "9884523450";
                 formw2.Employee.Email = "peter@spanenterprises.com";
 
                 //Mapping FormW2Details
-                formw2.FormW2Details = new FormW2Details();
-                formw2.FormW2Details.Box1 = 10000.00M;
+                formw2.FormDetails = new FormW2Details();
+                formw2.FormDetails.Box1 = 10000.00M;
 
                 //Optional BusinessDetails
                 formw2.Business.PhoneExtn = "";
@@ -101,6 +101,8 @@ namespace APIClientTool.Controllers
         public ActionResult APIResponseStatus(FormW2 formw2)
         {
             var responseJson = string.Empty;
+            formw2.TaxYear = 2017;
+            formw2.Business.BusinessId = Guid.Empty;
             W2ReturnResponse response = new W2ReturnResponse();
             W2CreateReturnRequest request = new W2CreateReturnRequest();
             ErrorResponse errorResponse = new ErrorResponse();

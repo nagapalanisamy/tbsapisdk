@@ -299,5 +299,8 @@ header .linkText img { padding-right: 2px; max-width: 23px; }
 .btn.btn_xs { padding: 3px 10px !important; font-size: 14px !important; }
 .btn.btn_md i { font-size: 20px; vertical-align: top; padding: 1px 2px 0 0; }
 .font15 { font-size: 15px !important; }
-.close { position: absolute; background: transparent url("Images/close.png") no-repeat scroll 0px 0px; width: 31px; height: 31px; text-indent: -9999px; z-index: 999; }
+.close { position: absolute; background: transparent url("~/Images/close.png") no-repeat scroll 0px 0px; width: 31px; height: 31px; text-indent: -9999px; z-index: 999; }
 .close:focus { border: none !important; }
+.modal-header { border-bottom: 1px solid #c7c7c7; border-radius: 6px 6px 0 0; background: #f3f3f3; }
+.modal-title { margin: 0px; color: #fb7310 !important; overflow: hidden !important; }
+.modal-header #form_heading { margin: 0px; padding-bottom: 0; font-weight: 600; font-size: 22px; }

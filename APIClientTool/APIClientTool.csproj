@@ -256,6 +256,7 @@
     <Compile Include="Utilities\Utility.cs" />
     <Compile Include="ViewModels\BusinessDetails.cs" />
     <Compile Include="ViewModels\EFileStatus.cs" />
+    <Compile Include="ViewModels\EfileStatusGetRequest.cs" />
     <Compile Include="ViewModels\EfileStatusResponse.cs" />
     <Compile Include="ViewModels\Employee.cs" />
     <Compile Include="ViewModels\EntityBase.cs" />

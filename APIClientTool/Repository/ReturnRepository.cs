@@ -32,11 +32,11 @@ namespace APIClientTool.Repository
                     dbContext.APIResponses.Add(apiResponse);
                     dbContext.SaveChanges();
 
-                    if (returnResponse.FormW2Record != null)
+                    if (returnResponse.FormW2Records != null)
                     {
-                        if (returnResponse.FormW2Record.SuccessRecords != null && returnResponse.FormW2Record.SuccessRecords.Count > 0)
+                        if (returnResponse.FormW2Records.SuccessRecords != null && returnResponse.FormW2Records.SuccessRecords.Count > 0)
                         {
-                            foreach (var successRecord in returnResponse.FormW2Record.SuccessRecords)
+                            foreach (var successRecord in returnResponse.FormW2Records.SuccessRecords)
                             {
                                 var successStatus = new SuccessStatu();
                                 successStatus.Record_Id = successRecord.RecordId;
@@ -47,9 +47,9 @@ namespace APIClientTool.Repository
                             }
                         }
 
-                        if (returnResponse.FormW2Record.ErrorRecords != null && returnResponse.FormW2Record.ErrorRecords.Count > 0)
+                        if (returnResponse.FormW2Records.ErrorRecords != null && returnResponse.FormW2Records.ErrorRecords.Count > 0)
                         {
-                            foreach (var errorRecord in returnResponse.FormW2Record.ErrorRecords)
+                            foreach (var errorRecord in returnResponse.FormW2Records.ErrorRecords)
                             {
                                 var errorStatus = new ErrorStatu();
                                 errorStatus.Sequence = errorRecord.Sequence;

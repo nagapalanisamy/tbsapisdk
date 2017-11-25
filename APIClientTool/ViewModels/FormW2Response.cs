@@ -8,7 +8,7 @@ namespace APIClientTool.ViewModels
     public class FormW2Response
     {
         public Guid SubmissionId { get; set; }
-        public FormW2Records FormW2Record { get; set; }
+        public FormW2Records FormW2Records { get; set; }
         public int StatusCode { get; set; }
         public string StatusMessage { get; set; }
         public string StatusName { get; set; }

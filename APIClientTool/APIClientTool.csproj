@@ -260,6 +260,7 @@
     <Compile Include="ViewModels\EntityBase.cs" />
     <Compile Include="ViewModels\FormW2.cs" />
     <Compile Include="ViewModels\SigningAuthority.cs" />
+    <Compile Include="ViewModels\W2CreateReturnRequest.cs" />
     <Compile Include="ViewModels\W2FormDetails.cs" />
     <Compile Include="ViewModels\W2ReturnResponse.cs" />
   </ItemGroup>

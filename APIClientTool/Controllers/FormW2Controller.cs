@@ -150,5 +150,47 @@ namespace APIClientTool.Controllers
 
         #endregion
 
+        #region Form W2 Transmit
+        public ActionResult TransmitFormW2()
+        {
+            return View();
+        }
+        #endregion
+
+        #region Get EFile Status
+        public ActionResult GetEFileStatus()
+        {
+            return View();
+        }
+        #endregion
+
+        #region FormW2 Delete Return
+        public ActionResult FormW2DeleteReturn()
+        {
+            return View();
+        }
+        #endregion
+
+        #region FormW2 Return List
+        public ActionResult FormW2ReturnList()
+        {
+            return View();
+        }
+        #endregion
+
+        #region Get FormW2 Return
+        public ActionResult GetFormW2Return()
+        {
+            return View();
+        }
+        #endregion
+
+        #region Update FormW2 Return
+        public ActionResult UpdateFormW2Return()
+        {
+            return View();
+        }
+        #endregion
+
     }
 }

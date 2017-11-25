@@ -239,6 +239,10 @@ namespace APIClientTool.Controllers
                             {
                                 transmitFormW2ResponseJSON = JsonConvert.SerializeObject(createResponse, Formatting.Indented);
                                 transmitFormW2Response = new JavaScriptSerializer().Deserialize<TransmitFormW2Response>(transmitFormW2ResponseJSON);
+                                if (transmitFormW2Response.SubmissionId != null && transmitFormW2Response.SubmissionId != Guid.Empty && transmitFormW2Response.StatusCode == (int)StatusCode.Success)
+                                {
+                                    _repository.UpdateFilingStatus(transmitFormW2Response.SubmissionId);
+                                }
                             }
                         }
                         else

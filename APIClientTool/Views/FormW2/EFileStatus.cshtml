@@ -10,6 +10,7 @@
         <thead class="thead-inverse">
             <tr>
                 <th>SubmissionId</th>
+                <th>Status</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -22,10 +23,21 @@
                         <td>
                             @item.SubmissionId
                         </td>
+                        @if (item.IsReturnTransmitted)
+                        {
+                            <td>Transmitted</td>
+                        }
+                        else
+                        {
+                            <td>Not Transmitted</td>
+                        }
                         <td>
                             <button type="button" class="btn btn_sm btn_second" onclick="APIValidate('@item.SubmissionId')">APIValidate</button>
-                            <button type="button" class="btn btn_sm btn_second" onclick="Transmit('@item.SubmissionId')">Transmit</button>
                             <button type="button" class="btn btn_sm btn_second" onclick="EfileStatus('@item.SubmissionId')">EfileStatus</button>
+                            @if (!item.IsReturnTransmitted)
+                            {
+                                <button type="button" class="btn btn_sm btn_primary" onclick="Transmit('@item.SubmissionId')">Transmit</button>
+                            }
                         </td>
                     </tr>
                 }

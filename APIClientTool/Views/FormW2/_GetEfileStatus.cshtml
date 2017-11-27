@@ -27,7 +27,7 @@
                     }
                     <td>
                         <button type="button" class="btn btn_sm btn_second" onclick="APIValidate('@item.SubmissionId')" id="btnapival_@i" style="background:#da4b3b!important">
-                            APIValidate
+                            Validate
                             <i class="fa fa-spinner fa-spin" aria-hidden="true" id="apivalspinner_@i" style="display:none"></i>
                         </button>
                         @if (!item.IsReturnTransmitted)
@@ -38,7 +38,7 @@
                             </button>
                         }
                         <button type="button" class="btn btn_sm btn_second" onclick="EfileStatus('@item.SubmissionId')" id="btnEfilestatus_@i">
-                            EfileStatus
+                            Get Status
                             <i class="fa fa-spinner fa-spin" aria-hidden="true" id="statusSpinner_@i" style="display:none"></i>
                         </button>
                     </td>

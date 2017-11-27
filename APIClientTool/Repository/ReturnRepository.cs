@@ -130,7 +130,6 @@ namespace APIClientTool.Repository
             if (submissionId != Guid.Empty)
             {
                 transmitFormW2.SubmissionId = submissionId;
-                transmitFormW2.RecordIds = new List<Guid>();
                 using (TaxBanditsAPIClientEntities dbContext = new TaxBanditsAPIClientEntities())
                 {
                     var recordIds = (from api in dbContext.APIResponses
@@ -142,6 +141,7 @@ namespace APIClientTool.Repository
                                      }).ToList();
                     if (recordIds != null && recordIds.Any())
                     {
+                        transmitFormW2.RecordIds = new List<Guid>();
                         foreach (var recordId in recordIds)
                         {
                             transmitFormW2.RecordIds.Add(recordId.Record_Id);

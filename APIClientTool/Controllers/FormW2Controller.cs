@@ -280,10 +280,10 @@ namespace APIClientTool.Controllers
                 {
                     efileRequest.RecordIds = recordIds.RecordIds;
                 }
-                else
-                {
-                    efileRequest.RecordIds = new List<Guid> { Guid.Empty };
-                }
+                //else
+                //{
+                //    efileRequest.RecordIds = new List<Guid> { Guid.Empty };
+                //}
                 var transmitFormW2ResponseJSON = string.Empty;
 
                 // Request JSON

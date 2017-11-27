@@ -21,4 +21,11 @@ namespace APIClientTool.ViewModels
         InternalServerError = 500,
         NotAvailable = 503
     }
+
+    public class EntityBase
+    {
+        public DateTime CreatedTimeStamp { get; set; }
+        public DateTime UpdatedTimeStamp { get; set; }
+        public bool IsDeleted { get; set; }
+    }
 }

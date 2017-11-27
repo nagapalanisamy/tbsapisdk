@@ -113,6 +113,9 @@ namespace APIClientTool.Repository
                     var formW2 = new EFileStatus();
                     formW2.SubmissionId = submission.Submission_Id ?? Guid.Empty;
                     formW2.IsReturnTransmitted = submission.Is_Return_Transmitted ?? false;
+                    formW2.IsDeleted = submission.Is_Deleted ?? false;
+                    formW2.CreatedTimeStamp = submission.Created_Time_Stamp ?? DateTime.Now;
+                    formW2.UpdatedTimeStamp = submission.Updated_Time_Stamp ?? DateTime.Now;
                     formW2list.Add(formW2);
                 }
             }
@@ -154,17 +157,18 @@ namespace APIClientTool.Repository
         public bool UpdateFilingStatus(Guid submissionId)
         {
             bool isUpdated = false;
-            if(submissionId != Guid.Empty)
+            if (submissionId != Guid.Empty)
             {
                 using (TaxBanditsAPIClientEntities dbContext = new TaxBanditsAPIClientEntities())
                 {
                     var apiResponse = dbContext.APIResponses.Where(a => a.Submission_Id == submissionId).SingleOrDefault();
                     apiResponse.Is_Return_Transmitted = true;
+                    apiResponse.Updated_Time_Stamp = DateTime.Now;
                     dbContext.SaveChanges();
                     isUpdated = true;
                 }
             }
-            
+
             return isUpdated;
         }
         #endregion

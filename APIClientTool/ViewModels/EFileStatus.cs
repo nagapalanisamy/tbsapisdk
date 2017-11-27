@@ -5,7 +5,7 @@ using System.Web;
 
 namespace APIClientTool.ViewModels
 {
-    public class EFileStatus
+    public class EFileStatus : EntityBase
     {
         public Guid SubmissionId { get; set; }
         public Guid RecordId { get; set; }

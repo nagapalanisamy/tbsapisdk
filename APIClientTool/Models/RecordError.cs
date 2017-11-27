@@ -20,5 +20,8 @@ namespace APIClientTool.Models
         public string Message { get; set; }
         public string Type { get; set; }
         public Nullable<int> Error_Status_Id { get; set; }
+        public Nullable<bool> Is_Deleted { get; set; }
+        public Nullable<System.DateTime> Created_Time_Stamp { get; set; }
+        public Nullable<System.DateTime> Updated_Time_Stamp { get; set; }
     }
 }

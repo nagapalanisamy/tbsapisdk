@@ -12,19 +12,19 @@ namespace APIClientTool.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    
+
     public partial class TaxBanditsAPIClientEntities : DbContext
     {
         public TaxBanditsAPIClientEntities()
             : base("name=TaxBanditsAPIClientEntities")
         {
         }
-    
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
         }
-    
+
         public virtual DbSet<APIResponse> APIResponses { get; set; }
         public virtual DbSet<ErrorStatu> ErrorStatus { get; set; }
         public virtual DbSet<RecordError> RecordErrors { get; set; }

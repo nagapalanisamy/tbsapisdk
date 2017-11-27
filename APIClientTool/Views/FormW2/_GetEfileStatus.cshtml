@@ -9,9 +9,9 @@
     </thead>
     <tbody>
         @if (Model != null && Model.Any())
+        {
+            foreach (var item in Model.OrderBy(a => a.UpdatedTimeStamp))
             {
-                foreach (var item in Model)
-                {
                 <tr>
                     <td>
                         @item.SubmissionId

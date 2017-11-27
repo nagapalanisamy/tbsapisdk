@@ -166,9 +166,11 @@ namespace APIClientTool.Controllers
         #endregion
 
         #region Get EFile Status
-        public ActionResult GetEFileStatus()
+        public ActionResult _GetEFileStatus()
         {
-            return View();
+            List<EFileStatus> _formw2List = new List<EFileStatus>();
+            _formw2List = _repository.GetAPIResponse();
+            return PartialView(_formw2List);
         }
         #endregion
 
@@ -259,12 +261,12 @@ namespace APIClientTool.Controllers
         #endregion
 
         #region _GetEfileStatus
-        public ActionResult _GetEfileStatus(Guid submissionId)
+        public ActionResult _GetEfileStatusResponse(Guid submissionId)
         {
             EfileStatusResponse efileStatusResponse = new EfileStatusResponse();
             if (submissionId != null && submissionId != Guid.Empty)
             {
-                var efileRequest = new EfileStatusGetRequest { SubmissionId = submissionId};
+                var efileRequest = new EfileStatusGetRequest { SubmissionId = submissionId };
                 var recordIds = _repository.GetRecordIdsBySubmissionId(submissionId);
                 if (recordIds != null && recordIds.RecordIds != null && recordIds.RecordIds.Count > 0)
                 {
@@ -303,8 +305,5 @@ namespace APIClientTool.Controllers
             return PartialView(efileStatusResponse);
         }
         #endregion
-
-
-
     }
 }

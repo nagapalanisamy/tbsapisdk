@@ -77,12 +77,12 @@
             <tbody>
                 @foreach (var itemerror in Model.Errors)
                 {
-                    <tr>
-                        <td>@itemerror.Code</td>
-                        <td>@itemerror.Name</td>
-                        <td>@itemerror.Message</td>
-                        <td>@itemerror.Type</td>
-                    </tr>
+                <tr>
+                    <td>@itemerror.Code</td>
+                    <td>@itemerror.Name</td>
+                    <td>@itemerror.Message</td>
+                    <td>@itemerror.Type</td>
+                </tr>
                 }
             </tbody>
         </table>
@@ -91,7 +91,11 @@
 </div>
 
 <div class="modal-footer edit-modal-footer mTopNo">
-
+    <div class="taC">
+        <button type="button" class="btn btn_md btn_second" data-dismiss="modal">
+            Okay !
+        </button>
+    </div>
 </div>
 
 <script type="text/javascript">

@@ -108,6 +108,10 @@ namespace APIClientTool.Controllers
             W2CreateReturnRequest w2ReturnList = new W2CreateReturnRequest();
             w2ReturnList.W2Forms = new List<FormW2>();
             w2ReturnList.W2Forms.Add(formw2);
+
+            // Request JSON
+            var requestJson = JsonConvert.SerializeObject(w2ReturnList, Formatting.Indented);
+
             using (var client = new PublicAPIClient())
             {
                 string requestUri = "FormW2/Create";
@@ -227,6 +231,10 @@ namespace APIClientTool.Controllers
             if (submissionId != null && submissionId != Guid.Empty)
             {
                 transmitFormW2 = _repository.GetRecordIdsBySubmissionId(submissionId);
+
+                // Request JSON
+                var requestJson = JsonConvert.SerializeObject(transmitFormW2, Formatting.Indented);
+
                 if (transmitFormW2 != null)
                 {
                     using (var client = new PublicAPIClient())
@@ -277,6 +285,10 @@ namespace APIClientTool.Controllers
                     efileRequest.RecordIds = new List<Guid> { Guid.Empty };
                 }
                 var transmitFormW2ResponseJSON = string.Empty;
+
+                // Request JSON
+                var requestJson = JsonConvert.SerializeObject(efileRequest, Formatting.Indented);
+
                 if (submissionId != null && submissionId != Guid.Empty)
                 {
                     using (var client = new PublicAPIClient())

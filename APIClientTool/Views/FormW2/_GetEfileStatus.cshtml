@@ -25,17 +25,17 @@
                         <td style="color:dodgerblue">Not Transmitted</td>
                     }
                     <td>
-                        <button type="button" class="btn btn_sm btn_second" onclick="APIValidate('@item.SubmissionId')">
+                        <button type="button" class="btn btn_sm btn_second" onclick="APIValidate('@item.SubmissionId')" id="btnapival">
                             APIValidate
                             <i class="fa fa-spinner fa-spin" aria-hidden="true" id="apivalspinner" style="display:none"></i>
                         </button>
-                        <button type="button" class="btn btn_sm btn_second" onclick="EfileStatus('@item.SubmissionId')">
+                        <button type="button" class="btn btn_sm btn_second" onclick="EfileStatus('@item.SubmissionId')" id="btnEfilestatus">
                             EfileStatus
                             <i class="fa fa-spinner fa-spin" aria-hidden="true" id="statusSpinner" style="display:none"></i>
                         </button>
                         @if (!item.IsReturnTransmitted)
                         {
-                            <button type="button" class="btn btn_sm btn_primary" onclick="Transmit('@item.SubmissionId')">
+                            <button type="button" class="btn btn_sm btn_primary" onclick="Transmit('@item.SubmissionId')" id="btnTransmit">
                                 Transmit
                                 <i class="fa fa-spinner fa-spin" aria-hidden="true" id="TransmitSpinner" style="display:none"></i>
                             </button>

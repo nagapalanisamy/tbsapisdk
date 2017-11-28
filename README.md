@@ -19,10 +19,6 @@ TaxBandits API follows authenticated W-2/1099 & Employment Taxes filing procedur
 # Start Sending Returns
 With a simple click, you can ensure your W-2/1099 & Employment Taxes Forms are securely transmitted and duly approved by the IRS.
 
-# License
-
-See the LICENSE file.
-
 # Developer Terms
 
 You agree to comply with all applicable laws and regulations and also agree to our Terms http://www.expresstaxzone.com/terms-of-use

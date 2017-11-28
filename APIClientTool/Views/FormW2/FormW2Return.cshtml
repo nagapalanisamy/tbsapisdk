@@ -743,7 +743,7 @@
     }
     <div class="spacer10"></div>
     <div class="taC">
-        <button type="button" class="btn btn_lg btn_primary" onclick="GetStatus()">
+        <button type="button" class="btn btn_lg btn_primary" onclick="GetStatus()" id="btnCreate">
             Create Return
             <i class="fa fa-spinner fa-spin" aria-hidden="true" id="CreateSpinner" style="display:none"></i>
         </button>
@@ -754,12 +754,14 @@
 <script type="text/javascript">
 
     $(function () {
-
+        $(".nav_menu li").removeClass('active');
+        $("#liformw2return").addClass('active');
     });
 
     function GetStatus() {
         var formdata = $("#createreturnForm").serialize();
         $("#CreateSpinner").show();
+        $("#btnCreate").prop("disabled", true);
         $.ajax({
             url: "/FormW2/APIResponseStatus/",
             cache: false,
@@ -769,6 +771,7 @@
                 $('#ModelBody').html(data);
                 $('#myModal').modal("show");
                 $("#CreateSpinner").hide();
+                $("#btnCreate").prop("disabled", false);
             },
             error: function (err) {
                 console.log(err.responseText);

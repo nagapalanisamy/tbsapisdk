@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="TaxBanditsAPIClientModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="TaxBanditsAPIClientModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="APIResponse">
           <Key>
             <PropertyRef Name="Reponse_Id" />
@@ -14,6 +14,10 @@
           <Property Name="Code" Type="int" />
           <Property Name="Message" Type="varchar(max)" />
           <Property Name="Name" Type="varchar(max)" />
+          <Property Name="Is_Return_Transmitted" Type="bit" />
+          <Property Name="Created_Time_Stamp" Type="datetime" />
+          <Property Name="Updated_Time_Stamp" Type="datetime" />
+          <Property Name="Is_Deleted" Type="bit" />
         </EntityType>
         <EntityType Name="ErrorStatus">
           <Key>
@@ -23,6 +27,9 @@
           <Property Name="Sequence" Type="varchar(max)" />
           <Property Name="Record_Error_Id" Type="bigint" />
           <Property Name="Response_Id" Type="int" />
+          <Property Name="Is_Deleted" Type="bit" />
+          <Property Name="Created_Time_Stamp" Type="datetime" />
+          <Property Name="Updated_Time_Stamp" Type="datetime" />
         </EntityType>
         <EntityType Name="RecordError">
           <Key>
@@ -34,6 +41,9 @@
           <Property Name="Message" Type="varchar(max)" />
           <Property Name="Type" Type="varchar(max)" />
           <Property Name="Error_Status_Id" Type="int" />
+          <Property Name="Is_Deleted" Type="bit" />
+          <Property Name="Created_Time_Stamp" Type="datetime" />
+          <Property Name="Updated_Time_Stamp" Type="datetime" />
         </EntityType>
         <EntityType Name="SuccessStatus">
           <Key>
@@ -43,6 +53,9 @@
           <Property Name="Sequence" Type="varchar" MaxLength="1000" />
           <Property Name="Record_Id" Type="uniqueidentifier" />
           <Property Name="Response_Id" Type="int" />
+          <Property Name="Is_Deleted" Type="bit" />
+          <Property Name="Created_Time_Stamp" Type="datetime" />
+          <Property Name="Updated_Time_Stamp" Type="datetime" />
         </EntityType>
         <EntityContainer Name="TaxBanditsAPIClientModelStoreContainer">
           <EntitySet Name="APIResponse" EntityType="Self.APIResponse" Schema="dbo" store:Type="Tables" />
@@ -50,8 +63,7 @@
           <EntitySet Name="RecordError" EntityType="Self.RecordError" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SuccessStatus" EntityType="Self.SuccessStatus" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="TaxBanditsAPIClientModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -64,6 +76,10 @@
           <Property Name="Code" Type="Int32" />
           <Property Name="Message" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Is_Return_Transmitted" Type="Boolean" />
+          <Property Name="Created_Time_Stamp" Type="DateTime" Precision="3" />
+          <Property Name="Updated_Time_Stamp" Type="DateTime" Precision="3" />
+          <Property Name="Is_Deleted" Type="Boolean" />
         </EntityType>
         <EntityType Name="ErrorStatu">
           <Key>
@@ -73,6 +89,9 @@
           <Property Name="Sequence" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Record_Error_Id" Type="Int64" />
           <Property Name="Response_Id" Type="Int32" />
+          <Property Name="Is_Deleted" Type="Boolean" />
+          <Property Name="Created_Time_Stamp" Type="DateTime" Precision="3" />
+          <Property Name="Updated_Time_Stamp" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="RecordError">
           <Key>
@@ -84,6 +103,9 @@
           <Property Name="Message" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Type" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Error_Status_Id" Type="Int32" />
+          <Property Name="Is_Deleted" Type="Boolean" />
+          <Property Name="Created_Time_Stamp" Type="DateTime" Precision="3" />
+          <Property Name="Updated_Time_Stamp" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="SuccessStatu">
           <Key>
@@ -93,6 +115,9 @@
           <Property Name="Sequence" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
           <Property Name="Record_Id" Type="Guid" />
           <Property Name="Response_Id" Type="Int32" />
+          <Property Name="Is_Deleted" Type="Boolean" />
+          <Property Name="Created_Time_Stamp" Type="DateTime" Precision="3" />
+          <Property Name="Updated_Time_Stamp" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="APIResponses" EntityType="Self.APIResponse" />
@@ -109,6 +134,10 @@
           <EntitySetMapping Name="APIResponses">
             <EntityTypeMapping TypeName="TaxBanditsAPIClientModel.APIResponse">
               <MappingFragment StoreEntitySet="APIResponse">
+                <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
+                <ScalarProperty Name="Updated_Time_Stamp" ColumnName="Updated_Time_Stamp" />
+                <ScalarProperty Name="Created_Time_Stamp" ColumnName="Created_Time_Stamp" />
+                <ScalarProperty Name="Is_Return_Transmitted" ColumnName="Is_Return_Transmitted" />
                 <ScalarProperty Name="Reponse_Id" ColumnName="Reponse_Id" />
                 <ScalarProperty Name="Submission_Id" ColumnName="Submission_Id" />
                 <ScalarProperty Name="Code" ColumnName="Code" />
@@ -120,6 +149,9 @@
           <EntitySetMapping Name="ErrorStatus">
             <EntityTypeMapping TypeName="TaxBanditsAPIClientModel.ErrorStatu">
               <MappingFragment StoreEntitySet="ErrorStatus">
+                <ScalarProperty Name="Updated_Time_Stamp" ColumnName="Updated_Time_Stamp" />
+                <ScalarProperty Name="Created_Time_Stamp" ColumnName="Created_Time_Stamp" />
+                <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
                 <ScalarProperty Name="Error_Status_Id" ColumnName="Error_Status_Id" />
                 <ScalarProperty Name="Sequence" ColumnName="Sequence" />
                 <ScalarProperty Name="Record_Error_Id" ColumnName="Record_Error_Id" />
@@ -130,6 +162,9 @@
           <EntitySetMapping Name="RecordErrors">
             <EntityTypeMapping TypeName="TaxBanditsAPIClientModel.RecordError">
               <MappingFragment StoreEntitySet="RecordError">
+                <ScalarProperty Name="Updated_Time_Stamp" ColumnName="Updated_Time_Stamp" />
+                <ScalarProperty Name="Created_Time_Stamp" ColumnName="Created_Time_Stamp" />
+                <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
                 <ScalarProperty Name="Record_Error_Id" ColumnName="Record_Error_Id" />
                 <ScalarProperty Name="Code" ColumnName="Code" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -142,6 +177,9 @@
           <EntitySetMapping Name="SuccessStatus">
             <EntityTypeMapping TypeName="TaxBanditsAPIClientModel.SuccessStatu">
               <MappingFragment StoreEntitySet="SuccessStatus">
+                <ScalarProperty Name="Updated_Time_Stamp" ColumnName="Updated_Time_Stamp" />
+                <ScalarProperty Name="Created_Time_Stamp" ColumnName="Created_Time_Stamp" />
+                <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
                 <ScalarProperty Name="Success_Status_Id" ColumnName="Success_Status_Id" />
                 <ScalarProperty Name="Sequence" ColumnName="Sequence" />
                 <ScalarProperty Name="Record_Id" ColumnName="Record_Id" />

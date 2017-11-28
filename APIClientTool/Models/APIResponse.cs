@@ -19,5 +19,9 @@ namespace APIClientTool.Models
         public Nullable<int> Code { get; set; }
         public string Message { get; set; }
         public string Name { get; set; }
+        public Nullable<bool> Is_Return_Transmitted { get; set; }
+        public Nullable<System.DateTime> Created_Time_Stamp { get; set; }
+        public Nullable<System.DateTime> Updated_Time_Stamp { get; set; }
+        public Nullable<bool> Is_Deleted { get; set; }
     }
 }

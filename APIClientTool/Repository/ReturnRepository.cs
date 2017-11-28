@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using static APIClientTool.ViewModels.EntityBase;
 
 namespace APIClientTool.Repository
 {
@@ -29,14 +28,15 @@ namespace APIClientTool.Repository
                     apiResponse.Message = returnResponse.StatusMessage;
                     apiResponse.Name = returnResponse.StatusName;
                     apiResponse.Submission_Id = returnResponse.SubmissionId;
+                    apiResponse.Is_Return_Transmitted = false;
                     dbContext.APIResponses.Add(apiResponse);
                     dbContext.SaveChanges();
 
-                    if (returnResponse.FormW2Record != null)
+                    if (returnResponse.FormW2Records != null)
                     {
-                        if (returnResponse.FormW2Record.SuccessRecords != null && returnResponse.FormW2Record.SuccessRecords.Count > 1)
+                        if (returnResponse.FormW2Records.SuccessRecords != null && returnResponse.FormW2Records.SuccessRecords.Count > 0)
                         {
-                            foreach (var successRecord in returnResponse.FormW2Record.SuccessRecords)
+                            foreach (var successRecord in returnResponse.FormW2Records.SuccessRecords)
                             {
                                 var successStatus = new SuccessStatu();
                                 successStatus.Record_Id = successRecord.RecordId;
@@ -47,9 +47,9 @@ namespace APIClientTool.Repository
                             }
                         }
 
-                        if (returnResponse.FormW2Record.ErrorRecords != null && returnResponse.FormW2Record.ErrorRecords.Count > 1)
+                        if (returnResponse.FormW2Records.ErrorRecords != null && returnResponse.FormW2Records.ErrorRecords.Count > 0)
                         {
-                            foreach (var errorRecord in returnResponse.FormW2Record.ErrorRecords)
+                            foreach (var errorRecord in returnResponse.FormW2Records.ErrorRecords)
                             {
                                 var errorStatus = new ErrorStatu();
                                 errorStatus.Sequence = errorRecord.Sequence;
@@ -57,7 +57,7 @@ namespace APIClientTool.Repository
                                 dbContext.ErrorStatus.Add(errorStatus);
                                 dbContext.SaveChanges();
 
-                                if (errorRecord.Errors != null && errorRecord.Errors.Count > 1)
+                                if (errorRecord.Errors != null && errorRecord.Errors.Count > 0)
                                 {
                                     foreach (var error in errorRecord.Errors)
                                     {
@@ -79,43 +79,47 @@ namespace APIClientTool.Repository
 
         #endregion
 
-        #region Save API Error Response
-        public void SaveAPIErrorResponse(ErrorResponse errorResponse)
-        {
-            if (errorResponse != null && errorResponse.Errors != null && errorResponse.Errors.Any())
-            {
-                using (TaxBanditsAPIClientEntities dbContext = new TaxBanditsAPIClientEntities())
-                {
-                    foreach (var error in errorResponse.Errors)
-                    {
-                        var recordError = new RecordError();
-                        recordError.Code = error.Code;
-                        recordError.Message = error.Message;
-                        recordError.Name = error.Name;
-                        //recordError.Type = error.Type;
-                        dbContext.RecordErrors.Add(recordError);
-                        dbContext.SaveChanges();
-                    }
-                }
-            }
-        }
-        #endregion
+        //#region Save API Error Response
+        //public void SaveAPIErrorResponse(ErrorResponse errorResponse)
+        //{
+        //    if (errorResponse != null && errorResponse.Errors != null && errorResponse.Errors.Any())
+        //    {
+        //        using (TaxBanditsAPIClientEntities dbContext = new TaxBanditsAPIClientEntities())
+        //        {
+        //            foreach (var error in errorResponse.Errors)
+        //            {
+        //                var recordError = new RecordError();
+        //                recordError.Code = error.Code;
+        //                recordError.Message = error.Message;
+        //                recordError.Name = error.Name;
+        //                //recordError.Type = error.Type;
+        //                dbContext.RecordErrors.Add(recordError);
+        //                dbContext.SaveChanges();
+        //            }
+        //        }
+        //    }
+        //}
+        //#endregion
 
         #region Get API Response 
-        public List<TransmitFormW2> GetAPIResponse()
+        public List<EFileStatus> GetAPIResponse()
         {
-            List<TransmitFormW2> transmitFormW2list = new List<TransmitFormW2>();
+            List<EFileStatus> formW2list = new List<EFileStatus>();
             using (TaxBanditsAPIClientEntities dbContext = new TaxBanditsAPIClientEntities())
             {
                 var apiResponse = dbContext.APIResponses.Where(a => a.Code == (int)StatusCode.Success && a.Submission_Id != Guid.Empty).ToList();
                 foreach (var submission in apiResponse)
                 {
-                    var transmitFormW2 = new TransmitFormW2();
-                    transmitFormW2.SubmissionId = submission.Submission_Id ?? Guid.Empty;
-                    transmitFormW2list.Add(transmitFormW2);
+                    var formW2 = new EFileStatus();
+                    formW2.SubmissionId = submission.Submission_Id ?? Guid.Empty;
+                    formW2.IsReturnTransmitted = submission.Is_Return_Transmitted ?? false;
+                    formW2.IsDeleted = submission.Is_Deleted ?? false;
+                    formW2.CreatedTimeStamp = submission.Created_Time_Stamp ?? DateTime.Now;
+                    formW2.UpdatedTimeStamp = submission.Updated_Time_Stamp ?? DateTime.Now;
+                    formW2list.Add(formW2);
                 }
             }
-            return transmitFormW2list;
+            return formW2list;
         }
         #endregion
 
@@ -125,7 +129,7 @@ namespace APIClientTool.Repository
             TransmitFormW2 transmitFormW2 = new TransmitFormW2();
             if (submissionId != Guid.Empty)
             {
-                transmitFormW2.RecordIds = new List<Guid>();
+                transmitFormW2.SubmissionId = submissionId;
                 using (TaxBanditsAPIClientEntities dbContext = new TaxBanditsAPIClientEntities())
                 {
                     var recordIds = (from api in dbContext.APIResponses
@@ -137,6 +141,7 @@ namespace APIClientTool.Repository
                                      }).ToList();
                     if (recordIds != null && recordIds.Any())
                     {
+                        transmitFormW2.RecordIds = new List<Guid>();
                         foreach (var recordId in recordIds)
                         {
                             transmitFormW2.RecordIds.Add(recordId.Record_Id);
@@ -145,6 +150,26 @@ namespace APIClientTool.Repository
                 }
             }
             return transmitFormW2;
+        }
+        #endregion
+
+        #region Get API Response 
+        public bool UpdateFilingStatus(Guid submissionId)
+        {
+            bool isUpdated = false;
+            if (submissionId != Guid.Empty)
+            {
+                using (TaxBanditsAPIClientEntities dbContext = new TaxBanditsAPIClientEntities())
+                {
+                    var apiResponse = dbContext.APIResponses.Where(a => a.Submission_Id == submissionId).SingleOrDefault();
+                    apiResponse.Is_Return_Transmitted = true;
+                    apiResponse.Updated_Time_Stamp = DateTime.Now;
+                    dbContext.SaveChanges();
+                    isUpdated = true;
+                }
+            }
+
+            return isUpdated;
         }
         #endregion
     }

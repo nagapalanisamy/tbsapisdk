@@ -36,6 +36,9 @@ namespace APIClientTool.Utilities
             string authenticationHeader = apiPublicKey + ":" + ComputeHash(apiPrivateKey, BuildAuthSignature(methodType, utcDateString, requestUri.ToLower()));
             client.DefaultRequestHeaders.Add("Authentication", authenticationHeader);
 
+            string uniqueId = Guid.NewGuid().ToString();
+            client.DefaultRequestHeaders.Add("IdempotentKey", uniqueId);
+
         }
         #endregion
 

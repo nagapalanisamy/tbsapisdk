@@ -222,36 +222,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\APIResponse.cs">
-      <DependentUpon>TaxBanditsAPIClient.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ErrorStatu.cs">
-      <DependentUpon>TaxBanditsAPIClient.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\RecordError.cs">
-      <DependentUpon>TaxBanditsAPIClient.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\SuccessStatu.cs">
-      <DependentUpon>TaxBanditsAPIClient.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\TaxBanditsAPIClient.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>TaxBanditsAPIClient.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\TaxBanditsAPIClient.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>TaxBanditsAPIClient.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\TaxBanditsAPIClient.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>TaxBanditsAPIClient.edmx</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repository\ReturnRepository.cs" />
     <Compile Include="Utilities\APIGenerateAuthHeader.cs" />
+    <Compile Include="Utilities\APISession.cs" />
     <Compile Include="Utilities\PublicAPIClient.cs" />
     <Compile Include="Utilities\Utility.cs" />
     <Compile Include="ViewModels\BusinessDetails.cs" />
@@ -270,10 +243,6 @@
     <Compile Include="ViewModels\W2ReturnResponse.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\TaxBanditsAPIClient.mdf" />
-    <Content Include="App_Data\TaxBanditsAPIClient_log.ldf">
-      <DependentUpon>TaxBanditsAPIClient.mdf</DependentUpon>
-    </Content>
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -284,22 +253,11 @@
     <Content Include="Content\Images\logo.png" />
     <Content Include="Content\Images\logoHead.png" />
     <Content Include="Content\Images\phone_icon.png" />
-    <Content Include="Scripts\toastr.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Models\TaxBanditsAPIClient.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>TaxBanditsAPIClient.edmx</DependentUpon>
-      <LastGenOutput>TaxBanditsAPIClient.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\TaxBanditsAPIClient.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>TaxBanditsAPIClient.edmx</DependentUpon>
-      <LastGenOutput>TaxBanditsAPIClient.cs</LastGenOutput>
-    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
@@ -313,13 +271,6 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
-    <EntityDeploy Include="Models\TaxBanditsAPIClient.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>TaxBanditsAPIClient.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\TaxBanditsAPIClient.edmx.diagram">
-      <DependentUpon>TaxBanditsAPIClient.edmx</DependentUpon>
-    </Content>
     <Content Include="fonts\fontawesome-webfont.eot" />
     <Content Include="fonts\fontawesome-webfont.ttf" />
     <Content Include="fonts\fontawesome-webfont.woff" />
@@ -343,7 +294,6 @@
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="Scripts\toastr.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -374,7 +324,9 @@
     <Content Include="Views\FormW2\_GetEfileStatusResponse.cshtml" />
     <Content Include="Views\FormW2\_GetEFileStatus.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Models\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />

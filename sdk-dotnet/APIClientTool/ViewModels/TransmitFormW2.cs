@@ -8,7 +8,6 @@ namespace APIClientTool.ViewModels
     public class TransmitFormW2
     {
         public Guid SubmissionId { get; set; }
-
         public List<Guid> RecordIds { get; set; }
     }
 }

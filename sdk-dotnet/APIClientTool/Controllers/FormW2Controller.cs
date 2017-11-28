@@ -5,21 +5,12 @@ using System.Web.Mvc;
 using System.Web.Script.Serialization;
 using System.Net.Http;
 using APIClientTool.ViewModels;
-using APIClientTool.Repository;
 using System.Collections.Generic;
 
 namespace APIClientTool.Controllers
 {
     public class FormW2Controller : Controller
     {
-        ReturnRepository _repository;
-
-        #region Constructor
-        public FormW2Controller()
-        {
-            _repository = new ReturnRepository();
-        }
-        #endregion
 
         #region Index
         public ActionResult Index()
@@ -27,8 +18,8 @@ namespace APIClientTool.Controllers
             return View();
         }
         #endregion
-
-        #region CreateFormW2Return
+         
+        #region Create FormW2 Return
         public ActionResult FormW2Return(bool? id)
         {
             FormW2 formw2 = new FormW2();
@@ -126,7 +117,7 @@ namespace APIClientTool.Controllers
                         w2response = new JavaScriptSerializer().Deserialize<W2CreateReturnResponse>(responseJson);
                         if (w2response.SubmissionId != null && w2response.SubmissionId != Guid.Empty)
                         {
-                            _repository.SaveAPIResponse(w2response);
+                            APISession.AddAPIResponse(w2response);
                         }
                     }
                 }
@@ -141,27 +132,6 @@ namespace APIClientTool.Controllers
         }
         #endregion
 
-        #region Status Test
-        //public ActionResult APIResponseStatus()
-        //{
-        //    var id = 1;
-        //    using (var client = new PublicAPIClient())
-        //    {
-        //        var requestUri = $"FormW2/Get?Id={id}";
-        //        APIGenerateAuthHeader.GenerateAuthHeader(client, requestUri, "GET");
-        //        var response = client.GetAsync(requestUri).Result;
-        //        if (response != null && response.IsSuccessStatusCode)
-        //        {
-        //            var responseJson = response.Content.ReadAsAsync<string>().Result;
-        //            ViewBag.responseJson = responseJson;
-        //        }
-        //    }
-
-        //    return PartialView();
-        //}
-
-        #endregion
-
         #region Form W2 Transmit
         public ActionResult TransmitFormW2()
         {
@@ -173,36 +143,8 @@ namespace APIClientTool.Controllers
         public ActionResult _GetEFileStatus()
         {
             List<EFileStatus> _formw2List = new List<EFileStatus>();
-            _formw2List = _repository.GetAPIResponse();
+            _formw2List = APISession.GetAPIResponse();
             return PartialView(_formw2List);
-        }
-        #endregion
-
-        #region FormW2 Delete Return
-        public ActionResult FormW2DeleteReturn()
-        {
-            return View();
-        }
-        #endregion
-
-        #region FormW2 Return List
-        public ActionResult FormW2ReturnList()
-        {
-            return View();
-        }
-        #endregion
-
-        #region Get FormW2 Return
-        public ActionResult GetFormW2Return()
-        {
-            return View();
-        }
-        #endregion
-
-        #region Update FormW2 Return
-        public ActionResult UpdateFormW2Return()
-        {
-            return View();
         }
         #endregion
 
@@ -210,19 +152,19 @@ namespace APIClientTool.Controllers
         public ActionResult EFileStatus()
         {
             List<EFileStatus> _formw2List = new List<EFileStatus>();
-            _formw2List = _repository.GetAPIResponse();
+            _formw2List = APISession.GetAPIResponse();
             return View(_formw2List);
         }
         #endregion
 
-        #region _APIValidate
+        #region API Validate
         public ActionResult _APIValidate()
         {
             return PartialView();
         }
         #endregion
 
-        #region _TransmitReturn
+        #region Transmit Return
         public ActionResult _TransmitReturn(Guid submissionId)
         {
             TransmitFormW2 transmitFormW2 = new TransmitFormW2();
@@ -230,7 +172,7 @@ namespace APIClientTool.Controllers
             var transmitFormW2ResponseJSON = string.Empty;
             if (submissionId != null && submissionId != Guid.Empty)
             {
-                transmitFormW2 = _repository.GetRecordIdsBySubmissionId(submissionId);
+                transmitFormW2 = APISession.GetRecordIdsBySubmissionId(submissionId);
 
                 // Request JSON
                 var requestJson = JsonConvert.SerializeObject(transmitFormW2, Formatting.Indented);
@@ -251,7 +193,7 @@ namespace APIClientTool.Controllers
                                 transmitFormW2Response = new JavaScriptSerializer().Deserialize<TransmitFormW2Response>(transmitFormW2ResponseJSON);
                                 if (transmitFormW2Response.SubmissionId != null && transmitFormW2Response.SubmissionId != Guid.Empty && transmitFormW2Response.StatusCode == (int)StatusCode.Success)
                                 {
-                                    _repository.UpdateFilingStatus(transmitFormW2Response.SubmissionId);
+                                    APISession.UpdateFilingStatus(transmitFormW2Response.SubmissionId);
                                 }
                             }
                         }
@@ -268,22 +210,18 @@ namespace APIClientTool.Controllers
         }
         #endregion
 
-        #region _GetEfileStatus
+        #region Get Efile Status
         public ActionResult _GetEfileStatusResponse(Guid submissionId)
         {
             EfileStatusResponse efileStatusResponse = new EfileStatusResponse();
             if (submissionId != null && submissionId != Guid.Empty)
             {
                 var efileRequest = new EfileStatusGetRequest { SubmissionId = submissionId };
-                var recordIds = _repository.GetRecordIdsBySubmissionId(submissionId);
+                var recordIds = APISession.GetRecordIdsBySubmissionId(submissionId);
                 if (recordIds != null && recordIds.RecordIds != null && recordIds.RecordIds.Count > 0)
                 {
                     efileRequest.RecordIds = recordIds.RecordIds;
                 }
-                //else
-                //{
-                //    efileRequest.RecordIds = new List<Guid> { Guid.Empty };
-                //}
                 var transmitFormW2ResponseJSON = string.Empty;
 
                 // Request JSON

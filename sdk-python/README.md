@@ -1,6 +1,6 @@
-# Using the TaxBandits API with C#
+# Using the TaxBandits API with Python
 
-TaxBandits SDK is supported and maintained .Net wrapper library, written in C#, used to communicate with the TaxBandits API.
+TaxBandits SDK is written in Python and used to communicate with the TaxBandits API.
 
 
 

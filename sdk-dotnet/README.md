@@ -3,10 +3,14 @@
 TaxBandits SDK is supported and maintained .Net wrapper library, written in C#, used to communicate with the TaxBandits API.
 
 
+# How to use?
 
-# License
-
-See the LICENSE file.
+1. Login to http://dev.taxbandits.com using your credentials
+2. Go to your Settings, then choose API Credentials
+3. You can view your Public Key, Private Key and generate User Token.
+4. Download TaxBandits-SDK from [TaxBandits-SDK/sdk-dotnet/APIClientTool.sln]
+5. Open Web.Config and replace with your PrivateKey, PublicKey, UserToken under appSettings tag.
+6. Play with the sample application provided for sandbox testing.
 
 # Developer Terms
 

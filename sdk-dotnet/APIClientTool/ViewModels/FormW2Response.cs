@@ -5,7 +5,7 @@ using System.Web;
 
 namespace APIClientTool.ViewModels
 {
-    public class FormW2Response
+    public class FormW2Response : FilingStatus
     {
         public Guid SubmissionId { get; set; }
         public FormW2Records FormW2Records { get; set; }
@@ -39,5 +39,9 @@ namespace APIClientTool.ViewModels
         public string Name { get; set; }
         public string Message { get; set; }
         public string Type { get; set; }
+    }
+    public class FilingStatus
+    {
+        public bool IsReturnTransmitted { get; set; }
     }
 }

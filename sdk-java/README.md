@@ -1,12 +1,8 @@
-# Using the TaxBandits API with C#
+# Using the TaxBandits API with Java
 
-TaxBandits SDK is supported and maintained .Net wrapper library, written in C#, used to communicate with the TaxBandits API.
+TaxBandits SDK is written in Java, used to communicate with the TaxBandits API.
 
 
-
-# License
-
-See the LICENSE file.
 
 # Developer Terms
 

@@ -7,16 +7,10 @@ TaxBandits SDK is supported and maintained .Net wrapper library, written in C#, 
 
 1. Login to http://dev.taxbandits.com using your credentials
 2. Go to your Settings, then choose API Credentials
-3. You can view your Public Key and Private Key. You can also view your User Token.
-4. If User Token is not shown in the page, you will have an option to generate it.
-5. Now you Clone/Download TaxBandits-SDK
-6. If you are going to Download, then Select Download Zip option and UnZip the downloaded file.
-7. Either you can open APIClientTool.sln using Visual Studio 2013/2015 or by choosing Open Project in your Visual Studio
-8. Open Web.Config and give your PublicAPIUrl, PrivateKey, PublicKey, UserToken under appSettings tag.
-9. Run the application. You will get a page to create the return.
-10. Specify the Employer, Employee, Form W2 and State details to create the return. 
-11. You can see the status of your return in Efile Status page.
-12. You will have an option to transmit and get the status of your return.
+3. You can view your Public Key, Private Key and generate User Token.
+4. Download TaxBandits-SDK from [TaxBandits-SDK/sdk-dotnet/APIClientTool.sln]
+5. Open Web.Config and replace with your PrivateKey, PublicKey, UserToken under appSettings tag.
+6. Play with the sample application provided for sandbox testing.
 
 # Developer Terms
 

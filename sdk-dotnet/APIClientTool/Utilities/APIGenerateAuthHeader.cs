@@ -26,28 +26,32 @@ namespace APIClientTool.Utilities
             if (!string.IsNullOrWhiteSpace(userToken))
             {
                 string authorizeHeader = !string.IsNullOrWhiteSpace(userToken) ? userToken : string.Empty;
-                client.DefaultRequestHeaders.Add("UserAuthorization", authorizeHeader);
+                client.DefaultRequestHeaders.Add("UserToken", authorizeHeader);
             }
+            string IPAddress = HttpContext.Current.Request.UserHostAddress;
+            client.DefaultRequestHeaders.Add("IpAddress", IPAddress);
 
             var utcDate = DateTime.Now.ToUniversalTime().ToString("MM/dd/yyyy hh:mm:ss.fff tt");
             string utcDateString = string.Format("{0:U}", utcDate); //"Thursday, May 21, 2015 4:33:50 AM"
 
             client.DefaultRequestHeaders.Add("Timestamp", utcDateString);
-            string authenticationHeader = apiPublicKey + ":" + ComputeHash(apiPrivateKey, BuildAuthSignature(methodType, utcDateString, requestUri.ToLower()));
+
+            string authenticationHeader = apiPublicKey + ":" + ComputeHash(apiPrivateKey, BuildAuthSignature(methodType, utcDateString, IPAddress, userToken, requestUri.ToLower()));
             client.DefaultRequestHeaders.Add("Authentication", authenticationHeader);
 
             string uniqueId = Guid.NewGuid().ToString();
             client.DefaultRequestHeaders.Add("IdempotentKey", uniqueId);
 
+
         }
         #endregion
 
-        public static string BuildAuthSignature(string methodType, string date, string absolutePath)
+        public static string BuildAuthSignature(string methodType, string date, string IPAddress, string userToken, string absolutePath)
         {
             string message = string.Empty;
             absolutePath = "/" + absolutePath;
             var uri = HttpContext.Current.Server.UrlDecode(absolutePath);
-            return string.Join("\n", methodType, date, uri);//, parameterMessage
+            return string.Join("\n", methodType, date, IPAddress, userToken, uri);//, parameterMessage
         }
 
         #region Compute Hash

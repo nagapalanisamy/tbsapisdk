@@ -1,6 +1,6 @@
-# Using the TaxBandits API with Python
+# Using the TaxBandits API with PHP
 
-TaxBandits SDK is written in Python and used to communicate with the TaxBandits API.
+TaxBandits SDK is written in PHP and used to communicate with the TaxBandits API.
 
 
 

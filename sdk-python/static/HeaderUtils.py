@@ -20,10 +20,10 @@ def getHeaders(methodType, methodName):
     headers['IpAddress']= __SERVER_IP__
 
     # Step 3: Add User token as an User Auth Key
-    headers['UserAuthorization']= USER_TOKEN
+    headers['UserToken']= USER_TOKEN
 
     # Step 4: Generate Authentication Key with private Key and
-    message = buildAuthSignature(methodType, utcDate, str.lower(methodName))
+    message = buildAuthSignature(methodType, utcDate, __SERVER_IP__, USER_TOKEN, str.lower(methodName))
 
     # Step 5: Generate Authentication with public key and private key
     headers['Authentication'] = PUBLIC_KEY + ":" + computeHashKey(PRIVATE_KEY, message)
@@ -32,7 +32,7 @@ def getHeaders(methodType, methodName):
 
 
 
-def buildAuthSignature(methodType, date, absolutePath):
+def buildAuthSignature(methodType, utcDate, __SERVER_IP__, USER_TOKEN, absolutePath):
     """ buildAuthSignature:
             methodType   ->  'GET' or 'POST'
             date         ->  '%A, %b %d, %Y %I:%M:%S %p'  like  'Sunday, Jan 01, 2020 10:10:00 AM'
@@ -49,7 +49,7 @@ def buildAuthSignature(methodType, date, absolutePath):
     if isValidString(urlparse(absolutePath).query):
         url = url + urlparse(absolutePath).query
 
-    sentence = [methodType, date, absolutePath]
+    sentence = [methodType, utcDate, __SERVER_IP__, USER_TOKEN, absolutePath]
     return '\n'.join(sentence)
 
 

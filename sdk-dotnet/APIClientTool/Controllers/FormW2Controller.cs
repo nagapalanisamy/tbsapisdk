@@ -26,66 +26,71 @@ namespace APIClientTool.Controllers
             bool _prePopulate = id ?? false;
             if (_prePopulate)
             {
-                formw2.TaxYear = 2017;
-                formw2.Sequence = "1";
-                //Mapping BusinessDetails
-                formw2.Business = new BusinessDetails();
-                formw2.Business.BusinessNm = "API Client Tool Team";
-                formw2.Business.TradeNm = "API Client";
-                formw2.Business.Email = "e990dev@expressexcise.com";
-                formw2.Business.EIN = "123456789";
-                formw2.Business.ContactNm = "Express Team";
-                formw2.Business.Phone = "9841381515";
-                formw2.Business.BusinessType = "ESTE";
-                formw2.Business.SigningAuthority = new SigningAuthority();
-
-                formw2.Business.SigningAuthority.Name = "Peter Samuel";
-                formw2.Business.SigningAuthority.DayTimePhone = "9876543210";
-                formw2.Business.SigningAuthority.BusinessMembers = "Owner";
-
-                formw2.Business.KindOfEmployer = "Regular(941)";
-                formw2.Business.EmploymentCd = "FederalGovt";
-                //formw2.Business.IsForeign = false;
-                formw2.Business.Country = "US";
-                formw2.Business.Address1 = "109 Pangbourne Way";
-                formw2.Business.City = "Hanover";
-                formw2.Business.USState = "MD";
-                formw2.Business.USZip = "21076";
-
-                //Mapping Employee
-                formw2.Employee = new Employee();
-                formw2.Employee.SSN = "123456789";
-                formw2.Employee.FirstNm = "Peter";
-                formw2.Employee.LastNm = "Yengaran";
-                //formw2.Employee.IsForeign = false;
-                formw2.Employee.Country = "US";
-                formw2.Employee.Address1 = "First Street";
-                formw2.Employee.City = "Rockhill";
-                formw2.Employee.State = "SC";
-                formw2.Employee.Zip = "29727";
-                formw2.Employee.Phone = "9884523450";
-                formw2.Employee.Email = "peter@spanenterprises.com";
-
-                //Mapping FormW2Details
-                formw2.FormDetails = new FormW2Details();
-                formw2.FormDetails.Box1 = 10000.00M;
-
-                //Optional BusinessDetails
-                formw2.Business.PhoneExtn = "";
-                formw2.Business.Fax = "";
-                formw2.Business.Address2 = "";
-                //formw2.Business.ProvinceState = "";
-                //formw2.Business.PostalCd = "";
-
-                //Optional Employee
-                formw2.Employee.MiddleNm = "";
-                formw2.Employee.Suffix = "";
-                formw2.Employee.Fax = "";
-                formw2.Employee.Address2 = "";
-                //formw2.Employee.ProvinceState = "";
-                //formw2.Employee.PostalCd = "";
+                PrePopulate(formw2);
             }
             return View(formw2);
+        }
+
+        private static void PrePopulate(FormW2 formw2)
+        {
+            formw2.TaxYear = 2017;
+            formw2.Sequence = "Record1";
+            //Mapping BusinessDetails
+            formw2.Business = new BusinessDetails();
+            formw2.Business.BusinessNm = "Test Business";
+            formw2.Business.TradeNm = "";
+            formw2.Business.Email = "employer@company.com";
+            formw2.Business.EIN = "123456789";
+            formw2.Business.ContactNm = "John Doe";
+            formw2.Business.Phone = "1234567890";
+            formw2.Business.BusinessType = "ESTE";
+            formw2.Business.SigningAuthority = new SigningAuthority();
+
+            formw2.Business.SigningAuthority.Name = "John Doe";
+            formw2.Business.SigningAuthority.DayTimePhone = "1234567890";
+            formw2.Business.SigningAuthority.BusinessMembers = "Owner";
+
+            formw2.Business.KindOfEmployer = "REGULAR941";
+            formw2.Business.EmploymentCd = "FEDERALGOVT";
+            //formw2.Business.IsForeign = false;
+            formw2.Business.Country = "US";
+            formw2.Business.Address1 = "Address line 1";
+            formw2.Business.City = "Hanover";
+            formw2.Business.USState = "MD";
+            formw2.Business.USZip = "21076";
+
+            //Mapping Employee
+            formw2.Employee = new Employee();
+            formw2.Employee.SSN = "123456789";
+            formw2.Employee.FirstNm = "Steve";
+            formw2.Employee.LastNm = "Smith";
+            //formw2.Employee.IsForeign = false;
+            formw2.Employee.Country = "US";
+            formw2.Employee.Address1 = "Address Line 1";
+            formw2.Employee.City = "Rockhill";
+            formw2.Employee.State = "SC";
+            formw2.Employee.Zip = "29730";
+            formw2.Employee.Phone = "9876543210";
+            formw2.Employee.Email = "employee@company.com";
+
+            //Mapping FormW2Details
+            formw2.FormDetails = new FormW2Details();
+            formw2.FormDetails.Box1 = 10000.00M;
+
+            //Optional BusinessDetails
+            formw2.Business.PhoneExtn = "";
+            formw2.Business.Fax = "";
+            formw2.Business.Address2 = "";
+            //formw2.Business.ProvinceState = "";
+            //formw2.Business.PostalCd = "";
+
+            //Optional Employee
+            formw2.Employee.MiddleNm = "";
+            formw2.Employee.Suffix = "";
+            formw2.Employee.Fax = "";
+            formw2.Employee.Address2 = "";
+            //formw2.Employee.ProvinceState = "";
+            //formw2.Employee.PostalCd = "";
         }
         #endregion
 
@@ -94,7 +99,7 @@ namespace APIClientTool.Controllers
         {
             var responseJson = string.Empty;
             formw2.TaxYear = 2017;
-            formw2.Sequence = "SEQ123";
+            formw2.Sequence = "Record1";
             W2CreateReturnResponse w2response = new W2CreateReturnResponse();
             W2CreateReturnRequest w2ReturnList = new W2CreateReturnRequest();
             w2ReturnList.W2Forms = new List<FormW2>();

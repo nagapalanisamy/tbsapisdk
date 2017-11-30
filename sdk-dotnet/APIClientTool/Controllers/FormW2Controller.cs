@@ -11,15 +11,13 @@ namespace APIClientTool.Controllers
 {
     public class FormW2Controller : Controller
     {
-
-        #region Index
-        public ActionResult Index()
-        {
-            return View();
-        }
-        #endregion
-         
-        #region Create FormW2 Return
+ 
+        #region Create Form W-2 Return
+        /// <summary>
+        /// Function returns the form view to create W-2 return
+        /// </summary>
+        /// <param name="id">Parameter id is passed to prefill default values in the W-2 Form</param>
+        /// <returns>FormW2 View</returns>
         public ActionResult FormW2Return(bool? id)
         {
             FormW2 formw2 = new FormW2();
@@ -33,8 +31,10 @@ namespace APIClientTool.Controllers
 
         private static void PrePopulate(FormW2 formw2)
         {
+            //Mapping FormW2
             formw2.TaxYear = 2017;
             formw2.Sequence = "Record1";
+
             //Mapping BusinessDetails
             formw2.Business = new BusinessDetails();
             formw2.Business.BusinessNm = "Test Business";
@@ -44,15 +44,14 @@ namespace APIClientTool.Controllers
             formw2.Business.ContactNm = "John Doe";
             formw2.Business.Phone = "1234567890";
             formw2.Business.BusinessType = "ESTE";
-            formw2.Business.SigningAuthority = new SigningAuthority();
 
+            formw2.Business.SigningAuthority = new SigningAuthority();
             formw2.Business.SigningAuthority.Name = "John Doe";
             formw2.Business.SigningAuthority.DayTimePhone = "1234567890";
             formw2.Business.SigningAuthority.BusinessMembers = "Owner";
 
             formw2.Business.KindOfEmployer = "REGULAR941";
             formw2.Business.EmploymentCd = "FEDERALGOVT";
-            //formw2.Business.IsForeign = false;
             formw2.Business.Country = "US";
             formw2.Business.Address1 = "Address line 1";
             formw2.Business.City = "Hanover";
@@ -64,7 +63,6 @@ namespace APIClientTool.Controllers
             formw2.Employee.SSN = "123456789";
             formw2.Employee.FirstNm = "Steve";
             formw2.Employee.LastNm = "Smith";
-            //formw2.Employee.IsForeign = false;
             formw2.Employee.Country = "US";
             formw2.Employee.Address1 = "Address Line 1";
             formw2.Employee.City = "Rockhill";
@@ -81,47 +79,60 @@ namespace APIClientTool.Controllers
             formw2.Business.PhoneExtn = "";
             formw2.Business.Fax = "";
             formw2.Business.Address2 = "";
-            //formw2.Business.ProvinceState = "";
-            //formw2.Business.PostalCd = "";
 
             //Optional Employee
             formw2.Employee.MiddleNm = "";
             formw2.Employee.Suffix = "";
             formw2.Employee.Fax = "";
             formw2.Employee.Address2 = "";
-            //formw2.Employee.ProvinceState = "";
-            //formw2.Employee.PostalCd = "";
         }
         #endregion
 
-        #region API Response Status
+        #region Form W-2 Create Return Response Status
+        /// <summary>
+        /// Function inputs Form W-2 details, POST all those details to the API and returns the response.
+        /// Successful response contains SubmissionId, StatusCode and RecordSuccessStatus details (Sequence, RecordId, RecordStatus etc)
+        /// Error response contains StatusCode and RecordErrorStatus details (RecordId, Sequence and list of Error information such as Code, Name, Message and Type)
+        /// </summary>
+        /// <param name="formw2">Form W-2 details passed through formw2 parameter</param>
+        /// <returns>W2CreateReturnResponse</returns>
         public ActionResult APIResponseStatus(FormW2 formw2)
         {
+            //Hardcoded values for Sequence and TaxYear
             var responseJson = string.Empty;
             formw2.TaxYear = 2017;
             formw2.Sequence = "Record1";
+
             W2CreateReturnResponse w2response = new W2CreateReturnResponse();
             W2CreateReturnRequest w2ReturnList = new W2CreateReturnRequest();
             w2ReturnList.W2Forms = new List<FormW2>();
             w2ReturnList.W2Forms.Add(formw2);
 
-            // Request JSON
+            // Generate JSON for Form W-2
             var requestJson = JsonConvert.SerializeObject(w2ReturnList, Formatting.Indented);
 
             using (var client = new PublicAPIClient())
             {
+                //API URL to Create Form W-2 Return
                 string requestUri = "FormW2/Create";
+
+                //POST
                 APIGenerateAuthHeader.GenerateAuthHeader(client, requestUri, "POST");
+
+                //Get Response
                 var _response = client.PostAsJsonAsync(requestUri, w2ReturnList).Result;
                 if (_response != null && _response.IsSuccessStatusCode)
                 {
+                    //Read Response
                     var createResponse = _response.Content.ReadAsAsync<W2CreateReturnResponse>().Result;
                     if (createResponse != null)
                     {
                         responseJson = JsonConvert.SerializeObject(createResponse, Formatting.Indented);
+                        //Deserializing JSON (Success Response) to W2CreateReturnResponse object
                         w2response = new JavaScriptSerializer().Deserialize<W2CreateReturnResponse>(responseJson);
                         if (w2response.SubmissionId != null && w2response.SubmissionId != Guid.Empty)
                         {
+                            //Adding W2CreateReturnResponse Response to Session
                             APISession.AddAPIResponse(w2response);
                         }
                     }
@@ -130,17 +141,12 @@ namespace APIClientTool.Controllers
                 {
                     var createResponse = _response.Content.ReadAsAsync<Object>().Result;
                     responseJson = JsonConvert.SerializeObject(createResponse, Formatting.Indented);
+
+                    //Deserializing JSON (Error Response) to W2CreateReturnResponse object
                     w2response = new JavaScriptSerializer().Deserialize<W2CreateReturnResponse>(responseJson);
                 }
             }
             return PartialView(w2response);
-        }
-        #endregion
-
-        #region Form W2 Transmit
-        public ActionResult TransmitFormW2()
-        {
-            return View();
         }
         #endregion
 
@@ -153,6 +159,10 @@ namespace APIClientTool.Controllers
         }
         #endregion
 
+        /// <summary>
+        /// Function loads list of all SubmissionIds created in FormW2Return page
+        /// </summary>
+        /// <returns>List of all SubmissionIds</returns>
         #region  EFile Status
         public ActionResult EFileStatus()
         {
@@ -162,14 +172,12 @@ namespace APIClientTool.Controllers
         }
         #endregion
 
-        #region API Validate
-        public ActionResult _APIValidate()
-        {
-            return PartialView();
-        }
-        #endregion
-
         #region Transmit Return
+        /// <summary>
+        /// Function transmit the Form W-2 Return to Efile
+        /// </summary>
+        /// <param name="submissionId">SubmissionId passed to transmit the W-2 return</param>
+        /// <returns>TransmitFormW2Response</returns>
         public ActionResult _TransmitReturn(Guid submissionId)
         {
             TransmitFormW2 transmitFormW2 = new TransmitFormW2();
@@ -177,20 +185,27 @@ namespace APIClientTool.Controllers
             var transmitFormW2ResponseJSON = string.Empty;
             if (submissionId != null && submissionId != Guid.Empty)
             {
+                // Getting the RecordIds for SubmissionId
                 transmitFormW2 = APISession.GetRecordIdsBySubmissionId(submissionId);
 
-                // Request JSON
+                // Generate JSON for TransmitFormW2
                 var requestJson = JsonConvert.SerializeObject(transmitFormW2, Formatting.Indented);
 
                 if (transmitFormW2 != null)
                 {
                     using (var client = new PublicAPIClient())
                     {
+                        //API URL to Transmit Form W-2 Return
                         string requestUri = "FormW2/Transmit";
+
+                        //POST
                         APIGenerateAuthHeader.GenerateAuthHeader(client, requestUri, "POST");
+
+                        //Get Response
                         var _response = client.PostAsJsonAsync(requestUri, transmitFormW2).Result;
                         if (_response != null && _response.IsSuccessStatusCode)
                         {
+                            //Read Response
                             var createResponse = _response.Content.ReadAsAsync<TransmitFormW2Response>().Result;
                             if (createResponse != null)
                             {
@@ -198,6 +213,7 @@ namespace APIClientTool.Controllers
                                 transmitFormW2Response = new JavaScriptSerializer().Deserialize<TransmitFormW2Response>(transmitFormW2ResponseJSON);
                                 if (transmitFormW2Response.SubmissionId != null && transmitFormW2Response.SubmissionId != Guid.Empty && transmitFormW2Response.StatusCode == (int)StatusCode.Success)
                                 {
+                                    //Updating Filing Status (Transmitted) for a specific SubmissionId in Session 
                                     APISession.UpdateFilingStatus(transmitFormW2Response.SubmissionId);
                                 }
                             }
@@ -216,6 +232,11 @@ namespace APIClientTool.Controllers
         #endregion
 
         #region Get Efile Status
+        /// <summary>
+        /// Function returns the Efile status of Form W-2
+        /// </summary>
+        /// <param name="submissionId">SubmissionId is passed to get the efile status</param>
+        /// <returns>EfileStatusResponse</returns>
         public ActionResult _GetEfileStatusResponse(Guid submissionId)
         {
             EfileStatusResponse efileStatusResponse = new EfileStatusResponse();
@@ -236,8 +257,13 @@ namespace APIClientTool.Controllers
                 {
                     using (var client = new PublicAPIClient())
                     {
+                        //POST
                         string requestUri = "FormW2/Status";
+
+                        //Get Response
                         APIGenerateAuthHeader.GenerateAuthHeader(client, requestUri, "POST");
+
+                        //Read Response
                         var _response = client.PostAsJsonAsync(requestUri, efileRequest).Result;
                         if (_response != null && _response.IsSuccessStatusCode)
                         {

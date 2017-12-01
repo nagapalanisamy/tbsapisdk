@@ -58,12 +58,12 @@
         /// Report distributions to an employee from a nonqualified plan
         /// </summary>
         
-        public decimal Box11NonqualifiedPlan { get; set; }
+        public decimal Box11NonQualPlan { get; set; }
         /// <summary>
         /// Report distributions to an employee from a nongovernmental section 457(b) plan
         /// </summary>
         
-        public decimal Box11NonSectionPlan { get; set; }
+        public decimal Box11NonSecPlan { get; set; }
         /// <summary>
         /// Box 12a Code
         /// </summary>
@@ -110,17 +110,17 @@
         /// Statutory employees whose earnings are subject to social security and Medicare taxes but not subject to federal income tax withholding. Statutory employees are usually salespeople or other employees who work on commission. This will reflect whether the employee is a Statutory employee or not
         /// </summary>
         
-        public bool Box13IsStatutoryEmployee { get; set; }
+        public bool Box13IsStatEmp { get; set; }
         /// <summary>
         /// This will show whether the employee is a member of a retirement plan or not.
         /// </summary>
         
-        public bool Box13IsRetirementPlan { get; set; }
+        public bool Box13IsRetPlan { get; set; }
         /// <summary>
         /// This will show whether your business is reporting third-party sick pay or not
         /// </summary>
         
-        public bool Box13IsThirdPartySickpay { get; set; }
+        public bool Box13Is3rdPartySickPay { get; set; }
         /// <summary>
         /// Any additional information of benefits the employer wants the employee to have and cannot be reported in boxes 1-13 can be listed here. Examples would be auto allowance, travel reimbursement, relocation expenses, job uniforms, after-tax employee contributions to an HSA, etc.
         /// </summary>
@@ -130,13 +130,13 @@
         #region State Details
 
         
-        public string Box15State1 { get; set; }
+        public string Box15State1Cd { get; set; }
 
         /// <summary>
         /// State 1 - Employer’s state ID number
         /// </summary>
         
-        public string Box15State1IDNumber { get; set; }
+        public string Box15State1IdNum { get; set; }
 
         /// <summary>
         /// State 1 - Wages, tips, etc
@@ -166,17 +166,17 @@
         /// State 1 - Locality name
         /// </summary>
         
-        public string Box20Locality1Name { get; set; }
+        public string Box20Locality1Nm { get; set; }
 
         //State 2
         
-        public string Box15State2 { get; set; }
+        public string Box15State2Cd { get; set; }
 
         /// <summary>
         /// State 2 - Employer’s state ID number
         /// </summary>
         
-        public string Box15State2IdNumber { get; set; }
+        public string Box15State2IdNum { get; set; }
 
         /// <summary>
         /// State 2 - Wages, tips, etc
@@ -206,7 +206,7 @@
         /// State 2 - Locality name
         /// </summary>
         
-        public string Box20Locality2Name { get; set; }
+        public string Box20Locality2Nm { get; set; }
 
         #endregion
 

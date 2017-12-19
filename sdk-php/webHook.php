@@ -49,9 +49,9 @@
                         704.684.4751
                     </a>
                     <ul class="nav navbar-nav nav_menu floatR">
-                        <li class="active"><a href="index.php">Create Return</a></li>
+                        <li><a href="index.php">Create Return </a></li>
                         <li><a href="w2validate.php">Validate & Transmit Return </a></li>
-                        <li><a href="webHook.html">Web Hook Settings</a></li>
+                        <li class="active"><a href="webHook.html">Web Hook Settings</a></li>
 
                     </ul>
                     <div class="clearfix"></div>

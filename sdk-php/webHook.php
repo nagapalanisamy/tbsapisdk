@@ -1457,11 +1457,5 @@
 </div>
 <footer></footer>
 
-<div class="modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" style="width:1000px">
-        <div class="modal-content" id="ModelBody">
-        </div>
-    </div>
-</div>
 </body>
 </html>

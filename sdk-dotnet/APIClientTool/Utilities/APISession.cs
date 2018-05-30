@@ -107,6 +107,39 @@ namespace APIClientTool.Utilities
         }
         #endregion
 
+        #region Get Coma seperated RecordIDs by SubmissionId
+        /// <summary>
+        ///  Get Coma seperated RecordIDs by SubmissionId
+        /// </summary>
+        /// <param name="submissionId"></param>
+        /// <returns></returns>
+        public static string GetComaseperatedRecordIdsBySubmissionId(Guid submissionId)
+        {
+            string recordIdStr = string.Empty;
+            List<FormW2ReturnResponse> returnResponses = ReturnResponses;
+            if (submissionId != Guid.Empty)
+            {
+                if (returnResponses != null && returnResponses.Count > 0)
+                {
+                    var returnResponse = returnResponses.Where(r => r.SubmissionId == submissionId).SingleOrDefault();
+                    if (returnResponse != null && returnResponse.FormW2Records != null
+                        && returnResponse.FormW2Records.SuccessRecords != null && returnResponse.FormW2Records.SuccessRecords.Count > 0)
+                    {
+                        var recordIds = returnResponse.FormW2Records.SuccessRecords.Select(r => r.RecordId).ToList();
+                        if (recordIds != null && recordIds.Any())
+                        {
+                            foreach (var recordId in recordIds)
+                            {
+                                recordIdStr = !string.IsNullOrEmpty(recordIdStr) ? ("," + (recordId ?? Guid.Empty).ToString()) : (recordId ?? Guid.Empty).ToString();
+                            }
+                        }
+                    }
+                }
+            }
+            return recordIdStr;
+        }
+        #endregion
+
         #region Update Filing Status
         /// <summary>
         /// Update Filing Status

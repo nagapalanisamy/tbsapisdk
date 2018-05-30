@@ -182,12 +182,12 @@ namespace APIClientTool.Controllers
             var form941SchRReturnList = new Form941SchRCreateReturnRequest { Form941SchRRecords = new List<Form941SchRRecords>() };
             form941SchRReturnList.Form941SchRRecords.Add(form941SchRRecords);
 
-            // Generate JSON for Form 941
+            // Generate JSON for Form 941SCHR
             var requestJson = JsonConvert.SerializeObject(form941SchRReturnList, Formatting.Indented);
 
             using (var client = new PublicAPIClient())
             {
-                //API URL to Create Form 941 Return
+                //API URL to Create Form 941SCHR Return
                 string requestUri = "Form941SCHR/Create";
 
                 //POST
@@ -232,18 +232,18 @@ namespace APIClientTool.Controllers
         /// <returns>TransmitFormW2Response</returns>
         public ActionResult _TransmitReturn(Guid submissionId)
         {
-            var transmitForm941 = new TransmitForm();
+            var transmitForm941SchR = new TransmitForm();
             var transmitForm941SchRResponse = new TransmitForm941SchRResponse();
             var transmitForm941SchRResponseJSON = string.Empty;
             if (submissionId != null && submissionId != Guid.Empty)
             {
                 // Getting the RecordIds for SubmissionId
-                transmitForm941 = APISession.GetRecordIdsBySubmissionId(submissionId);
+                transmitForm941SchR = APISession.GetRecordIdsBySubmissionId(submissionId);
 
                 // Generate JSON for TransmitForm 941
-                var requestJson = JsonConvert.SerializeObject(transmitForm941, Formatting.Indented);
+                var requestJson = JsonConvert.SerializeObject(transmitForm941SchR, Formatting.Indented);
 
-                if (transmitForm941 != null)
+                if (transmitForm941SchR != null)
                 {
                     using (var client = new PublicAPIClient())
                     {
@@ -254,7 +254,7 @@ namespace APIClientTool.Controllers
                         APIGenerateAuthHeader.GenerateAuthHeader(client, requestUri, "POST");
 
                         //Get Response
-                        var _response = client.PostAsJsonAsync(requestUri, transmitForm941).Result;
+                        var _response = client.PostAsJsonAsync(requestUri, transmitForm941SchR).Result;
                         if (_response != null && _response.IsSuccessStatusCode)
                         {
                             //Read Response
@@ -280,6 +280,62 @@ namespace APIClientTool.Controllers
                 }
             }
             return PartialView(transmitForm941SchRResponseJSON);
+        }
+        #endregion
+
+        #region Delete Return
+        /// <summary>
+        /// Function transmit the Form 941 Return to Efile
+        /// </summary>
+        /// <param name="submissionId">SubmissionId passed to transmit the 941 return</param>
+        /// <returns>TransmitFormW2Response</returns>
+        public ActionResult Delete(Guid submissionId)
+        {
+            var deleteReturnRequest = new DeleteReturnRequest();
+            var deleteReturnResponse = new DeleteReturnResponse();
+            var deleteReturnResponseJSON = string.Empty;
+            if (submissionId != null && submissionId != Guid.Empty)
+            {
+                deleteReturnRequest.SubmissionId = submissionId;
+                // Getting the RecordIds for SubmissionId
+                deleteReturnRequest.RecordIds = APISession.GetComaseperatedRecordIdsBySubmissionId(submissionId);
+
+                if (!string.IsNullOrEmpty(deleteReturnRequest.RecordIds))
+                {
+                    using (var client = new PublicAPIClient())
+                    {
+                        //API URL to Transmit Form 941 Return
+                        string requestUri = "Form941SCHR/Delete";
+
+                        //POST
+                        APIGenerateAuthHeader.GenerateAuthHeader(client, requestUri, "POST");
+
+                        //Get Response
+                        var _response = client.PostAsJsonAsync(requestUri, deleteReturnRequest).Result;
+                        if (_response != null && _response.IsSuccessStatusCode)
+                        {
+                            //Read Response
+                            var createResponse = _response.Content.ReadAsAsync<DeleteReturnResponse>().Result;
+                            if (createResponse != null)
+                            {
+                                deleteReturnResponseJSON = JsonConvert.SerializeObject(createResponse, Formatting.Indented);
+                                deleteReturnResponse = new JavaScriptSerializer().Deserialize<DeleteReturnResponse>(deleteReturnResponseJSON);
+                                if (deleteReturnResponse != null && deleteReturnResponse.StatusCode == (int)StatusCode.Success)
+                                {
+                                    //Todo Remove Submission and RecordId from session
+                                }
+                            }
+                        }
+                        else
+                        {
+                            var createResponse = _response.Content.ReadAsAsync<Object>().Result;
+                            deleteReturnResponseJSON = JsonConvert.SerializeObject(createResponse, Formatting.Indented);
+                            deleteReturnResponse = new JavaScriptSerializer().Deserialize<DeleteReturnResponse>(deleteReturnResponseJSON);
+                        }
+                    }
+                }
+            }
+            return PartialView(deleteReturnResponseJSON);
         }
         #endregion
 

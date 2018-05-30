@@ -373,5 +373,61 @@ namespace APIClientTool.Controllers
         }
         #endregion
 
+        #region Delete Return
+        /// <summary>
+        /// Function transmit the Form 941 Return to Efile
+        /// </summary>
+        /// <param name="submissionId">SubmissionId passed to transmit the 941 return</param>
+        /// <returns>TransmitFormW2Response</returns>
+        public ActionResult Delete(Guid submissionId)
+        {
+            var deleteReturnRequest = new DeleteReturnRequest();
+            var deleteReturnResponse = new DeleteReturnResponse();
+            var deleteReturnResponseJSON = string.Empty;
+            if (submissionId != null && submissionId != Guid.Empty)
+            {
+                deleteReturnRequest.SubmissionId = submissionId;
+                // Getting the RecordIds for SubmissionId
+                deleteReturnRequest.RecordIds = APISession.GetComaseperatedRecordIdsBySubmissionId(submissionId);
+
+                if (!string.IsNullOrEmpty(deleteReturnRequest.RecordIds))
+                {
+                    using (var client = new PublicAPIClient())
+                    {
+                        //API URL to Transmit Form 941 Return
+                        string requestUri = "Form941/Delete";
+
+                        //POST
+                        APIGenerateAuthHeader.GenerateAuthHeader(client, requestUri, "POST");
+
+                        //Get Response
+                        var _response = client.PostAsJsonAsync(requestUri, deleteReturnRequest).Result;
+                        if (_response != null && _response.IsSuccessStatusCode)
+                        {
+                            //Read Response
+                            var createResponse = _response.Content.ReadAsAsync<DeleteReturnResponse>().Result;
+                            if (createResponse != null)
+                            {
+                                deleteReturnResponseJSON = JsonConvert.SerializeObject(createResponse, Formatting.Indented);
+                                deleteReturnResponse = new JavaScriptSerializer().Deserialize<DeleteReturnResponse>(deleteReturnResponseJSON);
+                                if (deleteReturnResponse != null && deleteReturnResponse.StatusCode == (int)StatusCode.Success)
+                                {
+                                    //Todo Remove Submission and RecordId from session
+                                }
+                            }
+                        }
+                        else
+                        {
+                            var createResponse = _response.Content.ReadAsAsync<Object>().Result;
+                            deleteReturnResponseJSON = JsonConvert.SerializeObject(createResponse, Formatting.Indented);
+                            deleteReturnResponse = new JavaScriptSerializer().Deserialize<DeleteReturnResponse>(deleteReturnResponseJSON);
+                        }
+                    }
+                }
+            }
+            return PartialView(deleteReturnResponseJSON);
+        }
+        #endregion
+
     }
 }

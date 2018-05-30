@@ -236,6 +236,9 @@
     <Compile Include="ViewModels\EfileStatusResponse.cs" />
     <Compile Include="ViewModels\Employee.cs" />
     <Compile Include="ViewModels\EntityBase.cs" />
+    <Compile Include="ViewModels\Form941CoreModel\DeleteFormRecords.cs" />
+    <Compile Include="ViewModels\Form941CoreModel\DeleteReturnRequest.cs" />
+    <Compile Include="ViewModels\Form941CoreModel\DeleteReturnResponse.cs" />
     <Compile Include="ViewModels\Form941CoreModel\SigningAuthority.cs" />
     <Compile Include="ViewModels\Form941CoreModel\ThirdPartyDesignee.cs" />
     <Compile Include="ViewModels\Form941SCHR\Form941MainFilerData.cs" />
@@ -359,6 +362,8 @@
     <Content Include="Views\Form941\_TransmitReturn.cshtml" />
     <Content Include="Views\Form941SCHR\APIResponseStatus.cshtml" />
     <Content Include="Views\Form941SCHR\_TransmitReturn.cshtml" />
+    <Content Include="Views\Form941SCHR\Delete.cshtml" />
+    <Content Include="Views\Form941\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />

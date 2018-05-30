@@ -276,8 +276,8 @@ img { border: none; }
 .form-group { margin-bottom: 10px; }
 
 header { background: #fff; }
-header .linkText { padding-top: 14px; display: inline-block; font-size: 17px; color: #404040; font-weight:600; }
-header .linkText:hover{color:#fb7310;text-decoration:none;}
+header .linkText { padding-top: 14px; display: inline-block; font-size: 17px; color: #404040; font-weight: 600; }
+header .linkText:hover { color: #fb7310; text-decoration: none; }
 header .linkText img { padding-right: 2px; }
 .navbar { padding: 10px 0; border-bottom: 1px solid #ccc; background: #fff; height: 71px; }
 .body-content { padding: 15px; }
@@ -288,7 +288,7 @@ header .linkText img { padding-right: 2px; }
 .responsive .labelName { width: 260px; text-align: right; padding-right: 5px; padding-top: 8px; vertical-align: top; color: #333; font-weight: 600; }
 .responsive .fieldName { position: relative; }
 .responsive .labelName label { color: #333; font-weight: 600; margin: 0; }
-.fieldText { font-weight: 600; color: #1a6ab3; padding-top:8px;}
+.fieldText { font-weight: 600; color: #1a6ab3; padding-top: 8px; }
 .pageTitle { font-size: 21px; color: #333; margin: 0px 0 15px; }
 .form-control { width: 192px; display: inline-block; }
 .btn.btn_primary, .btn_primary, .btn_primary:hover, .btn_primary:focus { background: #fb7310; padding: 5px 12px 7px 12px; height: auto !important; color: #fff !important; text-align: left; cursor: pointer !important; font: 600 15px 'Open Sans', sans-serif; border-radius: 4px; border: 1px solid #da6610; text-decoration: none; }
@@ -306,14 +306,12 @@ header .linkText img { padding-right: 2px; }
 .modal-title { margin: 0px; color: #fb7310 !important; overflow: hidden !important; }
 .modal-header #form_heading { margin: 0px; padding-bottom: 0; font-weight: 600; font-size: 22px; }
 .modal-dialog { width: 1000px !important; }
-.nav_menu { padding-top: 10px;
-    margin-right: 25px;}
+.nav_menu { padding-top: 10px; margin-right: 25px; }
 .nav_menu li { display: inline-block; float: none; }
-.nav_menu li a {     color: #333;
-    font-weight: 600;
-    padding: 10px 10px 17px 10px;
-    margin-right: 10px;
-    border-bottom: 4px solid transparent;
-    font-size: 16px; }
+.nav_menu li a, li.dropdown .dropdown-toggle { color: #333; font-weight: 600; padding: 10px 10px 17px 10px; margin-right: 10px; border-bottom: 4px solid transparent; font-size: 16px; cursor: pointer; }
 .nav_menu li.active a, .nav_menu li.active:hover a, .nav_menu li.active:focus a { border-bottom: 4px solid #fb7310; color: #fb7310; background: transparent; }
 .nav_menu li:hover a, .nav_menu li:focus a { color: #fb7310; background: transparent; }
+.nav_menu .dropdown-menu li { display: block; }
+.nav_menu .dropdown-menu li a, .nav_menu .dropdown-menu li a:hover, .nav_menu .dropdown-menu li a:focus { display: block; padding: 5px 10px; margin: 0; font-size: 14px; border: none; }
+.nav_menu .dropdown-menu li a { color: #333; cursor: pointer; }
+.dropdown-menu li a:hover, .nav_menu .dropdown-menu li a:focus { display: block; padding: 5px 10px; margin: 0; font-size: 14px; border: none; color: #fb7310; }

@@ -1,4 +1,4 @@
-﻿@model APIClientTool.ViewModels.ReturnResponse
+﻿@model APIClientTool.ViewModels.FormW2ReturnResponse
 <div class="modal-header edit-modal-header">
     <button type="button" class="close" data-dismiss="modal"></button>
     <h4 id="form_heading" class="modal-title">
@@ -31,7 +31,7 @@
         </table>
     }
 
-    @if (Model != null && Model.FormRecords != null && Model.FormRecords.ErrorRecords != null && Model.FormRecords.ErrorRecords.Count > 0)
+    @if (Model != null && Model.FormW2Records != null && Model.FormW2Records.ErrorRecords != null && Model.FormW2Records.ErrorRecords.Count > 0)
     {
         <div class="spacer15"> </div>
         <h3 style="font-size:medium;font-weight:600">Error Records</h3>
@@ -48,7 +48,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var item in Model.FormRecords.ErrorRecords)
+                    @foreach (var item in Model.FormW2Records.ErrorRecords)
                 {
                         <tr>
                             <td>@item.Sequence</td>
@@ -84,7 +84,7 @@
     }
 
 
-    @if (Model != null && Model.FormRecords != null && Model.FormRecords.SuccessRecords != null)
+    @if (Model != null && Model.FormW2Records != null && Model.FormW2Records.SuccessRecords != null)
             {
         <div class="spacer15"> </div>
         <h3 style="font-size:medium;font-weight:600">Success Records</h3>
@@ -100,7 +100,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var item in Model.FormRecords.SuccessRecords)
+                    @foreach (var item in Model.FormW2Records.SuccessRecords)
                     {
                         <tr>
                             <td>@item.Sequence</td>

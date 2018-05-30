@@ -31,7 +31,7 @@
         </table>
     }
 
-    @if (Model != null && Model.Form941Records != null && Model.Form941Records.ErrorRecords != null && Model.Form941Records.ErrorRecords.Count > 0)
+    @if (Model != null && Model.Form941SchRRecords != null && Model.Form941SchRRecords.ErrorRecords != null && Model.Form941SchRRecords.ErrorRecords.Count > 0)
     {
         <div class="spacer15"> </div>
         <h3 style="font-size:medium;font-weight:600">Error Records</h3>
@@ -48,7 +48,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var item in Model.Form941Records.ErrorRecords)
+                    @foreach (var item in Model.Form941SchRRecords.ErrorRecords)
                 {
                         <tr>
                             <td>@item.Sequence</td>
@@ -84,7 +84,7 @@
     }
 
 
-    @if (Model != null && Model.Form941Records != null && Model.Form941Records.SuccessRecords != null)
+    @if (Model != null && Model.Form941SchRRecords != null && Model.Form941SchRRecords.SuccessRecords != null)
             {
         <div class="spacer15"> </div>
         <h3 style="font-size:medium;font-weight:600">Success Records</h3>
@@ -100,7 +100,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var item in Model.Form941Records.SuccessRecords)
+                    @foreach (var item in Model.Form941SchRRecords.SuccessRecords)
                     {
                         <tr>
                             <td>@item.Sequence</td>

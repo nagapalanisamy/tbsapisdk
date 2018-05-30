@@ -1,4 +1,5 @@
 ﻿using APIClientTool.Utilities;
+using APIClientTool.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,9 +16,21 @@ namespace APIClientTool.Controllers
         /// Get EFile Status
         /// </summary>
         /// <returns></returns>
-        public ActionResult _GetEFileStatus()
+        public ActionResult _GetEFileStatus(int? id)
         {
-            return PartialView(APISession.GetAPIResponse());
+            if (id == (int)FormType.FormW2)
+            {
+                return PartialView(APISession.GetAPIResponse());
+            }
+            else if (id == (int)FormType.Form941)
+            {
+                return PartialView(APISession.GetForm941APIResponse());
+            }
+            else if (id == (int)FormType.Form941SCHR)
+            {
+                return PartialView(APISession.GetForm941APIResponse());
+            }
+            return PartialView();
         }
         #endregion
 

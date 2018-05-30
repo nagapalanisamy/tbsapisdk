@@ -436,33 +436,34 @@
                             <tr><td class="spacer10"></td></tr>
                             <tr>
                                 <td class="labelName"> <label class="control-label">EIN:</label> </td>
-                                <td class="fieldName">@Html.TextBoxFor(model => model.Business.EIN, new { @class = "form-control" })</td>
+                                <td class="fieldName">@Html.TextBoxFor(model => model.Business.EINorSSN, new { @class = "form-control" })</td>
+                                @Html.HiddenFor(model => model.Business.IsEIN)
                                 <td class="labelName"><label class="control-label">Address Line1:</label></td>
-                                <td class="fieldName">@Html.TextBoxFor(model => model.Business.Address1, new { @class = "form-control" })</td>
+                                <td class="fieldName">@Html.TextBoxFor(model => model.Business.USAddress.Address1, new { @class = "form-control" })</td>
                             </tr>
                             <tr><td class="spacer10"></td></tr>
 
                             <tr>
                                 <td class="labelName"><label class="control-label">Address Line2:</label></td>
-                                <td class="fieldName">@Html.TextBoxFor(model => model.Business.Address2, new { @class = "form-control" })</td>
+                                <td class="fieldName">@Html.TextBoxFor(model => model.Business.USAddress.Address2, new { @class = "form-control" })</td>
                                 <td class="labelName"><label class="control-label">City:</label></td>
-                                <td class="fieldName">@Html.TextBoxFor(model => model.Business.City, new { @class = "form-control" })</td>
+                                <td class="fieldName">@Html.TextBoxFor(model => model.Business.USAddress.City, new { @class = "form-control" })</td>
                             </tr>
                             <tr><td class="spacer10"></td></tr>
                             <tr>
                                 <td class="labelName"><label class="control-label">State:</label></td>
                                 <td>
-                                    @Html.DropDownListFor(model => model.Business.USState, new SelectList(_USStates, "value", "text", null), "Select State", new { @class = "form-control" })
+                                    @Html.DropDownListFor(model => model.Business.USAddress.State, new SelectList(_USStates, "value", "text", null), "Select State", new { @class = "form-control" })
                                 </td>
                                 <td class="labelName"><label class="control-label">Zip Code:</label></td>
-                                <td class="fieldName">@Html.TextBoxFor(model => model.Business.USZip, new { @class = "form-control" })</td>
+                                <td class="fieldName">@Html.TextBoxFor(model => model.Business.USAddress.ZipCd, new { @class = "form-control" })</td>
                             </tr>
                             <tr><td class="spacer10"></td></tr>
                             <tr>
-                                <td class="labelName"><label class="control-label">Country:</label></td>
+                                @*<td class="labelName"><label class="control-label">Country:</label></td>
                                 <td>
-                                    @Html.DropDownListFor(model => model.Business.Country, new SelectList(_countryList, "value", "text", null), "Select Country", new { @class = "form-control" })
-                                </td>
+                                    @Html.DropDownListFor(model => model.Business.ForeignAddress.Country, new SelectList(_countryList, "value", "text", null), "Select Country", new { @class = "form-control" })
+                                </td>*@
                                 <td class="labelName"><label class="control-labeld">Contact Name:</label></td>
                                 <td class="fieldName">@Html.TextBoxFor(model => model.Business.ContactNm, new { @class = "form-control" })</td>
                             </tr>
@@ -485,7 +486,7 @@
                                 <td class="labelName"><label class="control-label">Kind Of Employer:</label></td>
                                 <td class="fieldName">@Html.DropDownListFor(model => model.Business.KindOfEmployer, new SelectList(_kindOfEmployer, "value", "text", null), "Select Employer Type", new { @class = "form-control" })</td>
                                 <td class="labelName"><label class="control-label">Employment Code:</label></td>
-                                <td class="fieldName">@Html.DropDownListFor(model => model.Business.EmploymentCd, new SelectList(_employmentCd, "value", "text", null), "Select Employer Type", new { @class = "form-control" })</td>
+                                <td class="fieldName">@Html.DropDownListFor(model => model.Business.KindOfPayer, new SelectList(_employmentCd, "value", "text", null), "Select Employer Type", new { @class = "form-control" })</td>
                             </tr>
                         </table>
                     </div>
@@ -595,7 +596,7 @@
                             <tr>
                                 <td class="labelName"><label class="control-label">Nonqualified plans:</label></td>
                                 <td class="fieldName">@Html.TextBoxFor(model => model.FormDetails.Box11NonQualPlan, new { @class = "form-control" })</td>
-                                
+
                             </tr>
                             <tr><td class="spacer10"></td></tr>
                             <tr>
@@ -737,7 +738,7 @@
         $("#CreateSpinner").show();
         $("#btnCreate").prop("disabled", true);
         $.ajax({
-            url: "/FormW2/c/",
+            url: "/formw2/apiresponsestatus/",
             cache: false,
             data: formdata,
             success: function (data) {

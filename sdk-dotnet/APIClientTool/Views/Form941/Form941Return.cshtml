@@ -430,7 +430,7 @@
                                 <td class="fieldName">@Html.TextBoxFor(model => model.ReturnHeader.Business.USAddress.Address1, new { @class = "form-control" })</td>
                             </tr>
                             <tr><td class="spacer10"></td></tr>
-                           
+
                             <tr>
                                 <td class="labelName"><label class="control-label">Address Line2:</label></td>
                                 <td class="fieldName">@Html.TextBoxFor(model => model.ReturnHeader.Business.USAddress.Address2, new { @class = "form-control" })</td>
@@ -532,14 +532,15 @@
                                         <tr>
                                             <td class="labelName"><label class="control-label">Taxable Medicare wages & tips:</label></td>
                                             <td class="fieldName">
-                                                @Html.TextBoxFor(model => model.ReturnData.Form941.Line5cInitialAmt, new { @class = "form-control" }) <span> × 0.124 = </span> @Html.TextBoxFor(model => model.ReturnData.Form941.Line5c, new { @class = "form-control" })
+                                                @Html.TextBoxFor(model => model.ReturnData.Form941.Line5cInitialAmt, new { @class = "form-control" }) <span> × 0.029 = </span> @Html.TextBoxFor(model => model.ReturnData.Form941.Line5c, new { @class = "form-control" })
                                             </td>
                                         </tr>
                                         <tr><td class="spacer10"></td></tr>
                                         <tr>
                                             <td class="labelName"><label class="control-label">Taxable wages & tips subject to Additional Medicare Tax:</label></td>
                                             <td class="fieldName">
-                                                @Html.TextBoxFor(model => model.ReturnData.Form941.Line5dInitialAmt, new { @class = "form-control" }) <span> × 0.124 = </span> @Html.TextBoxFor(model => model.ReturnData.Form941.Line5d, new { @class = "form-control" })
+                                                @Html.TextBoxFor(model => model.ReturnData.Form941.Line5dInitialAmt, new { @class = "form-control" }) <span> × 0.009 = </span> @Html.TextBoxFor(model => model.ReturnData.Form941.Line5d, new { @class = "form-control" })
+                                               
                                             </td>
                                         </tr>
                                         <tr><td class="spacer10"></td></tr>
@@ -636,7 +637,7 @@
                                         <tr><td class="spacer10"></td></tr>
                                         <tr>
                                             <td class="labelName"><label class="control-label">Total liability for quarter</label></td>
-                                            <td class="fieldName">@Html.TextBoxFor(model => model.ReturnData.DepositScheduleType.TotalQuarterTaxLiabilityAmt, new { @class = "form-control" })</td>
+                                            <td class="fieldName">@Html.TextBoxFor(model => model.ReturnData.DepositScheduleType.TaxLiabilityTotalAmt, new { @class = "form-control" })</td>
                                         </tr>
                                     </table>
                                 </td>
@@ -948,7 +949,7 @@
                                             Yes
                                         </label>
                                         <label>
-                                            @Html.RadioButtonFor(model => model.ReturnHeader.IsThirdPartyDesignee, false, new { @id = "IsThirdPartyDesigneeNo", @class = "css-radiobox",  @onchange = "ChangeThirdPartyDesignee(this)" })
+                                            @Html.RadioButtonFor(model => model.ReturnHeader.IsThirdPartyDesignee, false, new { @id = "IsThirdPartyDesigneeNo", @class = "css-radiobox", @onchange = "ChangeThirdPartyDesignee(this)" })
                                             No
                                         </label>
                                     </div>
@@ -988,7 +989,7 @@
                             <tr>
                                 <td class="labelName"><label class="control-label">Third-Party Designee Name:</label></td>
                                 <td class="fieldName">
-                                    @Html.DropDownListFor(model => model.ReturnHeader.SignatureDetails.SignatureType, signatureType, "--Select--", new { @class = "form-control", @onchange="ChangeSignatureType(this)" })
+                                    @Html.DropDownListFor(model => model.ReturnHeader.SignatureDetails.SignatureType, signatureType, "--Select--", new { @class = "form-control", @onchange = "ChangeSignatureType(this)" })
                                 </td>
                             </tr>
                             <tr><td class="spacer10"></td></tr>
@@ -1004,7 +1005,8 @@
                     </div>
                 </div>
             </div>
-
+            @Html.HiddenFor(model => model.ReturnData.Form941.Line5e)
+            @Html.HiddenFor(model => model.ReturnData.Form941.Line10)
         </div>
     }
     <div class="spacer10"></div>
@@ -1020,7 +1022,7 @@
 
     $(function () {
         $(".nav_menu li").removeClass('active');
-        $("#liformw2return").addClass('active');
+        $("#liform941return").addClass('active');
 
         $("#ReturnHeader_BusinessStatusDetails_IsBusinessClosed").click(function () {
             if ($("#ReturnHeader_BusinessStatusDetails_IsBusinessClosed").is(':checked')) {
@@ -1136,7 +1138,7 @@
         }
     }
 
-    
+
 
     function ChangesDepositScheduler(obj) {
         if ($(obj).val() == '@(DepositorType.MONTHLY.ToString())') {

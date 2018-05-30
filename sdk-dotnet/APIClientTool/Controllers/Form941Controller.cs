@@ -17,7 +17,7 @@ namespace APIClientTool.Controllers
         #region Form 941 View Get Method
         // GET: Form941
         [Route("form941")]
-        public ActionResult Index(bool? id)
+        public ActionResult Form941Return(bool? id)
         {
             Form941Data form941 = new Form941Data();
             bool _prePopulate = id ?? false;
@@ -67,15 +67,15 @@ namespace APIClientTool.Controllers
                         State = "SC",
                         ZipCd = "29730"
                     },
-                    SigningAuthority = new ViewModels.Form941CoreModel.SigningAuthority
+                    SigningAuthority = new APIClientTool.ViewModels.SigningAuthority
                     {
                         BusinessMemberType = "ADMINISTRATOR",
                         Phone = "1234564390",
                         Name = "John"
                     },
-                    KindOfEmployer =null,
+                    KindOfEmployer = null,
                     KindOfPayer = null,
-                    ForeignAddress = null
+                    ForeignAddress = null,
                 },
                 BusinessStatusDetails = new BusinessStatusDetails
                 {
@@ -94,8 +94,8 @@ namespace APIClientTool.Controllers
                 },
                 SignatureDetails = new SignatureDetails
                 {
-                    SignatureType = "ONLINE_SIGN_PIN",
-                    OnlineSignaturePIN = new OnlineSignaturePIN { PIN = "1234567890" }
+                    SignatureType = "REPORTING_AGENT",
+                    ReportingAgentPIN = new ReportingAgentPIN { PIN = "12345" }
                 }
             };
 
@@ -104,37 +104,35 @@ namespace APIClientTool.Controllers
             {
                 DepositScheduleType = new DepositScheduleType
                 {
-                    DepositorType = DepositorType.MONTHLY.ToString(),
-                    MonthlyDepositor = new MonthlyDepositor
-                    {
-                        TaxLiabilityMonth1 = 4,
-                        TaxLiabilityMonth2 = 345,
-                        TaxLiabilityMonth3 = 43
-                    }
+                    DepositorType = DepositorType.MINTAXLIABILITY.ToString(),
+                    TaxLiabilityTotalAmt = 200M
                 },
                 Form941 = new Form941Details
                 {
                     EmployeeCnt = 3,
                     WagesAmt = 5750000M,
-                    FedIncomeTaxWHAmt = 13499.76M,
-                    WagesNotSubjToSSMedcrTaxInd = null,
-                    Line5aInitialAmt = 57000M,
+                    FedIncomeTaxWHAmt = 130M,
+                    WagesNotSubjToSSMedcrTaxInd = true,
+                    Line5aInitialAmt = 564.51M,
                     Line5bInitialAmt = 0M,
-                    Line5cInitialAmt = 57500M,
+                    Line5cInitialAmt = 0M,
                     Line5dInitialAmt = 0M,
-                    Line5a = 7130M,
+                    Line5a = 70M,
                     Line5b = 0M,
-                    Line5c = 1667.50M,
+                    Line5c = 0M,
                     Line5d = 0M,
-                    Line5e = 8797.50M,
+                    Line5e = 70M,
                     TaxOnUnreportedTips3121qAmt = 0M,
                     CurrentQtrFractionsCentsAmt = 0M,
                     CurrentQuarterSickPaymentAmt = 0M,
                     CurrQtrTipGrpTermLifeInsAdjAmt = 0M,
-                    Line12 = 22297.26M,
+                    Line12 = 200M,
                     Line11 = 0M,
                     Line14 = 0M,
-                    Line15 = 0M
+                    Line15 = 0M,
+                    Line6 = 200M,
+                    Line10 = 200M,
+                    TotTaxDepositAmt = 200M
                 }
             };
         }
@@ -178,7 +176,7 @@ namespace APIClientTool.Controllers
             }
 
             var form941Response = new Form941CreateReturnResponse();
-            var form941ReturnList = new Form941CreateReturnRequest { Form941Records = new List<Form941Data>()};
+            var form941ReturnList = new Form941CreateReturnRequest { Form941Records = new List<Form941Data>() };
             form941ReturnList.Form941Records.Add(form941);
 
             // Generate JSON for Form 941
@@ -206,7 +204,7 @@ namespace APIClientTool.Controllers
                         if (form941Response.SubmissionId != null && form941Response.SubmissionId != Guid.Empty)
                         {
                             //Adding Form941CreateReturnResponse Response to Session
-                            //APISession.AddAPIResponse(form941Response); To Do
+                            APISession.AddForm941APIResponse(form941Response);
                         }
                     }
                 }
@@ -369,6 +367,62 @@ namespace APIClientTool.Controllers
                 return Json(businessMembersList, JsonRequestBehavior.AllowGet);
             }
             return Json(false, JsonRequestBehavior.AllowGet);
+        }
+        #endregion
+
+        #region Delete Return
+        /// <summary>
+        /// Function transmit the Form 941 Return to Efile
+        /// </summary>
+        /// <param name="submissionId">SubmissionId passed to transmit the 941 return</param>
+        /// <returns>TransmitFormW2Response</returns>
+        public ActionResult Delete(Guid submissionId)
+        {
+            var deleteReturnRequest = new DeleteReturnRequest();
+            var deleteReturnResponse = new DeleteReturnResponse();
+            var deleteReturnResponseJSON = string.Empty;
+            if (submissionId != null && submissionId != Guid.Empty)
+            {
+                deleteReturnRequest.SubmissionId = submissionId;
+                // Getting the RecordIds for SubmissionId
+                deleteReturnRequest.RecordIds = APISession.GetComaseperatedRecordIdsBySubmissionId(submissionId);
+
+                if (!string.IsNullOrEmpty(deleteReturnRequest.RecordIds))
+                {
+                    using (var client = new PublicAPIClient())
+                    {
+                        //API URL to Transmit Form 941 Return
+                        string requestUri = "Form941/Delete";
+
+                        //POST
+                        APIGenerateAuthHeader.GenerateAuthHeader(client, requestUri, "POST");
+
+                        //Get Response
+                        var _response = client.PostAsJsonAsync(requestUri, deleteReturnRequest).Result;
+                        if (_response != null && _response.IsSuccessStatusCode)
+                        {
+                            //Read Response
+                            var createResponse = _response.Content.ReadAsAsync<DeleteReturnResponse>().Result;
+                            if (createResponse != null)
+                            {
+                                deleteReturnResponseJSON = JsonConvert.SerializeObject(createResponse, Formatting.Indented);
+                                deleteReturnResponse = new JavaScriptSerializer().Deserialize<DeleteReturnResponse>(deleteReturnResponseJSON);
+                                if (deleteReturnResponse != null && deleteReturnResponse.StatusCode == (int)StatusCode.Success)
+                                {
+                                    //Todo Remove Submission and RecordId from session
+                                }
+                            }
+                        }
+                        else
+                        {
+                            var createResponse = _response.Content.ReadAsAsync<Object>().Result;
+                            deleteReturnResponseJSON = JsonConvert.SerializeObject(createResponse, Formatting.Indented);
+                            deleteReturnResponse = new JavaScriptSerializer().Deserialize<DeleteReturnResponse>(deleteReturnResponseJSON);
+                        }
+                    }
+                }
+            }
+            return PartialView(deleteReturnResponseJSON);
         }
         #endregion
 

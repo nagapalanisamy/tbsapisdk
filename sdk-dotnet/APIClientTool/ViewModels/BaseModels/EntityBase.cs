@@ -293,6 +293,16 @@ namespace APIClientTool.ViewModels
         SOLEMEMBER = 57
     }
 
+    public enum FormType
+    {
+        [Display(Name = "Form W-2")]
+        FormW2 = 4,
+        [Display(Name = "Form 941")]
+        Form941 = 14,
+        [Display(Name = "Form 941-SCHR")]
+        Form941SCHR = 21,
+    }
+
     public enum SignatureType
     {
         [Display(Name = "Online Signature PIN")]

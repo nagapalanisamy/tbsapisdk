@@ -22,7 +22,7 @@ namespace APIClientTool.ViewModels.Form941CoreModel
         /// <value>
         /// Total tax liability amount
         /// </value>
-        public decimal TotalQuarterTaxLiabilityAmt { get; set; }
+        public decimal TaxLiabilityTotalAmt { get; set; }
     }
 
     public class MonthlyDepositor

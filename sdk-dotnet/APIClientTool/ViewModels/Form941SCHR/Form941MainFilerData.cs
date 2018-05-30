@@ -44,5 +44,20 @@ namespace APIClientTool.ViewModels.Form941SCHR
         /// Gets or sets TotTaxDepositAmt
         /// </summary>
         public decimal TotTaxDepositAmt { get; set; }
+
+        public decimal? Line5e { get; set; }
+        /// <summary>
+        /// Gets or sets the line 8 amount
+        /// </summary>
+        /// 
+        public decimal? Line11 { get; set; }
+        /// <summary>
+        /// Gets or sets the line 8 amount
+        /// </summary>
+        /// 
+        public decimal? Line12 { get; set; }
+        /// <summary>
+        /// Gets or sets the line 8 amount
+        /// </summary>
     }
 }

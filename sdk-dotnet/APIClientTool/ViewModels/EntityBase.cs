@@ -293,6 +293,39 @@ namespace APIClientTool.ViewModels
         SOLEMEMBER = 57
     }
 
+    public enum SignatureType
+    {
+        [Display(Name = "Online Signature PIN")]
+        ONLINE_SIGN_PIN,
+        [Display(Name = "Reporting Agent PIN")]
+        REPORTING_AGENT,
+        [Display(Name = "Form 8453")]
+        FORM_8453_EMP
+      
+    }
+
+    public enum FilerType
+    {
+        [Display(Name = "SECTION 3504 AGENT")]
+        SECTION3504AGENT,
+        [Display(Name = "CPEO")]
+        CPEO
+    }
+
+    public enum Form8974PayerIndicatorType
+    {
+        
+        THIRDPARTYSICKPAYIND,
+        SECTION3121QIND
+    }
+
+    public enum DepositorScheduleType
+    {
+        MINTAXLIABILITY,
+        MONTHLY,
+        SEMIWEEKLY
+    }
+
     #endregion
 
 }

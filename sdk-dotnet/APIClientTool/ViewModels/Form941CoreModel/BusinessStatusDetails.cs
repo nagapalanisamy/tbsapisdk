@@ -24,6 +24,9 @@ namespace APIClientTool.ViewModels.Form941CoreModel
         /// Gets or sets the IsSeasonalEmployer
         /// </summary>
         public bool IsSeasonalEmployer { get; set; }
+
+       
+
     }
 
     #region BusinessClosed
@@ -120,6 +123,10 @@ namespace APIClientTool.ViewModels.Form941CoreModel
         
         public ForeignAddress ForeignAddress { get; set; }
 
+        public bool IsSale { get; set; }
+        /// <summary>
+        /// Gets or sets the IsSale
+        /// </summary>
     }
     #endregion
 

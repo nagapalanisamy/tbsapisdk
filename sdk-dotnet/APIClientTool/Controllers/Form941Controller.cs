@@ -16,7 +16,7 @@ namespace APIClientTool.Controllers
         #region Form 941 View Get Method
         // GET: Form941
         [Route("form941")]
-        public ActionResult Index(bool? id)
+        public ActionResult Form941Return(bool? id)
         {
             Form941Data form941 = new Form941Data();
             bool _prePopulate = id ?? false;
@@ -68,13 +68,13 @@ namespace APIClientTool.Controllers
                     },
                     SigningAuthority = new SigningAuthority
                     {
-                        BusinessMembers = "ADMINISTRATOR",
-                        DayTimePhone = "1234564390",
+                        BusinessMemberType = "ADMINISTRATOR",
+                        Phone = "1234564390",
                         Name = "John"
                     },
-                    KindOfEmployer =null,
+                    KindOfEmployer = null,
                     KindOfPayer = null,
-                    ForeignAddress = null
+                    ForeignAddress = null,
                 },
                 BusinessStatusDetails = new BusinessStatusDetails
                 {
@@ -93,8 +93,8 @@ namespace APIClientTool.Controllers
                 },
                 SignatureDetails = new SignatureDetails
                 {
-                    SignatureType = "ONLINE_SIGN_PIN",
-                    OnlineSignaturePIN = new OnlineSignaturePIN { PIN = "1234567890" }
+                    SignatureType = "REPORTING_AGENT",
+                    ReportingAgentPIN = new ReportingAgentPIN { PIN = "12345" }
                 }
             };
 
@@ -106,31 +106,32 @@ namespace APIClientTool.Controllers
                     DepositorType = DepositorType.MONTHLY.ToString(),
                     MonthlyDepositor = new MonthlyDepositor
                     {
-                        TaxLiabilityMonth1 = 4,
-                        TaxLiabilityMonth2 = 345,
-                        TaxLiabilityMonth3 = 43
-                    }
+                        TaxLiabilityMonth1 = 120M,
+                        TaxLiabilityMonth2 = 100M,
+                        TaxLiabilityMonth3 = 430M
+                    },
+                    TaxLiabilityTotalAmt = 650M
                 },
                 Form941 = new Form941Details
                 {
                     EmployeeCnt = 3,
                     WagesAmt = 5750000M,
                     FederalIncomeTaxWithheldAmt = 13499.76M,
-                    WagesNotSubjToSSMedcrTaxInd = null,
-                    Line5aInitialAmt = 57000M,
+                    WagesNotSubjToSSMedcrTaxInd = true,
+                    Line5aInitialAmt = 564.51M,
                     Line5bInitialAmt = 0M,
-                    Line5cInitialAmt = 57500M,
+                    Line5cInitialAmt = 0M,
                     Line5dInitialAmt = 0M,
-                    Line5a = 7130M,
+                    Line5a = 70M,
                     Line5b = 0M,
-                    Line5c = 1667.50M,
+                    Line5c = 0M,
                     Line5d = 0M,
-                    Line5e = 8797.50M,
+                    Line5e = 70M,
                     TaxOnUnreportedTips3121qAmt = 0M,
                     CurrentQtrFractionsCentsAmt = 0M,
                     CurrentQuarterSickPaymentAmt = 0M,
                     CurrQtrTipGrpTermLifeInsAdjAmt = 0M,
-                    Line12 = 22297.26M,
+                    Line12 = 2004M,
                     Line11 = 0M,
                     Line14 = 0M,
                     Line15 = 0M
@@ -177,7 +178,7 @@ namespace APIClientTool.Controllers
             }
 
             var form941Response = new Form941CreateReturnResponse();
-            var form941ReturnList = new Form941CreateReturnRequest { Form941Records = new List<Form941Data>()};
+            var form941ReturnList = new Form941CreateReturnRequest { Form941Records = new List<Form941Data>() };
             form941ReturnList.Form941Records.Add(form941);
 
             // Generate JSON for Form 941

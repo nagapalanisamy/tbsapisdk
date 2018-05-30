@@ -338,7 +338,7 @@
     <Content Include="Views\Efile\EFileStatus.cshtml" />
     <Content Include="Views\Efile\_APIValidate.cshtml" />
     <Content Include="Views\FormW2\_TransmitReturn.cshtml" />
-    <Content Include="Views\Form941\Index.cshtml" />
+    <Content Include="Views\Form941\Form941Return.cshtml" />
     <Content Include="Views\Efile\_GetEfileStatus.cshtml" />
     <Content Include="Views\FormW2\_GetEfileStatusResponse.cshtml" />
     <Content Include="Views\Form941\_GetEfileStatusResponse.cshtml" />

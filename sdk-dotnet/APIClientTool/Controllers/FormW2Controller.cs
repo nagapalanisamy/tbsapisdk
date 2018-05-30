@@ -47,8 +47,8 @@ namespace APIClientTool.Controllers
 
             formw2.Business.SigningAuthority = new SigningAuthority();
             formw2.Business.SigningAuthority.Name = "John Doe";
-            formw2.Business.SigningAuthority.DayTimePhone = "1234567890";
-            formw2.Business.SigningAuthority.BusinessMembers = "Owner";
+            formw2.Business.SigningAuthority.Phone = "1234567890";
+            formw2.Business.SigningAuthority.BusinessMemberType = "Owner";
 
             formw2.Business.KindOfEmployer = "REGULAR941";
             formw2.Business.EmploymentCd = "FEDERALGOVT";

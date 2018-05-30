@@ -104,20 +104,14 @@ namespace APIClientTool.Controllers
             {
                 DepositScheduleType = new DepositScheduleType
                 {
-                    DepositorType = DepositorType.MONTHLY.ToString(),
-                    MonthlyDepositor = new MonthlyDepositor
-                    {
-                        TaxLiabilityMonth1 = 120M,
-                        TaxLiabilityMonth2 = 100M,
-                        TaxLiabilityMonth3 = 430M
-                    },
-                    TaxLiabilityTotalAmt = 650M
+                    DepositorType = DepositorType.MINTAXLIABILITY.ToString(),
+                    TaxLiabilityTotalAmt = 200M
                 },
                 Form941 = new Form941Details
                 {
                     EmployeeCnt = 3,
                     WagesAmt = 5750000M,
-                    FedIncomeTaxWHAmt = 13499.76M,
+                    FedIncomeTaxWHAmt = 130M,
                     WagesNotSubjToSSMedcrTaxInd = true,
                     Line5aInitialAmt = 564.51M,
                     Line5bInitialAmt = 0M,
@@ -132,10 +126,13 @@ namespace APIClientTool.Controllers
                     CurrentQtrFractionsCentsAmt = 0M,
                     CurrentQuarterSickPaymentAmt = 0M,
                     CurrQtrTipGrpTermLifeInsAdjAmt = 0M,
-                    Line12 = 2004M,
+                    Line12 = 200M,
                     Line11 = 0M,
                     Line14 = 0M,
-                    Line15 = 0M
+                    Line15 = 0M,
+                    Line6 = 200M,
+                    Line10= 200M,
+                    TotTaxDepositAmt=200M
                 }
             };
         }

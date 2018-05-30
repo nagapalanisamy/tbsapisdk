@@ -540,7 +540,7 @@
                                             <td class="labelName"><label class="control-label">Taxable wages & tips subject to Additional Medicare Tax:</label></td>
                                             <td class="fieldName">
                                                 @Html.TextBoxFor(model => model.ReturnData.Form941.Line5dInitialAmt, new { @class = "form-control" }) <span> × 0.009 = </span> @Html.TextBoxFor(model => model.ReturnData.Form941.Line5d, new { @class = "form-control" })
-                                                @Html.HiddenFor(model => model.ReturnData.Form941.Line5e)
+                                               
                                             </td>
                                         </tr>
                                         <tr><td class="spacer10"></td></tr>
@@ -1005,7 +1005,8 @@
                     </div>
                 </div>
             </div>
-
+            @Html.HiddenFor(model => model.ReturnData.Form941.Line5e)
+            @Html.HiddenFor(model => model.ReturnData.Form941.Line10)
         </div>
     }
     <div class="spacer10"></div>

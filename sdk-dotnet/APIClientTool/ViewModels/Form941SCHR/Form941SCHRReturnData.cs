@@ -6,7 +6,7 @@ using APIClientTool.ViewModels.Form941CoreModel;
 
 namespace APIClientTool.ViewModels.Form941SCHR
 {
-    public class Form941SCHRReturnData
+    public class Form941SchRReturnData
     {
         /// <summary>
         /// Form 941 Main Filer Data

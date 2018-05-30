@@ -6,12 +6,12 @@ using APIClientTool.ViewModels.Form941CoreModel;
 
 namespace APIClientTool.ViewModels.Form941SCHR
 {
-    public class Form941SCHRCreateReturnRequest
+    public class Form941SchRCreateReturnRequest
     {
         /// <summary>
         /// Form 941SCHR Records
         /// </summary>
-        public List<Form941SCHRRecords> Form941SCHRRecords { get; set; }
+        public List<Form941SchRRecords> Form941SchRRecords { get; set; }
         /// <summary>
         /// Submission Id
         /// </summary>

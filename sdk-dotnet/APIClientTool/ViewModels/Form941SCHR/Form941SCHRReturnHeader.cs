@@ -6,7 +6,7 @@ using APIClientTool.ViewModels.Form941CoreModel;
 
 namespace APIClientTool.ViewModels.Form941SCHR
 {
-    public class Form941SCHRReturnHeader
+    public class Form941SchRReturnHeader
     {
         /// <summary>
         /// Gets or sets the Return Type

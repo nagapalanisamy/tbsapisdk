@@ -5,7 +5,7 @@ using System.Web;
 
 namespace APIClientTool.ViewModels.Form941SCHR
 {
-    public class Form941SCHRRecords
+    public class Form941SchRRecords
     {
         /// <summary>
         /// This identifies the sequence on the record sent in the pay load. When errors occur we will send the errors attached to particular sequence. Leave it blank for Update API.
@@ -17,11 +17,11 @@ namespace APIClientTool.ViewModels.Form941SCHR
         /// <summary>
         /// Form 941SCHR Return Header
         /// </summary>
-        public Form941SCHRReturnHeader ReturnHeader { get; set; }
+        public Form941SchRReturnHeader ReturnHeader { get; set; }
         /// <summary>
         /// Form 941SCHR Return Data
         /// </summary>
-        public Form941SCHRReturnData ReturnData { get; set; }
+        public Form941SchRReturnData ReturnData { get; set; }
         /// <summary>
         /// Gets or sets the Record Id
         /// </summary>

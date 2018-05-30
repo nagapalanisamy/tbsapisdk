@@ -4,10 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace APIClientTool.ViewModels.Form941
+namespace APIClientTool.ViewModels.Form941CoreModel
 {
     public class Form941Details
-    { /// <summary>
+    { 
+        /// <summary>
         ///  Gets or sets the employee count
         /// </summary>
         /// <value>
@@ -27,7 +28,7 @@ namespace APIClientTool.ViewModels.Form941
         /// <value>
         /// Federal Income Tax Withheld Amount
         /// </value>
-        public decimal FederalIncomeTaxWithheldAmt { get; set; }
+        public decimal FedIncomeTaxWHAmt { get; set; }
         /// <summary>
         /// Gets or sets the wages is subjected to social security and medicare tax or not
         /// </summary>
@@ -105,7 +106,7 @@ namespace APIClientTool.ViewModels.Form941
         /// <value>
         /// Line5e calculated Amount
         /// </value>
-        [JsonProperty(PropertyName = "TotalSSMdcrTaxAmt")]
+        [JsonProperty(PropertyName = "TotSSMdcrTaxAmt")]
         public decimal Line5e { get; set; }
         /// <summary>
         /// Gets or sets the tax on unreported tips 3121qAmt
@@ -162,7 +163,7 @@ namespace APIClientTool.ViewModels.Form941
         /// <value>
         /// Line 12 amount
         /// </value>
-        [JsonProperty(PropertyName = "TotalTaxAmt")]
+        [JsonProperty(PropertyName = "TotTaxAmt")]
         public decimal Line12 { get; set; }
         /// <summary>
         /// Gets or sets is Payroll Tax Credit applied or not
@@ -178,7 +179,7 @@ namespace APIClientTool.ViewModels.Form941
         /// <value>
         /// Total tax deposit amount
         /// </value>
-        public decimal TotalTaxDepositAmt { get; set; }
+        public decimal TotTaxDepositAmt { get; set; }
         /// <summary>
         /// Gets or sets balance due amount
         /// </summary>
@@ -202,6 +203,13 @@ namespace APIClientTool.ViewModels.Form941
         /// Over payment recovery type
         /// </value>
         public string OverPaymentRecoveryType { get; set; }
+        /// <summary>
+        /// Gets or sets over Filer Type
+        /// </summary>
+        /// <value>
+        /// Filer Type
+        /// </value>
+        public string FilerType { get; set; }
 
     }
 }

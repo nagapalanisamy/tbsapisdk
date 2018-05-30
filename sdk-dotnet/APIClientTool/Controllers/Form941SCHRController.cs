@@ -9,13 +9,13 @@ namespace APIClientTool.Controllers
 {
     public class Form941SCHRController : Controller
     {
-        #region Form 941 View Get Method
+        #region Form 941SCHR View Get Method
         // GET: Form941SCHR
         [Route("form941schr")]
         public ActionResult Index()
         {
-            Form941SchRRecords form941SchRRecords = new Form941SchRRecords();
-            return View(form941SchRRecords);
+            Form941SCHRRecords form941SCHRRecords = new Form941SCHRRecords();
+            return View(form941SCHRRecords);
         }
         #endregion
     }

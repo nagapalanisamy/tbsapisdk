@@ -1,4 +1,5 @@
-﻿using System;
+﻿using APIClientTool.ViewModels.Form941CoreModel;
+using System;
 
 namespace APIClientTool.ViewModels.Form941
 {
@@ -72,22 +73,7 @@ namespace APIClientTool.ViewModels.Form941
         /// </summary>
         public BusinessStatusDetails BusinessStatusDetails { get; set; }
     }
-    public class ThirdPartyDesignee
-    {
-        /// <summary>
-        /// Gets or sets the name of third party designee
-        /// </summary>
-        public string Name { get; set; }
-        /// <summary>
-        ///  Gets or sets the Phone of third party designee
-        /// </summary>
-        public string Phone { get; set; }
-        /// <summary>
-        ///  Gets or sets the PIN of third party designee
-        /// </summary>
-        public string PIN { get; set; }
-    }
-
+    
     public class Form941ReturnData
     {
         /// <summary>
@@ -101,7 +87,7 @@ namespace APIClientTool.ViewModels.Form941
         /// <summary>
         /// IRS payment informations
         /// </summary>
-        public IRSPayments IRSPayment { get; set; }
+        public IRSPayment IRSPayment { get; set; }
         /// <summary>
         /// Deposit schedule type informations
         /// </summary>

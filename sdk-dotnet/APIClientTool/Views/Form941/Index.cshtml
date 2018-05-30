@@ -459,14 +459,14 @@
                                 <td class="labelName"><label class="control-label">Email Address:</label></td>
                                 <td class="fieldName">@Html.TextBoxFor(model => model.ReturnHeader.Business.Email, new { @class = "form-control" })</td>
                                 <td class="labelName"><label class="control-label">Employer Title :</label></td>
-                                <td class="fieldName">@Html.DropDownListFor(model => model.ReturnHeader.Business.SigningAuthority.BusinessMembers, Enum.GetValues(typeof(EstateBusinessMembers)).Cast<EstateBusinessMembers>().Select(x => new SelectListItem { Text = Utility.GetEnumDisplayName(x), Value = (x).ToString() }), "--Select--", new { @class = "form-control" })</td>
+                                <td class="fieldName">@Html.DropDownListFor(model => model.ReturnHeader.Business.SigningAuthority.BusinessMemberType, Enum.GetValues(typeof(EstateBusinessMembers)).Cast<EstateBusinessMembers>().Select(x => new SelectListItem { Text = Utility.GetEnumDisplayName(x), Value = (x).ToString() }), "--Select--", new { @class = "form-control" })</td>
                             </tr>
                             <tr><td class="spacer10"></td></tr>
                             <tr>
                                 <td class="labelName"><label class="control-label">Employer Signatory Name:</label></td>
                                 <td class="fieldName">@Html.TextBoxFor(model => model.ReturnHeader.Business.SigningAuthority.Name, new { @class = "form-control" })</td>
                                 <td class="labelName"><label class="control-label">Employer Signatory Phone:</label></td>
-                                <td class="fieldName">@Html.TextBoxFor(model => model.ReturnHeader.Business.SigningAuthority.DayTimePhone, new { @class = "form-control" })</td>
+                                <td class="fieldName">@Html.TextBoxFor(model => model.ReturnHeader.Business.SigningAuthority.Phone, new { @class = "form-control" })</td>
                             </tr>
                         </table>
                     </div>
@@ -493,7 +493,7 @@
                             <tr><td class="spacer10"></td></tr>
                             <tr>
                                 <td class="labelName"><label class="control-label">Federal income tax withheld from wages, tips, and other compensation:</label></td>
-                                <td class="fieldName">@Html.TextBoxFor(model => model.ReturnData.Form941.FederalIncomeTaxWithheldAmt, new { @class = "form-control" })</td>
+                                <td class="fieldName">@Html.TextBoxFor(model => model.ReturnData.Form941.FedIncomeTaxWHAmt, new { @class = "form-control" })</td>
                             </tr>
                             <tr><td class="spacer10"></td></tr>
                             <tr>
@@ -584,7 +584,7 @@
                             <tr><td class="spacer10"></td></tr>
                             <tr>
                                 <td class="labelName"><label class="control-label">Total deposits for this quarter, including overpayment applied from a prior quarter and overpayments applied from Form 941-X, 941-X (PR), 944-X, or 944-X (SP) filed in the current quarter:</label></td>
-                                <td class="fieldName">@Html.TextBoxFor(model => model.ReturnData.Form941.TotalTaxDepositAmt, new { @class = "form-control" })</td>
+                                <td class="fieldName">@Html.TextBoxFor(model => model.ReturnData.Form941.TotTaxDepositAmt, new { @class = "form-control" })</td>
                             </tr>
                             <tr><td class="spacer10"></td></tr>
                             <tr>

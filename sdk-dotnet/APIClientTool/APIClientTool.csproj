@@ -230,12 +230,12 @@
     <Compile Include="Utilities\APISession.cs" />
     <Compile Include="Utilities\PublicAPIClient.cs" />
     <Compile Include="Utilities\Utility.cs" />
-    <Compile Include="ViewModels\BusinessDetails.cs" />
+    <Compile Include="ViewModels\BaseModels\Business.cs" />
     <Compile Include="ViewModels\EFileStatus.cs" />
     <Compile Include="ViewModels\EfileStatusGetRequest.cs" />
     <Compile Include="ViewModels\EfileStatusResponse.cs" />
-    <Compile Include="ViewModels\Employee.cs" />
-    <Compile Include="ViewModels\EntityBase.cs" />
+    <Compile Include="ViewModels\BaseModels\Employee.cs" />
+    <Compile Include="ViewModels\BaseModels\EntityBase.cs" />
     <Compile Include="ViewModels\Form941CoreModel\DeleteFormRecords.cs" />
     <Compile Include="ViewModels\Form941CoreModel\DeleteReturnRequest.cs" />
     <Compile Include="ViewModels\Form941CoreModel\DeleteReturnResponse.cs" />
@@ -253,7 +253,6 @@
     <Compile Include="ViewModels\Form941\Form941CreateReturnRequest.cs" />
     <Compile Include="ViewModels\Form941\Form941CreateReturnResponse.cs" />
     <Compile Include="ViewModels\Form941CoreModel\Form941Details.cs" />
-    <Compile Include="ViewModels\Form941CoreModel\Business.cs" />
     <Compile Include="ViewModels\Form941CoreModel\BusinessStatusDetails.cs" />
     <Compile Include="ViewModels\Form941CoreModel\DepositScheduleType.cs" />
     <Compile Include="ViewModels\Form941\Form941.cs" />
@@ -264,7 +263,7 @@
     <Compile Include="ViewModels\Form941\TransmitForm941.cs" />
     <Compile Include="ViewModels\FormW2.cs" />
     <Compile Include="ViewModels\FormW2ReturnResponse.cs" />
-    <Compile Include="ViewModels\SigningAuthority.cs" />
+    <Compile Include="ViewModels\BaseModels\SigningAuthority.cs" />
     <Compile Include="ViewModels\TransmitForm.cs" />
     <Compile Include="ViewModels\TransmitFormW2Response.cs" />
     <Compile Include="ViewModels\W2CreateReturnRequest.cs" />

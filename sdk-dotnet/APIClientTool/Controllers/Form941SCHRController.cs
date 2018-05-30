@@ -68,7 +68,7 @@ namespace APIClientTool.Controllers
                         State = "SC",
                         ZipCd = "29730"
                     },
-                    SigningAuthority = new ViewModels.Form941CoreModel.SigningAuthority
+                    SigningAuthority = new APIClientTool.ViewModels.SigningAuthority
                     {
                         BusinessMemberType = "ADMINISTRATOR",
                         Phone = "1234564390",

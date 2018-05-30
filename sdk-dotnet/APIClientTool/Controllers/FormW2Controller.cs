@@ -11,7 +11,7 @@ namespace APIClientTool.Controllers
 {
     public class FormW2Controller : Controller
     {
- 
+
         #region Create Form W-2 Return
         /// <summary>
         /// Function returns the form view to create W-2 return
@@ -36,11 +36,12 @@ namespace APIClientTool.Controllers
             formw2.Sequence = "Record1";
 
             //Mapping BusinessDetails
-            formw2.Business = new BusinessDetails();
+            formw2.Business = new Business();
             formw2.Business.BusinessNm = "Test Business";
             formw2.Business.TradeNm = "";
             formw2.Business.Email = "employer@company.com";
-            formw2.Business.EIN = "123456789";
+            formw2.Business.IsEIN = true;
+            formw2.Business.EINorSSN = "123456789";
             formw2.Business.ContactNm = "John Doe";
             formw2.Business.Phone = "1234567890";
             formw2.Business.BusinessType = "ESTE";
@@ -50,13 +51,16 @@ namespace APIClientTool.Controllers
             formw2.Business.SigningAuthority.Phone = "1234567890";
             formw2.Business.SigningAuthority.BusinessMemberType = "Owner";
 
-            formw2.Business.KindOfEmployer = "REGULAR941";
-            formw2.Business.EmploymentCd = "FEDERALGOVT";
-            formw2.Business.Country = "US";
-            formw2.Business.Address1 = "Address line 1";
-            formw2.Business.City = "Hanover";
-            formw2.Business.USState = "MD";
-            formw2.Business.USZip = "21076";
+            formw2.Business.KindOfEmployer = "FEDERALGOVT";
+            formw2.Business.KindOfPayer = "REGULAR941";
+
+            formw2.Business.IsForeign = false;
+            formw2.Business.USAddress = new USAddress();
+            formw2.Business.USAddress.Address1 = "Address Line 1";
+            formw2.Business.USAddress.City = "Rockhill";
+            formw2.Business.USAddress.State = "SC";
+            formw2.Business.USAddress.ZipCd = "29730";
+
 
             //Mapping Employee
             formw2.Employee = new Employee();
@@ -78,7 +82,6 @@ namespace APIClientTool.Controllers
             //Optional BusinessDetails
             formw2.Business.PhoneExtn = "";
             formw2.Business.Fax = "";
-            formw2.Business.Address2 = "";
 
             //Optional Employee
             formw2.Employee.MiddleNm = "";

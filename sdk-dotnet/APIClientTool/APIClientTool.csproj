@@ -219,6 +219,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\EfileController.cs" />
     <Compile Include="Controllers\Form941Controller.cs" />
+    <Compile Include="Controllers\Form941SCHRController.cs" />
     <Compile Include="Controllers\FormW2Controller.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
@@ -235,18 +236,28 @@
     <Compile Include="ViewModels\EfileStatusResponse.cs" />
     <Compile Include="ViewModels\Employee.cs" />
     <Compile Include="ViewModels\EntityBase.cs" />
-    <Compile Include="ViewModels\Form941\Form8974.cs" />
+    <Compile Include="ViewModels\Form941CoreModel\SigningAuthority.cs" />
+    <Compile Include="ViewModels\Form941CoreModel\ThirdPartyDesignee.cs" />
+    <Compile Include="ViewModels\Form941SCHR\Form941MainFilerData.cs" />
+    <Compile Include="ViewModels\Form941SCHR\Form941SchRCreateReturnRequest.cs" />
+    <Compile Include="ViewModels\Form941CoreModel\Form8974.cs" />
+    <Compile Include="ViewModels\Form941SCHR\Form941SchRCreateReturnResponse.cs" />
+    <Compile Include="ViewModels\Form941SCHR\Form941SchRRecords.cs" />
+    <Compile Include="ViewModels\Form941SCHR\Form941SchRReturnData.cs" />
+    <Compile Include="ViewModels\Form941SCHR\Form941SchRReturnHeader.cs" />
+    <Compile Include="ViewModels\Form941SCHR\Form941SchRReturnResponse.cs" />
+    <Compile Include="ViewModels\Form941SCHR\TransmitForm941SchR.cs" />
     <Compile Include="ViewModels\Form941\Form941CreateReturnRequest.cs" />
     <Compile Include="ViewModels\Form941\Form941CreateReturnResponse.cs" />
-    <Compile Include="ViewModels\Form941\Form941Details.cs" />
-    <Compile Include="ViewModels\Form941\Business.cs" />
-    <Compile Include="ViewModels\Form941\BusinessStatusDetails.cs" />
-    <Compile Include="ViewModels\Form941\DepositScheduleType.cs" />
+    <Compile Include="ViewModels\Form941CoreModel\Form941Details.cs" />
+    <Compile Include="ViewModels\Form941CoreModel\Business.cs" />
+    <Compile Include="ViewModels\Form941CoreModel\BusinessStatusDetails.cs" />
+    <Compile Include="ViewModels\Form941CoreModel\DepositScheduleType.cs" />
     <Compile Include="ViewModels\Form941\Form941.cs" />
     <Compile Include="ViewModels\Form941\Form941Data.cs" />
     <Compile Include="ViewModels\Form941\Form941ReturnResponse.cs" />
-    <Compile Include="ViewModels\Form941\IRSPayments.cs" />
-    <Compile Include="ViewModels\Form941\SignatureDetails.cs" />
+    <Compile Include="ViewModels\Form941CoreModel\IRSPayment.cs" />
+    <Compile Include="ViewModels\Form941CoreModel\SignatureDetails.cs" />
     <Compile Include="ViewModels\Form941\TransmitForm941.cs" />
     <Compile Include="ViewModels\FormW2.cs" />
     <Compile Include="ViewModels\FormW2ReturnResponse.cs" />
@@ -312,6 +323,8 @@
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\toastr.min.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="Views\Form941SCHR\Index.cshtml" />
+    <Content Include="Views\Form941SCHR\_Create941SCHRAddClients.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -344,6 +357,8 @@
     <Content Include="Views\Form941\_GetEfileStatusResponse.cshtml" />
     <Content Include="Views\Form941\APIResponseStatus.cshtml" />
     <Content Include="Views\Form941\_TransmitReturn.cshtml" />
+    <Content Include="Views\Form941SCHR\APIResponseStatus.cshtml" />
+    <Content Include="Views\Form941SCHR\_TransmitReturn.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />

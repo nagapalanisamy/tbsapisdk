@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace APIClientTool.ViewModels.Form941
+namespace APIClientTool.ViewModels.Form941CoreModel
 {
     public class Form8974
     {

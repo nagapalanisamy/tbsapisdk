@@ -1,6 +1,6 @@
-﻿namespace APIClientTool.ViewModels.Form941
+﻿namespace APIClientTool.ViewModels.Form941CoreModel
 {
-    public class IRSPayments
+    public class IRSPayment
     {
         /// <summary>
         /// Gets or sets the Bank Routing Number

@@ -1,6 +1,7 @@
 ﻿using APIClientTool.Utilities;
 using APIClientTool.ViewModels;
 using APIClientTool.ViewModels.Form941;
+using APIClientTool.ViewModels.Form941CoreModel;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -66,7 +67,7 @@ namespace APIClientTool.Controllers
                         State = "SC",
                         ZipCd = "29730"
                     },
-                    SigningAuthority = new SigningAuthority
+                    SigningAuthority = new ViewModels.Form941CoreModel.SigningAuthority
                     {
                         BusinessMemberType = "ADMINISTRATOR",
                         Phone = "1234564390",
@@ -116,7 +117,7 @@ namespace APIClientTool.Controllers
                 {
                     EmployeeCnt = 3,
                     WagesAmt = 5750000M,
-                    FederalIncomeTaxWithheldAmt = 13499.76M,
+                    FedIncomeTaxWHAmt = 13499.76M,
                     WagesNotSubjToSSMedcrTaxInd = true,
                     Line5aInitialAmt = 564.51M,
                     Line5bInitialAmt = 0M,

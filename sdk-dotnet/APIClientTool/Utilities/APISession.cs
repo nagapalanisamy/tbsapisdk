@@ -1,4 +1,5 @@
 ﻿using APIClientTool.ViewModels;
+using APIClientTool.ViewModels.Form941;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,12 +9,14 @@ namespace APIClientTool.Utilities
 {
     public class APISession
     {
+        #region Form W-2
+
         #region Session Property for Return
         public static List<FormW2ReturnResponse> ReturnResponses
         {
             get
             {
-                if(HttpContext.Current.Session["ReturnResponse"] != null)
+                if (HttpContext.Current.Session["ReturnResponse"] != null)
                 {
                     return (List<FormW2ReturnResponse>)HttpContext.Current.Session["ReturnResponse"];
                 }
@@ -24,7 +27,7 @@ namespace APIClientTool.Utilities
             }
             set
             {
-                if(value != null)
+                if (value != null)
                 {
                     HttpContext.Current.Session["ReturnResponse"] = value;
                 }
@@ -32,23 +35,23 @@ namespace APIClientTool.Utilities
         }
         #endregion
 
-        #region Add API Response
+        #region Add Form W-2 API Response
         /// <summary>
         /// Add API Response
         /// </summary>
         /// <param name="returnResponse"></param>
         public static void AddAPIResponse(FormW2ReturnResponse returnResponse)
-        {           
+        {
             if (returnResponse != null && returnResponse.SubmissionId != Guid.Empty)
             {
                 List<FormW2ReturnResponse> returnResponses = ReturnResponses;
                 returnResponses.Add(returnResponse);
-               ReturnResponses = returnResponses;
+                ReturnResponses = returnResponses;
             }
         }
         #endregion
 
-        #region Get API Response 
+        #region Get Form W-2 API Response 
         /// <summary>
         ///  Get API Response 
         /// </summary>
@@ -88,7 +91,7 @@ namespace APIClientTool.Utilities
                 if (returnResponses != null && returnResponses.Count > 0)
                 {
                     var returnResponse = returnResponses.Where(r => r.SubmissionId == submissionId).SingleOrDefault();
-                    if(returnResponse != null && returnResponse.FormW2Records != null 
+                    if (returnResponse != null && returnResponse.FormW2Records != null
                         && returnResponse.FormW2Records.SuccessRecords != null && returnResponse.FormW2Records.SuccessRecords.Count > 0)
                     {
                         var recordIds = returnResponse.FormW2Records.SuccessRecords.Select(r => r.RecordId).ToList();
@@ -162,5 +165,77 @@ namespace APIClientTool.Utilities
             return isUpdated;
         }
         #endregion
+
+        #endregion
+
+
+        #region Form 941
+
+        #region Session Property for Form 941 Return
+        public static List<Form941ReturnResponse> Form941ReturnResponses
+        {
+            get
+            {
+                if (HttpContext.Current.Session["Form941ReturnResponses"] != null)
+                {
+                    return (List<Form941ReturnResponse>)HttpContext.Current.Session["Form941ReturnResponses"];
+                }
+                else
+                {
+                    return new List<Form941ReturnResponse>();
+                }
+            }
+            set
+            {
+                if (value != null)
+                {
+                    HttpContext.Current.Session["Form941ReturnResponses"] = value;
+                }
+            }
+        }
+        #endregion
+
+        #region Add Form 941 API Response
+        /// <summary>
+        /// Add Form 941 API Response
+        /// </summary>
+        /// <param name="returnResponse"></param>
+        public static void AddForm941APIResponse(Form941ReturnResponse returnResponse)
+        {
+            if (returnResponse != null && returnResponse.SubmissionId != Guid.Empty)
+            {
+                List<Form941ReturnResponse> returnResponses = Form941ReturnResponses;
+                returnResponses.Add(returnResponse);
+                Form941ReturnResponses = returnResponses;
+            }
+        }
+        #endregion
+
+        #region Get Form 941 API Response 
+        /// <summary>
+        ///  Get API Response 
+        /// </summary>
+        /// <returns></returns>
+        public static List<EFileStatus> GetForm941APIResponse()
+        {
+            List<EFileStatus> efileStatusList = new List<EFileStatus>();
+            List<Form941ReturnResponse> returnResponses = Form941ReturnResponses;
+            if (returnResponses != null && returnResponses.Count > 0)
+            {
+                var apiResponse = returnResponses.Where(a => a.StatusCode == (int)StatusCode.Success && a.SubmissionId != Guid.Empty).ToList();
+                foreach (var submission in apiResponse)
+                {
+                    var formW2 = new EFileStatus();
+                    formW2.SubmissionId = submission.SubmissionId;
+                    formW2.IsReturnTransmitted = submission.IsReturnTransmitted;
+                    efileStatusList.Add(formW2);
+                }
+            }
+            return efileStatusList;
+        }
+        #endregion
+
+        #endregion
+
     }
 }

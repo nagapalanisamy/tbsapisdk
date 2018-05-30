@@ -131,8 +131,8 @@ namespace APIClientTool.Controllers
                     Line14 = 0M,
                     Line15 = 0M,
                     Line6 = 200M,
-                    Line10= 200M,
-                    TotTaxDepositAmt=200M
+                    Line10 = 200M,
+                    TotTaxDepositAmt = 200M
                 }
             };
         }
@@ -204,7 +204,7 @@ namespace APIClientTool.Controllers
                         if (form941Response.SubmissionId != null && form941Response.SubmissionId != Guid.Empty)
                         {
                             //Adding Form941CreateReturnResponse Response to Session
-                            //APISession.AddAPIResponse(form941Response); To Do
+                            APISession.AddForm941APIResponse(form941Response);
                         }
                     }
                 }

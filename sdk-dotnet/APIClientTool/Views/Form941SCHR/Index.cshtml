@@ -1,8 +1,400 @@
-﻿
+﻿@model APIClientTool.ViewModels.Form941SCHR.Form941SchRRecords
+
+@using APIClientTool.ViewModels
+@using APIClientTool.Utilities
 @{
     Layout = null;
-}
 
+   // int ClientCount = Session["ClientCounts"] != null ? Utility.GetInt(Session["ClientCounts"]) : 1;
+    var CPEOWageTypeList = new List<SelectListItem>();
+    CPEOWageTypeList.Add(new SelectListItem() { Text = "A", Value = "A" });
+    CPEOWageTypeList.Add(new SelectListItem() { Text = "B", Value = "B" });
+    CPEOWageTypeList.Add(new SelectListItem() { Text = "C", Value = "C" });
+    CPEOWageTypeList.Add(new SelectListItem() { Text = "D", Value = "D" });
+    //bool isUpdateTrue = Session["Update"] != null ? Utility.GetBool(Session["Update"]) : false; 
+    //bool isUpdateClient = Session["UpdateClient"] != null ? Utility.GetBool(Session["UpdateClient"]) : false;
+}
+@{
+    ViewBag.Title = "CreateBusiness";
+
+    List<SelectListItem> BusinessTypeList = new List<SelectListItem>()
+    {
+         new SelectListItem { Text="Estate",Value="ESTE"},
+    new SelectListItem { Text="Partnership",Value="PART"},
+    new SelectListItem { Text="Corporation",Value="CORP"},
+    new SelectListItem { Text="Exempt Organization",Value="EORG"},
+    new SelectListItem { Text="Sole Proprietorship",Value="SPRO"}
+
+    };
+
+    List<SelectListItem> countryList = new List<SelectListItem>();
+    countryList.Add(new SelectListItem { Text = "Afghanistan", Value = "AF" });
+    countryList.Add(new SelectListItem { Text = "Akrotiri", Value = "AX" });
+    countryList.Add(new SelectListItem { Text = "Aland Island", Value = "XI" });
+    countryList.Add(new SelectListItem { Text = "Albania", Value = "AL" });
+    countryList.Add(new SelectListItem { Text = "Algeria", Value = "AG" });
+    countryList.Add(new SelectListItem { Text = "American Samoa", Value = "AQ" });
+    countryList.Add(new SelectListItem { Text = "Andorra", Value = "AN" });
+    countryList.Add(new SelectListItem { Text = "Angola ", Value = "AO" });
+    countryList.Add(new SelectListItem { Text = "Anguilla", Value = "AV" });
+    countryList.Add(new SelectListItem { Text = "Antarctica ", Value = "AY" });
+    countryList.Add(new SelectListItem { Text = "Antigua and Barbuda", Value = "AC" });
+    countryList.Add(new SelectListItem { Text = "Argentina", Value = "AR" });
+    countryList.Add(new SelectListItem { Text = "Armenia", Value = "AM" });
+    countryList.Add(new SelectListItem { Text = "Aruba", Value = "AA" });
+    countryList.Add(new SelectListItem { Text = "Ascension", Value = "XA" });
+    countryList.Add(new SelectListItem { Text = "Ashmore and Cartier Islands", Value = "AT" });
+    countryList.Add(new SelectListItem { Text = "Australia", Value = "AS" });
+    countryList.Add(new SelectListItem { Text = "Austria", Value = "AU" });
+    countryList.Add(new SelectListItem { Text = "Azerbaijan ", Value = "AJ" });
+    countryList.Add(new SelectListItem { Text = "Azores ", Value = "XZ" });
+    countryList.Add(new SelectListItem { Text = "Bahamas", Value = "BF" });
+    countryList.Add(new SelectListItem { Text = "Bahrain", Value = "BA" });
+    countryList.Add(new SelectListItem { Text = "Baker Islands", Value = "FQ" });
+    countryList.Add(new SelectListItem { Text = "Bangladesh ", Value = "BG" });
+    countryList.Add(new SelectListItem { Text = "Barbados", Value = "BB" });
+    countryList.Add(new SelectListItem { Text = "Bassas da India", Value = "BS" });
+    countryList.Add(new SelectListItem { Text = "Belarus", Value = "BO" });
+    countryList.Add(new SelectListItem { Text = "Belgium", Value = "BE" });
+    countryList.Add(new SelectListItem { Text = "Belize ", Value = "BH" });
+    countryList.Add(new SelectListItem { Text = "Benin", Value = "BN" });
+    countryList.Add(new SelectListItem { Text = "Bermuda", Value = "BD" });
+    countryList.Add(new SelectListItem { Text = "Bhutan ", Value = "BT" });
+    countryList.Add(new SelectListItem { Text = "Bolivia", Value = "BL" });
+    countryList.Add(new SelectListItem { Text = "Bosnia - Herzegovina ", Value = "BK" });
+    countryList.Add(new SelectListItem { Text = "Botswana", Value = "BC" });
+    countryList.Add(new SelectListItem { Text = "Bouvet Island", Value = "BV" });
+    countryList.Add(new SelectListItem { Text = "Brazil ", Value = "BR" });
+    countryList.Add(new SelectListItem { Text = "British Indian OceanTerritory", Value = "IO" });
+    countryList.Add(new SelectListItem { Text = "British Virgin Islands", Value = "VI" });
+    countryList.Add(new SelectListItem { Text = "Brunei ", Value = "BX" });
+    countryList.Add(new SelectListItem { Text = "Bulgaria", Value = "BU" });
+    countryList.Add(new SelectListItem { Text = "Burkina Faso", Value = "UV" });
+    countryList.Add(new SelectListItem { Text = "Burma", Value = "BM" });
+    countryList.Add(new SelectListItem { Text = "Burundi", Value = "BY" });
+    countryList.Add(new SelectListItem { Text = "Cambodia", Value = "CB" });
+    countryList.Add(new SelectListItem { Text = "Cameroon", Value = "CM" });
+    countryList.Add(new SelectListItem { Text = "Canada ", Value = "CA" });
+    countryList.Add(new SelectListItem { Text = "Canary Islands", Value = "XY" });
+    countryList.Add(new SelectListItem { Text = "Cape Verde ", Value = "CV" });
+    countryList.Add(new SelectListItem { Text = "Cayman Islands", Value = "CJ" });
+    countryList.Add(new SelectListItem { Text = "Central African Republic ", Value = "CT" });
+    countryList.Add(new SelectListItem { Text = "Chad", Value = "CD" });
+    countryList.Add(new SelectListItem { Text = "Channel Islands", Value = "XC" });
+    countryList.Add(new SelectListItem { Text = "Chile", Value = "CI" });
+    countryList.Add(new SelectListItem { Text = "China", Value = "CH" });
+    countryList.Add(new SelectListItem { Text = "Christmas Island ", Value = "KT" });
+    countryList.Add(new SelectListItem { Text = "Clipperton Island", Value = "IP" });
+    countryList.Add(new SelectListItem { Text = "Cocos(Keeling) Islands", Value = "CK" });
+    countryList.Add(new SelectListItem { Text = "Colombia", Value = "CO" });
+    countryList.Add(new SelectListItem { Text = "Congo(Brazzaville)", Value = "CF" });
+    countryList.Add(new SelectListItem { Text = "Congo(Kinshasa)", Value = "CG" });
+    countryList.Add(new SelectListItem { Text = "Cook Islands", Value = "CW" });
+    countryList.Add(new SelectListItem { Text = "Coral Sea Islands", Value = "CR" });
+    countryList.Add(new SelectListItem { Text = "Corsica", Value = "VP" });
+    countryList.Add(new SelectListItem { Text = "Costa Rica ", Value = "CS" });
+    countryList.Add(new SelectListItem { Text = "Cote D'Ivoire (IvoryCoast)", Value = "IV" });
+    countryList.Add(new SelectListItem { Text = "Croatia", Value = "HR" });
+    countryList.Add(new SelectListItem { Text = "Cuba", Value = "CU" });
+    countryList.Add(new SelectListItem { Text = "Cyprus ", Value = "CY" });
+    countryList.Add(new SelectListItem { Text = "Czech Republic", Value = "EZ" });
+    countryList.Add(new SelectListItem { Text = "Denmark", Value = "DA" });
+    countryList.Add(new SelectListItem { Text = "Dhekelia", Value = "DX" });
+    countryList.Add(new SelectListItem { Text = "Djibouti", Value = "DJ" });
+    countryList.Add(new SelectListItem { Text = "Dominica", Value = "DO" });
+    countryList.Add(new SelectListItem { Text = "Dominican Republic", Value = "DR" });
+    countryList.Add(new SelectListItem { Text = "East Timor ", Value = "TT" });
+    countryList.Add(new SelectListItem { Text = "Ecuador", Value = "EC" });
+    countryList.Add(new SelectListItem { Text = "Egypt", Value = "EG" });
+    countryList.Add(new SelectListItem { Text = "El Salvador", Value = "ES" });
+    countryList.Add(new SelectListItem { Text = "England", Value = "UK" });
+    countryList.Add(new SelectListItem { Text = "Equatorial Guinea", Value = "EK" });
+    countryList.Add(new SelectListItem { Text = "Eritrea", Value = "ER" });
+    countryList.Add(new SelectListItem { Text = "Estonia", Value = "EN" });
+    countryList.Add(new SelectListItem { Text = "Ethiopia", Value = "ET" });
+    countryList.Add(new SelectListItem { Text = "Europa Island", Value = "EU" });
+    countryList.Add(new SelectListItem { Text = "Falkland Islands(Islas Malvinas) ", Value = "FK" });
+    countryList.Add(new SelectListItem { Text = "Faroe Islands", Value = "FO" });
+    countryList.Add(new SelectListItem { Text = "Federated States of Micronesia", Value = "FM" });
+    countryList.Add(new SelectListItem { Text = "Fiji", Value = "FJ" });
+    countryList.Add(new SelectListItem { Text = "Finland", Value = "FI" });
+    countryList.Add(new SelectListItem { Text = "France ", Value = "FR" });
+    countryList.Add(new SelectListItem { Text = "French Guiana", Value = "FG" });
+    countryList.Add(new SelectListItem { Text = "French Polynesia ", Value = "FP" });
+    countryList.Add(new SelectListItem { Text = "French Southern and Antarctic Lands", Value = "FS" });
+    countryList.Add(new SelectListItem { Text = "Gabon", Value = "GB" });
+    countryList.Add(new SelectListItem { Text = "The Gambia ", Value = "GA" });
+    countryList.Add(new SelectListItem { Text = "Gaza Strip ", Value = "GZ" });
+    countryList.Add(new SelectListItem { Text = "Georgia", Value = "GG" });
+    countryList.Add(new SelectListItem { Text = "Germany", Value = "GM" });
+    countryList.Add(new SelectListItem { Text = "Ghana", Value = "GH" });
+    countryList.Add(new SelectListItem { Text = "Gibraltar", Value = "GI" });
+    countryList.Add(new SelectListItem { Text = "Glorioso Islands ", Value = "GO" });
+    countryList.Add(new SelectListItem { Text = "Greece ", Value = "GR" });
+    countryList.Add(new SelectListItem { Text = "Greenland", Value = "GL" });
+    countryList.Add(new SelectListItem { Text = "Grenada", Value = "GJ" });
+    countryList.Add(new SelectListItem { Text = "Grenadines ", Value = "VC" });
+    countryList.Add(new SelectListItem { Text = "Guadeloupe ", Value = "GP" });
+    countryList.Add(new SelectListItem { Text = "Guam", Value = "GQ" });
+    countryList.Add(new SelectListItem { Text = "Guatemala", Value = "GT" });
+    countryList.Add(new SelectListItem { Text = "Guernsey", Value = "GK" });
+    countryList.Add(new SelectListItem { Text = "Guinea ", Value = "GV" });
+    countryList.Add(new SelectListItem { Text = "Guinea - Bissau", Value = "PU" });
+    countryList.Add(new SelectListItem { Text = "Guyana ", Value = "GY" });
+    countryList.Add(new SelectListItem { Text = "Haiti", Value = "HA" });
+    countryList.Add(new SelectListItem { Text = "Heard Island and McDonald Islands", Value = "HM" });
+    countryList.Add(new SelectListItem { Text = "Honduras", Value = "HO" });
+    countryList.Add(new SelectListItem { Text = "Hong Kong", Value = "HK" });
+    countryList.Add(new SelectListItem { Text = "Howland Island", Value = "HQ" });
+    countryList.Add(new SelectListItem { Text = "Hungary", Value = "HU" });
+    countryList.Add(new SelectListItem { Text = "Iceland", Value = "IC" });
+    countryList.Add(new SelectListItem { Text = "India", Value = "IN" });
+    countryList.Add(new SelectListItem { Text = "Indonesia", Value = "ID" });
+    countryList.Add(new SelectListItem { Text = "Iran", Value = "IR" });
+    countryList.Add(new SelectListItem { Text = "Iraq", Value = "IZ" });
+    countryList.Add(new SelectListItem { Text = "Ireland", Value = "EI" });
+    countryList.Add(new SelectListItem { Text = "Israel ", Value = "IS" });
+    countryList.Add(new SelectListItem { Text = "Italy", Value = "IT" });
+    countryList.Add(new SelectListItem { Text = "Jamaica", Value = "JM" });
+    countryList.Add(new SelectListItem { Text = "Jan Mayen", Value = "JN" });
+    countryList.Add(new SelectListItem { Text = "Japan", Value = "JA" });
+    countryList.Add(new SelectListItem { Text = "Jarvis Island", Value = "DQ" });
+    countryList.Add(new SelectListItem { Text = "Jersey ", Value = "JE" });
+    countryList.Add(new SelectListItem { Text = "Johnston Atoll", Value = "JQ" });
+    countryList.Add(new SelectListItem { Text = "Jordan ", Value = "JO" });
+    countryList.Add(new SelectListItem { Text = "Juan de Nova Island", Value = "JU" });
+    countryList.Add(new SelectListItem { Text = "Kazakhstan ", Value = "KZ" });
+    countryList.Add(new SelectListItem { Text = "Kenya", Value = "KE" });
+    countryList.Add(new SelectListItem { Text = "Kingman Reef", Value = "KQ" });
+    countryList.Add(new SelectListItem { Text = "Kiribati", Value = "KR" });
+    countryList.Add(new SelectListItem { Text = "Korea, Democratic People's Republic of (North)", Value = "KN" });
+    countryList.Add(new SelectListItem { Text = "Korea, Republic of (South)", Value = "KS" });
+    countryList.Add(new SelectListItem { Text = "Kuwait ", Value = "KU" });
+    countryList.Add(new SelectListItem { Text = "Kyrgyzstan ", Value = "KG" });
+    countryList.Add(new SelectListItem { Text = "Laos", Value = "LA" });
+    countryList.Add(new SelectListItem { Text = "Latvia ", Value = "LG" });
+    countryList.Add(new SelectListItem { Text = "Lebanon", Value = "LE" });
+    countryList.Add(new SelectListItem { Text = "Lesotho", Value = "LT" });
+    countryList.Add(new SelectListItem { Text = "Liberia", Value = "LI" });
+    countryList.Add(new SelectListItem { Text = "Libya", Value = "LY" });
+    countryList.Add(new SelectListItem { Text = "Liechtenstein", Value = "LS" });
+    countryList.Add(new SelectListItem { Text = "Lithuania", Value = "LH" });
+    countryList.Add(new SelectListItem { Text = "Luxembourg ", Value = "LU" });
+    countryList.Add(new SelectListItem { Text = "Macau", Value = "MC" });
+    countryList.Add(new SelectListItem { Text = "Macedonia", Value = "MK" });
+    countryList.Add(new SelectListItem { Text = "Madagascar ", Value = "MA" });
+    countryList.Add(new SelectListItem { Text = "Malawi ", Value = "MI" });
+    countryList.Add(new SelectListItem { Text = "Malaysia", Value = "MY" });
+    countryList.Add(new SelectListItem { Text = "Maldives", Value = "MV" });
+    countryList.Add(new SelectListItem { Text = "Mali", Value = "ML" });
+    countryList.Add(new SelectListItem { Text = "Malta", Value = "MT" });
+    countryList.Add(new SelectListItem { Text = "Man, Isle of", Value = "IM" });
+    countryList.Add(new SelectListItem { Text = "Marshall Islands ", Value = "RM" });
+    countryList.Add(new SelectListItem { Text = "Martinique ", Value = "MB" });
+    countryList.Add(new SelectListItem { Text = "Mauritania ", Value = "MR" });
+    countryList.Add(new SelectListItem { Text = "Mauritius", Value = "MP" });
+    countryList.Add(new SelectListItem { Text = "Mayotte", Value = "MF" });
+    countryList.Add(new SelectListItem { Text = "Mexico ", Value = "MX" });
+    countryList.Add(new SelectListItem { Text = "Midway Islands", Value = "MQ" });
+    countryList.Add(new SelectListItem { Text = "Moldova", Value = "MD" });
+    countryList.Add(new SelectListItem { Text = "Monaco ", Value = "MN" });
+    countryList.Add(new SelectListItem { Text = "Mongolia", Value = "MG" });
+    countryList.Add(new SelectListItem { Text = "Montenegro ", Value = "MJ" });
+    countryList.Add(new SelectListItem { Text = "Montserrat ", Value = "MH" });
+    countryList.Add(new SelectListItem { Text = "Morocco", Value = "MO" });
+    countryList.Add(new SelectListItem { Text = "Mozambique ", Value = "MZ" });
+    countryList.Add(new SelectListItem { Text = "Myanmar", Value = "XM" });
+    countryList.Add(new SelectListItem { Text = "Namibia", Value = "WA" });
+    countryList.Add(new SelectListItem { Text = "Nauru", Value = "NR" });
+    countryList.Add(new SelectListItem { Text = "Navassa Island", Value = "BQ" });
+    countryList.Add(new SelectListItem { Text = "Nepal", Value = "NP" });
+    countryList.Add(new SelectListItem { Text = "Netherlands", Value = "NL" });
+    countryList.Add(new SelectListItem { Text = "Netherlands Antilles ", Value = "NT" });
+    countryList.Add(new SelectListItem { Text = "New Caledonia", Value = "NC" });
+    countryList.Add(new SelectListItem { Text = "New Zealand", Value = "NZ" });
+    countryList.Add(new SelectListItem { Text = "Nicaragua", Value = "NU" });
+    countryList.Add(new SelectListItem { Text = "Niger", Value = "NG" });
+    countryList.Add(new SelectListItem { Text = "Nigeria", Value = "NI" });
+    countryList.Add(new SelectListItem { Text = "Niue", Value = "NE" });
+    countryList.Add(new SelectListItem { Text = "Norfolk Island", Value = "NF" });
+    countryList.Add(new SelectListItem { Text = "Northern Ireland ", Value = "XN" });
+    countryList.Add(new SelectListItem { Text = "Northern Mariana Islands ", Value = "CQ" });
+    countryList.Add(new SelectListItem { Text = "Norway ", Value = "NO" });
+    countryList.Add(new SelectListItem { Text = "Oman", Value = "MU" });
+    countryList.Add(new SelectListItem { Text = "Other Country (country not identified elsewhere)", Value = "OC" });
+    countryList.Add(new SelectListItem { Text = "Pakistan", Value = "PK" });
+    countryList.Add(new SelectListItem { Text = "Palmyra Atoll", Value = "LQ" });
+    countryList.Add(new SelectListItem { Text = "Palau", Value = "PS" });
+    countryList.Add(new SelectListItem { Text = "Panama ", Value = "PM" });
+    countryList.Add(new SelectListItem { Text = "Papua - New Guinea", Value = "PP" });
+    countryList.Add(new SelectListItem { Text = "Paracel Islands ", Value = "PF" });
+    countryList.Add(new SelectListItem { Text = "Paraguay", Value = "PA" });
+    countryList.Add(new SelectListItem { Text = "Peru ", Value = "PE" });
+    countryList.Add(new SelectListItem { Text = "Philippines", Value = "RP" });
+    countryList.Add(new SelectListItem { Text = "Pitcairn Islands", Value = "PC" });
+    countryList.Add(new SelectListItem { Text = "Poland", Value = "PL" });
+    countryList.Add(new SelectListItem { Text = "Portugal", Value = "PO" });
+    countryList.Add(new SelectListItem { Text = "Puerto Rico", Value = "RQ" });
+    countryList.Add(new SelectListItem { Text = "Qatar", Value = "QA" });
+    countryList.Add(new SelectListItem { Text = "Reunion ", Value = "RE" });
+    countryList.Add(new SelectListItem { Text = "Romania ", Value = "RO" });
+    countryList.Add(new SelectListItem { Text = "Russia", Value = "RS" });
+    countryList.Add(new SelectListItem { Text = "Rwanda", Value = "RW" });
+    countryList.Add(new SelectListItem { Text = "Samoa and Western Samoa ", Value = "WS" });
+    countryList.Add(new SelectListItem { Text = "San Marino ", Value = "SM" });
+    countryList.Add(new SelectListItem { Text = "Sao Tome and Principe", Value = "TP" });
+    countryList.Add(new SelectListItem { Text = "Saudi Arabia", Value = "SA" });
+    countryList.Add(new SelectListItem { Text = "Scotland", Value = "XS" });
+    countryList.Add(new SelectListItem { Text = "Senegal ", Value = "SG" });
+    countryList.Add(new SelectListItem { Text = "Serbia", Value = "RI" });
+    countryList.Add(new SelectListItem { Text = "Seychelles ", Value = "SE" });
+    countryList.Add(new SelectListItem { Text = "Sierra Leone", Value = "SL" });
+    countryList.Add(new SelectListItem { Text = "Singapore", Value = "SN" });
+    countryList.Add(new SelectListItem { Text = "Slovak Republic", Value = "XR" });
+    countryList.Add(new SelectListItem { Text = "Slovakia", Value = "LO" });
+    countryList.Add(new SelectListItem { Text = "Slovenia", Value = "SI" });
+    countryList.Add(new SelectListItem { Text = "Solomon Islands", Value = "BP" });
+    countryList.Add(new SelectListItem { Text = "Somalia ", Value = "SO" });
+    countryList.Add(new SelectListItem { Text = "South Africa", Value = "SF" });
+    countryList.Add(new SelectListItem { Text = "South Georgia and the South Sandwich Islands ", Value = "SX" });
+    countryList.Add(new SelectListItem { Text = "Spain", Value = "SP" });
+    countryList.Add(new SelectListItem { Text = "Spratly Islands", Value = "PG" });
+    countryList.Add(new SelectListItem { Text = "Sri Lanka", Value = "CE" });
+    countryList.Add(new SelectListItem { Text = "St.Helena", Value = "SH" });
+    countryList.Add(new SelectListItem { Text = "St.Kitts and Nevis", Value = "SC" });
+    countryList.Add(new SelectListItem { Text = "St.Lucia Island", Value = "ST" });
+    countryList.Add(new SelectListItem { Text = "St.Pierre and Miquelon", Value = "SB" });
+    countryList.Add(new SelectListItem { Text = "St.Vincent and the Grenadines ", Value = "VC" });
+    countryList.Add(new SelectListItem { Text = "Sudan", Value = "SU" });
+    countryList.Add(new SelectListItem { Text = "Suriname", Value = "NS" });
+    countryList.Add(new SelectListItem { Text = "Svalbard", Value = "SV" });
+    countryList.Add(new SelectListItem { Text = "Swaziland", Value = "WZ" });
+    countryList.Add(new SelectListItem { Text = "Sweden", Value = "SW" });
+    countryList.Add(new SelectListItem { Text = "Switzerland", Value = "SZ" });
+    countryList.Add(new SelectListItem { Text = "Syria", Value = "SY" });
+    countryList.Add(new SelectListItem { Text = "Taiwan", Value = "TW" });
+    countryList.Add(new SelectListItem { Text = "Tajikistin ", Value = "TI" });
+    countryList.Add(new SelectListItem { Text = "Tanzania", Value = "TZ" });
+    countryList.Add(new SelectListItem { Text = "Thailand", Value = "TH" });
+    countryList.Add(new SelectListItem { Text = "Togo ", Value = "TO" });
+    countryList.Add(new SelectListItem { Text = "Tokelau ", Value = "TL" });
+    countryList.Add(new SelectListItem { Text = "Tonga", Value = "TN" });
+    countryList.Add(new SelectListItem { Text = "Trinidad and Tobago", Value = "TD" });
+    countryList.Add(new SelectListItem { Text = "Tristan Da Cunha", Value = "XT" });
+    countryList.Add(new SelectListItem { Text = "Tromelin Island", Value = "TE" });
+    countryList.Add(new SelectListItem { Text = "Tunisia ", Value = "TS" });
+    countryList.Add(new SelectListItem { Text = "Turkey", Value = "TU" });
+    countryList.Add(new SelectListItem { Text = "Turkmenistan", Value = "TX" });
+    countryList.Add(new SelectListItem { Text = "Turks and Caicos Islands", Value = "TK" });
+    countryList.Add(new SelectListItem { Text = "Tuvalu", Value = "TV" });
+    countryList.Add(new SelectListItem { Text = "Uganda", Value = "UG" });
+    countryList.Add(new SelectListItem { Text = "Ukraine ", Value = "UP" });
+    countryList.Add(new SelectListItem { Text = "United Arab Emirates ", Value = "AE" });
+    countryList.Add(new SelectListItem { Text = "Uruguay ", Value = "UY" });
+    countryList.Add(new SelectListItem { Text = "Uzbekistan ", Value = "UZ" });
+    countryList.Add(new SelectListItem { Text = "Vanuatu ", Value = "NH" });
+    countryList.Add(new SelectListItem { Text = "Vatican City", Value = "VT" });
+    countryList.Add(new SelectListItem { Text = "Venezuela", Value = "VE" });
+    countryList.Add(new SelectListItem { Text = "Vietnam ", Value = "VM" });
+    countryList.Add(new SelectListItem { Text = "Virgin Islands ", Value = "VQ" });
+    countryList.Add(new SelectListItem { Text = "Wake Island", Value = "WQ" });
+    countryList.Add(new SelectListItem { Text = "Wales", Value = "XW" });
+    countryList.Add(new SelectListItem { Text = "Wallis and Futuna ", Value = "WF" });
+    countryList.Add(new SelectListItem { Text = "West Bank", Value = "WE" });
+    countryList.Add(new SelectListItem { Text = "Western Sahara ", Value = "WI" });
+    countryList.Add(new SelectListItem { Text = "Yemen(Aden)", Value = "YM" });
+    countryList.Add(new SelectListItem { Text = "Yugoslavia ", Value = "YI" });
+    countryList.Add(new SelectListItem { Text = "Zambia", Value = "ZA" });
+    countryList.Add(new SelectListItem { Text = "Zimbabwe", Value = "ZI" });
+    countryList.Add(new SelectListItem { Text = "Curacao", Value = "UC" });
+    countryList.Add(new SelectListItem { Text = "Holy See", Value = "VT" });
+    countryList.Add(new SelectListItem { Text = "Kosovo", Value = "KV" });
+    countryList.Add(new SelectListItem { Text = "Palau", Value = "PS" });
+    countryList.Add(new SelectListItem { Text = "Saint Barthelemy", Value = "TB" });
+    countryList.Add(new SelectListItem { Text = "Saint Martin", Value = "RN" });
+    countryList.Add(new SelectListItem { Text = "Sint Maarten", Value = "NN" });
+    countryList.Add(new SelectListItem { Text = "South Sudan", Value = "OD" });
+    countryList.Add(new SelectListItem { Text = "United Kingdom", Value = "UK" });
+    countryList.Add(new SelectListItem { Text = "USA ", Value = "US" });
+
+    List<SelectListItem> USStates = new List<SelectListItem>();
+    USStates.Add(new SelectListItem { Text = "Alabama (AL)", Value = "AL" });
+    USStates.Add(new SelectListItem { Text = "Alaska (AK)", Value = "AK" });
+    USStates.Add(new SelectListItem { Text = "Arizona (AZ)", Value = "AZ" });
+    USStates.Add(new SelectListItem { Text = "Arkansas (AR)", Value = "AR" });
+    USStates.Add(new SelectListItem { Text = "California (CA)", Value = "CA" });
+    USStates.Add(new SelectListItem { Text = "Colorado (CO)", Value = "CO" });
+    USStates.Add(new SelectListItem { Text = "Connecticut (CT)", Value = "CT" });
+    USStates.Add(new SelectListItem { Text = "Delaware (DE)", Value = "DE" });
+    USStates.Add(new SelectListItem { Text = "District of Columbia (DC)", Value = "DC" });
+    USStates.Add(new SelectListItem { Text = "Florida (FL)", Value = "FL" });
+    USStates.Add(new SelectListItem { Text = "Georgia (GA)", Value = "GA" });
+    USStates.Add(new SelectListItem { Text = "Hawaii (HI)", Value = "HI" });
+    USStates.Add(new SelectListItem { Text = "Idaho (ID)", Value = "ID" });
+    USStates.Add(new SelectListItem { Text = "Illinois (IL)", Value = "IL" });
+    USStates.Add(new SelectListItem { Text = "Indiana (IN)", Value = "IN" });
+    USStates.Add(new SelectListItem { Text = "Iowa (IA)", Value = "IA" });
+    USStates.Add(new SelectListItem { Text = "Kansas (KS)", Value = "KS" });
+    USStates.Add(new SelectListItem { Text = "Kentucky (KY)", Value = "KY" });
+    USStates.Add(new SelectListItem { Text = "Louisiana (LA)", Value = "LA" });
+    USStates.Add(new SelectListItem { Text = "Maine (ME)", Value = "ME" });
+    USStates.Add(new SelectListItem { Text = "Maryland (MD)", Value = "MD" });
+    USStates.Add(new SelectListItem { Text = "Massachusetts (MA)", Value = "MA" });
+    USStates.Add(new SelectListItem { Text = "Michigan (MI)", Value = "MI" });
+    USStates.Add(new SelectListItem { Text = "Minnesota (MN)", Value = "MN" });
+    USStates.Add(new SelectListItem { Text = "Mississippi (MS)", Value = "MS" });
+    USStates.Add(new SelectListItem { Text = "Missouri (MO)", Value = "MO" });
+    USStates.Add(new SelectListItem { Text = "Montana (MT)", Value = "MT" });
+    USStates.Add(new SelectListItem { Text = "Nebraska (NE)", Value = "NE" });
+    USStates.Add(new SelectListItem { Text = "Nevada (NV)", Value = "NV" });
+    USStates.Add(new SelectListItem { Text = "New Hampshire (NH)", Value = "NH" });
+    USStates.Add(new SelectListItem { Text = "New Jersey (NJ)", Value = "NJ" });
+    USStates.Add(new SelectListItem { Text = "New Mexico (NM)", Value = "NM" });
+    USStates.Add(new SelectListItem { Text = "New York (NY)", Value = "NY" });
+    USStates.Add(new SelectListItem { Text = "North Carolina (NC)", Value = "NC" });
+    USStates.Add(new SelectListItem { Text = "North Dakota (ND)", Value = "ND" });
+    USStates.Add(new SelectListItem { Text = "Ohio (OH)", Value = "OH" });
+    USStates.Add(new SelectListItem { Text = "Oklahoma (OK)", Value = "OK" });
+    USStates.Add(new SelectListItem { Text = "Oregon (OR)", Value = "OR" });
+    USStates.Add(new SelectListItem { Text = "Pennsylvania (PA)", Value = "PA" });
+    USStates.Add(new SelectListItem { Text = "Rhode Island (RI)", Value = "RI" });
+    USStates.Add(new SelectListItem { Text = "South Carolina (SC)", Value = "SC" });
+    USStates.Add(new SelectListItem { Text = "South Dakota (SD)", Value = "SD" });
+    USStates.Add(new SelectListItem { Text = "Tennessee (TN)", Value = "TN" });
+    USStates.Add(new SelectListItem { Text = "Texas (TX)", Value = "TX" });
+    USStates.Add(new SelectListItem { Text = "Utah (UT)", Value = "UT" });
+    USStates.Add(new SelectListItem { Text = "Vermont (VT)", Value = "VT" });
+    USStates.Add(new SelectListItem { Text = "Virginia (VA)", Value = "VA" });
+    USStates.Add(new SelectListItem { Text = "Washington (WA)", Value = "WA" });
+    USStates.Add(new SelectListItem { Text = "West Virginia (WV)", Value = "WV" });
+    USStates.Add(new SelectListItem { Text = "Wisconsin (WI)", Value = "WI" });
+    USStates.Add(new SelectListItem { Text = "Wyoming (WY)", Value = "WY" });
+    USStates.Add(new SelectListItem { Text = "American Samoa (AS)", Value = "AS" });
+    USStates.Add(new SelectListItem { Text = "Federated States of Micronesia (FM)", Value = "FM" });
+    USStates.Add(new SelectListItem { Text = "Guam (GU)", Value = "GU" });
+    USStates.Add(new SelectListItem { Text = "Marshall Islands (MH)", Value = "MH" });
+    USStates.Add(new SelectListItem { Text = "Northern Mariana Islands (MP)", Value = "MP" });
+    USStates.Add(new SelectListItem { Text = "Palau (PW)", Value = "PW" });
+    USStates.Add(new SelectListItem { Text = "Puerto Rico (PR)", Value = "PR" });
+    USStates.Add(new SelectListItem { Text = "Virgin Islands (VI)", Value = "VI" });
+    USStates.Add(new SelectListItem { Text = "Armed Forces Americas (AA)", Value = "AA" });
+    USStates.Add(new SelectListItem { Text = "Armed Forces Europe (AE)", Value = "AE" });
+    USStates.Add(new SelectListItem { Text = "Armed Forces Pacific (AP)", Value = "AP" });
+
+    List<SelectListItem> taxYear = new List<SelectListItem> {
+    new SelectListItem { Text = "2018", Value = "2018" }
+    };
+
+    List<SelectListItem> quarter = new List<SelectListItem> {
+        new SelectListItem { Text = "Q1", Value = "Q1" },
+        new SelectListItem { Text = "Q2", Value = "Q2" },
+        new SelectListItem { Text = "Q3", Value = "Q3" },
+        new SelectListItem { Text = "Q4", Value = "Q4" }
+    };
+
+    //var countryList = Enum.GetValues(typeof(CountryType)).Cast<CountryType>().Select(e => new { Text = e.ToString(), Value = e.ToString() });
+    //var stateList = Enum.GetValues(typeof(StateType)).Cast<StateType>().Select(e => new { Text = e.ToString(), value = e.ToString() });
+}
 <!DOCTYPE html>
 
 <html>
@@ -11,7 +403,241 @@
     <title>Index</title>
 </head>
 <body>
-    <div> 
-    </div>
+
+    @using (Html.BeginForm("", "", FormMethod.Post, new { id = "Create941SCHRAddClient" }))
+    {
+        <h1 class="pageTitle">Create941SCHR Business</h1>
+        <table class="responsive">
+            <tr>
+                <td class="labelName"><label class="control-label">Tax Year</label></td>
+                <td class="fieldName">
+                    @Html.DropDownListFor(model => model.ReturnHeader.TaxYr, taxYear, "--Select--", new { @class = "form-control" })
+                </td>
+                <td class="labelName"><label class="control-label">Quarter</label></td>
+                <td class="fieldName">
+                    @Html.DropDownListFor(model => model.ReturnHeader.Qtr, quarter, "--Select--", new { @class = "form-control" })
+                </td>
+            </tr>
+            <tr><td class="spacer10"></td></tr>
+        </table>
+
+        <div class="panel-group" id="accordion">
+            <div class="formDiv">
+                <table class="tdDisBlock640">
+                    <tr>
+                        <td class="labelName">
+                            Business Type:
+                        </td>
+                        <td class="apifieldname vaT">
+                            @Html.DropDownListFor(model => Model.ReturnHeader.Business.BusinessType, BusinessTypeList, "-- Select--",
+               new { @tabindex = "103", id = "BusinessType", @onchange = "AssignBusinessMembers();" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="spacer10"></td>
+                    </tr>
+                    <tr>
+                        <td class="labelName">
+                            Employer Name:
+                        </td>
+                        <td class="apifieldname vaT">
+                            @Html.TextBoxFor(model => Model.ReturnHeader.Business.BusinessNm, new { @tabindex = "104" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="spacer10"></td>
+                    </tr>
+                    <tr>
+                        <td class="labelName">
+                            EIN:
+                        </td>
+                        <td class="apifieldname vaT">
+                            @Html.TextBoxFor(model => Model.ReturnHeader.Business.EINorSSN, new { maxlength = "9", @tabindex = "105" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="spacer10"></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td colspan="3">
+                            <div class="full_width">
+                                @Html.CheckBoxFor(model => model.ReturnHeader.Business.IsForeign, new { onclick = "ChangeForeignAddr();", @class = "css-checkbox", id = "chkIsForeignAddress", @tabindex = "106" })
+                                <label for="chkIsForeignAddress" class="css-label checkbox">Foreign Address (Outside US)?</label>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="labelName">
+                            Address:
+                        </td>
+                        <td class="apifieldname vaT">
+                            @Html.TextBoxFor(model => Model.ReturnHeader.Business.USAddress.Address1, new { @tabindex = "107", @class = "USAddressDetails" })
+                            @Html.TextBoxFor(model => Model.ReturnHeader.Business.ForeignAddress.Address1, new { @tabindex = "107", @style = "display:none", @class = "ForeignAddressDetails" })
+                        </td>
+                        <td class="labelName">
+                            Address Cont:
+                        </td>
+                        <td class="apifieldname vaT">
+                            @Html.TextBoxFor(model => Model.ReturnHeader.Business.USAddress.Address2, new { @tabindex = "108", @class = "USAddressDetails" })
+                            @Html.TextBoxFor(model => Model.ReturnHeader.Business.ForeignAddress.Address2, new { @tabindex = "108", @style = "display:none", @class = "ForeignAddressDetails" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="spacer10"></td>
+                    </tr>
+                    <tr id="trcitystate">
+                        <td class="labelName">
+                            City:
+                        </td>
+                        <td class="apifieldname vaT">
+                            @Html.TextBoxFor(model => Model.ReturnHeader.Business.USAddress.City, new { @id = "PayerCity", maxlength = "22", @tabindex = "109" })
+                        </td>
+                        <td class="labelName">
+                            State Code:
+                        </td>
+                        <td class="apifieldname vaT">
+                            @Html.DropDownListFor(model => Model.ReturnHeader.Business.USAddress.State, new SelectList(stateList, "text", "value", null), "Select Code", new { @tabindex = "110" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="spacer10"></td>
+                    </tr>
+
+                    <tr id="trOutsideCityStates">
+                        <td class="labelName">
+                            City:
+                        </td>
+                        <td class="apifieldname vaT">
+                            @Html.TextBoxFor(model => Model.ReturnHeader.Business.ForeignAddress.City, new { @id = "ForeignPayerCity", maxlength = "22", @tabindex = "109" })
+                        </td>
+                        <td class="labelName">
+                            Foreign City/State:
+                        </td>
+                        <td class="apifieldname vaT">
+                            @Html.TextBoxFor(model => Model.ReturnHeader.Business.ForeignAddress.ProvinceOrStateNm, new { @id = "ForeignPayerCity", maxlength = "22", @tabindex = "110" })
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td class="spacer10"></td>
+                    </tr>
+                    <tr id="trzipcode">
+                        <td class="labelName">
+                            Zip Code:
+                        </td>
+                        <td class="apifieldname vaT">
+                            @Html.TextBoxFor(model => Model.ReturnHeader.Business.USAddress.ZipCd, new { maxlength = "9", @tabindex = "111" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="spacer10"></td>
+                    </tr>
+                    <tr id="trZipcodeOutside">
+                        <td class="labelName">
+                            Country:
+                        </td>
+                        <td class="apifieldname vaT">
+                            @Html.DropDownListFor(model => Model.ReturnHeader.Business.ForeignAddress.Country, new SelectList(countryList, "text", "value", null), "Select Code", new { @tabindex = "111" })
+                        </td>
+                        <td class="labelName">
+                            Postal Code:
+                        </td>
+                        <td class="apifieldname vaT">
+                            @Html.TextBoxFor(model => Model.ReturnHeader.Business.ForeignAddress.PostalCd, new { maxlength = "9", @tabindex = "112" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="spacer10"></td>
+                    </tr>
+                    <tr>
+                        <td class="labelName">
+                            Contact Name:
+                        </td>
+                        <td class="apifieldname vaT">
+                            @Html.TextBoxFor(model => Model.ReturnHeader.Business.ContactNm, new { @tabindex = "113", maxlength = "50" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="spacer10"></td>
+                    </tr>
+                    <tr>
+                        <td class="labelName">
+                            Phone Number:
+                        </td>
+                        <td class="apifieldname vaT" colspan="3">
+                            @Html.TextBoxFor(m => Model.ReturnHeader.Business.Phone, new { @tabindex = "114", maxlength = "10" })
+                            @*@Html.TextBoxFor(m => m.ReturnHeader.Business.PhoneExtn, new { @tabindex = "114", @class = "PhoneExtension", maxlength = "5", @style = "width:60px !important;", @placeholder = "extn"})*@
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="spacer10"></td>
+                    </tr>
+                    <tr>
+                        <td class="labelName">
+                            Email Address:
+                        </td>
+                        <td class="apifieldname vaT">
+                            @Html.TextBoxFor(model => Model.ReturnHeader.Business.Email, new { @tabindex = "115" })
+                        </td>
+                        <td class="labelName">
+                            Fax Number:
+                        </td>
+                        <td class="apifieldname vaT">
+                            @Html.TextBoxFor(model => Model.ReturnHeader.Business.Fax, new { @tabindex = "116", maxlength = "10" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="spacer10"></td>
+                    </tr>
+                    <tr>
+                        <td class="labelName">
+                            Signatory Name:
+                        </td>
+                        <td class="apifieldname vaT">
+                            @Html.TextBoxFor(model => Model.ReturnHeader.Business.SigningAuthority.Name, new { @tabindex = "117", maxlength = "50" })
+                        </td>
+                        <td class="labelName">
+                            Title:
+                        </td>
+                        <td class="apifieldname vaT">
+                            @Html.DropDownListFor(model => Model.ReturnHeader.Business.SigningAuthority.BusinessMemberType, new SelectList("", "BusinessMembersId", "BusinessMembers"), "-- Select--",
+               new { @tabindex = "118", id = "BusinessMembers", @style = "width:172px" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="spacer10"></td>
+                    </tr>
+                    <tr>
+                        <td class="labelName">
+                            Daytime Phone:
+                        </td>
+                        <td class="apifieldname vaT">
+                            @Html.TextBoxFor(model => Model.ReturnHeader.Business.SigningAuthority.Phone, new { @tabindex = "119", maxlength = "10" })
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+            <div class="panel-group" id="accordion">
+                <div class="panel panel-default">
+                    <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapse1">
+                        <h4 class="panel-title">
+                            Add Clients Form 941-SCHR
+                            <i class="more-less fa fa-angle-up"></i>
+</h4>
+                    </div>
+
+                    <div id="collapse1" class="panel-collapse collapse">
+                        
+                    </div>
+
+                        </div>
+                    </div>
+
+
+                    }
+
 </body>
 </html>

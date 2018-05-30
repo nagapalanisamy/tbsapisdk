@@ -315,6 +315,8 @@
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\toastr.min.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="Views\Form941SCHR\Index.cshtml" />
+    <Content Include="Views\Form941SCHR\_Create941SCHRAddClients.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -347,7 +349,6 @@
     <Content Include="Views\Form941\_GetEfileStatusResponse.cshtml" />
     <Content Include="Views\Form941\APIResponseStatus.cshtml" />
     <Content Include="Views\Form941\_TransmitReturn.cshtml" />
-    <Content Include="Views\Form941SCHR\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />

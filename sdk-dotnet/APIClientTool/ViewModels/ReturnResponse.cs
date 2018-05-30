@@ -1,30 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace APIClientTool.ViewModels
 {
-    public class FormW2Response : FilingStatus
+    public class ReturnResponse : FilingStatus
     {
         public Guid SubmissionId { get; set; }
-        public FormW2Records FormW2Records { get; set; }
+        public FormRecords FormRecords { get; set; }
         public int StatusCode { get; set; }
         public string StatusMessage { get; set; }
         public string StatusName { get; set; }
         public List<Error> Errors { get; set; }
     }
-    public class FormW2Records
+    public class FormRecords
     {
-        public List<FormW2RecordSuccessStatus> SuccessRecords { get; set; }
-        public List<FormW2RecordErrorStatus> ErrorRecords { get; set; }
+        public List<FormRecordSuccessStatus> SuccessRecords { get; set; }
+        public List<FormRecordErrorStatus> ErrorRecords { get; set; }
     }
-    public class FormW2RecordErrorStatus
+    public class FormRecordErrorStatus
     {
         public string Sequence { get; set; }
         public List<Error> Errors { get; set; }
     }
-    public class FormW2RecordSuccessStatus
+    public class FormRecordSuccessStatus
     {
         public string Sequence { get; set; }
         public Guid? RecordId { get; set; }

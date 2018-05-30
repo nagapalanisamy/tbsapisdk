@@ -180,7 +180,7 @@ namespace APIClientTool.Controllers
         /// <returns>TransmitFormW2Response</returns>
         public ActionResult _TransmitReturn(Guid submissionId)
         {
-            TransmitFormW2 transmitFormW2 = new TransmitFormW2();
+            TransmitForm transmitFormW2 = new TransmitForm();
             TransmitFormW2Response transmitFormW2Response = new TransmitFormW2Response();
             var transmitFormW2ResponseJSON = string.Empty;
             if (submissionId != null && submissionId != Guid.Empty)

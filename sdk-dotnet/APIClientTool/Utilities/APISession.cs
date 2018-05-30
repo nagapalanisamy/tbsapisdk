@@ -8,47 +8,55 @@ namespace APIClientTool.Utilities
 {
     public class APISession
     {
-        #region Session Property for W2 Return
-        public static List<W2CreateReturnResponse> W2ReturnResponses
+        #region Session Property for Return
+        public static List<ReturnResponse> ReturnResponses
         {
             get
             {
-                if(HttpContext.Current.Session["W2CreateReturnResponse"] != null)
+                if(HttpContext.Current.Session["ReturnResponse"] != null)
                 {
-                    return (List<W2CreateReturnResponse>)HttpContext.Current.Session["W2CreateReturnResponse"];
+                    return (List<ReturnResponse>)HttpContext.Current.Session["ReturnResponse"];
                 }
                 else
                 {
-                    return new List<W2CreateReturnResponse>();
+                    return new List<ReturnResponse>();
                 }
             }
             set
             {
                 if(value != null)
                 {
-                    HttpContext.Current.Session["W2CreateReturnResponse"] = value;
+                    HttpContext.Current.Session["ReturnResponse"] = value;
                 }
             }
         }
         #endregion
 
         #region Add API Response
-        public static void AddAPIResponse(W2CreateReturnResponse returnResponse)
+        /// <summary>
+        /// Add API Response
+        /// </summary>
+        /// <param name="returnResponse"></param>
+        public static void AddAPIResponse(ReturnResponse returnResponse)
         {           
             if (returnResponse != null && returnResponse.SubmissionId != Guid.Empty)
             {
-                List<W2CreateReturnResponse> returnResponses = W2ReturnResponses;
+                List<ReturnResponse> returnResponses = ReturnResponses;
                 returnResponses.Add(returnResponse);
-                W2ReturnResponses = returnResponses;
+               ReturnResponses = returnResponses;
             }
         }
         #endregion
 
         #region Get API Response 
+        /// <summary>
+        ///  Get API Response 
+        /// </summary>
+        /// <returns></returns>
         public static List<EFileStatus> GetAPIResponse()
         {
             List<EFileStatus> formW2list = new List<EFileStatus>();
-            List<W2CreateReturnResponse> returnResponses = W2ReturnResponses;
+            List<ReturnResponse> returnResponses = ReturnResponses;
             if (returnResponses != null && returnResponses.Count > 0)
             {
                 var apiResponse = returnResponses.Where(a => a.StatusCode == (int)StatusCode.Success && a.SubmissionId != Guid.Empty).ToList();
@@ -65,44 +73,54 @@ namespace APIClientTool.Utilities
         #endregion
 
         #region Get RecordIDs by SubmissionId
-        public static TransmitFormW2 GetRecordIdsBySubmissionId(Guid submissionId)
+        /// <summary>
+        ///  Get RecordIDs by SubmissionId
+        /// </summary>
+        /// <param name="submissionId"></param>
+        /// <returns></returns>
+        public static TransmitForm GetRecordIdsBySubmissionId(Guid submissionId)
         {
-            TransmitFormW2 transmitFormW2 = new TransmitFormW2();
-            List<W2CreateReturnResponse> returnResponses = W2ReturnResponses;
+            TransmitForm transmitForm = new TransmitForm();
+            List<ReturnResponse> returnResponses = ReturnResponses;
             if (submissionId != Guid.Empty)
             {
-                transmitFormW2.SubmissionId = submissionId;
+                transmitForm.SubmissionId = submissionId;
                 if (returnResponses != null && returnResponses.Count > 0)
                 {
                     var returnResponse = returnResponses.Where(r => r.SubmissionId == submissionId).SingleOrDefault();
-                    if(returnResponse != null && returnResponse.FormW2Records != null 
-                        && returnResponse.FormW2Records.SuccessRecords != null && returnResponse.FormW2Records.SuccessRecords.Count > 0)
+                    if(returnResponse != null && returnResponse.FormRecords != null 
+                        && returnResponse.FormRecords.SuccessRecords != null && returnResponse.FormRecords.SuccessRecords.Count > 0)
                     {
-                        var recordIds = returnResponse.FormW2Records.SuccessRecords.Select(r => r.RecordId).ToList();
+                        var recordIds = returnResponse.FormRecords.SuccessRecords.Select(r => r.RecordId).ToList();
                         if (recordIds != null && recordIds.Any())
                         {
-                            transmitFormW2.RecordIds = new List<Guid>();
+                            transmitForm.RecordIds = new List<Guid>();
                             foreach (var recordId in recordIds)
                             {
-                                transmitFormW2.RecordIds.Add(recordId ?? Guid.Empty);
+                                transmitForm.RecordIds.Add(recordId ?? Guid.Empty);
                             }
                         }
                     }
                 }
             }
-            return transmitFormW2;
+            return transmitForm;
         }
         #endregion
 
         #region Update Filing Status
+        /// <summary>
+        /// Update Filing Status
+        /// </summary>
+        /// <param name="submissionId"></param>
+        /// <returns></returns>
         public static bool UpdateFilingStatus(Guid submissionId)
         {
             bool isUpdated = false;
             if (submissionId != Guid.Empty)
             {
-                if (W2ReturnResponses != null && W2ReturnResponses.Count > 0)
+                if (ReturnResponses != null && ReturnResponses.Count > 0)
                 {
-                    var apiResponse = W2ReturnResponses.Where(a => a.SubmissionId == submissionId).SingleOrDefault();
+                    var apiResponse = ReturnResponses.Where(a => a.SubmissionId == submissionId).SingleOrDefault();
                     apiResponse.IsReturnTransmitted = true;
                     isUpdated = true;
                 }

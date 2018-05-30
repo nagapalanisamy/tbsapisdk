@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace APIClientTool.ViewModels
+﻿namespace APIClientTool.ViewModels
 {
-    public class TransmitFormW2Response : FormW2Response
+    public class TransmitFormW2Response : ReturnResponse
     {
 
     }

@@ -1,7 +1,4 @@
-﻿
-using System.Runtime.Serialization;
-
-namespace APIClientTool.ViewModels
+﻿namespace APIClientTool.ViewModels
 {
     public class SigningAuthority
     {

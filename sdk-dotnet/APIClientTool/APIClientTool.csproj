@@ -217,6 +217,8 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\EfileController.cs" />
+    <Compile Include="Controllers\Form941Controller.cs" />
     <Compile Include="Controllers\FormW2Controller.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
@@ -233,10 +235,22 @@
     <Compile Include="ViewModels\EfileStatusResponse.cs" />
     <Compile Include="ViewModels\Employee.cs" />
     <Compile Include="ViewModels\EntityBase.cs" />
+    <Compile Include="ViewModels\Form941\Form8974.cs" />
+    <Compile Include="ViewModels\Form941\Form941CreateReturnRequest.cs" />
+    <Compile Include="ViewModels\Form941\Form941CreateReturnResponse.cs" />
+    <Compile Include="ViewModels\Form941\Form941Details.cs" />
+    <Compile Include="ViewModels\Form941\Business.cs" />
+    <Compile Include="ViewModels\Form941\BusinessStatusDetails.cs" />
+    <Compile Include="ViewModels\Form941\DepositScheduleType.cs" />
+    <Compile Include="ViewModels\Form941\Form941.cs" />
+    <Compile Include="ViewModels\Form941\Form941Data.cs" />
+    <Compile Include="ViewModels\Form941\IRSPayments.cs" />
+    <Compile Include="ViewModels\Form941\SignatureDetails.cs" />
+    <Compile Include="ViewModels\Form941\TransmitForm941.cs" />
     <Compile Include="ViewModels\FormW2.cs" />
-    <Compile Include="ViewModels\FormW2Response.cs" />
+    <Compile Include="ViewModels\ReturnResponse.cs" />
     <Compile Include="ViewModels\SigningAuthority.cs" />
-    <Compile Include="ViewModels\TransmitFormW2.cs" />
+    <Compile Include="ViewModels\TransmitForm.cs" />
     <Compile Include="ViewModels\TransmitFormW2Response.cs" />
     <Compile Include="ViewModels\W2CreateReturnRequest.cs" />
     <Compile Include="ViewModels\W2FormDetails.cs" />
@@ -253,6 +267,7 @@
     <Content Include="Content\Images\logo.png" />
     <Content Include="Content\Images\logoHead.png" />
     <Content Include="Content\Images\phone_icon.png" />
+    <Content Include="Content\toastr.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -294,6 +309,7 @@
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\toastr.min.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -318,11 +334,15 @@
     <Content Include="Scripts\jquery-3.2.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.2.1.min.map" />
     <Content Include="Views\Shared\_SubMenu.cshtml" />
-    <Content Include="Views\FormW2\EFileStatus.cshtml" />
-    <Content Include="Views\FormW2\_APIValidate.cshtml" />
+    <Content Include="Views\Efile\EFileStatus.cshtml" />
+    <Content Include="Views\Efile\_APIValidate.cshtml" />
     <Content Include="Views\FormW2\_TransmitReturn.cshtml" />
+    <Content Include="Views\Form941\Index.cshtml" />
+    <Content Include="Views\Efile\_GetEfileStatus.cshtml" />
     <Content Include="Views\FormW2\_GetEfileStatusResponse.cshtml" />
-    <Content Include="Views\FormW2\_GetEFileStatus.cshtml" />
+    <Content Include="Views\Form941\_GetEfileStatusResponse.cshtml" />
+    <Content Include="Views\Form941\APIResponseStatus.cshtml" />
+    <Content Include="Views\Form941\_TransmitReturn.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />

@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Web;
@@ -20,6 +18,7 @@ namespace APIClientTool.Utilities
             userToken = Utility.GetAppSettings("UserToken");
             string apiPrivateKey = Utility.GetAppSettings("PrivateKey");
             string apiPublicKey = Utility.GetAppSettings("PublicKey");
+            var apiVersion = Utility.GetAppSettings("ApiVersion");
 
             client.DefaultRequestHeaders.Clear();
 
@@ -36,7 +35,7 @@ namespace APIClientTool.Utilities
 
             client.DefaultRequestHeaders.Add("Timestamp", utcDateString);
 
-            string authenticationHeader = apiPublicKey + ":" + ComputeHash(apiPrivateKey, BuildAuthSignature(methodType, utcDateString, IPAddress, userToken, requestUri.ToLower()));
+            string authenticationHeader = apiPublicKey + ":" + ComputeHash(apiPrivateKey, BuildAuthSignature(apiVersion, methodType, utcDateString, IPAddress, userToken, requestUri.ToLower()));
             client.DefaultRequestHeaders.Add("Authentication", authenticationHeader);
 
             string uniqueId = Guid.NewGuid().ToString();
@@ -46,12 +45,19 @@ namespace APIClientTool.Utilities
         }
         #endregion
 
-        public static string BuildAuthSignature(string methodType, string date, string IPAddress, string userToken, string absolutePath)
+        public static string BuildAuthSignature(string version, string methodType, string date, string IPAddress, string userToken, string absolutePath)
         {
-            string message = string.Empty;
-            absolutePath = "/" + absolutePath;
+            if (!(string.IsNullOrEmpty(version)))
+            {
+                absolutePath = "/" + version + "/" + absolutePath;
+            }
+            else
+            {
+                absolutePath = "/" + absolutePath;
+            }
             var uri = HttpContext.Current.Server.UrlDecode(absolutePath);
-            return string.Join("\n", methodType, date, IPAddress, userToken, uri);//, parameterMessage
+            var message = string.Join("\n", methodType, date, IPAddress, userToken, uri);
+            return message;
         }
 
         #region Compute Hash

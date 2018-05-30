@@ -244,11 +244,12 @@
     <Compile Include="ViewModels\Form941\DepositScheduleType.cs" />
     <Compile Include="ViewModels\Form941\Form941.cs" />
     <Compile Include="ViewModels\Form941\Form941Data.cs" />
+    <Compile Include="ViewModels\Form941\Form941ReturnResponse.cs" />
     <Compile Include="ViewModels\Form941\IRSPayments.cs" />
     <Compile Include="ViewModels\Form941\SignatureDetails.cs" />
     <Compile Include="ViewModels\Form941\TransmitForm941.cs" />
     <Compile Include="ViewModels\FormW2.cs" />
-    <Compile Include="ViewModels\ReturnResponse.cs" />
+    <Compile Include="ViewModels\FormW2ReturnResponse.cs" />
     <Compile Include="ViewModels\SigningAuthority.cs" />
     <Compile Include="ViewModels\TransmitForm.cs" />
     <Compile Include="ViewModels\TransmitFormW2Response.cs" />

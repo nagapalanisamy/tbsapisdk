@@ -3,10 +3,10 @@ using System.Collections.Generic;
 
 namespace APIClientTool.ViewModels
 {
-    public class ReturnResponse : FilingStatus
+    public class FormW2ReturnResponse : FilingStatus
     {
         public Guid SubmissionId { get; set; }
-        public FormRecords FormRecords { get; set; }
+        public FormRecords FormW2Records { get; set; }
         public int StatusCode { get; set; }
         public string StatusMessage { get; set; }
         public string StatusName { get; set; }

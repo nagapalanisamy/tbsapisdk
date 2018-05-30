@@ -1,6 +1,6 @@
 ﻿namespace APIClientTool.ViewModels
 {
-    public class EfileStatusResponse : ReturnResponse
+    public class EfileStatusResponse : FormW2ReturnResponse
     {
 
     }

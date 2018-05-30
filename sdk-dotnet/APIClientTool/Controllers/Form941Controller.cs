@@ -37,10 +37,11 @@ namespace APIClientTool.Controllers
         {
             //Mapping Form 941 
             form941.Sequence = "Record1";
-
+            form941.RecordId = null;
             //Mapping Return Header
             form941.ReturnHeader = new Form941ReturnHeader
             {
+                ReturnType = null,
                 Qtr = "Q1",
                 TaxYr = "2018",
                 Business = new Business
@@ -147,12 +148,14 @@ namespace APIClientTool.Controllers
         /// <param name="form941">Form 941details passed through form941 parameter</param>
         /// <returns>Form941CreateReturnResponse</returns>
         [HttpPost]
-        public ActionResult CreateReturn(Form941Data form941)
+        public ActionResult APIResponseStatus(Form941Data form941)
         {
             //Hardcoded values for Sequence
             var responseJson = string.Empty;
 
             form941.Sequence = "Record1";
+            form941.RecordId = null;
+            form941.ReturnHeader.ReturnType = null;
             form941.ReturnHeader.Business.IsEIN = true;
             form941.ReturnHeader.Business.IsForeign = false;
 
@@ -174,8 +177,7 @@ namespace APIClientTool.Controllers
             }
 
             var form941Response = new Form941CreateReturnResponse();
-            var form941ReturnList = new Form941CreateReturnRequest();
-            form941ReturnList.Form941Records = new List<Form941Data>();
+            var form941ReturnList = new Form941CreateReturnRequest { Form941Records = new List<Form941Data>()};
             form941ReturnList.Form941Records.Add(form941);
 
             // Generate JSON for Form 941
@@ -203,7 +205,7 @@ namespace APIClientTool.Controllers
                         if (form941Response.SubmissionId != null && form941Response.SubmissionId != Guid.Empty)
                         {
                             //Adding Form941CreateReturnResponse Response to Session
-                            APISession.AddAPIResponse(form941Response);
+                            //APISession.AddAPIResponse(form941Response); To Do
                         }
                     }
                 }

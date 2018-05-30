@@ -9,17 +9,17 @@ namespace APIClientTool.Utilities
     public class APISession
     {
         #region Session Property for Return
-        public static List<ReturnResponse> ReturnResponses
+        public static List<FormW2ReturnResponse> ReturnResponses
         {
             get
             {
                 if(HttpContext.Current.Session["ReturnResponse"] != null)
                 {
-                    return (List<ReturnResponse>)HttpContext.Current.Session["ReturnResponse"];
+                    return (List<FormW2ReturnResponse>)HttpContext.Current.Session["ReturnResponse"];
                 }
                 else
                 {
-                    return new List<ReturnResponse>();
+                    return new List<FormW2ReturnResponse>();
                 }
             }
             set
@@ -37,11 +37,11 @@ namespace APIClientTool.Utilities
         /// Add API Response
         /// </summary>
         /// <param name="returnResponse"></param>
-        public static void AddAPIResponse(ReturnResponse returnResponse)
+        public static void AddAPIResponse(FormW2ReturnResponse returnResponse)
         {           
             if (returnResponse != null && returnResponse.SubmissionId != Guid.Empty)
             {
-                List<ReturnResponse> returnResponses = ReturnResponses;
+                List<FormW2ReturnResponse> returnResponses = ReturnResponses;
                 returnResponses.Add(returnResponse);
                ReturnResponses = returnResponses;
             }
@@ -56,7 +56,7 @@ namespace APIClientTool.Utilities
         public static List<EFileStatus> GetAPIResponse()
         {
             List<EFileStatus> formW2list = new List<EFileStatus>();
-            List<ReturnResponse> returnResponses = ReturnResponses;
+            List<FormW2ReturnResponse> returnResponses = ReturnResponses;
             if (returnResponses != null && returnResponses.Count > 0)
             {
                 var apiResponse = returnResponses.Where(a => a.StatusCode == (int)StatusCode.Success && a.SubmissionId != Guid.Empty).ToList();
@@ -81,17 +81,17 @@ namespace APIClientTool.Utilities
         public static TransmitForm GetRecordIdsBySubmissionId(Guid submissionId)
         {
             TransmitForm transmitForm = new TransmitForm();
-            List<ReturnResponse> returnResponses = ReturnResponses;
+            List<FormW2ReturnResponse> returnResponses = ReturnResponses;
             if (submissionId != Guid.Empty)
             {
                 transmitForm.SubmissionId = submissionId;
                 if (returnResponses != null && returnResponses.Count > 0)
                 {
                     var returnResponse = returnResponses.Where(r => r.SubmissionId == submissionId).SingleOrDefault();
-                    if(returnResponse != null && returnResponse.FormRecords != null 
-                        && returnResponse.FormRecords.SuccessRecords != null && returnResponse.FormRecords.SuccessRecords.Count > 0)
+                    if(returnResponse != null && returnResponse.FormW2Records != null 
+                        && returnResponse.FormW2Records.SuccessRecords != null && returnResponse.FormW2Records.SuccessRecords.Count > 0)
                     {
-                        var recordIds = returnResponse.FormRecords.SuccessRecords.Select(r => r.RecordId).ToList();
+                        var recordIds = returnResponse.FormW2Records.SuccessRecords.Select(r => r.RecordId).ToList();
                         if (recordIds != null && recordIds.Any())
                         {
                             transmitForm.RecordIds = new List<Guid>();

@@ -7,8 +7,8 @@ namespace APIClientTool.ViewModels.Form941CoreModel
 {
     public class SigningAuthority
     {
-        public object Name { get; set; }
-        public object Phone { get; set; }
-        public object BusinessMemberType { get; set; }
+        public string Name { get; set; }
+        public string Phone { get; set; }
+        public string BusinessMemberType { get; set; }
     }
 }

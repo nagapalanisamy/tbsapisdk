@@ -370,35 +370,81 @@ namespace APIClientTool.Controllers
         }
         #endregion
 
+        #region Get Form 941
+        /// <summary>
+        /// Function get the Form 941 Return to Efile
+        /// </summary>
+        /// <param name="submissionId">SubmissionId passed to get the 941 return</param>
+        /// <returns>Form941GetReturnResponse</returns>
+        public ActionResult GetForm941(Guid submissionId)
+        {
+            var getReturnResponse = new Form941GetReturnResponse();
+            var getReturnResponseJSON = string.Empty;
+            if (submissionId != null && submissionId != Guid.Empty)
+            {
+                using (var client = new PublicAPIClient())
+                {
+                    //API URL to Get Form 941 Return
+                    string requestUri = "Form941/Get?submissionId=" + submissionId;
+
+                    //Get
+                    APIGenerateAuthHeader.GenerateAuthHeader(client, requestUri, "GET");
+
+                    //Get Response
+                    var _response = client.GetAsync(requestUri).Result;
+                    if (_response != null && _response.IsSuccessStatusCode)
+                    {
+                        //Read Response
+                        var createResponse = _response.Content.ReadAsAsync<DeleteReturnResponse>().Result;
+                        if (createResponse != null)
+                        {
+                            getReturnResponseJSON = JsonConvert.SerializeObject(createResponse, Formatting.Indented);
+                            getReturnResponse = new JavaScriptSerializer().Deserialize<Form941GetReturnResponse>(getReturnResponseJSON);
+                            if (getReturnResponse != null && getReturnResponse.StatusCode == (int)StatusCode.Success)
+                            {
+                                //Todo Remove Submission and RecordId from session
+                            }
+                        }
+                    }
+                    else
+                    {
+                        var createResponse = _response.Content.ReadAsAsync<Object>().Result;
+                        getReturnResponseJSON = JsonConvert.SerializeObject(createResponse, Formatting.Indented);
+                        getReturnResponse = new JavaScriptSerializer().Deserialize<Form941GetReturnResponse>(getReturnResponseJSON);
+                    }
+                }
+            }
+            return PartialView(getReturnResponseJSON);
+        }
+        #endregion
+
         #region Delete Return
         /// <summary>
-        /// Function transmit the Form 941 Return to Efile
+        /// Function delete the Form 941 Return to Efile
         /// </summary>
-        /// <param name="submissionId">SubmissionId passed to transmit the 941 return</param>
-        /// <returns></returns>
+        /// <param name="submissionId">SubmissionId passed to delete the 941 return</param>
+        /// <returns>DeleteReturnResponse</returns>
         public ActionResult Delete(Guid submissionId)
         {
-            var deleteReturnRequest = new DeleteReturnRequest();
             var deleteReturnResponse = new DeleteReturnResponse();
             var deleteReturnResponseJSON = string.Empty;
             if (submissionId != null && submissionId != Guid.Empty)
             {
-                deleteReturnRequest.SubmissionId = submissionId;
                 // Getting the RecordIds for SubmissionId
-                deleteReturnRequest.RecordIds = APISession.GetComaseperatedRecordIdsBySubmissionId(submissionId);
+                var recordIds = APISession.GetComaseperatedRecordIdsBySubmissionId(submissionId);
 
-                if (!string.IsNullOrEmpty(deleteReturnRequest.RecordIds))
+                if (!string.IsNullOrEmpty(recordIds))
                 {
                     using (var client = new PublicAPIClient())
                     {
-                        //API URL to Transmit Form 941 Return
-                        string requestUri = "Form941/Delete";
+                        //API URL to Delete Form 941 Return
+                        string requestUri = "Form941/Delete?SubmissionId=" + submissionId + "&RecordIds=" + recordIds;
 
-                        //POST
-                        APIGenerateAuthHeader.GenerateAuthHeader(client, requestUri, "POST");
+                        //Delete
+                        APIGenerateAuthHeader.GenerateAuthHeader(client, requestUri, "DELETE");
 
                         //Get Response
-                        var _response = client.PostAsJsonAsync(requestUri, deleteReturnRequest).Result;
+                        var _response = client.DeleteAsync(requestUri).Result;
                         if (_response != null && _response.IsSuccessStatusCode)
                         {
                             //Read Response
@@ -410,7 +456,6 @@ namespace APIClientTool.Controllers
                                 if (deleteReturnResponse != null && deleteReturnResponse.StatusCode == (int)StatusCode.Success)
                                 {
                                     //Todo Remove Submission and RecordId from session
-                                    APISession.DeleteForm941APIResponse(deleteReturnRequest.SubmissionId);
                                 }
                             }
                         }
@@ -426,10 +471,6 @@ namespace APIClientTool.Controllers
             return PartialView(deleteReturnResponseJSON);
         }
         #endregion
-
-        #region GET Form941
-
-        #endregion
-
+        
     }
 }

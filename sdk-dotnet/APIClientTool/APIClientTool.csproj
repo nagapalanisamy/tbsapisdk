@@ -233,11 +233,12 @@
     <Compile Include="ViewModels\BaseModels\Business.cs" />
     <Compile Include="ViewModels\BaseModels\EFileStatus.cs" />
     <Compile Include="ViewModels\BaseModels\EfileStatusGetRequest.cs" />
+    <Compile Include="ViewModels\Form941SCHR\Form941SchRGetReturnResponse.cs" />
+    <Compile Include="ViewModels\Form941\Form941GetReturnResponse.cs" />
     <Compile Include="ViewModels\FormW2\EfileStatusResponse.cs" />
     <Compile Include="ViewModels\BaseModels\Employee.cs" />
     <Compile Include="ViewModels\BaseModels\EntityBase.cs" />
     <Compile Include="ViewModels\Form941CoreModel\DeleteFormRecords.cs" />
-    <Compile Include="ViewModels\Form941CoreModel\DeleteReturnRequest.cs" />
     <Compile Include="ViewModels\Form941CoreModel\DeleteReturnResponse.cs" />
     <Compile Include="ViewModels\Form941CoreModel\SigningAuthority.cs" />
     <Compile Include="ViewModels\Form941CoreModel\ThirdPartyDesignee.cs" />
@@ -367,6 +368,8 @@
     <Content Include="Views\Form941\Delete.cshtml" />
     <Content Include="Views\Efile\_GetForm941EFileStatus.cshtml" />
     <Content Include="Views\Efile\_GetForm941SCHREFileStatus.cshtml" />
+    <Content Include="Views\Form941SCHR\GetForm941SchR.cshtml" />
+    <Content Include="Views\Form941\GetForm941.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />

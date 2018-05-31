@@ -27,6 +27,10 @@ namespace APIClientTool.ViewModels.Form941
         /// Form 941 Return Data
         /// </summary>
         public Form941ReturnData ReturnData { get; set; }
+        /// <summary>
+        /// Return Number from IRS
+        /// </summary>
+        public string ReturnNumber { get; set; }
     }
 
     public class Form941ReturnHeader

@@ -67,11 +67,12 @@ namespace APIClientTool.Controllers
             formw2.Employee.SSN = "123456789";
             formw2.Employee.FirstNm = "Steve";
             formw2.Employee.LastNm = "Smith";
-            formw2.Employee.Country = "US";
-            formw2.Employee.Address1 = "Address Line 1";
-            formw2.Employee.City = "Rockhill";
-            formw2.Employee.State = "SC";
-            formw2.Employee.Zip = "29730";
+
+            formw2.Employee.USAddress = new USAddress();
+            formw2.Employee.USAddress.Address1 = "Address Line 1";
+            formw2.Employee.USAddress.City = "Rockhill";
+            formw2.Employee.USAddress.State = "SC";
+            formw2.Employee.USAddress.ZipCd = "29730";
             formw2.Employee.Phone = "9876543210";
             formw2.Employee.Email = "employee@company.com";
 
@@ -87,7 +88,7 @@ namespace APIClientTool.Controllers
             formw2.Employee.MiddleNm = "";
             formw2.Employee.Suffix = "";
             formw2.Employee.Fax = "";
-            formw2.Employee.Address2 = "";
+            formw2.Employee.USAddress.Address2 = "";
         }
         #endregion
 

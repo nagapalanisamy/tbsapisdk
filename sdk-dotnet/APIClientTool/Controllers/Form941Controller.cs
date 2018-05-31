@@ -3,6 +3,7 @@ using APIClientTool.ViewModels;
 using APIClientTool.ViewModels.Form941;
 using APIClientTool.ViewModels.Form941CoreModel;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -235,7 +236,7 @@ namespace APIClientTool.Controllers
             if (submissionId != null && submissionId != Guid.Empty)
             {
                 // Getting the RecordIds for SubmissionId
-                transmitForm941 = APISession.GetRecordIdsBySubmissionId(submissionId);
+                transmitForm941 = APISession.GetForm941RecordIdsBySubmissionId(submissionId);
 
                 // Generate JSON for TransmitForm 941
                 var requestJson = JsonConvert.SerializeObject(transmitForm941, Formatting.Indented);
@@ -263,7 +264,7 @@ namespace APIClientTool.Controllers
                                 if (transmitForm941Response.SubmissionId != null && transmitForm941Response.SubmissionId != Guid.Empty && transmitForm941Response.StatusCode == (int)StatusCode.Success)
                                 {
                                     //Updating Filing Status (Transmitted) for a specific SubmissionId in Session 
-                                    APISession.UpdateFilingStatus(transmitForm941Response.SubmissionId);
+                                    APISession.UpdateForm941ReturnFilingStatus(transmitForm941Response.SubmissionId);
                                 }
                             }
                         }
@@ -285,14 +286,14 @@ namespace APIClientTool.Controllers
         /// Function returns the Efile status of Form 941
         /// </summary>
         /// <param name="submissionId">SubmissionId is passed to get the efile status</param>
-        /// <returns>EfileStatusResponse</returns>
+        /// <returns>Form941StatusResponse</returns>
         public ActionResult _GetEfileStatusResponse(Guid submissionId)
         {
-            EfileStatusResponse efileStatusResponse = new EfileStatusResponse();
+            Form941StatusResponse efileStatusResponse = new Form941StatusResponse();
             if (submissionId != null && submissionId != Guid.Empty)
             {
                 var efileRequest = new EfileStatusGetRequest { SubmissionId = submissionId };
-                var recordIds = APISession.GetRecordIdsBySubmissionId(submissionId);
+                var recordIds = APISession.GetForm941RecordIdsBySubmissionId(submissionId);
                 if (recordIds != null && recordIds.RecordIds != null && recordIds.RecordIds.Count > 0)
                 {
                     efileRequest.RecordIds = recordIds.RecordIds;
@@ -316,18 +317,18 @@ namespace APIClientTool.Controllers
                         var _response = client.PostAsJsonAsync(requestUri, efileRequest).Result;
                         if (_response != null && _response.IsSuccessStatusCode)
                         {
-                            var createResponse = _response.Content.ReadAsAsync<EfileStatusResponse>().Result;
+                            var createResponse = _response.Content.ReadAsAsync<Form941StatusResponse>().Result;
                             if (createResponse != null)
                             {
                                 transmitFormW2ResponseJSON = JsonConvert.SerializeObject(createResponse, Formatting.Indented);
-                                efileStatusResponse = new JavaScriptSerializer().Deserialize<EfileStatusResponse>(transmitFormW2ResponseJSON);
+                                efileStatusResponse = new JavaScriptSerializer().Deserialize<Form941StatusResponse>(transmitFormW2ResponseJSON);
                             }
                         }
                         else
                         {
                             var createResponse = _response.Content.ReadAsAsync<Object>().Result;
                             transmitFormW2ResponseJSON = JsonConvert.SerializeObject(createResponse, Formatting.Indented);
-                            efileStatusResponse = new JavaScriptSerializer().Deserialize<EfileStatusResponse>(transmitFormW2ResponseJSON);
+                            efileStatusResponse = new JavaScriptSerializer().Deserialize<Form941StatusResponse>(transmitFormW2ResponseJSON);
                         }
                     }
                 }
@@ -395,14 +396,16 @@ namespace APIClientTool.Controllers
                     if (_response != null && _response.IsSuccessStatusCode)
                     {
                         //Read Response
-                        var createResponse = _response.Content.ReadAsAsync<DeleteReturnResponse>().Result;
+                        var createResponse = _response.Content.ReadAsAsync<Form941GetReturnResponse>().Result;
                         if (createResponse != null)
                         {
                             getReturnResponseJSON = JsonConvert.SerializeObject(createResponse, Formatting.Indented);
                             getReturnResponse = new JavaScriptSerializer().Deserialize<Form941GetReturnResponse>(getReturnResponseJSON);
                             if (getReturnResponse != null && getReturnResponse.StatusCode == (int)StatusCode.Success)
                             {
-                                //Todo Remove Submission and RecordId from session
+                                JObject json = JObject.Parse(getReturnResponseJSON);
+                                ViewData["GetResponseJSON"] = json;
+                                return PartialView();
                             }
                         }
                     }
@@ -414,7 +417,7 @@ namespace APIClientTool.Controllers
                     }
                 }
             }
-            return PartialView(getReturnResponseJSON);
+            return PartialView(getReturnResponse);
         }
         #endregion
 
@@ -431,7 +434,7 @@ namespace APIClientTool.Controllers
             if (submissionId != null && submissionId != Guid.Empty)
             {
                 // Getting the RecordIds for SubmissionId
-                var recordIds = APISession.GetComaseperatedRecordIdsBySubmissionId(submissionId);
+                var recordIds = APISession.GetComaseperatedForm941RecordIdsBySubmissionId(submissionId);
 
                 if (!string.IsNullOrEmpty(recordIds))
                 {
@@ -455,7 +458,8 @@ namespace APIClientTool.Controllers
                                 deleteReturnResponse = new JavaScriptSerializer().Deserialize<DeleteReturnResponse>(deleteReturnResponseJSON);
                                 if (deleteReturnResponse != null && deleteReturnResponse.StatusCode == (int)StatusCode.Success)
                                 {
-                                    //Todo Remove Submission and RecordId from session
+                                    //Remove Submission and RecordId from session
+                                    APISession.DeleteForm941APIResponse(submissionId);
                                 }
                             }
                         }
@@ -468,9 +472,9 @@ namespace APIClientTool.Controllers
                     }
                 }
             }
-            return PartialView(deleteReturnResponseJSON);
+            return PartialView(deleteReturnResponse);
         }
         #endregion
-        
+
     }
 }

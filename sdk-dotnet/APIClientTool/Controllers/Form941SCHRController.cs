@@ -10,6 +10,7 @@ using APIClientTool.Utilities;
 using System.Net.Http;
 using System.Web.Script.Serialization;
 using APIClientTool.ViewModels;
+using Newtonsoft.Json.Linq;
 
 namespace APIClientTool.Controllers
 {
@@ -313,14 +314,16 @@ namespace APIClientTool.Controllers
                         if (_response != null && _response.IsSuccessStatusCode)
                         {
                             //Read Response
-                            var createResponse = _response.Content.ReadAsAsync<DeleteReturnResponse>().Result;
+                            var createResponse = _response.Content.ReadAsAsync<Form941SchRGetReturnResponse>().Result;
                             if (createResponse != null)
                             {
                                 getReturnResponseJSON = JsonConvert.SerializeObject(createResponse, Formatting.Indented);
                                 getReturnResponse = new JavaScriptSerializer().Deserialize<Form941SchRGetReturnResponse>(getReturnResponseJSON);
                                 if (getReturnResponse != null && getReturnResponse.StatusCode == (int)StatusCode.Success)
                                 {
-                                    //Todo Remove Submission and RecordId from session
+                                    JObject json = JObject.Parse(getReturnResponseJSON);
+                                    ViewData["GetResponseJSON"] = json;
+                                    return PartialView();
                                 }
                             }
                         }
@@ -333,7 +336,7 @@ namespace APIClientTool.Controllers
                     }
                 }
             }
-            return PartialView(getReturnResponseJSON);
+            return PartialView(getReturnResponse);
         }
         #endregion
 
@@ -357,7 +360,7 @@ namespace APIClientTool.Controllers
                     using (var client = new PublicAPIClient())
                     {
                         //API URL to Delete Form 941SCHR Return
-                        string requestUri = "Form941SCHR/Delete?SubmissionId="+ submissionId + "&RecordIds=" + recordIds;
+                        string requestUri = "Form941SCHR/Delete?SubmissionId=" + submissionId + "&RecordIds=" + recordIds;
 
                         //Delete
                         APIGenerateAuthHeader.GenerateAuthHeader(client, requestUri, "DELETE");
@@ -374,7 +377,8 @@ namespace APIClientTool.Controllers
                                 deleteReturnResponse = new JavaScriptSerializer().Deserialize<DeleteReturnResponse>(deleteReturnResponseJSON);
                                 if (deleteReturnResponse != null && deleteReturnResponse.StatusCode == (int)StatusCode.Success)
                                 {
-                                    //Todo Remove Submission and RecordId from session
+                                    //Remove Submission and RecordId from session
+                                    //APISession.DeleteForm941SCHRAPIResponse(submissionId);
                                 }
                             }
                         }
@@ -387,7 +391,7 @@ namespace APIClientTool.Controllers
                     }
                 }
             }
-            return PartialView(deleteReturnResponseJSON);
+            return PartialView(deleteReturnResponse);
         }
         #endregion
 

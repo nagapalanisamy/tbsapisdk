@@ -146,4 +146,21 @@
         });
     }
 
+    function ViewFormw2(id) {
+        $.ajax({
+            url: "/FormW2/GetFormW2/",
+            cache: false,
+            data: { submissionId: id },
+            success: function (data) {
+                debugger;
+                $(".modal-dialog").addClass("edit-dialog");
+                $('#ModelBody').html(data);
+                $('#myModal').modal("show");
+            },
+            error: function (err) {
+                console.log(err.responseText);
+            }
+        });
+    }
+
 </script>

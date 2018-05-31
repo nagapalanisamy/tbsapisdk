@@ -1,6 +1,5 @@
 ﻿using APIClientTool.ViewModels;
 using APIClientTool.ViewModels.Form941;
-using APIClientTool.ViewModels.Form941CoreModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -167,7 +166,7 @@ namespace APIClientTool.Utilities
         }
         #endregion
 
-        #region Delete Form 941 API Response
+        #region Delete Form W2 API Response
         /// <summary>
         /// Delete Form 941 API Response
         /// </summary>
@@ -179,8 +178,8 @@ namespace APIClientTool.Utilities
                 var formw2SessionResponse = ReturnResponses;
                 if (formw2SessionResponse != null)
                 {
-                    var form941return = formw2SessionResponse.Where(a => a.SubmissionId == submissionId).FirstOrDefault();
-                    formw2SessionResponse.Remove(form941return);
+                    var formw2return = formw2SessionResponse.Where(a => a.SubmissionId == submissionId).FirstOrDefault();
+                    formw2SessionResponse.Remove(formw2return);
                     ReturnResponses = formw2SessionResponse;
                 }
             }
@@ -272,6 +271,97 @@ namespace APIClientTool.Utilities
                     Form941ReturnResponses = form941SessionResponse;
                 }
             }
+        }
+        #endregion
+
+        #region Get Form941 RecordIDs by SubmissionId
+        /// <summary>
+        ///  Get Form941 RecordIDs by SubmissionId
+        /// </summary>
+        /// <param name="submissionId"></param>
+        /// <returns></returns>
+        public static TransmitForm GetForm941RecordIdsBySubmissionId(Guid submissionId)
+        {
+            TransmitForm transmitForm = new TransmitForm();
+            List<Form941ReturnResponse> returnResponses = Form941ReturnResponses;
+            if (submissionId != Guid.Empty)
+            {
+                transmitForm.SubmissionId = submissionId;
+                if (returnResponses != null && returnResponses.Count > 0)
+                {
+                    var returnResponse = returnResponses.Where(r => r.SubmissionId == submissionId).SingleOrDefault();
+                    if (returnResponse != null && returnResponse.Form941Records != null
+                        && returnResponse.Form941Records.SuccessRecords != null && returnResponse.Form941Records.SuccessRecords.Count > 0)
+                    {
+                        var recordIds = returnResponse.Form941Records.SuccessRecords.Select(r => r.RecordId).ToList();
+                        if (recordIds != null && recordIds.Any())
+                        {
+                            transmitForm.RecordIds = new List<Guid>();
+                            foreach (var recordId in recordIds)
+                            {
+                                transmitForm.RecordIds.Add(recordId ?? Guid.Empty);
+                            }
+                        }
+                    }
+                }
+            }
+            return transmitForm;
+        }
+        #endregion
+
+        #region Get Coma seperated Form 941 RecordIDs by SubmissionId
+        /// <summary>
+        ///  Get Coma seperated RecordIDs by SubmissionId
+        /// </summary>
+        /// <param name="submissionId"></param>
+        /// <returns></returns>
+        public static string GetComaseperatedForm941RecordIdsBySubmissionId(Guid submissionId)
+        {
+            string recordIdStr = string.Empty;
+            List<Form941ReturnResponse> returnResponses = Form941ReturnResponses;
+            if (submissionId != Guid.Empty)
+            {
+                if (returnResponses != null && returnResponses.Count > 0)
+                {
+                    var returnResponse = returnResponses.Where(r => r.SubmissionId == submissionId).SingleOrDefault();
+                    if (returnResponse != null && returnResponse.Form941Records != null
+                        && returnResponse.Form941Records.SuccessRecords != null && returnResponse.Form941Records.SuccessRecords.Count > 0)
+                    {
+                        var recordIds = returnResponse.Form941Records.SuccessRecords.Select(r => r.RecordId).ToList();
+                        if (recordIds != null && recordIds.Any())
+                        {
+                            foreach (var recordId in recordIds)
+                            {
+                                recordIdStr = !string.IsNullOrEmpty(recordIdStr) ? ("," + (recordId ?? Guid.Empty).ToString()) : (recordId ?? Guid.Empty).ToString();
+                            }
+                        }
+                    }
+                }
+            }
+            return recordIdStr;
+        }
+        #endregion
+
+        #region Form941 Return Update Filing Status
+        /// <summary>
+        /// Update Filing Status
+        /// </summary>
+        /// <param name="submissionId"></param>
+        /// <returns></returns>
+        public static bool UpdateForm941ReturnFilingStatus(Guid submissionId)
+        {
+            bool isUpdated = false;
+            if (submissionId != Guid.Empty)
+            {
+                if (Form941ReturnResponses != null && Form941ReturnResponses.Count > 0)
+                {
+                    var apiResponse = Form941ReturnResponses.Where(a => a.SubmissionId == submissionId).SingleOrDefault();
+                    apiResponse.IsReturnTransmitted = true;
+                    isUpdated = true;
+                }
+            }
+
+            return isUpdated;
         }
         #endregion
 

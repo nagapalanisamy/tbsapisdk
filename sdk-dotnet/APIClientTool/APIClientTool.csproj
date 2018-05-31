@@ -233,6 +233,7 @@
     <Compile Include="ViewModels\BaseModels\Business.cs" />
     <Compile Include="ViewModels\BaseModels\EFileStatus.cs" />
     <Compile Include="ViewModels\BaseModels\EfileStatusGetRequest.cs" />
+    <Compile Include="ViewModels\Form941CoreModel\DeleteReturnRequest.cs" />
     <Compile Include="ViewModels\Form941SCHR\Form941SchRGetReturnResponse.cs" />
     <Compile Include="ViewModels\Form941\Form941GetReturnResponse.cs" />
     <Compile Include="ViewModels\FormW2\EfileStatusResponse.cs" />
@@ -265,6 +266,7 @@
     <Compile Include="ViewModels\Form941\TransmitForm941Response.cs" />
     <Compile Include="ViewModels\FormW2\FormW2.cs" />
     <Compile Include="ViewModels\FormW2\FormW2DeleteReturnResponse.cs" />
+    <Compile Include="ViewModels\FormW2\FormW2GetReturnResponse.cs" />
     <Compile Include="ViewModels\FormW2\FormW2ReturnResponse.cs" />
     <Compile Include="ViewModels\BaseModels\SigningAuthority.cs" />
     <Compile Include="ViewModels\BaseModels\TransmitForm.cs" />
@@ -370,6 +372,8 @@
     <Content Include="Views\Efile\_GetForm941SCHREFileStatus.cshtml" />
     <Content Include="Views\Form941SCHR\GetForm941SchR.cshtml" />
     <Content Include="Views\Form941\GetForm941.cshtml" />
+    <Content Include="Views\FormW2\GetFormW2.cshtml" />
+    <Content Include="Views\FormW2\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />

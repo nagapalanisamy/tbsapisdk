@@ -46,5 +46,39 @@ namespace APIClientTool.Utilities
             return string.Empty;
         }
         #endregion
+
+        #region Convert to Int
+        /// <summary>
+        /// Convert to Int.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns></returns>
+        public static int GetInt(object value)
+        {
+            int result = 0;
+            if (value != null)
+            {
+                int.TryParse(value.ToString(), out result);
+            }
+            return result;
+        }
+        #endregion
+
+        #region Convert to Bool
+        /// <summary>
+        /// Convert to Bool.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns></returns>
+        public static bool GetBool(object value)
+        {
+            bool result = false;
+            if (value != null)
+            {
+                bool.TryParse(value.ToString(), out result);
+            }
+            return result;
+        }
+        #endregion
     }
 }

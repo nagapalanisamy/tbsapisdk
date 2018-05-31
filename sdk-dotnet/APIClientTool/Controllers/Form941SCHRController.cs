@@ -77,7 +77,7 @@ namespace APIClientTool.Controllers
                     },
                     KindOfEmployer = null,
                     KindOfPayer = null,
-                    ForeignAddress = null
+                    ForeignAddress = null,
                 },
                 BusinessStatusDetails = new BusinessStatusDetails
                 {
@@ -96,8 +96,8 @@ namespace APIClientTool.Controllers
                 },
                 SignatureDetails = new SignatureDetails
                 {
-                    SignatureType = "ONLINE_SIGN_PIN",
-                    OnlineSignaturePIN = new OnlineSignaturePIN { PIN = "1234567890" }
+                    SignatureType = "REPORTING_AGENT",
+                    ReportingAgentPIN = new ReportingAgentPIN { PIN = "12345" }
                 }
             };
 
@@ -106,37 +106,35 @@ namespace APIClientTool.Controllers
             {
                 DepositScheduleType = new DepositScheduleType
                 {
-                    DepositorType = DepositorType.MONTHLY.ToString(),
-                    MonthlyDepositor = new MonthlyDepositor
-                    {
-                        TaxLiabilityMonth1 = 4,
-                        TaxLiabilityMonth2 = 345,
-                        TaxLiabilityMonth3 = 43
-                    }
+                    DepositorType = DepositorType.MINTAXLIABILITY.ToString(),
+                    TaxLiabilityTotalAmt = 200M
                 },
                 AggregateForm941Data = new Form941Details
                 {
                     EmployeeCnt = 3,
-                    WagesAmt = 5750000M,
-                    FedIncomeTaxWHAmt = 13499.76M,
-                    WagesNotSubjToSSMedcrTaxInd = null,
-                    Line5aInitialAmt = 57000M,
+                    WagesAmt = 5750M,
+                    FedIncomeTaxWHAmt = 130M,
+                    WagesNotSubjToSSMedcrTaxInd = true,
+                    Line5aInitialAmt = 564.51M,
                     Line5bInitialAmt = 0M,
-                    Line5cInitialAmt = 57500M,
+                    Line5cInitialAmt = 0M,
                     Line5dInitialAmt = 0M,
-                    Line5a = 7130M,
+                    Line5a = 70M,
                     Line5b = 0M,
-                    Line5c = 1667.50M,
+                    Line5c = 0M,
                     Line5d = 0M,
-                    Line5e = 8797.50M,
+                    Line5e = 70M,
                     TaxOnUnreportedTips3121qAmt = 0M,
                     CurrentQtrFractionsCentsAmt = 0M,
                     CurrentQuarterSickPaymentAmt = 0M,
                     CurrQtrTipGrpTermLifeInsAdjAmt = 0M,
-                    Line12 = 22297.26M,
+                    Line12 = 200M,
                     Line11 = 0M,
                     Line14 = 0M,
-                    Line15 = 0M
+                    Line15 = 0M,
+                    Line6 = 200M,
+                    Line10 = 200M,
+                    TotTaxDepositAmt = 200M
                 }
             };
         }

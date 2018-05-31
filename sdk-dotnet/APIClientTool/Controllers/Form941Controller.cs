@@ -111,7 +111,7 @@ namespace APIClientTool.Controllers
                 Form941 = new Form941Details
                 {
                     EmployeeCnt = 3,
-                    WagesAmt = 5750000M,
+                    WagesAmt = 5750M,
                     FedIncomeTaxWHAmt = 130M,
                     WagesNotSubjToSSMedcrTaxInd = true,
                     Line5aInitialAmt = 564.51M,

@@ -400,12 +400,6 @@
     };
 
     var form8974 = new List<SelectListItem>();
-    //foreach (var item in Enum.GetValues(typeof(Form8974IncomeTaxReturnFiledForm)))
-    //{
-    //    form8974.Add(new SelectListItem { Text = item.ToString(), Value = item.ToString() });
-    //}
-    //var countryList = Enum.GetValues(typeof(CountryType)).Cast<CountryType>().Select(e => new { Text = e.ToString(), Value = e.ToString() });
-    //var stateList = Enum.GetValues(typeof(StateType)).Cast<StateType>().Select(e => new { Text = e.ToString(), value = e.ToString() });
 
     int clientId = ViewData["ClientId"] != null ? Utility.GetInt(ViewData["ClientId"]) : 0;
     int ClientCount = Session["ClientCounts"] != null ? Utility.GetInt(Session["ClientCounts"]) : 1;
@@ -419,53 +413,45 @@
     //}
 
 }
-<!DOCTYPE html>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-</head>
-<body>
-    <div class="col-md-12 col-lg-12">
-        @using (Html.BeginForm("", "", FormMethod.Post, new { id = "createreturnform" }))
-        {
-            <h1 class="pageTitle">Form941SCHR</h1>
-            <table class="responsive">
-                <tr>
-                    <td class="labelName"> <label class="control-label">Add No of Clients:</label></td>
-                    <td>
-                        @Html.TextBox("ClientCount", "", new { @id = "Clientcount", @class = "form-control" })
-                    </td>
-                    <td class="labelName"><label class="control-label">Tax Year</label></td>
-                    <td class="fieldName">
-                        @Html.DropDownListFor(model => model.ReturnHeader.TaxYr, taxYear, "--Select--", new { @class = "form-control" })
-                    </td>
-                    <td class="labelName"><label class="control-label">Quarter</label></td>
-                    <td class="fieldName">
-                        @Html.DropDownListFor(model => model.ReturnHeader.Qtr, quarter, "--Select--", new { @class = "form-control" })
-                    </td>
-                </tr>
-                <tr><td class="spacer10"></td></tr>
+<div class="col-md-12 col-lg-12">
+    @using (Html.BeginForm("", "", FormMethod.Post, new { id = "CreateForm941SCHR" }))
+    {
+        <h1 class="pageTitle">Form941SCHR</h1>
+        <table class="responsive">
+            <tr>
+                <td class="labelName"> <label class="control-label">Add No of Clients:</label></td>
+                <td>
+                    @Html.TextBox("ClientCount", "", new { @id = "Clientcount", @class = "form-control" })
+                </td>
+                <td class="labelName"><label class="control-label">Tax Year</label></td>
+                <td class="fieldName">
+                    @Html.DropDownListFor(model => model.ReturnHeader.TaxYr, taxYear, "--Select--", new { @class = "form-control" })
+                </td>
+                <td class="labelName"><label class="control-label">Quarter</label></td>
+                <td class="fieldName">
+                    @Html.DropDownListFor(model => model.ReturnHeader.Qtr, quarter, "--Select--", new { @class = "form-control" })
+                </td>
+            </tr>
+            <tr><td class="spacer10"></td></tr>
 
-                <tr>
-                    <td class="labelName">
-                        More Clients?:
-                    </td>
-                    <td class="fieldText vaT noWrap">
-                        <div class="field switch">
-                            @Html.RadioButtonFor(model => model.ReturnHeader.MoreClients, true, new { id = "rdoIsFinalReturnYes" })
-                            <label for="rdoIsFinalReturnYes" class="cb-disable"><span>Yes</span></label>
-                            @Html.RadioButtonFor(model => model.ReturnHeader.MoreClients, false, new { id = "rdoIsFinalReturnNo" })
-                            <label for="rdoIsFinalReturnNo" class="cb-enable"><span>No</span></label>
-                        </div>
-                    </td>
-                </tr>
+            <tr>
+                <td class="labelName">
+                    More Clients?:
+                </td>
+                <td class="fieldText vaT noWrap">
+                    <div class="field switch">
+                        @Html.RadioButtonFor(model => model.ReturnHeader.MoreClients, true, new { id = "rdoIsFinalReturnYes" })
+                        <label for="rdoIsFinalReturnYes" class="cb-disable"><span>Yes</span></label>
+                        @Html.RadioButtonFor(model => model.ReturnHeader.MoreClients, false, new { id = "rdoIsFinalReturnNo" })
+                        <label for="rdoIsFinalReturnNo" class="cb-enable"><span>No</span></label>
+                    </div>
+                </td>
+            </tr>
 
-            </table>
+        </table>
 
             <table class="tdDisBlock640">
-
                 <tr>
                     <td class="spacer10"></td>
                 </tr>
@@ -690,8 +676,8 @@
                             Form 941 Aggregate Client Details
                         </h4>
                         <div id="collapse2" class="panel-collapse collapse">
-                            
-                           
+
+
 
                         </div>
                     </div>
@@ -845,7 +831,8 @@
                                     @{
                                         int sNo = 1;
                                         int i = 0;
-                                        var form8974ITRDetails = Model.ReturnData != null ? Model.ReturnData.Form941MainFilerData.Form8974.Form8974IncomeTaxDetails : null;
+                                        var form8974ITRDetails = Model.ReturnData != null && Model.ReturnData.Form941MainFilerData != null &&
+                                            Model.ReturnData.Form941MainFilerData.Form8974 != null && Model.ReturnData.Form941MainFilerData.Form8974.Form8974IncomeTaxDetails != null ? Model.ReturnData.Form941MainFilerData.Form8974.Form8974IncomeTaxDetails : null;
                                     }
                                     @if (form8974ITRDetails != null)
                                     {
@@ -1248,7 +1235,7 @@
                     <div id="collapse5" class="panel-collapse collapse panel-body">
 
                         <label class="in_check floatL unCheckDiv" for="chkBusinessClosed">
-                            @Html.CheckBoxFor(model => Model.ReturnHeader.BusinessStatusDetails.IsBusinessClosed, new { @id = "chkBusinessClosed", @class = "css-checkbox divCheckBox",  @onchange = "OnBusinessClosed();" })
+                            @Html.CheckBoxFor(model => Model.ReturnHeader.BusinessStatusDetails.IsBusinessClosed, new { @id = "chkBusinessClosed", @class = "css-checkbox divCheckBox", @onchange = "OnBusinessClosed();" })
                             <label for="chkBusinessClosed" class="css-label mBot0">My business closed OR stopped paying wages</label>
                         </label>
                         <div class="white_bg full_width mBot10" id="BusinessClosedDiv" style="display:none">
@@ -1522,7 +1509,7 @@
                             <label for="chkSeasonalEmployer" class="css-label mBot0">I am a Seasonal Employer and do not have to file a return for every quarter of the year</label>
                         </label>
 
-                                            </div>
+                    </div>
                 </div>
 
 
@@ -1628,7 +1615,7 @@
                     <div data-toggle="collapse" class="panel-heading collapsed" data-parent="#accordion" href="#collapse8">
                         <h4 class="panel-title">
                             Third Party Designee
-                            
+
                         </h4>
                     </div>
 
@@ -1641,9 +1628,9 @@
                                 <td class="fieldText vaT noWrap pLeft10">
                                     <div class="field switch">
                                         @*@Html.RadioButtonFor(model => Model.ReturnHeader.IsThirdPartyDesignee, new { @id = "rdoIsThirdPartyYes", @class = "css-radiobox" })*@
-                                        @Html.RadioButtonFor(model => model.ReturnHeader.IsThirdPartyDesignee, false, new { @id = "rdoIsThirdPartyYes", @class = "css-radiobox",@onchange= "OnIsThirdPartyDesignee()" })
+                                        @Html.RadioButtonFor(model => model.ReturnHeader.IsThirdPartyDesignee, false, new { @id = "rdoIsThirdPartyYes", @class = "css-radiobox", @onchange = "OnIsThirdPartyDesignee()" })
                                         <label for="rdoIsThirdPartyYes" class="cb-disable"><span>Yes</span></label>
-                                        @Html.RadioButtonFor(model => model.ReturnHeader.IsThirdPartyDesignee, true, new { @id = "rdoIsThirdPartyNo", @class = "css-radiobox", @onchange = "OnIsThirdPartyDesignee()" ,@checked=true})
+                                        @Html.RadioButtonFor(model => model.ReturnHeader.IsThirdPartyDesignee, true, new { @id = "rdoIsThirdPartyNo", @class = "css-radiobox", @onchange = "OnIsThirdPartyDesignee()", @checked = true })
                                         <label for="rdoIsThirdPartyNo" class="cb-enable"><span>No</span></label>
                                     </div>
                                 </td>
@@ -1732,17 +1719,17 @@
 
                                         }
 
-        <div class="spacer10"></div>
-        <div class="taC">
-            <button type="button" class="btn btn_lg btn_primary" onclick="GetStatus()" id="btnCreate">
-                Create Return
-                <i class="fa fa-spinner fa-spin" aria-hidden="true" id="CreateSpinner" style="display:none"></i>
-            </button>
-        </div>
-
+    <div class="spacer10"></div>
+    <div class="taC">
+        <button type="button" class="btn btn_lg btn_primary" onclick="GetStatus()" id="btnCreate">
+            Create Return
+            <i class="fa fa-spinner fa-spin" aria-hidden="true" id="CreateSpinner" style="display:none"></i>
+        </button>
     </div>
-</body>
-</html>
+
+</div>
+
+
 <script>
     function OnIsOnlineSignaturePIN() {
         if ($("#onlinepin").is(':checked')) {
@@ -1817,7 +1804,8 @@
     }
 
     function GetStatus() {
-        var formdata = $("#createreturnForm").serialize();
+        var formdata = $("#CreateForm941SCHR").serialize();
+        debugger;
         $("#btnCreate > i").show();
         $("#btnCreate").prop("disabled", true);
         $.ajax({

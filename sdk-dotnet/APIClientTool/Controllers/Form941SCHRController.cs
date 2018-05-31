@@ -96,8 +96,8 @@ namespace APIClientTool.Controllers
                 },
                 SignatureDetails = new SignatureDetails
                 {
-                    SignatureType = "REPORTING_AGENT",
-                    ReportingAgentPIN = new ReportingAgentPIN { PIN = "12345" }
+                    SignatureType = "ONLINE_SIGN_PIN",
+                    OnlineSignaturePIN = new OnlineSignaturePIN { PIN = "1234567890" }
                 }
             };
 

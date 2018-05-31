@@ -451,15 +451,15 @@
 
         </table>
 
-            <table class="tdDisBlock640">
-                <tr>
-                    <td class="spacer10"></td>
-                </tr>
+        <table class="tdDisBlock640">
+            <tr>
+                <td class="spacer10"></td>
+            </tr>
 
-                <tr>
-                    <td class="spacer10"></td>
-                </tr>
-            </table>
+            <tr>
+                <td class="spacer10"></td>
+            </tr>
+        </table>
 
             <div class="panel-group" id="accordion">
 
@@ -545,7 +545,7 @@
                                         State Code:
                                     </td>
                                     <td class="apifieldname vaT">
-                                        @Html.DropDownListFor(model => Model.ReturnHeader.Business.USAddress.State, new SelectList(USStates, "text", "value", null), "Select Code", new { @class = "form-control" })
+                                        @Html.DropDownListFor(model => Model.ReturnHeader.Business.USAddress.State, new SelectList(USStates, "value", "text", null), "Select Code", new { @class = "form-control" })
                                     </td>
                                 </tr>
                                 <tr>
@@ -649,8 +649,7 @@
                                         Title:
                                     </td>
                                     <td class="apifieldname vaT">
-                                        @Html.DropDownListFor(model => Model.ReturnHeader.Business.SigningAuthority.BusinessMemberType, new SelectList("", "BusinessMembersId", "BusinessMembers"), "-- Select--",
-               new { @class = "form-control", id = "BusinessMembers", @style = "width:172px" })
+                                        @Html.DropDownListFor(model => Model.ReturnHeader.Business.SigningAuthority.BusinessMemberType, Enum.GetValues(typeof(EstateBusinessMembers)).Cast<EstateBusinessMembers>().Select(x => new SelectListItem { Text = Utility.GetEnumDisplayName(x), Value = (x).ToString() }), "-- Select--", new { @class = "form-control" })
                                     </td>
                                 </tr>
                                 <tr>
@@ -839,33 +838,33 @@
                                         for (int client = 0; client < form8974ITRDetails.Count; client++)
                                         {
                                             i++;
-                                            <tr>
-                                                <td class="pos-rel">
-                                                    @(sNo++)
-                                                    @*  @Html.HiddenFor(x => x.ReturnData.Form941MainFilerData.Form8974.Form8974IncomeTaxDetails[client].Form8974IncomeTaxId)*@
-                                                </td>
-                                                <td class="pos-rel">
-                                                    @Html.EditorFor(x => x.ReturnData.Form941MainFilerData.Form8974.Form8974IncomeTaxDetails[client].IncomeTaxPeriodEndDate, new { @id = "IncomeTaxPeriodEndDate_" + i, @class = "form-control" })
-                                                </td>
-                                                <td class="pos-rel">
-                                                    @Html.DropDownListFor(x => x.ReturnData.Form941MainFilerData.Form8974.Form8974IncomeTaxDetails[client].IncomeTaxReturnFiledForm, form8974, "--Select--", new { @id = "IncomeTaxReturnFiledForm_" + i, @class = "ITRFiledForm" })
-                                                </td>
-                                                <td class="pos-rel">
-                                                    @Html.EditorFor(x => x.ReturnData.Form941MainFilerData.Form8974.Form8974IncomeTaxDetails[client].IncomeTaxReturnFiledDate, new { @id = "IncomeTaxReturnFiledDate_" + i })
-                                                </td>
-                                                <td class="pos-rel">
-                                                    @Html.TextBoxFor(x => x.ReturnData.Form941MainFilerData.Form8974.Form8974IncomeTaxDetails[client].Form6765EIN, new { @id = "Form6765EIN_" + i })
-                                                </td>
-                                                <td class="pos-rel">
-                                                    @Html.TextBoxFor(x => x.ReturnData.Form941MainFilerData.Form8974.Form8974IncomeTaxDetails[client].Form6765Line44Amt, new { @id = "Form6765Line44Amt_" + i, @maxlength = "17", @onfocus = "txtFocus(this)", @onblur = "txtBlur(this)" })
-                                                </td>
-                                                <td class="pos-rel">
-                                                    @Html.TextBoxFor(x => x.ReturnData.Form941MainFilerData.Form8974.Form8974IncomeTaxDetails[client].PreviousPeriodRemaingCreditAmt, new { @id = "PreviousPeriodRemaingCreditAmt_" + i, @maxlength = "17", @onfocus = "txtFocus(this)", @onblur = "txtBlur(this)" })
-                                                </td>
-                                                <td class="pos-rel">
-                                                    @Html.TextBoxFor(x => x.ReturnData.Form941MainFilerData.Form8974.Form8974IncomeTaxDetails[client].RemainingCredit, new { @id = "RemainingCredit_" + i, @maxlength = "17", @onfocus = "txtFocus(this)", @onblur = "txtBlur(this)" })
-                                                </td>
-                                            </tr>
+                                    <tr>
+                                        <td class="pos-rel">
+                                            @(sNo++)
+                                            @*  @Html.HiddenFor(x => x.ReturnData.Form941MainFilerData.Form8974.Form8974IncomeTaxDetails[client].Form8974IncomeTaxId)*@
+                                        </td>
+                                        <td class="pos-rel">
+                                            @Html.EditorFor(x => x.ReturnData.Form941MainFilerData.Form8974.Form8974IncomeTaxDetails[client].IncomeTaxPeriodEndDate, new { @id = "IncomeTaxPeriodEndDate_" + i, @class = "form-control" })
+                                        </td>
+                                        <td class="pos-rel">
+                                            @Html.DropDownListFor(x => x.ReturnData.Form941MainFilerData.Form8974.Form8974IncomeTaxDetails[client].IncomeTaxReturnFiledForm, form8974, "--Select--", new { @id = "IncomeTaxReturnFiledForm_" + i, @class = "ITRFiledForm" })
+                                        </td>
+                                        <td class="pos-rel">
+                                            @Html.EditorFor(x => x.ReturnData.Form941MainFilerData.Form8974.Form8974IncomeTaxDetails[client].IncomeTaxReturnFiledDate, new { @id = "IncomeTaxReturnFiledDate_" + i })
+                                        </td>
+                                        <td class="pos-rel">
+                                            @Html.TextBoxFor(x => x.ReturnData.Form941MainFilerData.Form8974.Form8974IncomeTaxDetails[client].Form6765EIN, new { @id = "Form6765EIN_" + i })
+                                        </td>
+                                        <td class="pos-rel">
+                                            @Html.TextBoxFor(x => x.ReturnData.Form941MainFilerData.Form8974.Form8974IncomeTaxDetails[client].Form6765Line44Amt, new { @id = "Form6765Line44Amt_" + i, @maxlength = "17", @onfocus = "txtFocus(this)", @onblur = "txtBlur(this)" })
+                                        </td>
+                                        <td class="pos-rel">
+                                            @Html.TextBoxFor(x => x.ReturnData.Form941MainFilerData.Form8974.Form8974IncomeTaxDetails[client].PreviousPeriodRemaingCreditAmt, new { @id = "PreviousPeriodRemaingCreditAmt_" + i, @maxlength = "17", @onfocus = "txtFocus(this)", @onblur = "txtBlur(this)" })
+                                        </td>
+                                        <td class="pos-rel">
+                                            @Html.TextBoxFor(x => x.ReturnData.Form941MainFilerData.Form8974.Form8974IncomeTaxDetails[client].RemainingCredit, new { @id = "RemainingCredit_" + i, @maxlength = "17", @onfocus = "txtFocus(this)", @onblur = "txtBlur(this)" })
+                                        </td>
+                                    </tr>
                                         }
                                     }
                                 </tbody>
@@ -1306,14 +1305,14 @@
                                     </td>
                                     <td class="apifieldname vaT">
                                         @*@Html.TextBoxFor(model => Model.Form941SchRRecords[0].ReturnHeader.BusinessStatusDetails.BusinessClosedDetails.ForeignAddress.City, new { @id = "EmployerCity", maxlength = "22", @tabindex = "160",@class = "ClosedForeignAddress" })*@
-                                        @Html.TextBoxFor(model => Model.ReturnHeader.BusinessStatusDetails.BusinessClosedDetails.USAddress.City, new { @id = "EmployerCity", maxlength = "22", @tabindex = "160", @class = "ClosedUSAddress" })
+                                        @Html.TextBoxFor(model => Model.ReturnHeader.BusinessStatusDetails.BusinessClosedDetails.USAddress.City, new { @id = "EmployerCity", maxlength = "22", @class = "ClosedUSAddress" })
 
                                     </td>
                                     <td class="labelName">
                                         State Code:
                                     </td>
                                     <td class="apifieldname vaT">
-                                        @Html.DropDownListFor(model => Model.ReturnHeader.BusinessStatusDetails.BusinessClosedDetails.USAddress.State, new SelectList(USStates, "text", "value", null), "Select Code", new { @tabindex = "161", @class = "ClosedUSAddress" })
+                                        @Html.DropDownListFor(model => Model.ReturnHeader.BusinessStatusDetails.BusinessClosedDetails.USAddress.State, new SelectList(USStates, "text", "value", null), "Select Code", new { @class = "ClosedUSAddress" })
                                     </td>
                                 </tr>
                                 <tr>
@@ -1324,13 +1323,13 @@
                                         Foreign City/State:
                                     </td>
                                     <td class="apifieldname vaT">
-                                        @Html.TextBoxFor(model => Model.ReturnHeader.BusinessStatusDetails.BusinessClosedDetails.ForeignAddress.City, new { @id = "ForeignEmployerCity", maxlength = "22", @tabindex = "162", @class = "ClosedForeignAddress" })
+                                        @Html.TextBoxFor(model => Model.ReturnHeader.BusinessStatusDetails.BusinessClosedDetails.ForeignAddress.City, new { @id = "ForeignEmployerCity", maxlength = "22", @class = "ClosedForeignAddress" })
                                     </td>
                                     <td class="labelName">
                                         Country:
                                     </td>
                                     <td class="apifieldname vaT">
-                                        @Html.DropDownListFor(model => Model.ReturnHeader.BusinessStatusDetails.BusinessClosedDetails.ForeignAddress.Country, new SelectList(countryList, "text", "value", null), "Select Code", new { @tabindex = "163", @class = "ClosedForeignAddress" })
+                                        @Html.DropDownListFor(model => Model.ReturnHeader.BusinessStatusDetails.BusinessClosedDetails.ForeignAddress.Country, new SelectList(countryList, "text", "value", null), "Select Code", new { @class = "ClosedForeignAddress" })
                                     </td>
                                 </tr>
                                 <tr>
@@ -1642,7 +1641,7 @@
                                     Designee Name:
                                 </td>
                                 <td class="apifieldname vaT">
-                                    @Html.TextBoxFor(model => Model.ReturnHeader.ThirdPartyDesignee.Phone, new { @class = "form-control", maxlength = "50" })
+                                    @Html.TextBoxFor(model => Model.ReturnHeader.ThirdPartyDesignee.Name, new { @class = "form-control", maxlength = "50" })
                                 </td>
                                 <td class="labelName">
                                     Designee Phone:

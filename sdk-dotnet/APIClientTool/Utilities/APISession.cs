@@ -376,7 +376,7 @@ namespace APIClientTool.Utilities
         {
             get
             {
-                if (HttpContext.Current.Session["Form941ReturnResponses"] != null)
+                if (HttpContext.Current.Session["Form941SCHRReturnResponses"] != null)
                 {
                     return (List<Form941SchRReturnResponse>)HttpContext.Current.Session["Form941SCHRReturnResponses"];
                 }

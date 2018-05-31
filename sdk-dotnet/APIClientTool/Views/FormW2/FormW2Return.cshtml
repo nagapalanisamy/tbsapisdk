@@ -517,25 +517,25 @@
                             <tr><td class="spacer10"></td></tr>
                             <tr>
                                 <td class="labelName"><label class="control-label">Address Line1:</label></td>
-                                <td class="fieldName">@Html.TextBoxFor(model => model.Employee.Address1, new { @class = "form-control" })</td>
+                                <td class="fieldName">@Html.TextBoxFor(model => model.Employee.USAddress.Address1, new { @class = "form-control" })</td>
                                 <td class="labelName"><label class="control-label">Address Line2:</label></td>
-                                <td class="fieldName">@Html.TextBoxFor(model => model.Employee.Address2, new { @class = "form-control" })</td>
+                                <td class="fieldName">@Html.TextBoxFor(model => model.Employee.USAddress.Address2, new { @class = "form-control" })</td>
                             </tr>
                             <tr><td class="spacer10"></td></tr>
                             <tr>
                                 <td class="labelName"><label class="control-label">City:</label></td>
-                                <td class="fieldName">@Html.TextBoxFor(model => model.Employee.City, new { @class = "form-control" })</td>
+                                <td class="fieldName">@Html.TextBoxFor(model => model.Employee.USAddress.City, new { @class = "form-control" })</td>
                                 <td class="labelName"><label class="control-label">State:</label></td>
                                 <td>
-                                    @Html.DropDownListFor(model => model.Employee.State, new SelectList(_USStates, "value", "text", null), "Select State", new { @class = "form-control floatL" })
+                                    @Html.DropDownListFor(model => model.Employee.USAddress.State, new SelectList(_USStates, "value", "text", null), "Select State", new { @class = "form-control floatL" })
                                 </td>
                             </tr>
                             <tr><td class="spacer10"></td></tr>
                             <tr>
                                 <td class="labelName"><label class="control-label">Zip Code:</label></td>
-                                <td class="fieldName">@Html.TextBoxFor(model => model.Employee.Zip, new { @class = "form-control" })</td>
-                                <td class="labelName"><label class="control-label">Country:</label></td>
-                                <td class="fieldName">@Html.DropDownListFor(model => model.Employee.Country, new SelectList(_countryList, "value", "text", null), "Select Country", new { @class = "form-control" })</td>
+                                <td class="fieldName">@Html.TextBoxFor(model => model.Employee.USAddress.ZipCd, new { @class = "form-control" })</td>
+                                @*<td class="labelName"><label class="control-label">Country:</label></td>
+                                <td class="fieldName">@Html.DropDownListFor(model => model.Employee.Country, new SelectList(_countryList, "value", "text", null), "Select Country", new { @class = "form-control" })</td>*@
                             </tr>
                             <tr><td class="spacer10"></td></tr>
                             <tr>

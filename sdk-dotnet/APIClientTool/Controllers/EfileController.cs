@@ -51,7 +51,7 @@ namespace APIClientTool.Controllers
         /// <returns></returns>
         public ActionResult _GetForm941SCHREFileStatus()
         {
-            return PartialView();
+            return PartialView(APISession.GetForm941SCHRAPIResponse());
         }
         #endregion
 

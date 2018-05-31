@@ -278,7 +278,7 @@ namespace APIClientTool.Controllers
                     }
                 }
             }
-            return PartialView(transmitForm941SchRResponseJSON);
+            return PartialView(transmitForm941SchRResponse);
         }
         #endregion
 

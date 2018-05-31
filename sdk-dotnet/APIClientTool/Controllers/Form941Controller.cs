@@ -410,6 +410,7 @@ namespace APIClientTool.Controllers
                                 if (deleteReturnResponse != null && deleteReturnResponse.StatusCode == (int)StatusCode.Success)
                                 {
                                     //Todo Remove Submission and RecordId from session
+                                    APISession.DeleteForm941APIResponse(deleteReturnRequest.SubmissionId);
                                 }
                             }
                         }

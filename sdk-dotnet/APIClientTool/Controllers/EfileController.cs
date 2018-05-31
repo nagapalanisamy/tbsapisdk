@@ -11,26 +11,14 @@ namespace APIClientTool.Controllers
     public class EfileController : Controller
     {
 
-        #region Get EFile Status
+        #region Get Form W-2 EFile Status
         /// <summary>
-        /// Get EFile Status
+        /// Get Form W-2 EFile Status
         /// </summary>
         /// <returns></returns>
-        public ActionResult _GetEFileStatus(int? id)
+        public ActionResult _GetEFileStatus()
         {
-            if (id == (int)FormType.FormW2)
-            {
-                return PartialView(APISession.GetAPIResponse());
-            }
-            else if (id == (int)FormType.Form941)
-            {
-                return PartialView(APISession.GetForm941APIResponse());
-            }
-            else if (id == (int)FormType.Form941SCHR)
-            {
-                return PartialView(APISession.GetForm941APIResponse());
-            }
-            return PartialView();
+            return PartialView(APISession.GetAPIResponse());
         }
         #endregion
 
@@ -42,6 +30,28 @@ namespace APIClientTool.Controllers
         public ActionResult EFileStatus()
         {
             return View(APISession.GetAPIResponse());
+        }
+        #endregion
+
+        #region Get Form 941 EFile Status
+        /// <summary>
+        /// Get Form 941 EFile Status
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult _GetForm941EFileStatus()
+        {
+            return PartialView(APISession.GetForm941APIResponse());
+        }
+        #endregion
+
+        #region Get Form 941 SCHR EFile Status
+        /// <summary>
+        /// Get Form 941 SCHR EFile Status
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult _GetForm941SCHREFileStatus()
+        {
+            return PartialView();
         }
         #endregion
 

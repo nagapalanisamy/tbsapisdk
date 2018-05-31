@@ -1,5 +1,6 @@
 ﻿using APIClientTool.ViewModels;
 using APIClientTool.ViewModels.Form941;
+using APIClientTool.ViewModels.Form941CoreModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -166,8 +167,27 @@ namespace APIClientTool.Utilities
         }
         #endregion
 
+        #region Delete Form 941 API Response
+        /// <summary>
+        /// Delete Form 941 API Response
+        /// </summary>
+        /// <param name="returnResponse"></param>
+        public static void DeleteFormW2APIResponse(Guid? submissionId)
+        {
+            if (submissionId != null && submissionId != Guid.Empty)
+            {
+                var formw2SessionResponse = ReturnResponses;
+                if (formw2SessionResponse != null)
+                {
+                    var form941return = formw2SessionResponse.Where(a => a.SubmissionId == submissionId).FirstOrDefault();
+                    formw2SessionResponse.Remove(form941return);
+                    ReturnResponses = formw2SessionResponse;
+                }
+            }
+        }
         #endregion
 
+        #endregion
 
         #region Form 941
 
@@ -232,6 +252,26 @@ namespace APIClientTool.Utilities
                 }
             }
             return efileStatusList;
+        }
+        #endregion
+
+        #region Delete Form 941 API Response
+        /// <summary>
+        /// Delete Form 941 API Response
+        /// </summary>
+        /// <param name="returnResponse"></param>
+        public static void DeleteForm941APIResponse(Guid? submissionId)
+        {
+            if (submissionId != null && submissionId != Guid.Empty)
+            {
+                var form941SessionResponse = Form941ReturnResponses;
+                if (form941SessionResponse != null)
+                {
+                    var form941return = form941SessionResponse.Where(a => a.SubmissionId == submissionId).FirstOrDefault();
+                    form941SessionResponse.Remove(form941return);
+                    Form941ReturnResponses = form941SessionResponse;
+                }
+            }
         }
         #endregion
 

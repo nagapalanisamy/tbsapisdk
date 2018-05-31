@@ -1,10 +1,27 @@
 ﻿@model List<APIClientTool.ViewModels.EFileStatus>
 @{
-    ViewBag.Title = "EFileStatus";
+    ViewBag.Title = "API Option";
 }
-
-<h1 class="pageTitle">Form W-2 Efile Status</h1>
-
+<div class="spacer10"></div>
+<table class="responsive">
+    <tr>
+        <td class="labelName"><label class="control-label">Choose form to get returns:</label></td>
+        <td class="fieldName">
+            <div class="dropdown">
+                <button class="dropdown-toggle btn btn-primary btn-sm" type="button" data-toggle="dropdown" id="btnDropdown" style="background-color: #60b9ca;">
+                    Select Form
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a href="javascript:void(0)" onclick="GetEfileStatus()">Form W-2</a></li>
+                    <li><a href="javascript:void(0)" onclick="GetForm941EfileStatus()">Form 941</a></li>
+                    <li><a href="javascript:void(0)" onclick="GetForm941SCHREfileStatus()">Form 941 SCHR</a></li>
+                </ul>
+            </div>
+        </td>
+    </tr>
+</table>
+<div class="spacer25"></div>
 <div id="GetEfileStatus">
 
 </div>
@@ -17,68 +34,14 @@
         $("#liefilestatus").addClass('active');
     });
 
-
-    function APIValidate(id) {
-        $("#apivalspinner").show();
-        $.ajax({
-            url: "/Efile/_APIValidate/",
-            cache: false,
-            data: { submissionId: id },
-            success: function (data) {
-                $(".modal-dialog").addClass("edit-dialog");
-                $('#ModelBody').html(data);
-                $('#myModal').modal("show");
-                $("#apivalspinner").hide();
-            },
-            error: function (err) {
-                console.log(err.responseText);
-            }
-        });
-    }
-
-    function Transmit(id) {
-        $("#TransmitSpinner").show();
-        $.ajax({
-            url: "/FormW2/_TransmitReturn/",
-            cache: false,
-            data: { submissionId: id },
-            success: function (data) {
-                $(".modal-dialog").addClass("edit-dialog");
-                $('#ModelBody').html(data);
-                $('#myModal').modal("show");
-                $("#TransmitSpinner").hide();
-                GetEfileStatus();
-            },
-            error: function (err) {
-                console.log(err.responseText);
-            }
-        });
-    }
-
-    function EfileStatus(id) {
-        $("#statusSpinner").show();
-        $.ajax({
-            url: "/Efile/_GetEfileStatusResponse/",
-            cache: false,
-            data: { submissionId: id },
-            success: function (data) {
-                $(".modal-dialog").addClass("edit-dialog");
-                $('#ModelBody').html(data);
-                $('#myModal').modal("show");
-                $("#statusSpinner").hide();
-            },
-            error: function (err) {
-                console.log(err.responseText);
-            }
-        });
-    }
-
     function GetEfileStatus() {
+        $('#btnDropdown').html('Form W-2 <span class="caret"></span>')
         $.ajax({
-            url: "/Efile/_GetEFileStatus/",
+            url: "/efile/_getefilestatus/",
             cache: false,
             data: {},
             success: function (data) {
+                $('#GetEfileStatus').html("");
                 $('#GetEfileStatus').html(data);
             },
             error: function (err) {
@@ -86,5 +49,39 @@
             }
         });
     }
+
+    function GetForm941EfileStatus() {
+        $('#btnDropdown').html('Form 941 <span class="caret"></span>')
+        $.ajax({
+            url: "/efile/_getform941efilestatus/",
+            cache: false,
+            data: {},
+            success: function (data) {
+                $('#GetEfileStatus').html("");
+                $('#GetEfileStatus').html(data);
+            },
+            error: function (err) {
+                console.log(err.responseText);
+            }
+        });
+    }
+
+    function GetForm941SCHREfileStatus() {
+        $('#btnDropdown').html('Form 941-SCHR <span class="caret"></span>')
+        $.ajax({
+            url: "/efile/_getform941schrefilestatus/",
+            cache: false,
+            data: {},
+            success: function (data) {
+                $('#GetEfileStatus').html("");
+                $('#GetEfileStatus').html(data);
+            },
+            error: function (err) {
+                console.log(err.responseText);
+            }
+        });
+    }
+
+
 
 </script>

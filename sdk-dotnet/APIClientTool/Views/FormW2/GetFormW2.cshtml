@@ -6,7 +6,7 @@
     </h4>
 </div>
 <div class="modal-body edit-modal-body white_bg">
-    @Html.Raw(JsonConvert.SerializeObject(ViewData["GetResponseJSON"] != null ? ViewData["GetResponseJSON"] : string.Empty, Formatting.Indented))
+    @Html.Raw(ViewData["GetResponseJSON"] != null ? ViewData["GetResponseJSON"] : string.Empty)
 </div>
 
 <div class="modal-footer edit-modal-footer mTopNo">

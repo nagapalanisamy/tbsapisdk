@@ -382,8 +382,7 @@ namespace APIClientTool.Controllers
                             getReturnResponse = new JavaScriptSerializer().Deserialize<FormW2GetReturnResponse>(getReturnResponseJSON);
                             if (getReturnResponse != null && getReturnResponse.StatusCode == (int)StatusCode.Success)
                             {
-                                JObject json = JObject.Parse(getReturnResponseJSON);
-                                ViewData["GetResponseJSON"] = json;
+                                ViewData["GetResponseJSON"] = getReturnResponseJSON;
                                 return PartialView();
                             }
                         }

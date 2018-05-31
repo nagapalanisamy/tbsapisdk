@@ -1,6 +1,6 @@
 ﻿@model List<APIClientTool.ViewModels.EFileStatus>
 
-<h1 class="pageTitle">Form W-2 Returns</h1>
+<h1 class="pageTitle">Form 941-SCHR Returns</h1>
 
 <table class="table table-bordered">
     <thead class="thead-inverse">
@@ -33,22 +33,22 @@
                             Validate
                             <i class="fa fa-spinner fa-spin" aria-hidden="true" id="apivalspinner_@i" style="display:none"></i>
                         </button>
-                        @*<button type="button" class="btn btn_sm btn_second" onclick="DeleteFormw2('@item.SubmissionId')" id="btnapival_@i" style="background:#4cff00!important">
-                                Delete
-                            </button>
-                            <button type="button" class="btn btn_sm btn_second" onclick="ViewFormw2('@item.SubmissionId')" id="btnapival_@i" style="background:dodgerblue!important">
-                                View (GET)
-                            </button>*@
+                        <button type="button" class="btn btn_sm btn_second" onclick="ViewForm941SCHR('@item.SubmissionId')" id="btnapival_@i" style="background:dodgerblue!important">
+                            View (GET)
+                        </button>
                         @if (!item.IsReturnTransmitted)
                         {
-                            <button type="button" class="btn btn_sm btn_primary" onclick="Transmit('@item.SubmissionId')" id="btnTransmit_@i">
+                            <button type="button" class="btn btn_sm btn_primary" onclick="Form941SCHRTransmit('@item.SubmissionId')" id="btnTransmit_@i">
                                 Transmit
-                                <i class="fa fa-spinner fa-spin" aria-hidden="true" id="TransmitSpinner_@i" style="display:none"></i>
+                                <i class="fa fa-spinner fa-spin" aria-hidden="true" id="Form941SCHRTransmitSpinner_@i" style="display:none"></i>
                             </button>
                         }
-                        <button type="button" class="btn btn_sm btn_second" onclick="EfileStatus('@item.SubmissionId')" id="btnEfilestatus_@i">
+                        <button type="button" class="btn btn_sm btn_second" onclick="Form941SCHREfileStatus('@item.SubmissionId')" id="btnEfilestatus_@i">
                             Get Status
-                            <i class="fa fa-spinner fa-spin" aria-hidden="true" id="statusSpinner_@i" style="display:none"></i>
+                            <i class="fa fa-spinner fa-spin" aria-hidden="true" id="Form941SCHRstatusSpinner_@i" style="display:none"></i>
+                        </button>
+                        <button type="button" class="btn btn_sm btn_second" onclick="DeleteForm941SCHR('@item.SubmissionId')" id="btnapival_@i" style="background:#4cff00!important">
+                            Delete
                         </button>
                     </td>
                 </tr>
@@ -65,35 +65,16 @@
     </tbody>
 </table>
 
-
 <script type="text/javascript">
 
     $(function () {
 
     });
 
-    function APIValidate(id) {
-        $("#apivalspinner").show();
+    function Form941SCHRTransmit(id) {
+        $("#Form941SCHRTransmitSpinner").show();
         $.ajax({
-            url: "/FormW2/_APIValidate/",
-            cache: false,
-            data: { submissionId: id },
-            success: function (data) {
-                $(".modal-dialog").addClass("edit-dialog");
-                $('#ModelBody').html(data);
-                $('#myModal').modal("show");
-                $("#apivalspinner").hide();
-            },
-            error: function (err) {
-                console.log(err.responseText);
-            }
-        });
-    }
-
-    function Transmit(id) {
-        $("#TransmitSpinner").show();
-        $.ajax({
-            url: "/FormW2/_TransmitReturn/",
+            url: "/Form941SCHR/_TransmitReturn/",
             cache: false,
             data: { submissionId: id },
             success: function (data) {
@@ -101,7 +82,7 @@
                 $('#ModelBody').html(data);
                 $('#myModal').modal("show");
                 $("#TransmitSpinner").hide();
-                GetEfileStatus();
+                GetForm941SCHREfileStatus();
             },
             error: function (err) {
                 console.log(err.responseText);
@@ -109,10 +90,10 @@
         });
     }
 
-    function EfileStatus(id) {
-        $("#statusSpinner").show();
+    function Form941SCHREfileStatus(id) {
+        $("#Form941SCHRstatusSpinner").show();
         $.ajax({
-            url: "/FormW2/_GetEfileStatusResponse/",
+            url: "/Form941SCHR/_GetEfileStatusResponse/",
             cache: false,
             data: { submissionId: id },
             success: function (data) {
@@ -127,10 +108,9 @@
         });
     }
 
-    function DeleteFormw2(id) {
-        $("#TransmitSpinner").show();
+    function ViewForm941SCHR() {
         $.ajax({
-            url: "/FormW2/Delete/",
+            url: "/Form941SCHR/_Get/",
             cache: false,
             data: { submissionId: id },
             success: function (data) {
@@ -138,7 +118,24 @@
                 $('#ModelBody').html(data);
                 $('#myModal').modal("show");
                 $("#TransmitSpinner").hide();
-                GetEfileStatus();
+            },
+            error: function (err) {
+                console.log(err.responseText);
+            }
+        });
+    }
+
+    function DeleteForm941SCHR() {
+        $.ajax({
+            url: "/Form941SCHR/Delete/",
+            cache: false,
+            data: { submissionId: id },
+            success: function (data) {
+                $(".modal-dialog").addClass("edit-dialog");
+                $('#ModelBody').html(data);
+                $('#myModal').modal("show");
+                $("#TransmitSpinner").hide();
+                GetForm941EfileStatus();
             },
             error: function (err) {
                 console.log(err.responseText);

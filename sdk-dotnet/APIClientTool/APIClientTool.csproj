@@ -364,6 +364,8 @@
     <Content Include="Views\Form941SCHR\_TransmitReturn.cshtml" />
     <Content Include="Views\Form941SCHR\Delete.cshtml" />
     <Content Include="Views\Form941\Delete.cshtml" />
+    <Content Include="Views\Efile\_GetForm941EFileStatus.cshtml" />
+    <Content Include="Views\Efile\_GetForm941SCHREFileStatus.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />

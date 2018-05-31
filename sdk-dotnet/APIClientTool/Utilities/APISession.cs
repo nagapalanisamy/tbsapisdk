@@ -168,7 +168,6 @@ namespace APIClientTool.Utilities
 
         #endregion
 
-
         #region Form 941
 
         #region Session Property for Form 941 Return
@@ -236,6 +235,6 @@ namespace APIClientTool.Utilities
         #endregion
 
         #endregion
-
+        
     }
 }

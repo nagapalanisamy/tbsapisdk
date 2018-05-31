@@ -375,7 +375,7 @@ namespace APIClientTool.Controllers
         /// Function transmit the Form 941 Return to Efile
         /// </summary>
         /// <param name="submissionId">SubmissionId passed to transmit the 941 return</param>
-        /// <returns>TransmitFormW2Response</returns>
+        /// <returns></returns>
         public ActionResult Delete(Guid submissionId)
         {
             var deleteReturnRequest = new DeleteReturnRequest();
@@ -424,6 +424,10 @@ namespace APIClientTool.Controllers
             }
             return PartialView(deleteReturnResponseJSON);
         }
+        #endregion
+
+        #region GET Form941
+
         #endregion
 
     }

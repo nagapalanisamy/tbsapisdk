@@ -263,6 +263,7 @@
     <Compile Include="ViewModels\Form941\Form941StatusResponse.cs" />
     <Compile Include="ViewModels\Form941\TransmitForm941Response.cs" />
     <Compile Include="ViewModels\FormW2\FormW2.cs" />
+    <Compile Include="ViewModels\FormW2\FormW2DeleteReturnResponse.cs" />
     <Compile Include="ViewModels\FormW2\FormW2ReturnResponse.cs" />
     <Compile Include="ViewModels\BaseModels\SigningAuthority.cs" />
     <Compile Include="ViewModels\BaseModels\TransmitForm.cs" />

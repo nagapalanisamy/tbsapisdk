@@ -30,15 +30,12 @@
                     }
                     <td>
                         @*<button type="button" class="btn btn_sm btn_second" onclick="APIValidate('@item.SubmissionId')" id="btnapival_@i" style="background:#da4b3b!important">
-                            Validate
-                            <i class="fa fa-spinner fa-spin" aria-hidden="true" id="apivalspinner_@i" style="display:none"></i>
-                        </button>*@
-                        @*<button type="button" class="btn btn_sm btn_second" onclick="DeleteFormw2('@item.SubmissionId')" id="btnapival_@i" style="background:#4cff00!important">
-                                Delete
-                            </button>
-                            <button type="button" class="btn btn_sm btn_second" onclick="ViewFormw2('@item.SubmissionId')" id="btnapival_@i" style="background:dodgerblue!important">
-                                View (GET)
+                                Validate
+                                <i class="fa fa-spinner fa-spin" aria-hidden="true" id="apivalspinner_@i" style="display:none"></i>
                             </button>*@
+                        <button type="button" class="btn btn_sm btn_second" onclick="ViewFormw2('@item.SubmissionId')" id="btnapival_@i" style="background:dodgerblue!important">
+                            View (GET)
+                        </button>
                         @if (!item.IsReturnTransmitted)
                         {
                             <button type="button" class="btn btn_sm btn_primary" onclick="Transmit('@item.SubmissionId')" id="btnTransmit_@i">
@@ -49,6 +46,9 @@
                         <button type="button" class="btn btn_sm btn_second" onclick="EfileStatus('@item.SubmissionId')" id="btnEfilestatus_@i">
                             Get Status
                             <i class="fa fa-spinner fa-spin" aria-hidden="true" id="statusSpinner_@i" style="display:none"></i>
+                        </button>
+                        <button type="button" class="btn btn_sm btn_second" onclick="DeleteFormw2('@item.SubmissionId')" id="btnapival_@i" style="background:#ff0000!important">
+                            Delete
                         </button>
                     </td>
                 </tr>

@@ -167,6 +167,26 @@ namespace APIClientTool.Utilities
         }
         #endregion
 
+        #region Delete Form 941 API Response
+        /// <summary>
+        /// Delete Form 941 API Response
+        /// </summary>
+        /// <param name="returnResponse"></param>
+        public static void DeleteFormW2APIResponse(Guid? submissionId)
+        {
+            if (submissionId != null && submissionId != Guid.Empty)
+            {
+                var formw2SessionResponse = ReturnResponses;
+                if (formw2SessionResponse != null)
+                {
+                    var form941return = formw2SessionResponse.Where(a => a.SubmissionId == submissionId).FirstOrDefault();
+                    formw2SessionResponse.Remove(form941return);
+                    ReturnResponses = formw2SessionResponse;
+                }
+            }
+        }
+        #endregion
+
         #endregion
 
         #region Form 941
@@ -234,7 +254,6 @@ namespace APIClientTool.Utilities
             return efileStatusList;
         }
         #endregion
-
 
         #region Delete Form 941 API Response
         /// <summary>

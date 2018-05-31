@@ -29,10 +29,10 @@
                         <td style="color:dodgerblue">Not Transmitted</td>
                     }
                     <td>
-                        <button type="button" class="btn btn_sm btn_second" onclick="APIValidate('@item.SubmissionId')" id="btnapival_@i" style="background:#da4b3b!important">
+                        @*<button type="button" class="btn btn_sm btn_second" onclick="APIValidate('@item.SubmissionId')" id="btnapival_@i" style="background:#da4b3b!important">
                             Validate
                             <i class="fa fa-spinner fa-spin" aria-hidden="true" id="apivalspinner_@i" style="display:none"></i>
-                        </button>
+                        </button>*@
                         <button type="button" class="btn btn_sm btn_second" onclick="ViewForm941SCHR('@item.SubmissionId')" id="btnapival_@i" style="background:dodgerblue!important">
                             View (GET)
                         </button>
@@ -47,7 +47,7 @@
                             Get Status
                             <i class="fa fa-spinner fa-spin" aria-hidden="true" id="Form941SCHRstatusSpinner_@i" style="display:none"></i>
                         </button>
-                        <button type="button" class="btn btn_sm btn_second" onclick="DeleteForm941SCHR('@item.SubmissionId')" id="btnapival_@i" style="background:#4cff00!important">
+                        <button type="button" class="btn btn_sm btn_second" onclick="DeleteForm941SCHR('@item.SubmissionId')" id="btnapival_@i" style="background:#ff0000!important">
                             Delete
                         </button>
                     </td>
@@ -108,16 +108,15 @@
         });
     }
 
-    function ViewForm941SCHR() {
+    function ViewForm941SCHR(id) {
         $.ajax({
-            url: "/Form941SCHR/_Get/",
+            url: "/Form941SCHR/GetForm941SchR/",
             cache: false,
             data: { submissionId: id },
             success: function (data) {
                 $(".modal-dialog").addClass("edit-dialog");
                 $('#ModelBody').html(data);
                 $('#myModal').modal("show");
-                $("#TransmitSpinner").hide();
             },
             error: function (err) {
                 console.log(err.responseText);
@@ -125,7 +124,7 @@
         });
     }
 
-    function DeleteForm941SCHR() {
+    function DeleteForm941SCHR(id) {
         $.ajax({
             url: "/Form941SCHR/Delete/",
             cache: false,
@@ -134,7 +133,6 @@
                 $(".modal-dialog").addClass("edit-dialog");
                 $('#ModelBody').html(data);
                 $('#myModal').modal("show");
-                $("#TransmitSpinner").hide();
                 GetForm941EfileStatus();
             },
             error: function (err) {

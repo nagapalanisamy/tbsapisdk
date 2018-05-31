@@ -1,11 +1,12 @@
-﻿<div class="modal-header edit-modal-header">
+﻿@using Newtonsoft.Json
+<div class="modal-header edit-modal-header">
     <button type="button" class="close" data-dismiss="modal"></button>
     <h4 id="form_heading" class="modal-title">
         View
     </h4>
 </div>
 <div class="modal-body edit-modal-body white_bg">
-    @Html.Raw(ViewData["GetResponseJSON"] != null ? ViewData["GetResponseJSON"] : string.Empty)
+    @Html.Raw(JsonConvert.SerializeObject(ViewData["GetResponseJSON"] != null ? ViewData["GetResponseJSON"] : string.Empty, Formatting.Indented))
 </div>
 
 <div class="modal-footer edit-modal-footer mTopNo">

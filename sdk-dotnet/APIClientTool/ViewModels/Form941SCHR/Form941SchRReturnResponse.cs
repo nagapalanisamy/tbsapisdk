@@ -5,7 +5,7 @@ using System.Web;
 
 namespace APIClientTool.ViewModels.Form941SCHR
 {
-    public class Form941SchRReturnResponse
+    public class Form941SchRReturnResponse : FilingStatus
     {
 
         public Guid SubmissionId { get; set; }

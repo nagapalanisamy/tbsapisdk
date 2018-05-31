@@ -206,7 +206,7 @@ namespace APIClientTool.Controllers
                         if (form941SchRResponse.SubmissionId != null && form941SchRResponse.SubmissionId != Guid.Empty)
                         {
                             //Adding Form941CreateReturnResponse Response to Session
-                            //APISession.AddAPIResponse(form941SchRResponse); To Do
+                            APISession.AddForm941SCHRAPIResponse(form941SchRResponse);
                         }
                     }
                 }
@@ -228,7 +228,7 @@ namespace APIClientTool.Controllers
         /// Function transmit the Form 941 Return to Efile
         /// </summary>
         /// <param name="submissionId">SubmissionId passed to transmit the 941 return</param>
-        /// <returns>TransmitFormW2Response</returns>
+        /// <returns>TransmitForm941SCHRResponse</returns>
         public ActionResult _TransmitReturn(Guid submissionId)
         {
             var transmitForm941SchR = new TransmitForm();
@@ -237,7 +237,7 @@ namespace APIClientTool.Controllers
             if (submissionId != null && submissionId != Guid.Empty)
             {
                 // Getting the RecordIds for SubmissionId
-                transmitForm941SchR = APISession.GetRecordIdsBySubmissionId(submissionId);
+                transmitForm941SchR = APISession.GetForm941SCHRRecordIdsBySubmissionId(submissionId);
 
                 // Generate JSON for TransmitForm 941
                 var requestJson = JsonConvert.SerializeObject(transmitForm941SchR, Formatting.Indented);
@@ -265,7 +265,7 @@ namespace APIClientTool.Controllers
                                 if (transmitForm941SchRResponse.SubmissionId != null && transmitForm941SchRResponse.SubmissionId != Guid.Empty && transmitForm941SchRResponse.StatusCode == (int)StatusCode.Success)
                                 {
                                     //Updating Filing Status (Transmitted) for a specific SubmissionId in Session 
-                                    APISession.UpdateFilingStatus(transmitForm941SchRResponse.SubmissionId);
+                                    APISession.UpdateForm941SCHRReturnFilingStatus(transmitForm941SchRResponse.SubmissionId);
                                 }
                             }
                         }
@@ -287,7 +287,7 @@ namespace APIClientTool.Controllers
         /// Function get the Form 941SCHR Return to Efile
         /// </summary>
         /// <param name="submissionId">SubmissionId passed to get the 941SCHR return</param>
-        /// <returns>TransmitFormW2Response</returns>
+        /// <returns></returns>
         public ActionResult GetForm941SchR(Guid submissionId)
         {
             var getReturnResponse = new Form941SchRGetReturnResponse();
@@ -295,7 +295,7 @@ namespace APIClientTool.Controllers
             if (submissionId != null && submissionId != Guid.Empty)
             {
                 // Getting the RecordIds for SubmissionId
-                var recordIds = APISession.GetComaseperatedRecordIdsBySubmissionId(submissionId);
+                var recordIds = APISession.GetComaseperatedForm941SCHRRecordIdsBySubmissionId(submissionId);
 
                 if (!string.IsNullOrEmpty(recordIds))
                 {
@@ -351,7 +351,7 @@ namespace APIClientTool.Controllers
             if (submissionId != null && submissionId != Guid.Empty)
             {
                 // Getting the RecordIds for SubmissionId
-                var recordIds = APISession.GetComaseperatedRecordIdsBySubmissionId(submissionId);
+                var recordIds = APISession.GetComaseperatedForm941SCHRRecordIdsBySubmissionId(submissionId);
 
                 if (!string.IsNullOrEmpty(recordIds))
                 {
@@ -376,7 +376,7 @@ namespace APIClientTool.Controllers
                                 if (deleteReturnResponse != null && deleteReturnResponse.StatusCode == (int)StatusCode.Success)
                                 {
                                     //Remove Submission and RecordId from session
-                                    //APISession.DeleteForm941SCHRAPIResponse(submissionId);
+                                    APISession.DeleteForm941SCHRAPIResponse(submissionId);
                                 }
                             }
                         }

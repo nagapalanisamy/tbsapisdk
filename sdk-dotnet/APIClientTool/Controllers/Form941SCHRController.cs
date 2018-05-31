@@ -392,5 +392,60 @@ namespace APIClientTool.Controllers
         }
         #endregion
 
+        #region Get Efile Status
+        /// <summary>
+        /// Function returns the Efile status of Form 941
+        /// </summary>
+        /// <param name="submissionId">SubmissionId is passed to get the efile status</param>
+        /// <returns>Form941StatusResponse</returns>
+        public ActionResult _GetEfileStatusResponse(Guid submissionId)
+        {
+            var efileStatusResponse = new Form941SCHRStatusResponse();
+            if (submissionId != null && submissionId != Guid.Empty)
+            {
+                var efileRequest = new EfileStatusGetRequest { SubmissionId = submissionId };
+                var recordIds = APISession.GetForm941RecordIdsBySubmissionId(submissionId);
+                if (recordIds != null && recordIds.RecordIds != null && recordIds.RecordIds.Count > 0)
+                {
+                    efileRequest.RecordIds = recordIds.RecordIds;
+                }
+                var transmitFormW2ResponseJSON = string.Empty;
+
+                // Request JSON
+                var requestJson = JsonConvert.SerializeObject(efileRequest, Formatting.Indented);
+
+                if (submissionId != null && submissionId != Guid.Empty)
+                {
+                    using (var client = new PublicAPIClient())
+                    {
+                        //POST
+                        string requestUri = "Form941SCHR/Status";
+
+                        //Get Response
+                        APIGenerateAuthHeader.GenerateAuthHeader(client, requestUri, "POST");
+
+                        //Read Response
+                        var _response = client.PostAsJsonAsync(requestUri, efileRequest).Result;
+                        if (_response != null && _response.IsSuccessStatusCode)
+                        {
+                            var createResponse = _response.Content.ReadAsAsync<Form941SCHRStatusResponse>().Result;
+                            if (createResponse != null)
+                            {
+                                transmitFormW2ResponseJSON = JsonConvert.SerializeObject(createResponse, Formatting.Indented);
+                                efileStatusResponse = new JavaScriptSerializer().Deserialize<Form941SCHRStatusResponse>(transmitFormW2ResponseJSON);
+                            }
+                        }
+                        else
+                        {
+                            var createResponse = _response.Content.ReadAsAsync<Object>().Result;
+                            transmitFormW2ResponseJSON = JsonConvert.SerializeObject(createResponse, Formatting.Indented);
+                            efileStatusResponse = new JavaScriptSerializer().Deserialize<Form941SCHRStatusResponse>(transmitFormW2ResponseJSON);
+                        }
+                    }
+                }
+            }
+            return PartialView(efileStatusResponse);
+        }
+        #endregion
     }
 }

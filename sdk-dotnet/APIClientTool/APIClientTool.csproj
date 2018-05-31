@@ -235,6 +235,7 @@
     <Compile Include="ViewModels\BaseModels\EfileStatusGetRequest.cs" />
     <Compile Include="ViewModels\Form941CoreModel\DeleteReturnRequest.cs" />
     <Compile Include="ViewModels\Form941SCHR\Form941SchRGetReturnResponse.cs" />
+    <Compile Include="ViewModels\Form941SCHR\Form941SCHRStatusResponse.cs" />
     <Compile Include="ViewModels\Form941\Form941GetReturnResponse.cs" />
     <Compile Include="ViewModels\FormW2\EfileStatusResponse.cs" />
     <Compile Include="ViewModels\BaseModels\Employee.cs" />
@@ -374,6 +375,7 @@
     <Content Include="Views\Form941\GetForm941.cshtml" />
     <Content Include="Views\FormW2\GetFormW2.cshtml" />
     <Content Include="Views\FormW2\Delete.cshtml" />
+    <Content Include="Views\Form941SCHR\_GetEfileStatusResponse.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using APIClientTool.ViewModels.Form941CoreModel;
-
+﻿using APIClientTool.ViewModels.Form941CoreModel;
 namespace APIClientTool.ViewModels.Form941SCHR
 {
     public class Form941SchRReturnHeader
@@ -53,6 +48,6 @@ namespace APIClientTool.ViewModels.Form941SCHR
         /// Business Status Details
         /// </summary>
         public BusinessStatusDetails BusinessStatusDetails { get; set; }
-        public Form941ClientData Form941ClientData { get; internal set; }
+
     }
 }

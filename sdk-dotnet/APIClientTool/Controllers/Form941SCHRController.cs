@@ -101,39 +101,6 @@ namespace APIClientTool.Controllers
                     SignatureType = "ONLINE_SIGN_PIN",
                     OnlineSignaturePIN = new OnlineSignaturePIN { PIN = "1234567890" }
                 },
-
-
-                Form941ClientData = new Form941ClientData
-                {
-                    CSeqId = "AB",
-                    ClientEIN = "003012345",
-                    ClientName = "sss",
-                    WagesTypeCd = "A",
-                    WagesAmt = 5750M,
-                    FedIncomeTaxWHAmt = 130M,
-                    Line5e = 70M,
-                    TaxOnUnreportedTips3121qAmt = 0M,
-                    Line11 = 0M,
-                    Line12 = 200M,
-                    IsPayrollTaxCredit = false,
-                    Form8974 = new Form8974
-                    {
-                        Form8974IncomeTaxDetails = new List<Form8974IncomeTaxDetails> {
-                            new Form8974IncomeTaxDetails {
-                                IncomeTaxPeriodEndDate = null,
-                                IncomeTaxReturnFiledForm = null,
-                                IncomeTaxReturnFiledDate=null,
-                                Form6765Line44Amt = 0.0M,
-                                PreviousPeriodRemaingCreditAmt = 0.0M,
-                                RemainingCredit=0.0M
-                            }
-                        }
-                    },
-                    TotTaxDepositAmt= 200M
-                },
-                
-
-
             };
 
             //Mapping Return Data
@@ -170,9 +137,38 @@ namespace APIClientTool.Controllers
                     Line6 = 200M,
                     Line10 = 200M,
                     TotTaxDepositAmt = 200M
+                },
+                Form941ClientDetails = new List<Form941ClientData>
+                {
+                      new Form941ClientData
+                    {
+                        CSeqId = "AB",
+                        ClientEIN = "003012345",
+                        ClientName = "sss",
+                        WagesTypeCd = "A",
+                        WagesAmt = 5750M,
+                        FedIncomeTaxWHAmt = 130M,
+                        Line5e = 70M,
+                        TaxOnUnreportedTips3121qAmt = 0M,
+                        Line11 = 0M,
+                        Line12 = 200M,
+                        IsPayrollTaxCredit = false,
+                        Form8974 = new Form8974
+                        {
+                            Form8974IncomeTaxDetails = new List<Form8974IncomeTaxDetails> {
+                            new Form8974IncomeTaxDetails {
+                                IncomeTaxPeriodEndDate = null,
+                                IncomeTaxReturnFiledForm = null,
+                                IncomeTaxReturnFiledDate=null,
+                                Form6765Line44Amt = 0.0M,
+                                PreviousPeriodRemaingCreditAmt = 0.0M,
+                                RemainingCredit=0.0M
+                            }
+                        }
+                        },
+                        TotTaxDepositAmt = 200M
+                    },
                 }
-
-
             };
         }
         #endregion

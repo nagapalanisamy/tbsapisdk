@@ -6,7 +6,7 @@
     ViewBag.Title = "Form 941-SCHR";
     Layout = "~/Views/Shared/_Layout.cshtml";
 
-    // int ClientCount = Session["ClientCounts"] != null ? Utility.GetInt(Session["ClientCounts"]) : 1;
+     int ClientCount = Session["ClientCounts"] != null ? Utility.GetInt(Session["ClientCounts"]) : 1;
     var CPEOWageTypeList = new List<SelectListItem>();
     CPEOWageTypeList.Add(new SelectListItem() { Text = "A", Value = "A" });
     CPEOWageTypeList.Add(new SelectListItem() { Text = "B", Value = "B" });
@@ -461,1193 +461,24 @@
             </tr>
         </table>
 
-            <div class="panel-group" id="accordion">
+        <div class="panel-group" id="accordion">
 
-                <div class="panel panel-default">
-                    <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapse1">
-                        <h4 class="panel-title">
-                            Busienss Details
-                        </h4>
-                    </div>
-                    <div id="collapse1" class="panel-collapse collapse">
-                        <div class="panel-body">
-                            <table class="responsive">
-                                <tr>
-                                    <td class="labelName">
-                                        Business Type:
-                                    </td>
-                                    <td class="apifieldname vaT">
-                                        @Html.DropDownListFor(model => Model.ReturnHeader.Business.BusinessType, BusinessTypeList, "-- Select--",
+            <div class="panel panel-default">
+                <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapse1">
+                    <h4 class="panel-title">
+                        Busienss Details
+                    </h4>
+                </div>
+                <div id="collapse1" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <table class="responsive">
+                            <tr>
+                                <td class="labelName">
+                                    Business Type:
+                                </td>
+                                <td class="apifieldname vaT">
+                                    @Html.DropDownListFor(model => Model.ReturnHeader.Business.BusinessType, BusinessTypeList, "-- Select--",
                new { id = "BusinessType", @onchange = "AssignBusinessMembers();", @class = "form-control" })
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="spacer10"></td>
-                                </tr>
-                                <tr>
-                                    <td class="labelName">
-                                        Employer Name:
-                                    </td>
-                                    <td class="apifieldname vaT">
-                                        @Html.TextBoxFor(model => Model.ReturnHeader.Business.BusinessNm, new { @class = "form-control" })
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="spacer10"></td>
-                                </tr>
-                                <tr>
-                                    <td class="labelName">
-                                        EIN:
-                                    </td>
-                                    <td class="apifieldname vaT">
-                                        @Html.TextBoxFor(model => Model.ReturnHeader.Business.EINorSSN, new { maxlength = "9", @class = "form-control" })
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="spacer10"></td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td colspan="3">
-                                        <div class="full_width">
-                                            @Html.CheckBoxFor(model => model.ReturnHeader.Business.IsForeign, new { onclick = "ChangeForeignAddr();", @class = "css-checkbox", id = "chkIsForeignAddress", @tabindex = "106" })
-                                            <label for="chkIsForeignAddress" class="css-label checkbox">Foreign Address (Outside US)?</label>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="labelName">
-                                        Address:
-                                    </td>
-                                    <td class="apifieldname vaT">
-                                        @Html.TextBoxFor(model => Model.ReturnHeader.Business.USAddress.Address1, new { @class = "form-control" })
-                                        @Html.TextBoxFor(model => Model.ReturnHeader.Business.ForeignAddress.Address1, new { @style = "display:none", @class = "form-control" })
-                                    </td>
-                                    <td class="labelName">
-                                        Address Cont:
-                                    </td>
-                                    <td class="apifieldname vaT">
-                                        @Html.TextBoxFor(model => Model.ReturnHeader.Business.USAddress.Address2, new { @class = "form-control" })
-                                        @Html.TextBoxFor(model => Model.ReturnHeader.Business.ForeignAddress.Address2, new { @style = "display:none", @class = "form-control" })
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="spacer10"></td>
-                                </tr>
-                                <tr id="trcitystate">
-                                    <td class="labelName">
-                                        City:
-                                    </td>
-                                    <td class="apifieldname vaT">
-                                        @Html.TextBoxFor(model => Model.ReturnHeader.Business.USAddress.City, new { @id = "PayerCity", maxlength = "22", @class = "form-control" })
-                                    </td>
-                                    <td class="labelName">
-                                        State Code:
-                                    </td>
-                                    <td class="apifieldname vaT">
-                                        @Html.DropDownListFor(model => Model.ReturnHeader.Business.USAddress.State, new SelectList(USStates, "value", "text", null), "Select Code", new { @class = "form-control" })
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="spacer10"></td>
-                                </tr>
-
-                                <tr id="trOutsideCityStates">
-                                    <td class="labelName">
-                                        City:
-                                    </td>
-                                    <td class="apifieldname vaT">
-                                        @Html.TextBoxFor(model => Model.ReturnHeader.Business.ForeignAddress.City, new { @id = "ForeignPayerCity", maxlength = "22", @class = "form-control" })
-                                    </td>
-                                    <td class="labelName">
-                                        Foreign City/State:
-                                    </td>
-                                    <td class="apifieldname vaT">
-                                        @Html.TextBoxFor(model => Model.ReturnHeader.Business.ForeignAddress.ProvinceOrStateNm, new { @id = "ForeignPayerCity", maxlength = "22", @class = "form-control" })
-                                    </td>
-
-                                </tr>
-                                <tr>
-                                    <td class="spacer10"></td>
-                                </tr>
-                                <tr id="trzipcode">
-                                    <td class="labelName">
-                                        Zip Code:
-                                    </td>
-                                    <td class="apifieldname vaT">
-                                        @Html.TextBoxFor(model => Model.ReturnHeader.Business.USAddress.ZipCd, new { maxlength = "9", @class = "form-control" })
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="spacer10"></td>
-                                </tr>
-                                <tr id="trZipcodeOutside">
-                                    <td class="labelName">
-                                        Country:
-                                    </td>
-                                    <td class="apifieldname vaT">
-                                        @Html.DropDownListFor(model => Model.ReturnHeader.Business.ForeignAddress.Country, new SelectList(countryList, "text", "value", null), "Select Code", new { @class = "form-control" })
-                                    </td>
-                                    <td class="labelName">
-                                        Postal Code:
-                                    </td>
-                                    <td class="apifieldname vaT">
-                                        @Html.TextBoxFor(model => Model.ReturnHeader.Business.ForeignAddress.PostalCd, new { maxlength = "9", @class = "form-control" })
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="spacer10"></td>
-                                </tr>
-                                <tr>
-                                    <td class="labelName">
-                                        Contact Name:
-                                    </td>
-                                    <td class="apifieldname vaT">
-                                        @Html.TextBoxFor(model => Model.ReturnHeader.Business.ContactNm, new { @class = "form-control", maxlength = "50" })
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="spacer10"></td>
-                                </tr>
-                                <tr>
-                                    <td class="labelName">
-                                        Phone Number:
-                                    </td>
-                                    <td class="apifieldname vaT" colspan="3">
-                                        @Html.TextBoxFor(m => Model.ReturnHeader.Business.Phone, new { @class = "form-control", maxlength = "10" })
-                                        @*@Html.TextBoxFor(m => m.ReturnHeader.Business.PhoneExtn, new { @tabindex = "114", @class = "PhoneExtension", maxlength = "5", @style = "width:60px !important;", @placeholder = "extn"})*@
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="spacer10"></td>
-                                </tr>
-                                <tr>
-                                    <td class="labelName">
-                                        Email Address:
-                                    </td>
-                                    <td class="apifieldname vaT">
-                                        @Html.TextBoxFor(model => Model.ReturnHeader.Business.Email, new { @class = "form-control" })
-                                    </td>
-                                    <td class="labelName">
-                                        Fax Number:
-                                    </td>
-                                    <td class="apifieldname vaT">
-                                        @Html.TextBoxFor(model => Model.ReturnHeader.Business.Fax, new { @class = "form-control", maxlength = "10" })
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="spacer10"></td>
-                                </tr>
-                                <tr>
-                                    <td class="labelName">
-                                        Signatory Name:
-                                    </td>
-                                    <td class="apifieldname vaT">
-                                        @Html.TextBoxFor(model => Model.ReturnHeader.Business.SigningAuthority.Name, new { @class = "form-control", maxlength = "50" })
-                                    </td>
-                                    <td class="labelName">
-                                        Title:
-                                    </td>
-                                    <td class="apifieldname vaT">
-                                        @Html.DropDownListFor(model => Model.ReturnHeader.Business.SigningAuthority.BusinessMemberType, Enum.GetValues(typeof(EstateBusinessMembers)).Cast<EstateBusinessMembers>().Select(x => new SelectListItem { Text = Utility.GetEnumDisplayName(x), Value = (x).ToString() }), "-- Select--", new { @class = "form-control" })
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="spacer10"></td>
-                                </tr>
-                                <tr>
-                                    <td class="labelName">
-                                        Daytime Phone:
-                                    </td>
-                                    <td class="apifieldname vaT">
-                                        @Html.TextBoxFor(model => Model.ReturnHeader.Business.SigningAuthority.Phone, new { @class = "form-control", maxlength = "10" })
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="panel panel-default">
-                    <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapse2">
-                        <h4 class="panel-title">
-                            Form 941 Aggregate Client Details
-                        </h4>
-                        <div id="collapse2" class="panel-collapse collapse">
-
-
-
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="panel panel-default">
-                    <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapse3">
-                        <h4 class="panel-title">
-                            941SCHR Main Filer Data
-                        </h4>
-                    </div>
-                    <div id="collapse3" class="panel-collapse collapse">
-                        <div class="panel-body">
-                            <table class="responsive">
-                                <tr>
-                                    <td class="spacer10"></td>
-                                </tr>
-                                <tr>
-                                    <td class="labelNameL">
-                                        2. Total wages, tips, and other compensation:
-                                    </td>
-                                    <td class="apifieldname vaT">
-                                        @Html.TextBoxFor(model => model.ReturnData.Form941MainFilerData.WagesAmt, new { maxlength = "17", @class = "form-control" })
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="spacer10"></td>
-                                </tr>
-                                <tr>
-                                    <td class="labelNameL">
-                                        3. Total Federal Income Tax Withheld from wages, tips, and other compensation:
-                                    </td>
-                                    <td class="apifieldname vaT">
-                                        @Html.TextBoxFor(model => model.ReturnData.Form941MainFilerData.FedIncomeTaxWHAmt, new { maxlength = "17", @class = "form-control" })
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="spacer10"></td>
-                                </tr>
-                            </table>
-                        </div>
-
-                        <div class="">
-                        </div>
-                        <div>
-                            <table class="tdDisBlock640">
-                                <tr>
-                                    <td class="labelNameL">
-                                        5e. Total taxable wages & tips:
-                                    </td>
-                                    <td class="apifieldname vaT">
-                                        @Html.TextBoxFor(model => model.ReturnData.Form941MainFilerData.Line5e, new { maxlength = "17", @class = "form-control", id = "Line5eAmt" })
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="labelNameL">
-                                        5f. Section 3121(q) Notice and Demand—Tax due on unreported tips:
-                                    </td>
-                                    <td class="apifieldname vaT">
-                                        @Html.TextBoxFor(model => model.ReturnData.Form941MainFilerData.TaxOnUnreportedTips3121qAmt, new { maxlength = "17", @class = "form-control" })
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="spacer10"></td>
-                                </tr>
-                                <tr>
-                                    <td class="labelNameL">
-                                        11. Qualified small business payroll tax credit for increasing research activities:
-                                    </td>
-                                    <td class="apifieldname vaT">
-                                        @Html.TextBoxFor(model => model.ReturnData.Form941MainFilerData.Line11, new { maxlength = "17", @class = "form-control" })
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="spacer10"></td>
-                                </tr>
-                                <tr>
-                                    <td class="labelNameL">
-                                        12. Total taxes after adjustments and credits:
-                                    </td>
-                                    <td class="apifieldname vaT">
-                                        @Html.TextBoxFor(model => model.ReturnData.Form941MainFilerData.Line12, new { maxlength = "17", @class = "form-control" })
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="spacer10"></td>
-                                </tr>
-                                <tr>
-                                    <td class="labelNameL">
-                                        13. Deposits for this quarter:
-                                    </td>
-                                    <td class="apifieldname vaT">
-                                        @Html.TextBoxFor(model => model.ReturnData.Form941MainFilerData.TotTaxDepositAmt, new { maxlength = "17", @class = "form-control" })
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="spacer10"></td>
-                                </tr>
-                            </table>
-                        </div>
-
-                        <div class="form_941 taR_input formDiv" id="tabs-1" style="padding:0px">
-
-                            <table class="tdDisBlock640">
-                                <tr>
-                                    <td class="labelNameL">
-                                        Are you eligible for the Qualified Small Business Payroll Tax Credit for Increasing Research Activities?
-                                    </td>
-                                    <td class="fieldText vaT noWrap pLeft10">
-                                        <div class="field switch">
-                                            @Html.RadioButtonFor(model => Model.ReturnData.Form941MainFilerData.IsPayrollTaxCredit, true, new { id = "rdoIsPayrollCreditYes", @onchange = "OnIsPayrollTaxCreditMainFiler();", @class = "css-radiobox" })
-                                            <label for="rdoIsPayrollCreditYes" class="cb-disable"><span>Yes</span></label>
-                                            @Html.RadioButtonFor(model => Model.ReturnData.Form941MainFilerData.IsPayrollTaxCredit, false, new { id = "rdoIsPayrollCreditNo", @onchange = "OnIsPayrollTaxCreditMainFiler();", @checked = true, @class = "css-radiobox" })
-                                            <label for="rdoIsPayrollCreditNo" class="cb-enable"><span>No</span></label>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </table>
-
-                            <table class="PayrollTaxCreditFormDiv_MainFiler tblsty table-bordered cf dataTable minInputSize" style="display:none">
-                                <thead>
-                                    <tr>
-                                        <th style="max-width:50px">
-                                            S.No
-                                        </th>
-                                        <th style="min-width:160px">
-                                            (a) Ending date of income tax period
-                                        </th>
-                                        <th>
-                                            (b) Income tax return filed that included Form 6765
-                                        </th>
-                                        <th style="min-width:160px">
-                                            (c) Date income tax return was filed
-                                        </th>
-                                        <th style="min-width:110px">
-                                            (d) EIN used on Form 6765
-                                        </th>
-                                        <th>
-                                            (e) Amount from Form 6765, line 44, or if applicable, the amount that was allocated to your EIN
-                                        </th>
-                                        <th>
-                                            (f) Amount of credit from column (e) taken on a previous period(s)
-                                        </th>
-                                        <th>
-                                            (g) Remaining credit
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @{
-                                        int sNo = 1;
-                                        int i = 0;
-                                        var form8974ITRDetails = Model.ReturnData != null && Model.ReturnData.Form941MainFilerData != null &&
-                                            Model.ReturnData.Form941MainFilerData.Form8974 != null && Model.ReturnData.Form941MainFilerData.Form8974.Form8974IncomeTaxDetails != null ? Model.ReturnData.Form941MainFilerData.Form8974.Form8974IncomeTaxDetails : null;
-                                    }
-                                    @if (form8974ITRDetails != null)
-                                    {
-                                        for (int client = 0; client < form8974ITRDetails.Count; client++)
-                                        {
-                                            i++;
-                                    <tr>
-                                        <td class="pos-rel">
-                                            @(sNo++)
-                                            @*  @Html.HiddenFor(x => x.ReturnData.Form941MainFilerData.Form8974.Form8974IncomeTaxDetails[client].Form8974IncomeTaxId)*@
-                                        </td>
-                                        <td class="pos-rel">
-                                            @Html.EditorFor(x => x.ReturnData.Form941MainFilerData.Form8974.Form8974IncomeTaxDetails[client].IncomeTaxPeriodEndDate, new { @id = "IncomeTaxPeriodEndDate_" + i, @class = "form-control" })
-                                        </td>
-                                        <td class="pos-rel">
-                                            @Html.DropDownListFor(x => x.ReturnData.Form941MainFilerData.Form8974.Form8974IncomeTaxDetails[client].IncomeTaxReturnFiledForm, form8974, "--Select--", new { @id = "IncomeTaxReturnFiledForm_" + i, @class = "ITRFiledForm" })
-                                        </td>
-                                        <td class="pos-rel">
-                                            @Html.EditorFor(x => x.ReturnData.Form941MainFilerData.Form8974.Form8974IncomeTaxDetails[client].IncomeTaxReturnFiledDate, new { @id = "IncomeTaxReturnFiledDate_" + i })
-                                        </td>
-                                        <td class="pos-rel">
-                                            @Html.TextBoxFor(x => x.ReturnData.Form941MainFilerData.Form8974.Form8974IncomeTaxDetails[client].Form6765EIN, new { @id = "Form6765EIN_" + i })
-                                        </td>
-                                        <td class="pos-rel">
-                                            @Html.TextBoxFor(x => x.ReturnData.Form941MainFilerData.Form8974.Form8974IncomeTaxDetails[client].Form6765Line44Amt, new { @id = "Form6765Line44Amt_" + i, @maxlength = "17", @onfocus = "txtFocus(this)", @onblur = "txtBlur(this)" })
-                                        </td>
-                                        <td class="pos-rel">
-                                            @Html.TextBoxFor(x => x.ReturnData.Form941MainFilerData.Form8974.Form8974IncomeTaxDetails[client].PreviousPeriodRemaingCreditAmt, new { @id = "PreviousPeriodRemaingCreditAmt_" + i, @maxlength = "17", @onfocus = "txtFocus(this)", @onblur = "txtBlur(this)" })
-                                        </td>
-                                        <td class="pos-rel">
-                                            @Html.TextBoxFor(x => x.ReturnData.Form941MainFilerData.Form8974.Form8974IncomeTaxDetails[client].RemainingCredit, new { @id = "RemainingCredit_" + i, @maxlength = "17", @onfocus = "txtFocus(this)", @onblur = "txtBlur(this)" })
-                                        </td>
-                                    </tr>
-                                        }
-                                    }
-                                </tbody>
-                            </table>
-                            <div class="PayrollTaxCreditFormDiv_MainFiler" style="display:none">
-                                <div class="spacer20 full_width"></div>
-                                <div class="searchTitle">Determine the credit that you can use this period.</div>
-                                <div class="form_box">
-                                    <div class="col-lg-9 col-md-9 col-sm-8 col-xs-12">
-                                        <label>7. Total payroll tax credit you have available for the current tax year</label>
-                                    </div>
-                                    <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 check_box_941 taR doller_input">
-                                        @Html.TextBoxFor(x => x.ReturnData.Form941MainFilerData.Form8974.Line7, new { @id = "Line7", @class = "Line7" })
-                                    </div>
-                                </div>
-                                <div class="spacer20 full_width"></div>
-                                <div class="form_box">
-                                    <div class="col-lg-9 col-md-9 col-sm-8 col-xs-12">
-                                        <label>
-                                            8. Taxable social security wages (Form 941, Line 5a Column 2)
-                                        </label>
-                                    </div>
-                                    <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 check_box_941 taR doller_input">
-                                        @Html.TextBoxFor(x => x.ReturnData.Form941MainFilerData.Form8974.Line8, new { @class = "Line8" })
-                                    </div>
-                                </div>
-                                <div class="spacer20 full_width"></div>
-                                <div class="form_box">
-                                    <div class="col-lg-9 col-md-9 col-sm-8 col-xs-12">
-                                        <label>9. Taxable social security tips (Form 941, Line 5b Column 2)</label>
-                                    </div>
-                                    <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 check_box_941 taR doller_input">
-                                        @Html.TextBoxFor(x => x.ReturnData.Form941MainFilerData.Form8974.Line9, new { @class = "Line9" })
-                                    </div>
-                                </div>
-                                <div class="spacer20 full_width"></div>
-                                <div class="form_box">
-                                    <div class="col-lg-9 col-md-9 col-sm-8 col-xs-12">
-                                        <label>10. Total social security tax</label>
-                                    </div>
-                                    <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 check_box_941 taR doller_input">
-                                        @Html.TextBoxFor(x => x.ReturnData.Form941MainFilerData.Form8974.Line10, new { @class = "Line10" })
-                                    </div>
-                                </div>
-                                <div class="spacer20 full_width"></div>
-                                <div class="form_box">
-                                    <div class="col-lg-9 col-md-9 col-sm-8 col-xs-12">
-                                        <label>11. Employer's social security tax (50% of total security tax) </label>
-                                    </div>
-                                    <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 check_box_941 taR doller_input">
-                                        @Html.TextBoxFor(model => model.ReturnData.Form941MainFilerData.Form8974.Line11, new { @class = "Line11" })
-                                    </div>
-                                </div>
-                                <div class="spacer20 full_width"></div>
-                                <div class="form_box">
-                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                        <div class="field switch floatL">
-                                            @Html.RadioButtonFor(x => x.ReturnData.Form941MainFilerData.Form8974.PayerIndicatorType, Form8974PayerIndicatorType.THIRDPARTYSICKPAYIND.ToString(), new { @id = "checkIsThirdparty_MainFiler", @class = "css-radiobox" })
-                                            <label for="checkIsThirdparty_MainFiler" class="cb-enable"><span>I'm a third-party payer of sick pay</span></label>
-                                            @Html.RadioButtonFor(x => x.ReturnData.Form941MainFilerData.Form8974.PayerIndicatorType, Form8974PayerIndicatorType.SECTION3121QIND.ToString(), new { @id = "checkIsreceived3121_MainFiler", @class = "css-radiobox" })
-                                            <label for="checkIsreceived3121_MainFiler" class="cb-disable"><span>I received a Section 3121(q) Notice and Demand</span></label>
-                                            <a href="javascript:void(0)" class="buttonC floatR mTop10-sm" onclick="RadioClearMainFiler();">Clear</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="spacer20 full_width"></div>
-                                <div class="form_box">
-                                    <div class="col-lg-9 col-md-9 col-sm-8 col-xs-12">
-                                        <label>12. Credit (Qualified small business payroll tax credit for increasing research activities)</label>
-                                    </div>
-                                    <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 check_box_941 doller_input taR">
-                                        @Html.TextBoxFor(x => x.ReturnData.Form941MainFilerData.Form8974.Line12, new { @class = "Line12" })
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="panel panel-default">
-                    <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapse4">
-                        <h4 class="panel-title">
-                            Form941 Aggregate Data
-                        </h4>
-                    </div>
-
-                    <div id="collapse4" class="panel-collapse collapse">
-                        <div class="panel-body">
-                            <table class="responsive">
-                                <tr>
-                                    <td class="labelNameL">
-                                        1. Total number of employees who received wages, tips, or other compensation for the pay period including Mar. 12 (Jan - Mar 2017):
-                                    </td>
-                                    <td class="apifieldname vaT">
-                                        @Html.TextBoxFor(model => model.ReturnData.AggregateForm941Data.EmployeeCnt, new { @class = "form-control" })
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="spacer10"></td>
-                                </tr>
-                                <tr>
-                                    <td class="labelNameL">
-                                        2. Total wages, tips, and other compensation:
-                                    </td>
-                                    <td class="apifieldname vaT">
-                                        @Html.TextBoxFor(model => model.ReturnData.AggregateForm941Data.WagesAmt, new { maxlength = "17", @class = "form-control" })
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="spacer10"></td>
-                                </tr>
-                                <tr>
-                                    <td class="labelNameL">
-                                        3. Total Federal Income Tax Withheld from wages, tips, and other compensation:
-                                    </td>
-                                    <td class="apifieldname vaT">
-                                        @Html.TextBoxFor(model => model.ReturnData.AggregateForm941Data.FedIncomeTaxWHAmt, new { maxlength = "17", @class = "form-control" })
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="spacer10"></td>
-                                </tr>
-                            </table>
-                        </div>
-
-                        <div class="">
-                            <table class="tdDisBlock640">
-                                <tr>
-                                    <td class="labelNameL">
-                                        4. Do you have wages, tips, or other compensation which are subject to social security or Medicare tax?
-                                    </td>
-                                    <td class="fieldText vaT noWrap">
-                                        <div class="field switch">
-                                            @Html.RadioButtonFor(model => model.ReturnData.AggregateForm941Data.WagesNotSubjToSSMedcrTaxInd, true, new { id = "rdoIsWagesYes", @checked = true, @onchange = "OnWagesOptionChoose();", @class = "css-radiobox" })
-                                            <label for="rdoIsWagesYes" class="cb-disable"><span>Yes</span></label>
-                                            @Html.RadioButtonFor(model => model.ReturnData.AggregateForm941Data.WagesNotSubjToSSMedcrTaxInd, false, new { id = "rdoIsWagesNo", @onchange = "OnWagesOptionChoose();", @class = "css-radiobox" })
-                                            <label for="rdoIsWagesNo" class="cb-enable"><span>No</span></label>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="spacer10"></td>
-                                </tr>
-                            </table>
-                            <table id="DivsocialsecurityorMedicaretax" class="tdDisBlock640" style="display:none">
-                                <tr>
-                                    <td class="labelNameL tdCountry">5a. Taxable social security wages:</td>
-                                    <td class="apifieldname vaT tdCountry">
-                                        @Html.TextBoxFor(model => model.ReturnData.AggregateForm941Data.Line5aInitialAmt, new { maxlength = "17", @class = "form-control", id = "Line5aAmt" })
-                                        <div class="cPart">
-                                            <span class="calcPart">x 0.124 =</span>
-                                            @Html.TextBoxFor(model => model.ReturnData.AggregateForm941Data.Line5a, new { maxlength = "17", @class = "form-control", id = "Line5a_col2_Amt" })
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="spacer10"></td>
-                                </tr>
-                                <tr>
-                                    <td class="labelNameL">
-                                        5b. Taxable social security tips:
-                                    </td>
-                                    <td class="apifieldname vaT">
-                                        @Html.TextBoxFor(model => model.ReturnData.AggregateForm941Data.Line5bInitialAmt, new { maxlength = "17", @class = "form-control", id = "Line5bAmt" })
-                                        <div class="cPart">
-                                            <span class="calcPart">x 0.124 =</span>
-                                            @Html.TextBoxFor(model => model.ReturnData.AggregateForm941Data.Line5b, new { maxlength = "17", @class = "form-control", id = "Line5b_col2_Amt" })
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="spacer10"></td>
-                                </tr>
-                                <tr>
-                                    <td class="labelNameL">
-                                        5c. Taxable Medicare wages & tips:
-                                    </td>
-                                    <td class="apifieldname vaT">
-                                        @Html.TextBoxFor(model => model.ReturnData.AggregateForm941Data.Line5cInitialAmt, new { maxlength = "17", @class = "form-control", id = "Line5cAmt" })
-                                        <div class="cPart">
-                                            <span class="calcPart">x 0.029 =</span>
-                                            @Html.TextBoxFor(model => model.ReturnData.AggregateForm941Data.Line5c, new { maxlength = "17", @class = "form-control", id = "Line5c_col2_Amt" })
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="spacer10"></td>
-                                </tr>
-                                <tr>
-                                    <td class="labelNameL">
-                                        5d. Taxable wages & tips subject to Additional Medicare Tax withholdings:
-                                    </td>
-                                    <td class="apifieldname vaT">
-                                        @Html.TextBoxFor(model => model.ReturnData.AggregateForm941Data.Line5dInitialAmt, new { maxlength = "17", @class = "form-control", id = "Line5dAmt" })
-                                        <div class="cPart">
-                                            <span class="calcPart">x 0.009 =</span>
-                                            @Html.TextBoxFor(model => model.ReturnData.AggregateForm941Data.Line5d, new { maxlength = "17", @class = "form-control", id = "Line5d_col2_Amt" })
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="spacer10"></td>
-                                </tr>
-                                <tr>
-                                    <td class="labelNameL">
-                                        5e. Total taxable wages & tips:
-                                    </td>
-                                    <td class="apifieldname vaT">
-                                        @Html.TextBoxFor(model => model.ReturnData.AggregateForm941Data.Line5e, new { maxlength = "17", @class = "form-control", id = "Line5eAmt" })
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="spacer10"></td>
-                                </tr>
-                            </table>
-                        </div>
-                        <div>
-                            <table class="tdDisBlock640">
-                                <tr>
-                                    <td class="labelNameL">
-                                        5f. Section 3121(q) Notice and Demand—Tax due on unreported tips:
-                                    </td>
-                                    <td class="apifieldname vaT">
-                                        @Html.TextBoxFor(model => model.ReturnData.AggregateForm941Data.TaxOnUnreportedTips3121qAmt, new { maxlength = "17", @class = "form-control" })
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="spacer10"></td>
-                                </tr>
-                                <tr>
-                                    <td class="labelNameL">
-                                        6. Total taxes before adjustments:
-                                    </td>
-                                    <td class="apifieldname vaT">
-                                        @Html.TextBoxFor(model => model.ReturnData.AggregateForm941Data.Line6, new { maxlength = "17", @class = "form-control" })
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="spacer10"></td>
-                                </tr>
-                                <tr>
-                                    <td class="labelNameL">
-                                        7. Adjustments for Fraction of Cents:
-                                    </td>
-                                    <td class="apifieldname vaT">
-                                        @Html.TextBoxFor(model => model.ReturnData.AggregateForm941Data.CurrentQtrFractionsCentsAmt, new { maxlength = "17", @class = "form-control" })
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="spacer10"></td>
-                                </tr>
-                                <tr>
-                                    <td class="labelNameL">
-                                        8. Adjustment for sick pay:
-                                    </td>
-                                    <td class="apifieldname vaT">
-                                        @Html.TextBoxFor(model => model.ReturnData.AggregateForm941Data.CurrentQuarterSickPaymentAmt, new { maxlength = "17", @class = "form-control" })
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="spacer10"></td>
-                                </tr>
-                                <tr>
-                                    <td class="labelNameL">
-                                        9. Adjustments for tips and group-term life insurance:
-                                    </td>
-                                    <td class="apifieldname vaT">
-                                        @Html.TextBoxFor(model => model.ReturnData.AggregateForm941Data.CurrQtrTipGrpTermLifeInsAdjAmt, new { maxlength = "17", @class = "form-control" })
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="spacer10"></td>
-                                </tr>
-                                <tr>
-                                    <td class="labelNameL">
-                                        10. Total taxes after adjustments:
-                                    </td>
-                                    <td class="apifieldname vaT">
-                                        @Html.TextBoxFor(model => model.ReturnData.AggregateForm941Data.Line10, new { maxlength = "17", @class = "form-control" })
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="spacer10"></td>
-                                </tr>
-                                <tr>
-                                    <td class="labelNameL">
-                                        11. Qualified small business payroll tax credit for increasing research activities:
-                                    </td>
-                                    <td class="apifieldname vaT">
-                                        @Html.TextBoxFor(model => model.ReturnData.AggregateForm941Data.Line11, new { maxlength = "17", @class = "form-control" })
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="spacer10"></td>
-                                </tr>
-                                <tr>
-                                    <td class="labelNameL">
-                                        12. Total taxes after adjustments and credits:
-                                    </td>
-                                    <td class="apifieldname vaT">
-                                        @Html.TextBoxFor(model => model.ReturnData.AggregateForm941Data.Line12, new { maxlength = "17", @class = "form-control" })
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="spacer10"></td>
-                                </tr>
-                                <tr>
-                                    <td class="labelNameL">
-                                        13. Deposits for this quarter:
-                                    </td>
-                                    <td class="apifieldname vaT">
-                                        @Html.TextBoxFor(model => model.ReturnData.AggregateForm941Data.TotTaxDepositAmt, new { maxlength = "17", @class = "form-control" })
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="spacer10"></td>
-                                </tr>
-                                <tr>
-                                    <td class="labelNameL">
-                                        14. Balance due:
-                                    </td>
-                                    <td class="apifieldname vaT">
-                                        @Html.TextBoxFor(model => model.ReturnData.AggregateForm941Data.Line14, new { maxlength = "17", @class = "form-control" })
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="spacer10"></td>
-                                </tr>
-                                <tr>
-                                    <td class="labelNameL">
-                                        15. Overpayment:
-                                    </td>
-                                    <td class="apifieldname vaT">
-                                        @Html.TextBoxFor(model => model.ReturnData.AggregateForm941Data.Line15, new { maxlength = "17", @class = "form-control" })
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="spacer10"></td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2" class="fieldText vaT noWrap pLeft10">
-                                        <div class="field switch">
-                                            <div class="floatL mBot10">
-                                                @Html.RadioButtonFor(model => model.ReturnData.AggregateForm941Data.FilerType, FilerType.SECTION3504AGENT.ToString(), new { @id = "SECTION3504AGENT", @checked = true, @class = "css-radiobox" })
-                                                <label for="SECTION3504AGENT" class="cb-enable"><span>SECTION 3504 AGENT</span></label>
-                                            </div>
-                                            <div class="floatL mBot10">
-                                                @Html.RadioButtonFor(model => model.ReturnData.AggregateForm941Data.FilerType, FilerType.CPEO.ToString(), new { @id = "CPEO", @class = "css-radiobox" })
-                                                <label for="CPEO" class="cb-disable"><span>CPEO</span></label>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="panel panel-default">
-                    <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapse5">
-                        <h4 class="panel-title">
-                            Business Status
-                        </h4>
-                    </div>
-
-                    <div id="collapse5" class="panel-collapse collapse panel-body">
-
-                        <label class="in_check floatL unCheckDiv" for="chkBusinessClosed">
-                            @Html.CheckBoxFor(model => Model.ReturnHeader.BusinessStatusDetails.IsBusinessClosed, new { @id = "chkBusinessClosed", @class = "css-checkbox divCheckBox", @onchange = "OnBusinessClosed();" })
-                            <label for="chkBusinessClosed" class="css-label mBot0">My business closed OR stopped paying wages</label>
-                        </label>
-                        <div class="white_bg full_width mBot10" id="BusinessClosedDiv" style="display:none">
-                            <table class="responsive">
-                                <tr>
-                                    <td class="labelName">
-                                        Final date you paid wages:
-                                    </td>
-                                    <td class="pLeft10">
-                                        @Html.TextBoxFor(model => Model.ReturnHeader.BusinessStatusDetails.BusinessClosedDetails.FinalDateWagesPaid, new { @tabindex = "155", @style = "text-align: left !important;", @id = "BSFinaldatewagespaid", @placeholder = "Ex. mm/dd/yyyy", @class = "date-icon" })
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="spacer10"></td>
-                                </tr>
-                                <tr>
-                                    <td class="labelName" style="text-align:left;">
-                                        <b>Record Keeper Details</b>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="labelName" colspan="4" style="text-align:left;">
-                                        Enter the name of the person keeping the payroll records and the address where those records will be kept.
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="spacer10"></td>
-                                </tr>
-                                <tr>
-                                    <td class="labelName">
-                                        Name:
-                                    </td>
-                                    <td class="pLeft10">
-                                        @Html.TextBoxFor(model => Model.ReturnHeader.BusinessStatusDetails.BusinessClosedDetails.Name, new { @tabindex = "156", id = "txtBSName" })
-                                    </td>
-                                <tr>
-                                <tr>
-                                    <td class="spacer10"></td>
-                                </tr>
-                                <td colspan="3">
-                                    <div class="full_width">
-                                        @Html.CheckBoxFor(model => Model.ReturnHeader.BusinessStatusDetails.BusinessClosedDetails.IsForeign, new { onclick = "ChangeForeignAddress();", @class = "css-checkbox", id = "checkIsForeignAddress", @tabindex = "157" })
-                                        <label for="checkIsForeignAddress" class="css-label checkbox">Foreign Address (Outside US)?</label>
-                                    </div>
-                                </td>
-                                <tr>
-                                    <td class="labelName">
-                                        Address:
-                                    </td>
-                                    <td class="apifieldname vaT">
-                                        @Html.TextBoxFor(model => Model.ReturnHeader.BusinessStatusDetails.BusinessClosedDetails.ForeignAddress.Address1, new { @tabindex = "158", @class = "ClosedForeignAddress" })
-                                        @Html.TextBoxFor(model => Model.ReturnHeader.BusinessStatusDetails.BusinessClosedDetails.USAddress.Address1, new { @tabindex = "158", @class = "ClosedUSAddress" })
-                                    </td>
-                                    <td class="labelName">
-                                        Address Cont:
-                                    </td>
-                                    <td class="apifieldname vaT">
-                                        @Html.TextBoxFor(model => Model.ReturnHeader.BusinessStatusDetails.BusinessClosedDetails.ForeignAddress.Address2, new { @tabindex = "158", @class = "ClosedForeignAddress" })
-                                        @Html.TextBoxFor(model => Model.ReturnHeader.BusinessStatusDetails.BusinessClosedDetails.USAddress.Address2, new { @tabindex = "159", @class = "ClosedUSAddress" })
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="spacer10"></td>
-                                </tr>
-                                <tr id="bscitystate">
-                                    <td class="labelName">
-                                        City:
-                                    </td>
-                                    <td class="apifieldname vaT">
-                                        @*@Html.TextBoxFor(model => Model.Form941SchRRecords[0].ReturnHeader.BusinessStatusDetails.BusinessClosedDetails.ForeignAddress.City, new { @id = "EmployerCity", maxlength = "22", @tabindex = "160",@class = "ClosedForeignAddress" })*@
-                                        @Html.TextBoxFor(model => Model.ReturnHeader.BusinessStatusDetails.BusinessClosedDetails.USAddress.City, new { @id = "EmployerCity", maxlength = "22", @class = "ClosedUSAddress" })
-
-                                    </td>
-                                    <td class="labelName">
-                                        State Code:
-                                    </td>
-                                    <td class="apifieldname vaT">
-                                        @Html.DropDownListFor(model => Model.ReturnHeader.BusinessStatusDetails.BusinessClosedDetails.USAddress.State, new SelectList(USStates, "text", "value", null), "Select Code", new { @class = "ClosedUSAddress" })
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="spacer10"></td>
-                                </tr>
-                                <tr id="bsOutsideCityStates">
-                                    <td class="labelName">
-                                        Foreign City/State:
-                                    </td>
-                                    <td class="apifieldname vaT">
-                                        @Html.TextBoxFor(model => Model.ReturnHeader.BusinessStatusDetails.BusinessClosedDetails.ForeignAddress.City, new { @id = "ForeignEmployerCity", maxlength = "22", @class = "ClosedForeignAddress" })
-                                    </td>
-                                    <td class="labelName">
-                                        Country:
-                                    </td>
-                                    <td class="apifieldname vaT">
-                                        @Html.DropDownListFor(model => Model.ReturnHeader.BusinessStatusDetails.BusinessClosedDetails.ForeignAddress.Country, new SelectList(countryList, "text", "value", null), "Select Code", new { @class = "ClosedForeignAddress" })
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="spacer10"></td>
-                                </tr>
-                                <tr id="bszipcode">
-                                    <td class="labelName">
-                                        Zip Code:
-                                    </td>
-                                    <td class="apifieldname vaT">
-                                        @Html.TextBoxFor(model => Model.ReturnHeader.BusinessStatusDetails.BusinessClosedDetails.USAddress.ZipCd, new { maxlength = "9", @tabindex = "164" })
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="spacer10"></td>
-                                </tr>
-                                <tr id="bsZipcodeOutside">
-                                    <td class="labelName">
-                                        Postal Code:
-                                    </td>
-                                    <td class="apifieldname vaT">
-                                        @Html.TextBoxFor(model => Model.ReturnHeader.BusinessStatusDetails.BusinessClosedDetails.ForeignAddress.PostalCd, new { maxlength = "9", @tabindex = "165" })
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-                        <label class="in_check  floatL unCheckDiv" for="chkBusinessTransferred">
-                            @Html.CheckBoxFor(model => Model.ReturnHeader.BusinessStatusDetails.IsBusinessTransferred, new { @id = "chkBusinessTransferred", @class = "css-checkbox divCheckBox", @onchange = "OnBusinessTransferred();" })
-                            <label for="chkBusinessTransferred" class="css-label mBot0">My business was sold OR transferred</label>
-                        </label>
-                        <div class="white_bg full_width mBot10" style="display:none" id="BusinessTransferredDiv">
-                            <table class="responsive">
-                                <tr>
-                                    <td class="labelName">
-                                        Business Change Type:
-                                    </td>
-                                    <td class="fieldText vaT noWrap pLeft10">
-                                        <div class="field switch">
-                                            @Html.RadioButtonFor(model => Model.ReturnHeader.BusinessStatusDetails.BusinessTransferredDetails.IsSale, true, new { id = "rdoIsSale", @onchange = "ShowHideCalYr();" })
-                                            <label for="rdoIsSale" class="cb-disable"><span>Sale</span></label>
-                                            @Html.RadioButtonFor(model => Model.ReturnHeader.BusinessStatusDetails.BusinessTransferredDetails.IsSale, false, new { id = "rdoIsTransfer", @onchange = "ShowHideCalYr();", @checked = true })
-                                            <label for="rdoIsTransfer" class="cb-enable"><span>Transfer</span></label>
-                                        </div>
-                                    </td>
-                                    <td class="pLeft10" id="trSaleCalYear">
-                                        <label class="pLeft10" id="lblTransferType"></label>
-                                        @Html.TextBoxFor(model => Model.ReturnHeader.BusinessStatusDetails.BusinessTransferredDetails.DateOfChange, new { @tabindex = "169", @style = "text-align: left !important;", @id = "BSDateOfChange", @placeholder = "Ex. mm/dd/yyyy", @class = "date-icon" })
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="labelName">
-                                        Business Type:
-                                    </td>
-                                    <td class="fieldText vaT noWrap pLeft10">
-                                        @Html.DropDownListFor(model => Model.ReturnHeader.BusinessStatusDetails.BusinessTransferredDetails.NewBusinessType, BusinessTypeList, "-- Select--",
-                       new { @tabindex = "170", id = "BusinessType", @onchange = "AssignBusinessMembers();" })
-                                    </td>
-                                    <td class="labelName">
-                                        Business Name:
-                                    </td>
-                                    <td class="fieldText vaT noWrap pLeft10">
-                                        @Html.TextBoxFor(model => Model.ReturnHeader.BusinessStatusDetails.BusinessTransferredDetails.NewBusinessName, new { @tabindex = "171", id = "txtBSName" })
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="spacer10"></td>
-                                </tr>
-                                <tr>
-                                    <td class="labelName" style="text-align:left;">
-                                        <b>Record Keeper Details</b>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="labelName" colspan="4" style="text-align:left;">
-                                        Enter the name of the person keeping the payroll records and the address where those records will be kept.
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="spacer10"></td>
-                                </tr>
-                                <tr>
-                                    <td class="labelName">
-                                        Name:
-                                    </td>
-                                    <td class="pLeft10">
-                                        @Html.TextBoxFor(model => Model.ReturnHeader.BusinessStatusDetails.BusinessTransferredDetails.Name, new { @tabindex = "172", id = "txtBSName" })
-                                    </td>
-                                <tr>
-                                <tr>
-                                    <td class="spacer10"></td>
-                                </tr>
-                                <td colspan="3">
-                                    <div class="full_width">
-                                        @Html.CheckBoxFor(model => Model.ReturnHeader.BusinessStatusDetails.BusinessTransferredDetails.IsForeign, new { onclick = "ChangeForeignAddress();", @class = "css-checkbox", id = "checkIsTranForeignAddress", @tabindex = "173" })
-                                        <label for="checkIsTranForeignAddress" class="css-label checkbox">Foreign Address (Outside US)?</label>
-                                    </div>
-                                </td>
-                                <tr>
-                                    <td class="labelName">
-                                        Address:
-                                    </td>
-                                    <td class="apifieldname vaT">
-                                        @Html.TextBoxFor(model => Model.ReturnHeader.BusinessStatusDetails.BusinessTransferredDetails.USAddress.Address1, new { @tabindex = "174", @class = "ChangeUSForeignAddress" })
-                                        @Html.TextBoxFor(model => Model.ReturnHeader.BusinessStatusDetails.BusinessTransferredDetails.ForeignAddress.Address1, new { @tabindex = "174", @class = "ChangeForeignAddress" })
-                                    </td>
-                                    <td class="labelName">
-                                        Address Cont:
-                                    </td>
-                                    <td class="apifieldname vaT">
-                                        @Html.TextBoxFor(model => Model.ReturnHeader.BusinessStatusDetails.BusinessTransferredDetails.USAddress.Address2, new { @tabindex = "175", @class = "ChangeUSForeignAddress" })
-                                        @Html.TextBoxFor(model => Model.ReturnHeader.BusinessStatusDetails.BusinessTransferredDetails.ForeignAddress.Address2, new { @tabindex = "174", @class = "ChangeForeignAddress" })
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="spacer10"></td>
-                                </tr>
-                                <tr id="trancitystate">
-                                    <td class="labelName">
-                                        City:
-                                    </td>
-                                    <td class="apifieldname vaT">
-                                        @*@Html.TextBoxFor(model => Model.Form941SchRRecords[0].ReturnHeader.BusinessStatusDetails.BusinessTransferredDetails.USAddress.City, new { @id = "EmployerCity", maxlength = "22", @tabindex = "176" })*@
-                                        @Html.TextBoxFor(model => Model.ReturnHeader.BusinessStatusDetails.BusinessTransferredDetails.USAddress.City, new { @id = "EmployerCity", maxlength = "22", @tabindex = "176" })
-                                    </td>
-                                    <td class="labelName">
-                                        State Code:
-                                    </td>
-                                    <td class="apifieldname vaT">
-                                        @Html.DropDownListFor(model => Model.ReturnHeader.BusinessStatusDetails.BusinessTransferredDetails.USAddress.State, new SelectList(USStates, "text", "value", null), "Select Code", new { @tabindex = "177" })
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="spacer10"></td>
-                                </tr>
-                                <tr id="tranOutsideCityStates">
-                                    <td class="labelName">
-                                        Foreign City/State:
-                                    </td>
-                                    <td class="apifieldname vaT">
-                                        @*@Html.TextBoxFor(model => Model.Form941SchRRecords[0].ReturnHeader.BusinessStatusDetails.BusinessTransferredDetails.ForeignAddress.City, new { @id = "ForeignEmployerCity", maxlength = "22", @tabindex = "178" })*@
-                                        @Html.TextBoxFor(model => Model.ReturnHeader.BusinessStatusDetails.BusinessTransferredDetails.ForeignAddress.City, new { @id = "ForeignEmployerCity", maxlength = "22", @tabindex = "178" })
-                                    </td>
-                                    <td class="labelName">
-                                        Country:
-                                    </td>
-                                    <td class="apifieldname vaT">
-                                        @Html.DropDownListFor(model => Model.ReturnHeader.BusinessStatusDetails.BusinessTransferredDetails.ForeignAddress.Country, new SelectList(countryList, "text", "value", null), "Select Code", new { @tabindex = "179" })
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="spacer10"></td>
-                                </tr>
-                                <tr id="tranzipcode">
-                                    <td class="labelName">
-                                        Zip Code:
-                                    </td>
-                                    <td class="apifieldname vaT">
-                                        @Html.TextBoxFor(model => Model.ReturnHeader.BusinessStatusDetails.BusinessTransferredDetails.USAddress.ZipCd, new { maxlength = "9", @tabindex = "180" })
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="spacer10"></td>
-                                </tr>
-                                <tr id="tranZipcodeOutside">
-                                    <td class="labelName">
-                                        Postal Code:
-                                    </td>
-                                    <td class="apifieldname vaT">
-                                        @Html.TextBoxFor(model => Model.ReturnHeader.BusinessStatusDetails.BusinessTransferredDetails.ForeignAddress.PostalCd, new { maxlength = "9", @tabindex = "181" })
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-                        <label class="in_check floatL unCheckDiv " for="chkSeasonalEmployer">
-                            @Html.CheckBoxFor(model => Model.ReturnHeader.BusinessStatusDetails.IsSeasonalEmployer, new { @id = "chkSeasonalEmployer", @class = "css-checkbox divCheckBox", @tabindex = "182" })
-                            <label for="chkSeasonalEmployer" class="css-label mBot0">I am a Seasonal Employer and do not have to file a return for every quarter of the year</label>
-                        </label>
-
-                    </div>
-                </div>
-
-
-
-                <div class="panel panel-default">
-                    <div data-toggle="collapse" class="panel-heading" data-parent="#accordion" href="#collapse7">
-                        <h4 class="panel-title">
-                            Deposit Schedule & Tax Liability
-
-                        </h4>
-                    </div>
-                    <div id="collapse7" class="panel-collapse collapse">
-                        <table>
-                            <tr>
-                                <td class="fieldText vaT pLeft10">
-                                    <div class="field switch">
-                                        <div class="floatL w100p mBot10">
-                                            @Html.RadioButtonFor(model => model.ReturnData.DepositScheduleType.DepositorType, DepositorScheduleType.MINTAXLIABILITY.ToString(), new { @id = "mintaxliability", @onchange = "OnIsMonthlyDepositor();", @checked = true, @class = "css-radiobox" })
-                                            <label for="mintaxliability" class="cb-enable"><span>Total taxes after adjustments and credits on this return is, or prior quarter was, less than $2,500.</span></label>
-                                        </div>
-                                    </div>
-                                    <div class="field switch">
-                                        <div class="floatL w100p mBot10">
-                                            @Html.RadioButtonFor(model => model.ReturnData.DepositScheduleType.DepositorType, DepositorScheduleType.MONTHLY.ToString(), new { @id = "monthly", @onchange = "OnIsMonthlyDepositor();", @class = "css-radiobox" })
-                                            <label for="monthly" class="cb-disable"><span>Monthly schedule depositor for the entire quarter.</span></label>
-                                        </div>
-                                    </div>
-                                    <div class="white_bg full_width mBot10" style="display:none;min-height:auto;" id="MonthlyDepositor">
-                                        <div class="monthly-div">
-                                            <table class="responsive">
-                                                <tr>
-                                                    <td class="labelName">
-                                                        Tax Liability Month1:
-                                                    </td>
-                                                    <td class="apifieldname vaT">
-                                                        @Html.TextBoxFor(model => model.ReturnData.DepositScheduleType.MonthlyDepositor.TaxLiabilityMonth1, new { @class = "form-control", maxlength = "50", id = "TaxLiabilityMonth1" })
-                                                    </td>
-                                                    <td class="labelName">
-                                                        Tax Liability Month2:
-                                                    </td>
-                                                    <td class="apifieldname vaT">
-                                                        @Html.TextBoxFor(model => model.ReturnData.DepositScheduleType.MonthlyDepositor.TaxLiabilityMonth2, new { @class = "form-control", maxlength = "50", id = "TaxLiabilityMonth2" })
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td colspan="4" class="spacer10"></td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="labelName">
-                                                        Tax Liability Month3:
-                                                    </td>
-                                                    <td class="apifieldname vaT">
-                                                        @Html.TextBoxFor(model => model.ReturnData.DepositScheduleType.MonthlyDepositor.TaxLiabilityMonth3, new { @class = "form-control", maxlength = "50", id = "TaxLiabilityMonth3" })
-                                                    </td>
-                                                    <td colspan="2"></td>
-                                                </tr>
-                                                <tr>
-                                                    <td colspan="4" class="spacer10"></td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="labelName">
-                                                        Total liability for quarter:
-                                                    </td>
-                                                    <td class="apifieldname vaT">
-                                                        @Html.TextBoxFor(model => model.ReturnData.DepositScheduleType.TaxLiabilityTotalAmt, new { @class = "form-control", maxlength = "50", id = "MonthlyTotalTaxLiabilityAmt" })
-                                                    </td>
-                                                    <td colspan="2"></td>
-                                                </tr>
-                                            </table>
-                                        </div>
-                                    </div>
-                                    <div class="clear"></div>
-                                    <div class="field switch mBot10">
-                                        <div class="floatL w100p">
-                                            @Html.RadioButtonFor(model => model.ReturnData.DepositScheduleType.DepositorType, DepositorScheduleType.SEMIWEEKLY.ToString(), new { @id = "semiweekly", @onchange = "OnIsMonthlyDepositor();", @class = "css-radiobox" })
-                                            <label for="semiweekly" class="cb-disable"><span>Semiweekly schedule depositor for any part of this quarter.</span></label>
-                                        </div>
-                                    </div>
-                                    <div class="clear"></div>
-                                    <div id="SemiweeklyDepositor" class="monthly-div white_bg full_width">
-
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="fieldText vaT noWrap pLeft10">
-                                    <div class="field switch">
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="fieldText vaT noWrap pLeft10">
-                                    <div class="field switch">
-                                    </div>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-
-
-                <div class="panel panel-default">
-                    <div data-toggle="collapse" class="panel-heading collapsed" data-parent="#accordion" href="#collapse8">
-                        <h4 class="panel-title">
-                            Third Party Designee
-
-                        </h4>
-                    </div>
-
-                    <div id="collapse8" class="panel-collapse collapse">
-                        <table>
-                            <tr>
-                                <td class="labelNameL">
-                                    Do you want to allow another person to discuss this return with IRS?
-                                </td>
-                                <td class="fieldText vaT noWrap pLeft10">
-                                    <div class="field switch">
-                                        @*@Html.RadioButtonFor(model => Model.ReturnHeader.IsThirdPartyDesignee, new { @id = "rdoIsThirdPartyYes", @class = "css-radiobox" })*@
-                                        @Html.RadioButtonFor(model => model.ReturnHeader.IsThirdPartyDesignee, false, new { @id = "rdoIsThirdPartyYes", @class = "css-radiobox", @onchange = "OnIsThirdPartyDesignee()" })
-                                        <label for="rdoIsThirdPartyYes" class="cb-disable"><span>Yes</span></label>
-                                        @Html.RadioButtonFor(model => model.ReturnHeader.IsThirdPartyDesignee, true, new { @id = "rdoIsThirdPartyNo", @class = "css-radiobox", @onchange = "OnIsThirdPartyDesignee()", @checked = true })
-                                        <label for="rdoIsThirdPartyNo" class="cb-enable"><span>No</span></label>
-                                    </div>
-                                </td>
-                            </tr>
-                        </table>
-                        <table style="display:none;" id="ThirdPartyDesignee" class="tdDisBlock640">
-                            <tr>
-                                <td class="labelName">
-                                    Designee Name:
-                                </td>
-                                <td class="apifieldname vaT">
-                                    @Html.TextBoxFor(model => Model.ReturnHeader.ThirdPartyDesignee.Name, new { @class = "form-control", maxlength = "50" })
-                                </td>
-                                <td class="labelName">
-                                    Designee Phone:
-                                </td>
-                                <td class="apifieldname vaT">
-                                    @Html.TextBoxFor(model => Model.ReturnHeader.ThirdPartyDesignee.Phone, new { @class = "form-control", maxlength = "10" })
                                 </td>
                             </tr>
                             <tr>
@@ -1655,68 +486,1239 @@
                             </tr>
                             <tr>
                                 <td class="labelName">
-                                    Enter any 5 digit PIN:
-
+                                    Employer Name:
                                 </td>
                                 <td class="apifieldname vaT">
-                                    @Html.TextBoxFor(model => Model.ReturnHeader.ThirdPartyDesignee.PIN, new { @class = "form-control", maxlength = "5" })
+                                    @Html.TextBoxFor(model => Model.ReturnHeader.Business.BusinessNm, new { @class = "form-control" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="spacer10"></td>
+                            </tr>
+                            <tr>
+                                <td class="labelName">
+                                    EIN:
+                                </td>
+                                <td class="apifieldname vaT">
+                                    @Html.TextBoxFor(model => Model.ReturnHeader.Business.EINorSSN, new { maxlength = "9", @class = "form-control" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="spacer10"></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td colspan="3">
+                                    <div class="full_width">
+                                        @Html.CheckBoxFor(model => model.ReturnHeader.Business.IsForeign, new { onclick = "ChangeForeignAddr();", @class = "css-checkbox", id = "chkIsForeignAddress", @tabindex = "106" })
+                                        <label for="chkIsForeignAddress" class="css-label checkbox">Foreign Address (Outside US)?</label>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="labelName">
+                                    Address:
+                                </td>
+                                <td class="apifieldname vaT">
+                                    @Html.TextBoxFor(model => Model.ReturnHeader.Business.USAddress.Address1, new { @class = "form-control" })
+                                    @Html.TextBoxFor(model => Model.ReturnHeader.Business.ForeignAddress.Address1, new { @style = "display:none", @class = "form-control" })
+                                </td>
+                                <td class="labelName">
+                                    Address Cont:
+                                </td>
+                                <td class="apifieldname vaT">
+                                    @Html.TextBoxFor(model => Model.ReturnHeader.Business.USAddress.Address2, new { @class = "form-control" })
+                                    @Html.TextBoxFor(model => Model.ReturnHeader.Business.ForeignAddress.Address2, new { @style = "display:none", @class = "form-control" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="spacer10"></td>
+                            </tr>
+                            <tr id="trcitystate">
+                                <td class="labelName">
+                                    City:
+                                </td>
+                                <td class="apifieldname vaT">
+                                    @Html.TextBoxFor(model => Model.ReturnHeader.Business.USAddress.City, new { @id = "PayerCity", maxlength = "22", @class = "form-control" })
+                                </td>
+                                <td class="labelName">
+                                    State Code:
+                                </td>
+                                <td class="apifieldname vaT">
+                                    @Html.DropDownListFor(model => Model.ReturnHeader.Business.USAddress.State, new SelectList(USStates, "value", "text", null), "Select Code", new { @class = "form-control" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="spacer10"></td>
+                            </tr>
+
+                            <tr id="trOutsideCityStates">
+                                <td class="labelName">
+                                    City:
+                                </td>
+                                <td class="apifieldname vaT">
+                                    @Html.TextBoxFor(model => Model.ReturnHeader.Business.ForeignAddress.City, new { @id = "ForeignPayerCity", maxlength = "22", @class = "form-control" })
+                                </td>
+                                <td class="labelName">
+                                    Foreign City/State:
+                                </td>
+                                <td class="apifieldname vaT">
+                                    @Html.TextBoxFor(model => Model.ReturnHeader.Business.ForeignAddress.ProvinceOrStateNm, new { @id = "ForeignPayerCity", maxlength = "22", @class = "form-control" })
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td class="spacer10"></td>
+                            </tr>
+                            <tr id="trzipcode">
+                                <td class="labelName">
+                                    Zip Code:
+                                </td>
+                                <td class="apifieldname vaT">
+                                    @Html.TextBoxFor(model => Model.ReturnHeader.Business.USAddress.ZipCd, new { maxlength = "9", @class = "form-control" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="spacer10"></td>
+                            </tr>
+                            <tr id="trZipcodeOutside">
+                                <td class="labelName">
+                                    Country:
+                                </td>
+                                <td class="apifieldname vaT">
+                                    @Html.DropDownListFor(model => Model.ReturnHeader.Business.ForeignAddress.Country, new SelectList(countryList, "text", "value", null), "Select Code", new { @class = "form-control" })
+                                </td>
+                                <td class="labelName">
+                                    Postal Code:
+                                </td>
+                                <td class="apifieldname vaT">
+                                    @Html.TextBoxFor(model => Model.ReturnHeader.Business.ForeignAddress.PostalCd, new { maxlength = "9", @class = "form-control" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="spacer10"></td>
+                            </tr>
+                            <tr>
+                                <td class="labelName">
+                                    Contact Name:
+                                </td>
+                                <td class="apifieldname vaT">
+                                    @Html.TextBoxFor(model => Model.ReturnHeader.Business.ContactNm, new { @class = "form-control", maxlength = "50" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="spacer10"></td>
+                            </tr>
+                            <tr>
+                                <td class="labelName">
+                                    Phone Number:
+                                </td>
+                                <td class="apifieldname vaT" colspan="3">
+                                    @Html.TextBoxFor(m => Model.ReturnHeader.Business.Phone, new { @class = "form-control", maxlength = "10" })
+                                    @*@Html.TextBoxFor(m => m.ReturnHeader.Business.PhoneExtn, new { @tabindex = "114", @class = "PhoneExtension", maxlength = "5", @style = "width:60px !important;", @placeholder = "extn"})*@
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="spacer10"></td>
+                            </tr>
+                            <tr>
+                                <td class="labelName">
+                                    Email Address:
+                                </td>
+                                <td class="apifieldname vaT">
+                                    @Html.TextBoxFor(model => Model.ReturnHeader.Business.Email, new { @class = "form-control" })
+                                </td>
+                                <td class="labelName">
+                                    Fax Number:
+                                </td>
+                                <td class="apifieldname vaT">
+                                    @Html.TextBoxFor(model => Model.ReturnHeader.Business.Fax, new { @class = "form-control", maxlength = "10" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="spacer10"></td>
+                            </tr>
+                            <tr>
+                                <td class="labelName">
+                                    Signatory Name:
+                                </td>
+                                <td class="apifieldname vaT">
+                                    @Html.TextBoxFor(model => Model.ReturnHeader.Business.SigningAuthority.Name, new { @class = "form-control", maxlength = "50" })
+                                </td>
+                                <td class="labelName">
+                                    Title:
+                                </td>
+                                <td class="apifieldname vaT">
+                                    @Html.DropDownListFor(model => Model.ReturnHeader.Business.SigningAuthority.BusinessMemberType, Enum.GetValues(typeof(EstateBusinessMembers)).Cast<EstateBusinessMembers>().Select(x => new SelectListItem { Text = Utility.GetEnumDisplayName(x), Value = (x).ToString() }), "-- Select--", new { @class = "form-control" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="spacer10"></td>
+                            </tr>
+                            <tr>
+                                <td class="labelName">
+                                    Daytime Phone:
+                                </td>
+                                <td class="apifieldname vaT">
+                                    @Html.TextBoxFor(model => Model.ReturnHeader.Business.SigningAuthority.Phone, new { @class = "form-control", maxlength = "10" })
                                 </td>
                             </tr>
                         </table>
                     </div>
                 </div>
+            </div>
 
-                <div class="panel panel-default">
-                    <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapse9">
-                        <h4 class="panel-title">
-                            Signature Details
-                        </h4>
+
+            <div class="panel panel-default">
+                <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapse2">
+                    <h4 class="panel-title">
+                        Form 941 Aggregate Client Details
+                    </h4>
+                    <div id="collapse2" class="panel-collapse collapse">
+                       
+
+
                     </div>
-                    <div id="collapse9" class="panel-collapse collapse">
-                        <table>
+                </div>
+            </div>
+
+
+            <div class="panel panel-default">
+                <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapse3">
+                    <h4 class="panel-title">
+                        941SCHR Main Filer Data
+                    </h4>
+                </div>
+                <div id="collapse3" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <table class="responsive">
+                            <tr>
+                                <td class="spacer10"></td>
+                            </tr>
+                            <tr>
+                                <td class="labelNameL">
+                                    2. Total wages, tips, and other compensation:
+                                </td>
+                                <td class="apifieldname vaT">
+                                    @Html.TextBoxFor(model => model.ReturnData.Form941MainFilerData.WagesAmt, new { maxlength = "17", @class = "form-control" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="spacer10"></td>
+                            </tr>
+                            <tr>
+                                <td class="labelNameL">
+                                    3. Total Federal Income Tax Withheld from wages, tips, and other compensation:
+                                </td>
+                                <td class="apifieldname vaT">
+                                    @Html.TextBoxFor(model => model.ReturnData.Form941MainFilerData.FedIncomeTaxWHAmt, new { maxlength = "17", @class = "form-control" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="spacer10"></td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="">
+                    </div>
+                    <div>
+                        <table class="tdDisBlock640">
+                            <tr>
+                                <td class="labelNameL">
+                                    5e. Total taxable wages & tips:
+                                </td>
+                                <td class="apifieldname vaT">
+                                    @Html.TextBoxFor(model => model.ReturnData.Form941MainFilerData.Line5e, new { maxlength = "17", @class = "form-control", id = "Line5eAmt" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="labelNameL">
+                                    5f. Section 3121(q) Notice and Demand—Tax due on unreported tips:
+                                </td>
+                                <td class="apifieldname vaT">
+                                    @Html.TextBoxFor(model => model.ReturnData.Form941MainFilerData.TaxOnUnreportedTips3121qAmt, new { maxlength = "17", @class = "form-control" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="spacer10"></td>
+                            </tr>
+                            <tr>
+                                <td class="labelNameL">
+                                    11. Qualified small business payroll tax credit for increasing research activities:
+                                </td>
+                                <td class="apifieldname vaT">
+                                    @Html.TextBoxFor(model => model.ReturnData.Form941MainFilerData.Line11, new { maxlength = "17", @class = "form-control" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="spacer10"></td>
+                            </tr>
+                            <tr>
+                                <td class="labelNameL">
+                                    12. Total taxes after adjustments and credits:
+                                </td>
+                                <td class="apifieldname vaT">
+                                    @Html.TextBoxFor(model => model.ReturnData.Form941MainFilerData.Line12, new { maxlength = "17", @class = "form-control" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="spacer10"></td>
+                            </tr>
+                            <tr>
+                                <td class="labelNameL">
+                                    13. Deposits for this quarter:
+                                </td>
+                                <td class="apifieldname vaT">
+                                    @Html.TextBoxFor(model => model.ReturnData.Form941MainFilerData.TotTaxDepositAmt, new { maxlength = "17", @class = "form-control" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="spacer10"></td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="form_941 taR_input formDiv" id="tabs-1" style="padding:0px">
+
+                        <table class="tdDisBlock640">
+                            <tr>
+                                <td class="labelNameL">
+                                    Are you eligible for the Qualified Small Business Payroll Tax Credit for Increasing Research Activities?
+                                </td>
+                                <td class="fieldText vaT noWrap pLeft10">
+                                    <div class="field switch">
+                                        @Html.RadioButtonFor(model => Model.ReturnData.Form941MainFilerData.IsPayrollTaxCredit, true, new { id = "rdoIsPayrollCreditYes", @onchange = "OnIsPayrollTaxCreditMainFiler();", @class = "css-radiobox" })
+                                        <label for="rdoIsPayrollCreditYes" class="cb-disable"><span>Yes</span></label>
+                                        @Html.RadioButtonFor(model => Model.ReturnData.Form941MainFilerData.IsPayrollTaxCredit, false, new { id = "rdoIsPayrollCreditNo", @onchange = "OnIsPayrollTaxCreditMainFiler();", @checked = true, @class = "css-radiobox" })
+                                        <label for="rdoIsPayrollCreditNo" class="cb-enable"><span>No</span></label>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <table class="PayrollTaxCreditFormDiv_MainFiler tblsty table-bordered cf dataTable minInputSize" style="display:none">
+                            <thead>
+                                <tr>
+                                    <th style="max-width:50px">
+                                        S.No
+                                    </th>
+                                    <th style="min-width:160px">
+                                        (a) Ending date of income tax period
+                                    </th>
+                                    <th>
+                                        (b) Income tax return filed that included Form 6765
+                                    </th>
+                                    <th style="min-width:160px">
+                                        (c) Date income tax return was filed
+                                    </th>
+                                    <th style="min-width:110px">
+                                        (d) EIN used on Form 6765
+                                    </th>
+                                    <th>
+                                        (e) Amount from Form 6765, line 44, or if applicable, the amount that was allocated to your EIN
+                                    </th>
+                                    <th>
+                                        (f) Amount of credit from column (e) taken on a previous period(s)
+                                    </th>
+                                    <th>
+                                        (g) Remaining credit
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{
+                                    int sNo = 1;
+                                    int i = 0;
+                                    var form8974ITRDetails = Model.ReturnData != null && Model.ReturnData.Form941MainFilerData != null &&
+                                        Model.ReturnData.Form941MainFilerData.Form8974 != null && Model.ReturnData.Form941MainFilerData.Form8974.Form8974IncomeTaxDetails != null ? Model.ReturnData.Form941MainFilerData.Form8974.Form8974IncomeTaxDetails : null;
+                                }
+                                @Html.HiddenFor(model => Model.ReturnHeader.Form941ClientData)
+                                @if (form8974ITRDetails != null)
+                                {
+                                    for (int client = 0; client < form8974ITRDetails.Count; client++)
+                                    {
+                                        i++;
+                                        <tr>
+                                            <td class="pos-rel">
+                                                @(sNo++)
+                                                @*  @Html.HiddenFor(x => x.ReturnData.Form941MainFilerData.Form8974.Form8974IncomeTaxDetails[client].Form8974IncomeTaxId)*@
+                                            </td>
+                                            <td class="pos-rel">
+                                                @Html.EditorFor(x => x.ReturnData.Form941MainFilerData.Form8974.Form8974IncomeTaxDetails[client].IncomeTaxPeriodEndDate, new { @id = "IncomeTaxPeriodEndDate_" + i, @class = "form-control" })
+                                            </td>
+                                            <td class="pos-rel">
+                                                @Html.DropDownListFor(x => x.ReturnData.Form941MainFilerData.Form8974.Form8974IncomeTaxDetails[client].IncomeTaxReturnFiledForm, form8974, "--Select--", new { @id = "IncomeTaxReturnFiledForm_" + i, @class = "ITRFiledForm" })
+                                            </td>
+                                            <td class="pos-rel">
+                                                @Html.EditorFor(x => x.ReturnData.Form941MainFilerData.Form8974.Form8974IncomeTaxDetails[client].IncomeTaxReturnFiledDate, new { @id = "IncomeTaxReturnFiledDate_" + i })
+                                            </td>
+                                            <td class="pos-rel">
+                                                @Html.TextBoxFor(x => x.ReturnData.Form941MainFilerData.Form8974.Form8974IncomeTaxDetails[client].Form6765EIN, new { @id = "Form6765EIN_" + i })
+                                            </td>
+                                            <td class="pos-rel">
+                                                @Html.TextBoxFor(x => x.ReturnData.Form941MainFilerData.Form8974.Form8974IncomeTaxDetails[client].Form6765Line44Amt, new { @id = "Form6765Line44Amt_" + i, @maxlength = "17", @onfocus = "txtFocus(this)", @onblur = "txtBlur(this)" })
+                                            </td>
+                                            <td class="pos-rel">
+                                                @Html.TextBoxFor(x => x.ReturnData.Form941MainFilerData.Form8974.Form8974IncomeTaxDetails[client].PreviousPeriodRemaingCreditAmt, new { @id = "PreviousPeriodRemaingCreditAmt_" + i, @maxlength = "17", @onfocus = "txtFocus(this)", @onblur = "txtBlur(this)" })
+                                            </td>
+                                            <td class="pos-rel">
+                                                @Html.TextBoxFor(x => x.ReturnData.Form941MainFilerData.Form8974.Form8974IncomeTaxDetails[client].RemainingCredit, new { @id = "RemainingCredit_" + i, @maxlength = "17", @onfocus = "txtFocus(this)", @onblur = "txtBlur(this)" })
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                        <div class="PayrollTaxCreditFormDiv_MainFiler" style="display:none">
+                            <div class="spacer20 full_width"></div>
+                            <div class="searchTitle">Determine the credit that you can use this period.</div>
+                            <div class="form_box">
+                                <div class="col-lg-9 col-md-9 col-sm-8 col-xs-12">
+                                    <label>7. Total payroll tax credit you have available for the current tax year</label>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 check_box_941 taR doller_input">
+                                    @Html.TextBoxFor(x => x.ReturnData.Form941MainFilerData.Form8974.Line7, new { @id = "Line7", @class = "Line7" })
+                                </div>
+                            </div>
+                            <div class="spacer20 full_width"></div>
+                            <div class="form_box">
+                                <div class="col-lg-9 col-md-9 col-sm-8 col-xs-12">
+                                    <label>
+                                        8. Taxable social security wages (Form 941, Line 5a Column 2)
+                                    </label>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 check_box_941 taR doller_input">
+                                    @Html.TextBoxFor(x => x.ReturnData.Form941MainFilerData.Form8974.Line8, new { @class = "Line8" })
+                                </div>
+                            </div>
+                            <div class="spacer20 full_width"></div>
+                            <div class="form_box">
+                                <div class="col-lg-9 col-md-9 col-sm-8 col-xs-12">
+                                    <label>9. Taxable social security tips (Form 941, Line 5b Column 2)</label>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 check_box_941 taR doller_input">
+                                    @Html.TextBoxFor(x => x.ReturnData.Form941MainFilerData.Form8974.Line9, new { @class = "Line9" })
+                                </div>
+                            </div>
+                            <div class="spacer20 full_width"></div>
+                            <div class="form_box">
+                                <div class="col-lg-9 col-md-9 col-sm-8 col-xs-12">
+                                    <label>10. Total social security tax</label>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 check_box_941 taR doller_input">
+                                    @Html.TextBoxFor(x => x.ReturnData.Form941MainFilerData.Form8974.Line10, new { @class = "Line10" })
+                                </div>
+                            </div>
+                            <div class="spacer20 full_width"></div>
+                            <div class="form_box">
+                                <div class="col-lg-9 col-md-9 col-sm-8 col-xs-12">
+                                    <label>11. Employer's social security tax (50% of total security tax) </label>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 check_box_941 taR doller_input">
+                                    @Html.TextBoxFor(model => model.ReturnData.Form941MainFilerData.Form8974.Line11, new { @class = "Line11" })
+                                </div>
+                            </div>
+                            <div class="spacer20 full_width"></div>
+                            <div class="form_box">
+
+                                <div class="spacer20 full_width">
+                                    @Html.RadioButtonFor(x => x.ReturnData.Form941MainFilerData.Form8974.PayerIndicatorType, Form8974PayerIndicatorType.THIRDPARTYSICKPAYIND.ToString(), new { @id = "checkIsThirdparty_MainFiler", @class = "css-radiobox" })
+                                    <label for="checkIsThirdparty_MainFiler" class="cb-enable"><span>I'm a third-party payer of sick pay</span></label>
+                                    @Html.RadioButtonFor(x => x.ReturnData.Form941MainFilerData.Form8974.PayerIndicatorType, Form8974PayerIndicatorType.SECTION3121QIND.ToString(), new { @id = "checkIsreceived3121_MainFiler", @class = "css-radiobox" })
+                                    <label for="checkIsreceived3121_MainFiler" class="cb-disable"><span>I received a Section 3121(q) Notice and Demand</span></label>
+                                    <a href="javascript:void(0)" class="buttonC floatR mTop10-sm" onclick="RadioClearMainFiler();">Clear</a>
+                                </div>
+
+                            </div>
+                            <div class="spacer20 full_width"></div>
+                            <div class="form_box">
+                                <div class="col-lg-9 col-md-9 col-sm-8 col-xs-12">
+                                    <label>12. Credit (Qualified small business payroll tax credit for increasing research activities)</label>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 check_box_941 doller_input taR">
+                                    @Html.TextBoxFor(x => x.ReturnData.Form941MainFilerData.Form8974.Line12, new { @class = "Line12" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapse4">
+                    <h4 class="panel-title">
+                        Form941 Aggregate Data
+                    </h4>
+                </div>
+
+                <div id="collapse4" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <table class="responsive">
+                            <tr>
+                                <td class="labelNameL">
+                                    1. Total number of employees who received wages, tips, or other compensation for the pay period including Mar. 12 (Jan - Mar 2017):
+                                </td>
+                                <td class="apifieldname vaT">
+                                    @Html.TextBoxFor(model => model.ReturnData.AggregateForm941Data.EmployeeCnt, new { @class = "form-control" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="spacer10"></td>
+                            </tr>
+                            <tr>
+                                <td class="labelNameL">
+                                    2. Total wages, tips, and other compensation:
+                                </td>
+                                <td class="apifieldname vaT">
+                                    @Html.TextBoxFor(model => model.ReturnData.AggregateForm941Data.WagesAmt, new { maxlength = "17", @class = "form-control" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="spacer10"></td>
+                            </tr>
+                            <tr>
+                                <td class="labelNameL">
+                                    3. Total Federal Income Tax Withheld from wages, tips, and other compensation:
+                                </td>
+                                <td class="apifieldname vaT">
+                                    @Html.TextBoxFor(model => model.ReturnData.AggregateForm941Data.FedIncomeTaxWHAmt, new { maxlength = "17", @class = "form-control" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="spacer10"></td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="">
+                        <table class="tdDisBlock640">
+                            <tr>
+                                <td class="labelNameL">
+                                    4. Do you have wages, tips, or other compensation which are subject to social security or Medicare tax?
+                                </td>
+                                <td class="fieldText vaT noWrap">
+                                    <div class="field switch">
+                                        @Html.RadioButtonFor(model => model.ReturnData.AggregateForm941Data.WagesNotSubjToSSMedcrTaxInd, true, new { id = "rdoIsWagesYes", @checked = true, @onchange = "OnWagesOptionChoose();", @class = "css-radiobox" })
+                                        <label for="rdoIsWagesYes" class="cb-disable"><span>Yes</span></label>
+                                        @Html.RadioButtonFor(model => model.ReturnData.AggregateForm941Data.WagesNotSubjToSSMedcrTaxInd, false, new { id = "rdoIsWagesNo", @onchange = "OnWagesOptionChoose();", @class = "css-radiobox" })
+                                        <label for="rdoIsWagesNo" class="cb-enable"><span>No</span></label>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="spacer10"></td>
+                            </tr>
+                        </table>
+                        <table id="DivsocialsecurityorMedicaretax" class="tdDisBlock640" style="display:none">
+                            <tr>
+                                <td class="labelNameL tdCountry">5a. Taxable social security wages:</td>
+                                <td class="apifieldname vaT tdCountry">
+                                    @Html.TextBoxFor(model => model.ReturnData.AggregateForm941Data.Line5aInitialAmt, new { maxlength = "17", @class = "form-control", id = "Line5aAmt" })
+                                    <div class="cPart">
+                                        <span class="calcPart">x 0.124 =</span>
+                                        @Html.TextBoxFor(model => model.ReturnData.AggregateForm941Data.Line5a, new { maxlength = "17", @class = "form-control", id = "Line5a_col2_Amt" })
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="spacer10"></td>
+                            </tr>
+                            <tr>
+                                <td class="labelNameL">
+                                    5b. Taxable social security tips:
+                                </td>
+                                <td class="apifieldname vaT">
+                                    @Html.TextBoxFor(model => model.ReturnData.AggregateForm941Data.Line5bInitialAmt, new { maxlength = "17", @class = "form-control", id = "Line5bAmt" })
+                                    <div class="cPart">
+                                        <span class="calcPart">x 0.124 =</span>
+                                        @Html.TextBoxFor(model => model.ReturnData.AggregateForm941Data.Line5b, new { maxlength = "17", @class = "form-control", id = "Line5b_col2_Amt" })
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="spacer10"></td>
+                            </tr>
+                            <tr>
+                                <td class="labelNameL">
+                                    5c. Taxable Medicare wages & tips:
+                                </td>
+                                <td class="apifieldname vaT">
+                                    @Html.TextBoxFor(model => model.ReturnData.AggregateForm941Data.Line5cInitialAmt, new { maxlength = "17", @class = "form-control", id = "Line5cAmt" })
+                                    <div class="cPart">
+                                        <span class="calcPart">x 0.029 =</span>
+                                        @Html.TextBoxFor(model => model.ReturnData.AggregateForm941Data.Line5c, new { maxlength = "17", @class = "form-control", id = "Line5c_col2_Amt" })
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="spacer10"></td>
+                            </tr>
+                            <tr>
+                                <td class="labelNameL">
+                                    5d. Taxable wages & tips subject to Additional Medicare Tax withholdings:
+                                </td>
+                                <td class="apifieldname vaT">
+                                    @Html.TextBoxFor(model => model.ReturnData.AggregateForm941Data.Line5dInitialAmt, new { maxlength = "17", @class = "form-control", id = "Line5dAmt" })
+                                    <div class="cPart">
+                                        <span class="calcPart">x 0.009 =</span>
+                                        @Html.TextBoxFor(model => model.ReturnData.AggregateForm941Data.Line5d, new { maxlength = "17", @class = "form-control", id = "Line5d_col2_Amt" })
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="spacer10"></td>
+                            </tr>
+                            <tr>
+                                <td class="labelNameL">
+                                    5e. Total taxable wages & tips:
+                                </td>
+                                <td class="apifieldname vaT">
+                                    @Html.TextBoxFor(model => model.ReturnData.AggregateForm941Data.Line5e, new { maxlength = "17", @class = "form-control", id = "Line5eAmt" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="spacer10"></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div>
+                        <table class="tdDisBlock640">
+                            <tr>
+                                <td class="labelNameL">
+                                    5f. Section 3121(q) Notice and Demand—Tax due on unreported tips:
+                                </td>
+                                <td class="apifieldname vaT">
+                                    @Html.TextBoxFor(model => model.ReturnData.AggregateForm941Data.TaxOnUnreportedTips3121qAmt, new { maxlength = "17", @class = "form-control" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="spacer10"></td>
+                            </tr>
+                            <tr>
+                                <td class="labelNameL">
+                                    6. Total taxes before adjustments:
+                                </td>
+                                <td class="apifieldname vaT">
+                                    @Html.TextBoxFor(model => model.ReturnData.AggregateForm941Data.Line6, new { maxlength = "17", @class = "form-control" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="spacer10"></td>
+                            </tr>
+                            <tr>
+                                <td class="labelNameL">
+                                    7. Adjustments for Fraction of Cents:
+                                </td>
+                                <td class="apifieldname vaT">
+                                    @Html.TextBoxFor(model => model.ReturnData.AggregateForm941Data.CurrentQtrFractionsCentsAmt, new { maxlength = "17", @class = "form-control" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="spacer10"></td>
+                            </tr>
+                            <tr>
+                                <td class="labelNameL">
+                                    8. Adjustment for sick pay:
+                                </td>
+                                <td class="apifieldname vaT">
+                                    @Html.TextBoxFor(model => model.ReturnData.AggregateForm941Data.CurrentQuarterSickPaymentAmt, new { maxlength = "17", @class = "form-control" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="spacer10"></td>
+                            </tr>
+                            <tr>
+                                <td class="labelNameL">
+                                    9. Adjustments for tips and group-term life insurance:
+                                </td>
+                                <td class="apifieldname vaT">
+                                    @Html.TextBoxFor(model => model.ReturnData.AggregateForm941Data.CurrQtrTipGrpTermLifeInsAdjAmt, new { maxlength = "17", @class = "form-control" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="spacer10"></td>
+                            </tr>
+                            <tr>
+                                <td class="labelNameL">
+                                    10. Total taxes after adjustments:
+                                </td>
+                                <td class="apifieldname vaT">
+                                    @Html.TextBoxFor(model => model.ReturnData.AggregateForm941Data.Line10, new { maxlength = "17", @class = "form-control" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="spacer10"></td>
+                            </tr>
+                            <tr>
+                                <td class="labelNameL">
+                                    11. Qualified small business payroll tax credit for increasing research activities:
+                                </td>
+                                <td class="apifieldname vaT">
+                                    @Html.TextBoxFor(model => model.ReturnData.AggregateForm941Data.Line11, new { maxlength = "17", @class = "form-control" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="spacer10"></td>
+                            </tr>
+                            <tr>
+                                <td class="labelNameL">
+                                    12. Total taxes after adjustments and credits:
+                                </td>
+                                <td class="apifieldname vaT">
+                                    @Html.TextBoxFor(model => model.ReturnData.AggregateForm941Data.Line12, new { maxlength = "17", @class = "form-control" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="spacer10"></td>
+                            </tr>
+                            <tr>
+                                <td class="labelNameL">
+                                    13. Deposits for this quarter:
+                                </td>
+                                <td class="apifieldname vaT">
+                                    @Html.TextBoxFor(model => model.ReturnData.AggregateForm941Data.TotTaxDepositAmt, new { maxlength = "17", @class = "form-control" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="spacer10"></td>
+                            </tr>
+                            <tr>
+                                <td class="labelNameL">
+                                    14. Balance due:
+                                </td>
+                                <td class="apifieldname vaT">
+                                    @Html.TextBoxFor(model => model.ReturnData.AggregateForm941Data.Line14, new { maxlength = "17", @class = "form-control" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="spacer10"></td>
+                            </tr>
+                            <tr>
+                                <td class="labelNameL">
+                                    15. Overpayment:
+                                </td>
+                                <td class="apifieldname vaT">
+                                    @Html.TextBoxFor(model => model.ReturnData.AggregateForm941Data.Line15, new { maxlength = "17", @class = "form-control" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="spacer10"></td>
+                            </tr>
                             <tr>
                                 <td colspan="2" class="fieldText vaT noWrap pLeft10">
                                     <div class="field switch">
                                         <div class="floatL mBot10">
-                                            @Html.RadioButtonFor(model => model.ReturnHeader.SignatureDetails.SignatureType, SignatureType.ONLINE_SIGN_PIN.ToString(), new { @id = "onlinepin", @checked = true, @onchange = "OnIsOnlineSignaturePIN();", @class = "css-radiobox" })
-                                            <label for="onlinepin" class="cb-enable"><span>Online Signature PIN</span></label>
+                                            @Html.RadioButtonFor(model => model.ReturnData.AggregateForm941Data.FilerType, FilerType.SECTION3504AGENT.ToString(), new { @id = "SECTION3504AGENT", @checked = true, @class = "css-radiobox" })
+                                            <label for="SECTION3504AGENT" class="cb-enable"><span>SECTION 3504 AGENT</span></label>
                                         </div>
                                         <div class="floatL mBot10">
-                                            @Html.RadioButtonFor(model => model.ReturnHeader.SignatureDetails.SignatureType, SignatureType.REPORTING_AGENT.ToString(), new { @id = "rapin", @onchange = "OnIsOnlineSignaturePIN();", @class = "css-radiobox" })
-                                            <label for="rapin" class="cb-disable"><span>Reporting Agent</span></label>
-                                        </div>
-                                        <div class="floatL">
-                                            @Html.RadioButtonFor(model => model.ReturnHeader.SignatureDetails.SignatureType, SignatureType.FORM_8453_EMP.ToString(), new { @id = "form8453", @onchange = "OnIsOnlineSignaturePIN();", @class = "css-radiobox" })
-                                            <label for="form8453" class="cb-disable"><span>FORM 8453</span></label>
+                                            @Html.RadioButtonFor(model => model.ReturnData.AggregateForm941Data.FilerType, FilerType.CPEO.ToString(), new { @id = "CPEO", @class = "css-radiobox" })
+                                            <label for="CPEO" class="cb-disable"><span>CPEO</span></label>
                                         </div>
                                     </div>
                                 </td>
                             </tr>
-                            <tr id="OnlineSignaturePINDiv" style="display:none">
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="panel panel-default">
+                <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapse5">
+                    <h4 class="panel-title">
+                        Business Status
+                    </h4>
+                </div>
+
+                <div id="collapse5" class="panel-collapse collapse panel-body">
+
+                    <label class="in_check floatL unCheckDiv" for="chkBusinessClosed">
+                        @Html.CheckBoxFor(model => Model.ReturnHeader.BusinessStatusDetails.IsBusinessClosed, new { @id = "chkBusinessClosed", @class = "css-checkbox divCheckBox", @onchange = "OnBusinessClosed();" })
+                        <label for="chkBusinessClosed" class="css-label mBot0">My business closed OR stopped paying wages</label>
+                    </label>
+                    <div class="white_bg full_width mBot10" id="BusinessClosedDiv" style="display:none">
+                        <table class="responsive">
+                            <tr>
                                 <td class="labelName">
-                                    PIN:
+                                    Final date you paid wages:
                                 </td>
-                                <td class="apifieldname vaT">
-                                    @Html.TextBoxFor(model => model.ReturnHeader.SignatureDetails.OnlineSignaturePIN.PIN, new { @class = "form-control", maxlength = "10" })
+                                <td class="pLeft10">
+                                    @Html.TextBoxFor(model => Model.ReturnHeader.BusinessStatusDetails.BusinessClosedDetails.FinalDateWagesPaid, new { @tabindex = "155", @style = "text-align: left !important;", @id = "BSFinaldatewagespaid", @placeholder = "Ex. mm/dd/yyyy", @class = "date-icon" })
                                 </td>
                             </tr>
-                            <tr id="RAPINDiv" style="display:none">
+                            <tr>
+                                <td class="spacer10"></td>
+                            </tr>
+                            <tr>
+                                <td class="labelName" style="text-align:left;">
+                                    <b>Record Keeper Details</b>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="labelName" colspan="4" style="text-align:left;">
+                                    Enter the name of the person keeping the payroll records and the address where those records will be kept.
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="spacer10"></td>
+                            </tr>
+                            <tr>
                                 <td class="labelName">
-                                    PIN:
+                                    Name:
+                                </td>
+                                <td class="pLeft10">
+                                    @Html.TextBoxFor(model => Model.ReturnHeader.BusinessStatusDetails.BusinessClosedDetails.Name, new { @tabindex = "156", id = "txtBSName" })
+                                </td>
+                            <tr>
+                            <tr>
+                                <td class="spacer10"></td>
+                            </tr>
+                            <td colspan="3">
+                                <div class="full_width">
+                                    @Html.CheckBoxFor(model => Model.ReturnHeader.BusinessStatusDetails.BusinessClosedDetails.IsForeign, new { onclick = "ChangeForeignAddress();", @class = "css-checkbox", id = "checkIsForeignAddress", @tabindex = "157" })
+                                    <label for="checkIsForeignAddress" class="css-label checkbox">Foreign Address (Outside US)?</label>
+                                </div>
+                            </td>
+                            <tr>
+                                <td class="labelName">
+                                    Address:
                                 </td>
                                 <td class="apifieldname vaT">
-                                    @Html.TextBoxFor(model => model.ReturnHeader.SignatureDetails.ReportingAgentPIN.PIN, new { @class = "form-control", maxlength = "10" })
+                                    @Html.TextBoxFor(model => Model.ReturnHeader.BusinessStatusDetails.BusinessClosedDetails.ForeignAddress.Address1, new { @tabindex = "158", @class = "ClosedForeignAddress" })
+                                    @Html.TextBoxFor(model => Model.ReturnHeader.BusinessStatusDetails.BusinessClosedDetails.USAddress.Address1, new { @tabindex = "158", @class = "ClosedUSAddress" })
+                                </td>
+                                <td class="labelName">
+                                    Address Cont:
+                                </td>
+                                <td class="apifieldname vaT">
+                                    @Html.TextBoxFor(model => Model.ReturnHeader.BusinessStatusDetails.BusinessClosedDetails.ForeignAddress.Address2, new { @tabindex = "158", @class = "ClosedForeignAddress" })
+                                    @Html.TextBoxFor(model => Model.ReturnHeader.BusinessStatusDetails.BusinessClosedDetails.USAddress.Address2, new { @tabindex = "159", @class = "ClosedUSAddress" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="spacer10"></td>
+                            </tr>
+                            <tr id="bscitystate">
+                                <td class="labelName">
+                                    City:
+                                </td>
+                                <td class="apifieldname vaT">
+                                    @*@Html.TextBoxFor(model => Model.Form941SchRRecords[0].ReturnHeader.BusinessStatusDetails.BusinessClosedDetails.ForeignAddress.City, new { @id = "EmployerCity", maxlength = "22", @tabindex = "160",@class = "ClosedForeignAddress" })*@
+                                    @Html.TextBoxFor(model => Model.ReturnHeader.BusinessStatusDetails.BusinessClosedDetails.USAddress.City, new { @id = "EmployerCity", maxlength = "22", @class = "ClosedUSAddress" })
+
+                                </td>
+                                <td class="labelName">
+                                    State Code:
+                                </td>
+                                <td class="apifieldname vaT">
+                                    @Html.DropDownListFor(model => Model.ReturnHeader.BusinessStatusDetails.BusinessClosedDetails.USAddress.State, new SelectList(USStates, "text", "value", null), "Select Code", new { @class = "ClosedUSAddress" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="spacer10"></td>
+                            </tr>
+                            <tr id="bsOutsideCityStates">
+                                <td class="labelName">
+                                    Foreign City/State:
+                                </td>
+                                <td class="apifieldname vaT">
+                                    @Html.TextBoxFor(model => Model.ReturnHeader.BusinessStatusDetails.BusinessClosedDetails.ForeignAddress.City, new { @id = "ForeignEmployerCity", maxlength = "22", @class = "ClosedForeignAddress" })
+                                </td>
+                                <td class="labelName">
+                                    Country:
+                                </td>
+                                <td class="apifieldname vaT">
+                                    @Html.DropDownListFor(model => Model.ReturnHeader.BusinessStatusDetails.BusinessClosedDetails.ForeignAddress.Country, new SelectList(countryList, "text", "value", null), "Select Code", new { @class = "ClosedForeignAddress" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="spacer10"></td>
+                            </tr>
+                            <tr id="bszipcode">
+                                <td class="labelName">
+                                    Zip Code:
+                                </td>
+                                <td class="apifieldname vaT">
+                                    @Html.TextBoxFor(model => Model.ReturnHeader.BusinessStatusDetails.BusinessClosedDetails.USAddress.ZipCd, new { maxlength = "9", @tabindex = "164" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="spacer10"></td>
+                            </tr>
+                            <tr id="bsZipcodeOutside">
+                                <td class="labelName">
+                                    Postal Code:
+                                </td>
+                                <td class="apifieldname vaT">
+                                    @Html.TextBoxFor(model => Model.ReturnHeader.BusinessStatusDetails.BusinessClosedDetails.ForeignAddress.PostalCd, new { maxlength = "9", @tabindex = "165" })
                                 </td>
                             </tr>
                         </table>
                     </div>
+                    <label class="in_check  floatL unCheckDiv" for="chkBusinessTransferred">
+                        @Html.CheckBoxFor(model => Model.ReturnHeader.BusinessStatusDetails.IsBusinessTransferred, new { @id = "chkBusinessTransferred", @class = "css-checkbox divCheckBox", @onchange = "OnBusinessTransferred();" })
+                        <label for="chkBusinessTransferred" class="css-label mBot0">My business was sold OR transferred</label>
+                    </label>
+                    <div class="white_bg full_width mBot10" style="display:none" id="BusinessTransferredDiv">
+                        <table class="responsive">
+                            <tr>
+                                <td class="labelName">
+                                    Business Change Type:
+                                </td>
+                                <td class="fieldText vaT noWrap pLeft10">
+                                    <div class="field switch">
+                                        @Html.RadioButtonFor(model => Model.ReturnHeader.BusinessStatusDetails.BusinessTransferredDetails.IsSale, true, new { id = "rdoIsSale", @onchange = "ShowHideCalYr();" })
+                                        <label for="rdoIsSale" class="cb-disable"><span>Sale</span></label>
+                                        @Html.RadioButtonFor(model => Model.ReturnHeader.BusinessStatusDetails.BusinessTransferredDetails.IsSale, false, new { id = "rdoIsTransfer", @onchange = "ShowHideCalYr();", @checked = true })
+                                        <label for="rdoIsTransfer" class="cb-enable"><span>Transfer</span></label>
+                                    </div>
+                                </td>
+                                <td class="pLeft10" id="trSaleCalYear">
+                                    <label class="pLeft10" id="lblTransferType"></label>
+                                    @Html.TextBoxFor(model => Model.ReturnHeader.BusinessStatusDetails.BusinessTransferredDetails.DateOfChange, new { @tabindex = "169", @style = "text-align: left !important;", @id = "BSDateOfChange", @placeholder = "Ex. mm/dd/yyyy", @class = "date-icon" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="labelName">
+                                    Business Type:
+                                </td>
+                                <td class="fieldText vaT noWrap pLeft10">
+                                    @Html.DropDownListFor(model => Model.ReturnHeader.BusinessStatusDetails.BusinessTransferredDetails.NewBusinessType, BusinessTypeList, "-- Select--",
+                       new { @tabindex = "170", id = "BusinessType", @onchange = "AssignBusinessMembers();" })
+                                </td>
+                                <td class="labelName">
+                                    Business Name:
+                                </td>
+                                <td class="fieldText vaT noWrap pLeft10">
+                                    @Html.TextBoxFor(model => Model.ReturnHeader.BusinessStatusDetails.BusinessTransferredDetails.NewBusinessName, new { @tabindex = "171", id = "txtBSName" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="spacer10"></td>
+                            </tr>
+                            <tr>
+                                <td class="labelName" style="text-align:left;">
+                                    <b>Record Keeper Details</b>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="labelName" colspan="4" style="text-align:left;">
+                                    Enter the name of the person keeping the payroll records and the address where those records will be kept.
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="spacer10"></td>
+                            </tr>
+                            <tr>
+                                <td class="labelName">
+                                    Name:
+                                </td>
+                                <td class="pLeft10">
+                                    @Html.TextBoxFor(model => Model.ReturnHeader.BusinessStatusDetails.BusinessTransferredDetails.Name, new { @tabindex = "172", id = "txtBSName" })
+                                </td>
+                            <tr>
+                            <tr>
+                                <td class="spacer10"></td>
+                            </tr>
+                            <td colspan="3">
+                                <div class="full_width">
+                                    @Html.CheckBoxFor(model => Model.ReturnHeader.BusinessStatusDetails.BusinessTransferredDetails.IsForeign, new { onclick = "ChangeForeignAddress();", @class = "css-checkbox", id = "checkIsTranForeignAddress", @tabindex = "173" })
+                                    <label for="checkIsTranForeignAddress" class="css-label checkbox">Foreign Address (Outside US)?</label>
+                                </div>
+                            </td>
+                            <tr>
+                                <td class="labelName">
+                                    Address:
+                                </td>
+                                <td class="apifieldname vaT">
+                                    @Html.TextBoxFor(model => Model.ReturnHeader.BusinessStatusDetails.BusinessTransferredDetails.USAddress.Address1, new { @tabindex = "174", @class = "ChangeUSForeignAddress" })
+                                    @Html.TextBoxFor(model => Model.ReturnHeader.BusinessStatusDetails.BusinessTransferredDetails.ForeignAddress.Address1, new { @tabindex = "174", @class = "ChangeForeignAddress" })
+                                </td>
+                                <td class="labelName">
+                                    Address Cont:
+                                </td>
+                                <td class="apifieldname vaT">
+                                    @Html.TextBoxFor(model => Model.ReturnHeader.BusinessStatusDetails.BusinessTransferredDetails.USAddress.Address2, new { @tabindex = "175", @class = "ChangeUSForeignAddress" })
+                                    @Html.TextBoxFor(model => Model.ReturnHeader.BusinessStatusDetails.BusinessTransferredDetails.ForeignAddress.Address2, new { @tabindex = "174", @class = "ChangeForeignAddress" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="spacer10"></td>
+                            </tr>
+                            <tr id="trancitystate">
+                                <td class="labelName">
+                                    City:
+                                </td>
+                                <td class="apifieldname vaT">
+                                    @*@Html.TextBoxFor(model => Model.Form941SchRRecords[0].ReturnHeader.BusinessStatusDetails.BusinessTransferredDetails.USAddress.City, new { @id = "EmployerCity", maxlength = "22", @tabindex = "176" })*@
+                                    @Html.TextBoxFor(model => Model.ReturnHeader.BusinessStatusDetails.BusinessTransferredDetails.USAddress.City, new { @id = "EmployerCity", maxlength = "22", @tabindex = "176" })
+                                </td>
+                                <td class="labelName">
+                                    State Code:
+                                </td>
+                                <td class="apifieldname vaT">
+                                    @Html.DropDownListFor(model => Model.ReturnHeader.BusinessStatusDetails.BusinessTransferredDetails.USAddress.State, new SelectList(USStates, "text", "value", null), "Select Code", new { @tabindex = "177" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="spacer10"></td>
+                            </tr>
+                            <tr id="tranOutsideCityStates">
+                                <td class="labelName">
+                                    Foreign City/State:
+                                </td>
+                                <td class="apifieldname vaT">
+                                    @*@Html.TextBoxFor(model => Model.Form941SchRRecords[0].ReturnHeader.BusinessStatusDetails.BusinessTransferredDetails.ForeignAddress.City, new { @id = "ForeignEmployerCity", maxlength = "22", @tabindex = "178" })*@
+                                    @Html.TextBoxFor(model => Model.ReturnHeader.BusinessStatusDetails.BusinessTransferredDetails.ForeignAddress.City, new { @id = "ForeignEmployerCity", maxlength = "22", @tabindex = "178" })
+                                </td>
+                                <td class="labelName">
+                                    Country:
+                                </td>
+                                <td class="apifieldname vaT">
+                                    @Html.DropDownListFor(model => Model.ReturnHeader.BusinessStatusDetails.BusinessTransferredDetails.ForeignAddress.Country, new SelectList(countryList, "text", "value", null), "Select Code", new { @tabindex = "179" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="spacer10"></td>
+                            </tr>
+                            <tr id="tranzipcode">
+                                <td class="labelName">
+                                    Zip Code:
+                                </td>
+                                <td class="apifieldname vaT">
+                                    @Html.TextBoxFor(model => Model.ReturnHeader.BusinessStatusDetails.BusinessTransferredDetails.USAddress.ZipCd, new { maxlength = "9", @tabindex = "180" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="spacer10"></td>
+                            </tr>
+                            <tr id="tranZipcodeOutside">
+                                <td class="labelName">
+                                    Postal Code:
+                                </td>
+                                <td class="apifieldname vaT">
+                                    @Html.TextBoxFor(model => Model.ReturnHeader.BusinessStatusDetails.BusinessTransferredDetails.ForeignAddress.PostalCd, new { maxlength = "9", @tabindex = "181" })
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <label class="in_check floatL unCheckDiv " for="chkSeasonalEmployer">
+                        @Html.CheckBoxFor(model => Model.ReturnHeader.BusinessStatusDetails.IsSeasonalEmployer, new { @id = "chkSeasonalEmployer", @class = "css-checkbox divCheckBox", @tabindex = "182" })
+                        <label for="chkSeasonalEmployer" class="css-label mBot0">I am a Seasonal Employer and do not have to file a return for every quarter of the year</label>
+                    </label>
 
                 </div>
+            </div>
 
+
+
+            <div class="panel panel-default">
+                <div data-toggle="collapse" class="panel-heading" data-parent="#accordion" href="#collapse7">
+                    <h4 class="panel-title">
+                        Deposit Schedule & Tax Liability
+
+                    </h4>
+                </div>
+                <div id="collapse7" class="panel-collapse collapse">
+                    <table>
+                        <tr>
+                            <td class="fieldText vaT pLeft10">
+                                <div class="field switch">
+                                    <div class="floatL w100p mBot10">
+                                        @Html.RadioButtonFor(model => model.ReturnData.DepositScheduleType.DepositorType, DepositorScheduleType.MINTAXLIABILITY.ToString(), new { @id = "mintaxliability", @onchange = "OnIsMonthlyDepositor();", @checked = true, @class = "css-radiobox" })
+                                        <label for="mintaxliability" class="cb-enable"><span>Total taxes after adjustments and credits on this return is, or prior quarter was, less than $2,500.</span></label>
+                                    </div>
+                                </div>
+                                <div class="field switch">
+                                    <div class="floatL w100p mBot10">
+                                        @Html.RadioButtonFor(model => model.ReturnData.DepositScheduleType.DepositorType, DepositorScheduleType.MONTHLY.ToString(), new { @id = "monthly", @onchange = "OnIsMonthlyDepositor();", @class = "css-radiobox" })
+                                        <label for="monthly" class="cb-disable"><span>Monthly schedule depositor for the entire quarter.</span></label>
+                                    </div>
+                                </div>
+                                <div class="white_bg full_width mBot10" style="display:none;min-height:auto;" id="MonthlyDepositor">
+                                    <div class="monthly-div">
+                                        <table class="responsive">
+                                            <tr>
+                                                <td class="labelName">
+                                                    Tax Liability Month1:
+                                                </td>
+                                                <td class="apifieldname vaT">
+                                                    @Html.TextBoxFor(model => model.ReturnData.DepositScheduleType.MonthlyDepositor.TaxLiabilityMonth1, new { @class = "form-control", maxlength = "50", id = "TaxLiabilityMonth1" })
+                                                </td>
+                                                <td class="labelName">
+                                                    Tax Liability Month2:
+                                                </td>
+                                                <td class="apifieldname vaT">
+                                                    @Html.TextBoxFor(model => model.ReturnData.DepositScheduleType.MonthlyDepositor.TaxLiabilityMonth2, new { @class = "form-control", maxlength = "50", id = "TaxLiabilityMonth2" })
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="4" class="spacer10"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="labelName">
+                                                    Tax Liability Month3:
+                                                </td>
+                                                <td class="apifieldname vaT">
+                                                    @Html.TextBoxFor(model => model.ReturnData.DepositScheduleType.MonthlyDepositor.TaxLiabilityMonth3, new { @class = "form-control", maxlength = "50", id = "TaxLiabilityMonth3" })
+                                                </td>
+                                                <td colspan="2"></td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="4" class="spacer10"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="labelName">
+                                                    Total liability for quarter:
+                                                </td>
+                                                <td class="apifieldname vaT">
+                                                    @Html.TextBoxFor(model => model.ReturnData.DepositScheduleType.TaxLiabilityTotalAmt, new { @class = "form-control", maxlength = "50", id = "MonthlyTotalTaxLiabilityAmt" })
+                                                </td>
+                                                <td colspan="2"></td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="clear"></div>
+                                <div class="field switch mBot10">
+                                    <div class="floatL w100p">
+                                        @Html.RadioButtonFor(model => model.ReturnData.DepositScheduleType.DepositorType, DepositorScheduleType.SEMIWEEKLY.ToString(), new { @id = "semiweekly", @onchange = "OnIsMonthlyDepositor();", @class = "css-radiobox" })
+                                        <label for="semiweekly" class="cb-disable"><span>Semiweekly schedule depositor for any part of this quarter.</span></label>
+                                    </div>
+                                </div>
+                                <div class="clear"></div>
+                                <div id="SemiweeklyDepositor" class="monthly-div white_bg full_width">
+
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="fieldText vaT noWrap pLeft10">
+                                <div class="field switch">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="fieldText vaT noWrap pLeft10">
+                                <div class="field switch">
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+
+            <div class="panel panel-default">
+                <div data-toggle="collapse" class="panel-heading collapsed" data-parent="#accordion" href="#collapse8">
+                    <h4 class="panel-title">
+                        Third Party Designee
+
+                    </h4>
+                </div>
+
+                <div id="collapse8" class="panel-collapse collapse">
+                    <table>
+                        <tr>
+                            <td class="labelNameL">
+                                Do you want to allow another person to discuss this return with IRS?
+                            </td>
+                            <td class="fieldText vaT noWrap pLeft10">
+                                <div class="field switch">
+                                    @*@Html.RadioButtonFor(model => Model.ReturnHeader.IsThirdPartyDesignee, new { @id = "rdoIsThirdPartyYes", @class = "css-radiobox" })*@
+                                    @Html.RadioButtonFor(model => model.ReturnHeader.IsThirdPartyDesignee, false, new { @id = "rdoIsThirdPartyYes", @class = "css-radiobox", @onchange = "OnIsThirdPartyDesignee()" })
+                                    <label for="rdoIsThirdPartyYes" class="cb-disable"><span>Yes</span></label>
+                                    @Html.RadioButtonFor(model => model.ReturnHeader.IsThirdPartyDesignee, true, new { @id = "rdoIsThirdPartyNo", @class = "css-radiobox", @onchange = "OnIsThirdPartyDesignee()", @checked = true })
+                                    <label for="rdoIsThirdPartyNo" class="cb-enable"><span>No</span></label>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                    <table style="display:none;" id="ThirdPartyDesignee" class="tdDisBlock640">
+                        <tr>
+                            <td class="labelName">
+                                Designee Name:
+                            </td>
+                            <td class="apifieldname vaT">
+                                @Html.TextBoxFor(model => Model.ReturnHeader.ThirdPartyDesignee.Name, new { @class = "form-control", maxlength = "50" })
+                            </td>
+                            <td class="labelName">
+                                Designee Phone:
+                            </td>
+                            <td class="apifieldname vaT">
+                                @Html.TextBoxFor(model => Model.ReturnHeader.ThirdPartyDesignee.Phone, new { @class = "form-control", maxlength = "10" })
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="spacer10"></td>
+                        </tr>
+                        <tr>
+                            <td class="labelName">
+                                Enter any 5 digit PIN:
+
+                            </td>
+                            <td class="apifieldname vaT">
+                                @Html.TextBoxFor(model => Model.ReturnHeader.ThirdPartyDesignee.PIN, new { @class = "form-control", maxlength = "5" })
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapse9">
+                    <h4 class="panel-title">
+                        Signature Details
+                    </h4>
+                </div>
+                <div id="collapse9" class="panel-collapse collapse">
+                    <table>
+                        <tr>
+                            <td colspan="2" class="fieldText vaT noWrap pLeft10">
+                                <div class="field switch">
+                                    <div class="floatL mBot10">
+                                        @Html.RadioButtonFor(model => model.ReturnHeader.SignatureDetails.SignatureType, SignatureType.ONLINE_SIGN_PIN.ToString(), new { @id = "onlinepin", @checked = true, @onchange = "OnIsOnlineSignaturePIN();", @class = "css-radiobox" })
+                                        <label for="onlinepin" class="cb-enable"><span>Online Signature PIN</span></label>
+                                    </div>
+                                    <div class="floatL mBot10">
+                                        @Html.RadioButtonFor(model => model.ReturnHeader.SignatureDetails.SignatureType, SignatureType.REPORTING_AGENT.ToString(), new { @id = "rapin", @onchange = "OnIsOnlineSignaturePIN();", @class = "css-radiobox" })
+                                        <label for="rapin" class="cb-disable"><span>Reporting Agent</span></label>
+                                    </div>
+                                    <div class="floatL">
+                                        @Html.RadioButtonFor(model => model.ReturnHeader.SignatureDetails.SignatureType, SignatureType.FORM_8453_EMP.ToString(), new { @id = "form8453", @onchange = "OnIsOnlineSignaturePIN();", @class = "css-radiobox" })
+                                        <label for="form8453" class="cb-disable"><span>FORM 8453</span></label>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr id="OnlineSignaturePINDiv" style="display:none">
+                            <td class="labelName">
+                                PIN:
+                            </td>
+                            <td class="apifieldname vaT">
+                                @Html.TextBoxFor(model => model.ReturnHeader.SignatureDetails.OnlineSignaturePIN.PIN, new { @class = "form-control", maxlength = "10" })
+                            </td>
+                        </tr>
+                        <tr id="RAPINDiv" style="display:none">
+                            <td class="labelName">
+                                PIN:
+                            </td>
+                            <td class="apifieldname vaT">
+                                @Html.TextBoxFor(model => model.ReturnHeader.SignatureDetails.ReportingAgentPIN.PIN, new { @class = "form-control", maxlength = "10" })
+                            </td>
+                        </tr>
+                    </table>
+                </div>
 
             </div>
 
-                                        }
+
+        </div>
+
+
+                                    }
 
     <div class="spacer10"></div>
     <div class="taC">
@@ -1804,7 +1806,6 @@
 
     function GetStatus() {
         var formdata = $("#CreateForm941SCHR").serialize();
-        debugger;
         $("#btnCreate > i").show();
         $("#btnCreate").prop("disabled", true);
         $.ajax({
@@ -2125,7 +2126,6 @@
     }
 
     function OnBusinessClosed() {
-        debugger;
         if ($("#chkBusinessClosed").is(':checked')) {
             $("#BusinessClosedDiv").show();
         }
@@ -2135,7 +2135,6 @@
     }
 
     function OnBusinessTransferred() {
-        debugger;
         if ($("#chkBusinessTransferred").is(':checked')) {
             $("#BusinessTransferredDiv").show();
         }

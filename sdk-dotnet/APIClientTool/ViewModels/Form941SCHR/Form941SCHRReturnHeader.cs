@@ -53,5 +53,6 @@ namespace APIClientTool.ViewModels.Form941SCHR
         /// Business Status Details
         /// </summary>
         public BusinessStatusDetails BusinessStatusDetails { get; set; }
+        public Form941ClientData Form941ClientData { get; internal set; }
     }
 }

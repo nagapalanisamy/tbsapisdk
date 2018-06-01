@@ -234,6 +234,7 @@
     <Compile Include="ViewModels\BaseModels\EFileStatus.cs" />
     <Compile Include="ViewModels\BaseModels\EfileStatusGetRequest.cs" />
     <Compile Include="ViewModels\Form941CoreModel\DeleteReturnRequest.cs" />
+    <Compile Include="ViewModels\Form941SCHR\Form941ClientData.cs" />
     <Compile Include="ViewModels\Form941SCHR\Form941SchRGetReturnResponse.cs" />
     <Compile Include="ViewModels\Form941SCHR\Form941SCHRStatusResponse.cs" />
     <Compile Include="ViewModels\Form941\Form941GetReturnResponse.cs" />

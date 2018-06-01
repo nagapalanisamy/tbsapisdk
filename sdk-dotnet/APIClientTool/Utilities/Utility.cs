@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.Configuration;
 
@@ -78,6 +79,21 @@ namespace APIClientTool.Utilities
                 bool.TryParse(value.ToString(), out result);
             }
             return result;
+        }
+        #endregion
+
+        #region Format Json
+        public static string FormatJson(string json)
+        {
+            if (!string.IsNullOrWhiteSpace(json))
+            {
+                if ((json.StartsWith("{") && json.EndsWith("}")) || (json.StartsWith("[") && json.EndsWith("]")))
+                {
+                    dynamic parsedJson = JsonConvert.DeserializeObject(json);
+                    return JsonConvert.SerializeObject(parsedJson, Formatting.Indented);
+                }
+            }
+            return json;
         }
         #endregion
     }

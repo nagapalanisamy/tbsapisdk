@@ -315,3 +315,4 @@ header .linkText img { padding-right: 2px; }
 .nav_menu .dropdown-menu li a, .nav_menu .dropdown-menu li a:hover, .nav_menu .dropdown-menu li a:focus { display: block; padding: 5px 10px; margin: 0; font-size: 14px; border: none; }
 .nav_menu .dropdown-menu li a { color: #333; cursor: pointer; }
 .dropdown-menu li a:hover, .nav_menu .dropdown-menu li a:focus { display: block; padding: 5px 10px; margin: 0; font-size: 14px; border: none; color: #fb7310; }
+.pop_scroll { overflow-y: auto; height: calc(100vh - 192px); }

@@ -4,8 +4,8 @@
         View (GET)
     </h4>
 </div>
-<div class="modal-body edit-modal-body white_bg">
-    @Html.Raw(ViewData["GetResponseJSON"] != null ? ViewData["GetResponseJSON"] : string.Empty)
+<div class="modal-body edit-modal-body white_bg pop_scroll">
+    <pre> @Html.Raw(ViewData["GetResponseJSON"] != null ? ViewData["GetResponseJSON"] : string.Empty)</pre>
 </div>
 
 <div class="modal-footer edit-modal-footer mTopNo">

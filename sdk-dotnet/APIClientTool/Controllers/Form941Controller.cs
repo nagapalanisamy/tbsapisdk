@@ -99,7 +99,7 @@ namespace APIClientTool.Controllers
                     ReportingAgentPIN = new ReportingAgentPIN { PIN = "12345" }
                 }
 
-               
+
             };
 
             //Mapping Return Data
@@ -430,25 +430,27 @@ namespace APIClientTool.Controllers
         /// <returns>DeleteReturnResponse</returns>
         public ActionResult Delete(Guid submissionId)
         {
+            var deleteReturnRequest = new DeleteReturnRequest();
             var deleteReturnResponse = new DeleteReturnResponse();
             var deleteReturnResponseJSON = string.Empty;
             if (submissionId != null && submissionId != Guid.Empty)
             {
+                deleteReturnRequest.SubmissionId = submissionId;
                 // Getting the RecordIds for SubmissionId
-                var recordIds = APISession.GetComaseperatedForm941RecordIdsBySubmissionId(submissionId);
-
-                if (!string.IsNullOrEmpty(recordIds))
+                var recordIdsFromSession = APISession.GetForm941RecordIdsBySubmissionId(submissionId);
+                deleteReturnRequest.RecordIds = recordIdsFromSession != null ? recordIdsFromSession.RecordIds : null;
+                if (deleteReturnRequest.RecordIds != null && deleteReturnRequest.RecordIds.Count > 0)
                 {
                     using (var client = new PublicAPIClient())
                     {
-                        //API URL to Delete Form 941 Return
-                        string requestUri = "Form941/Delete?SubmissionId=" + submissionId + "&RecordIds=" + recordIds;
+                        //API URL to Transmit Form 941 Return
+                        string requestUri = "Form941/Delete";
 
-                        //Delete
-                        APIGenerateAuthHeader.GenerateAuthHeader(client, requestUri, "DELETE");
+                        //POST
+                        APIGenerateAuthHeader.GenerateAuthHeader(client, requestUri, "POST");
 
                         //Get Response
-                        var _response = client.DeleteAsync(requestUri).Result;
+                        var _response = client.PostAsJsonAsync(requestUri, deleteReturnRequest).Result;
                         if (_response != null && _response.IsSuccessStatusCode)
                         {
                             //Read Response

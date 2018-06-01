@@ -378,25 +378,27 @@ namespace APIClientTool.Controllers
         /// <returns>DeleteReturnResponse</returns>
         public ActionResult Delete(Guid submissionId)
         {
+            var deleteReturnRequest = new DeleteReturnRequest();
             var deleteReturnResponse = new DeleteReturnResponse();
             var deleteReturnResponseJSON = string.Empty;
             if (submissionId != null && submissionId != Guid.Empty)
             {
+                deleteReturnRequest.SubmissionId = submissionId;
                 // Getting the RecordIds for SubmissionId
-                var recordIds = APISession.GetComaseperatedForm941SCHRRecordIdsBySubmissionId(submissionId);
-
-                if (!string.IsNullOrEmpty(recordIds))
+                var recordIdsFromSession = APISession.GetForm941SCHRRecordIdsBySubmissionId(submissionId);
+                deleteReturnRequest.RecordIds = recordIdsFromSession != null ? recordIdsFromSession.RecordIds : null;
+                if (deleteReturnRequest.RecordIds != null && deleteReturnRequest.RecordIds.Count > 0)
                 {
                     using (var client = new PublicAPIClient())
                     {
                         //API URL to Delete Form 941SCHR Return
-                        string requestUri = "Form941SCHR/Delete?SubmissionId=" + submissionId + "&RecordIds=" + recordIds;
+                        string requestUri = "Form941SCHR/Delete";
 
                         //Delete
-                        APIGenerateAuthHeader.GenerateAuthHeader(client, requestUri, "DELETE");
+                        APIGenerateAuthHeader.GenerateAuthHeader(client, requestUri, "POST");
 
                         //Get Response
-                        var _response = client.DeleteAsync(requestUri).Result;
+                        var _response = client.PostAsJsonAsync(requestUri, deleteReturnRequest).Result;
                         if (_response != null && _response.IsSuccessStatusCode)
                         {
                             //Read Response

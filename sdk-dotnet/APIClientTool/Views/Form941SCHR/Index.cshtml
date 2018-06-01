@@ -1,5 +1,4 @@
 ﻿@model APIClientTool.ViewModels.Form941SCHR.Form941SchRRecords
-
 @using APIClientTool.ViewModels
 @using APIClientTool.Utilities
 @{
@@ -11,9 +10,6 @@
     CPEOWageTypeList.Add(new SelectListItem() { Text = "B", Value = "B" });
     CPEOWageTypeList.Add(new SelectListItem() { Text = "C", Value = "C" });
     CPEOWageTypeList.Add(new SelectListItem() { Text = "D", Value = "D" });
-}
-@{
-    ViewBag.Title = "CreateBusiness";
 
     List<SelectListItem> BusinessTypeList = new List<SelectListItem>()
     {
@@ -401,13 +397,6 @@
     int clientId = ViewData["ClientId"] != null ? Utility.GetInt(ViewData["ClientId"]) : 0;
     int ClientCount = Session["ClientCounts"] != null ? Utility.GetInt(Session["ClientCounts"]) : 1;
     bool isUpdateTrue = Session["Update"] != null ? Utility.GetBool(Session["Update"]) : false;
-    //bool isUpdateTrue = Session["Update"] != null ? Utility.GetBool(Session["Update"]) : false;
-
-    //var form8974 = new List<SelectListItem>();
-    //foreach (var item in Enum.GetValues(typeof(Form8974IncomeTaxReturnFiledForm)))
-    //{
-    //    form8974.Add(new SelectListItem { Text = item.ToString(), Value = item.ToString() });
-    //}
 
 }
 
@@ -431,7 +420,6 @@
                 </td>
             </tr>
             <tr><td class="spacer10"></td></tr>
-
             <tr>
                 <td class="labelName">
                     More Clients?:
@@ -445,7 +433,6 @@
                     </div>
                 </td>
             </tr>
-
         </table>
 
         <table class="tdDisBlock640">
@@ -1424,12 +1411,14 @@
                             <tr>
                                 <td class="spacer10"></td>
                             </tr>
-                            <td colspan="3">
-                                <div class="full_width">
-                                    @Html.CheckBoxFor(model => Model.ReturnHeader.BusinessStatusDetails.BusinessClosedDetails.IsForeign, new { onclick = "ChangeForeignAddress();", @class = "css-checkbox", id = "checkIsForeignAddress", @tabindex = "157" })
-                                    <label for="checkIsForeignAddress" class="css-label checkbox">Foreign Address (Outside US)?</label>
-                                </div>
-                            </td>
+                            <tr>
+                                <td colspan="3">
+                                    <div class="full_width">
+                                        @Html.CheckBoxFor(model => Model.ReturnHeader.BusinessStatusDetails.BusinessClosedDetails.IsForeign, new { onclick = "ChangeForeignAddress();", @class = "css-checkbox", id = "checkIsForeignAddress", @tabindex = "157" })
+                                        <label for="checkIsForeignAddress" class="css-label checkbox">Foreign Address (Outside US)?</label>
+                                    </div>
+                                </td>
+                            </tr>
                             <tr>
                                 <td class="labelName">
                                     Address:
@@ -1571,12 +1560,14 @@
                             <tr>
                                 <td class="spacer10"></td>
                             </tr>
-                            <td colspan="3">
-                                <div class="full_width">
-                                    @Html.CheckBoxFor(model => Model.ReturnHeader.BusinessStatusDetails.BusinessTransferredDetails.IsForeign, new { onclick = "ChangeForeignAddress();", @class = "css-checkbox", id = "checkIsTranForeignAddress", @tabindex = "173" })
-                                    <label for="checkIsTranForeignAddress" class="css-label checkbox">Foreign Address (Outside US)?</label>
-                                </div>
-                            </td>
+                            <tr>
+                                <td colspan="3">
+                                    <div class="full_width">
+                                        @Html.CheckBoxFor(model => Model.ReturnHeader.BusinessStatusDetails.BusinessTransferredDetails.IsForeign, new { onclick = "ChangeForeignAddress();", @class = "css-checkbox", id = "checkIsTranForeignAddress", @tabindex = "173" })
+                                        <label for="checkIsTranForeignAddress" class="css-label checkbox">Foreign Address (Outside US)?</label>
+                                    </div>
+                                </td>
+                            </tr>
                             <tr>
                                 <td class="labelName">
                                     Address:
@@ -1661,13 +1652,10 @@
                 </div>
             </div>
 
-            @*@Html.HiddenFor(model => Model.ReturnData.Form941ClientDetails[0])*@
-
             <div class="panel panel-default">
                 <div data-toggle="collapse" class="panel-heading" data-parent="#accordion" href="#collapse7">
                     <h4 class="panel-title">
                         Deposit Schedule & Tax Liability
-
                     </h4>
                 </div>
                 <div id="collapse7" class="panel-collapse collapse">
@@ -1739,7 +1727,6 @@
                                 </div>
                                 <div class="clear"></div>
                                 <div id="SemiweeklyDepositor" class="monthly-div white_bg full_width">
-
                                 </div>
                             </td>
                         </tr>
@@ -1764,7 +1751,6 @@
                 <div data-toggle="collapse" class="panel-heading collapsed" data-parent="#accordion" href="#collapse8">
                     <h4 class="panel-title">
                         Third Party Designee
-
                     </h4>
                 </div>
 
@@ -1860,7 +1846,6 @@
                         </tr>
                     </table>
                 </div>
-
             </div>
         </div>
 

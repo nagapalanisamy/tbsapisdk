@@ -2,32 +2,18 @@
 @{
     ViewBag.Title = "API Option";
 }
-<div class="spacer10"></div>
-<table class="responsive">
-    <tr>
-        <td class="labelName"><label class="control-label">Choose form to get returns:</label></td>
-        <td class="fieldName">
-            <div class="dropdown">
-                <button class="dropdown-toggle btn btn-primary btn-sm" type="button" data-toggle="dropdown" id="btnDropdown" style="background-color: #60b9ca;">
-                    Select Form
-                    <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu">
-                    <li><a href="javascript:void(0)" onclick="GetEfileStatus()">Form W-2</a></li>
-                    <li><a href="javascript:void(0)" onclick="GetForm941EfileStatus()">Form 941</a></li>
-                    <li><a href="javascript:void(0)" onclick="GetForm941SCHREfileStatus()">Form 941 SCHR</a></li>
-                </ul>
-            </div>
-        </td>
-    </tr>
-</table>
-<div class="spacer25"></div>
-<div id="GetEfileStatus"></div>
+
+<div class="spacer25"></div><div id="GetEfileStatus"></div>
+<div class="spacer25"></div><div id="GetForm941EfileStatus"></div>
+<div class="spacer25"></div><div id="GetForm941SCHREfileStatus"></div>
+
 
 <script type="text/javascript">
 
     $(function () {
         GetEfileStatus();
+        GetForm941EfileStatus();
+        GetForm941SCHREfileStatus();
         $(".nav_menu li").removeClass('active');
         $("#liefilestatus").addClass('active');
     });
@@ -39,7 +25,7 @@
             cache: false,
             data: {},
             success: function (data) {
-                $('#GetEfileStatus').html("");
+                //$('#GetEfileStatus').html("");
                 $('#GetEfileStatus').html(data);
             },
             error: function (err) {
@@ -55,8 +41,8 @@
             cache: false,
             data: {},
             success: function (data) {
-                $('#GetEfileStatus').html("");
-                $('#GetEfileStatus').html(data);
+                //$('#GetEfileStatus').html("");
+                $('#GetForm941EfileStatus').html(data);
             },
             error: function (err) {
                 console.log(err.responseText);
@@ -71,8 +57,8 @@
             cache: false,
             data: {},
             success: function (data) {
-                $('#GetEfileStatus').html("");
-                $('#GetEfileStatus').html(data);
+                //$('#GetEfileStatus').html("");
+                $('#GetForm941SCHREfileStatus').html(data);
             },
             error: function (err) {
                 console.log(err.responseText);

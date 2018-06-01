@@ -6,14 +6,11 @@
     ViewBag.Title = "Form 941-SCHR";
     Layout = "~/Views/Shared/_Layout.cshtml";
 
-    // int ClientCount = Session["ClientCounts"] != null ? Utility.GetInt(Session["ClientCounts"]) : 1;
     var CPEOWageTypeList = new List<SelectListItem>();
     CPEOWageTypeList.Add(new SelectListItem() { Text = "A", Value = "A" });
     CPEOWageTypeList.Add(new SelectListItem() { Text = "B", Value = "B" });
     CPEOWageTypeList.Add(new SelectListItem() { Text = "C", Value = "C" });
     CPEOWageTypeList.Add(new SelectListItem() { Text = "D", Value = "D" });
-    //bool isUpdateTrue = Session["Update"] != null ? Utility.GetBool(Session["Update"]) : false;
-    //bool isUpdateClient = Session["UpdateClient"] != null ? Utility.GetBool(Session["UpdateClient"]) : false;
 }
 @{
     ViewBag.Title = "CreateBusiness";
@@ -677,24 +674,24 @@
                     <div id="collapse2" class="panel-collapse collapse">
                         <div class="form_941 taR_input formDiv" id="tabs-0" style="padding:0px">
                             <table id="DivsocialsecurityorMedicaretax" class="tdDisBlock640">
-                               
-                                    <tr>
-                                        <td class="labelNameL">
-                                            <span class="red">*</span> Client's Record Id:
-                                        </td>
-                                        <td class="apifieldname">
-                                            @Html.TextBoxFor(model => Model.ReturnHeader.Form941ClientData.CRecordId, new { @tabindex = "1", @datatip = "1029", @maxlength = "36" })
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="2" class="spacer10"></td>
-                                    </tr>
+
+                                <tr>
+                                    <td class="labelNameL">
+                                        <span class="red">*</span> Client's Record Id:
+                                    </td>
+                                    <td class="apifieldname">
+                                        @Html.TextBoxFor(model => Model.ReturnData.Form941ClientDetails[0].CRecordId, new { @tabindex = "1", @datatip = "1029", @maxlength = "36" })
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" class="spacer10"></td>
+                                </tr>
                                 <tr>
                                     <td class="labelNameL">
                                         <span class="red">*</span> Client's Sequence Id:
                                     </td>
                                     <td class="apifieldname">
-                                        @Html.TextBoxFor(model => Model.ReturnHeader.Form941ClientData.CSeqId, new { @tabindex = "1", @datatip = "1029", @maxlength = "36" })
+                                        @Html.TextBoxFor(model => Model.ReturnData.Form941ClientDetails[0].CSeqId, new { @tabindex = "1", @datatip = "1029", @maxlength = "36" })
                                     </td>
                                 </tr>
                                 <tr>
@@ -707,7 +704,7 @@
                                         </label>
                                     </td>
                                     <td class="apifieldname">
-                                        @Html.TextBoxFor(model => Model.ReturnHeader.Form941ClientData.ClientName, "", new { @tabindex = "1", @datatip = "1029" })
+                                        @Html.TextBoxFor(model => Model.ReturnData.Form941ClientDetails[0].ClientName, "", new { @tabindex = "1", @datatip = "1029" })
                                     </td>
                                 </tr>
                                 <tr>
@@ -720,7 +717,7 @@
                                         </label>
                                     </td>
                                     <td class="apifieldname">
-                                        @Html.TextBoxFor(model => Model.ReturnHeader.Form941ClientData.ClientEIN, "", new { @tabindex = "1", @datatip = "1029", @class = "ClientEINDetails" })
+                                        @Html.TextBoxFor(model => Model.ReturnData.Form941ClientDetails[0].ClientEIN, "", new { @tabindex = "1", @datatip = "1029", @class = "ClientEINDetails" })
                                     </td>
                                 </tr>
                                 <tr>
@@ -733,7 +730,7 @@
                                         </label>
                                     </td>
                                     <td class="apifieldname">
-                                        @Html.DropDownListFor(model => Model.ReturnHeader.Form941ClientData.WagesTypeCd, CPEOWageTypeList, "--Select--", new { @tabindex = "2" })
+                                        @Html.DropDownListFor(model => Model.ReturnData.Form941ClientDetails[0].WagesTypeCd, CPEOWageTypeList, "--Select--", new { @tabindex = "2" })
                                         @*@Html.EnumDropDownListFor(model => model.Form941SchRRecords[0].ReturnData.Form941ClientDetails[i].CPEOWageType, "Select", new { @tabindex = "2" })*@
                                     </td>
                                 </tr>
@@ -747,7 +744,7 @@
                                         </label>
                                     </td>
                                     <td class="apifieldname">
-                                        @Html.TextBoxFor(model => Model.ReturnHeader.Form941ClientData.WagesAmt, new { @maxlength = "17", @tabindex = "3", @datatip = "1030" })
+                                        @Html.TextBoxFor(model => Model.ReturnData.Form941ClientDetails[0].WagesAmt, new { @maxlength = "17", @tabindex = "3", @datatip = "1030" })
                                     </td>
                                 </tr>
                                 <tr>
@@ -760,7 +757,7 @@
                                         </label>
                                     </td>
                                     <td class="apifieldname">
-                                        @Html.TextBoxFor(model => model.ReturnHeader.Form941ClientData.FedIncomeTaxWHAmt, new { @maxlength = "17", @tabindex = "4", @datatip = "1031" })
+                                        @Html.TextBoxFor(model => model.ReturnData.Form941ClientDetails[0].FedIncomeTaxWHAmt, new { @maxlength = "17", @tabindex = "4", @datatip = "1031" })
                                     </td>
                                 </tr>
                                 <tr>
@@ -771,7 +768,7 @@
                                         5e. Total taxable wages & tips:
                                     </td>
                                     <td class="apifieldname vaT">
-                                        @Html.TextBoxFor(model => model.ReturnHeader.Form941ClientData.Line5e, new { maxlength = "17", @tabindex = "127" })
+                                        @Html.TextBoxFor(model => model.ReturnData.Form941ClientDetails[0].Line5e, new { maxlength = "17", @tabindex = "127" })
                                     </td>
                                 </tr>
                                 <tr>
@@ -782,7 +779,7 @@
                                         5f. Section 3121(q) Notice and Demand—Tax due on unreported tips:
                                     </td>
                                     <td class="apifieldname vaT">
-                                        @Html.TextBoxFor(model => Model.ReturnHeader.Form941ClientData.TaxOnUnreportedTips3121qAmt, new { maxlength = "17", @tabindex = "130" })
+                                        @Html.TextBoxFor(model => Model.ReturnData.Form941ClientDetails[0].TaxOnUnreportedTips3121qAmt, new { maxlength = "17", @tabindex = "130" })
                                     </td>
                                 </tr>
                                 <tr>
@@ -795,7 +792,7 @@
                                         </label>
                                     </td>
                                     <td class="apifieldname">
-                                        @Html.TextBoxFor(model => Model.ReturnHeader.Form941ClientData.Line11, new { @tabindex = "14", maxlength = "17", @datatip = "1063" })
+                                        @Html.TextBoxFor(model => Model.ReturnData.Form941ClientDetails[0].Line11, new { @tabindex = "14", maxlength = "17", @datatip = "1063" })
                                     </td>
                                 </tr>
                                 <tr>
@@ -808,7 +805,7 @@
                                         </label>
                                     </td>
                                     <td class="apifieldname">
-                                        @Html.TextBoxFor(model => Model.ReturnHeader.Form941ClientData.Line12, new { @tabindex = "14", maxlength = "17", @datatip = "1063" })
+                                        @Html.TextBoxFor(model => Model.ReturnData.Form941ClientDetails[0].Line12, new { @tabindex = "14", maxlength = "17", @datatip = "1063" })
                                     </td>
                                 </tr>
                                 <tr>
@@ -821,7 +818,7 @@
                                         </label>
                                     </td>
                                     <td class="apifieldname">
-                                        @Html.TextBoxFor(model => Model.ReturnHeader.Form941ClientData.TotTaxDepositAmt, new { @tabindex = "14", maxlength = "17", @datatip = "1063" })
+                                        @Html.TextBoxFor(model => Model.ReturnData.Form941ClientDetails[0].TotTaxDepositAmt, new { @tabindex = "14", maxlength = "17", @datatip = "1063" })
                                     </td>
                                 </tr>
                                 <tr>
@@ -829,7 +826,7 @@
                                 </tr>
                             </table>
                         </div>
-                       
+
 
                     </div>
                 </div>
@@ -1664,12 +1661,7 @@
                 </div>
             </div>
 
-            @Html.HiddenFor(model => Model.ReturnHeader.Form941ClientData)
-
-
-
-
-
+            @*@Html.HiddenFor(model => Model.ReturnData.Form941ClientDetails[0])*@
 
             <div class="panel panel-default">
                 <div data-toggle="collapse" class="panel-heading" data-parent="#accordion" href="#collapse7">
@@ -1870,10 +1862,7 @@
                 </div>
 
             </div>
-
-
         </div>
-
 
                                     }
 

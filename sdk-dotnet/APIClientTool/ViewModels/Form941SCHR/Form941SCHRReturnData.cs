@@ -44,6 +44,6 @@ namespace APIClientTool.ViewModels.Form941SCHR
         /// </summary>
         public DepositScheduleType DepositScheduleType { get; set; }
 
-        public Form941ClientData Form941ClientDate { get; set; }
+        public Form941ClientData Form941ClientData { get; set; }
     }
 }

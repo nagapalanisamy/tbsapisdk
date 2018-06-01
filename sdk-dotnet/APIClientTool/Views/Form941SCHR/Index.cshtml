@@ -6,7 +6,7 @@
     ViewBag.Title = "Form 941-SCHR";
     Layout = "~/Views/Shared/_Layout.cshtml";
 
-     int ClientCount = Session["ClientCounts"] != null ? Utility.GetInt(Session["ClientCounts"]) : 1;
+    // int ClientCount = Session["ClientCounts"] != null ? Utility.GetInt(Session["ClientCounts"]) : 1;
     var CPEOWageTypeList = new List<SelectListItem>();
     CPEOWageTypeList.Add(new SelectListItem() { Text = "A", Value = "A" });
     CPEOWageTypeList.Add(new SelectListItem() { Text = "B", Value = "B" });
@@ -675,8 +675,161 @@
                         Form 941 Aggregate Client Details
                     </h4>
                     <div id="collapse2" class="panel-collapse collapse">
+                        <div class="form_941 taR_input formDiv" id="tabs-0" style="padding:0px">
+                            <table id="DivsocialsecurityorMedicaretax" class="tdDisBlock640">
+                               
+                                    <tr>
+                                        <td class="labelNameL">
+                                            <span class="red">*</span> Client's Record Id:
+                                        </td>
+                                        <td class="apifieldname">
+                                            @Html.TextBoxFor(model => Model.ReturnHeader.Form941ClientData.CRecordId, new { @tabindex = "1", @datatip = "1029", @maxlength = "36" })
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2" class="spacer10"></td>
+                                    </tr>
+                                <tr>
+                                    <td class="labelNameL">
+                                        <span class="red">*</span> Client's Sequence Id:
+                                    </td>
+                                    <td class="apifieldname">
+                                        @Html.TextBoxFor(model => Model.ReturnHeader.Form941ClientData.CSeqId, new { @tabindex = "1", @datatip = "1029", @maxlength = "36" })
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" class="spacer10"></td>
+                                </tr>
+                                <tr>
+                                    <td class="labelNameL">
+                                        <label>
+                                            <span class="red">*</span>1(a). Client's Business Name:
+                                        </label>
+                                    </td>
+                                    <td class="apifieldname">
+                                        @Html.TextBoxFor(model => Model.ReturnHeader.Form941ClientData.ClientName, "", new { @tabindex = "1", @datatip = "1029" })
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" class="spacer10"></td>
+                                </tr>
+                                <tr>
+                                    <td class="labelNameL">
+                                        <label>
+                                            <span class="red">*</span>1(b).  Client's Employer Identification Number (EIN):
+                                        </label>
+                                    </td>
+                                    <td class="apifieldname">
+                                        @Html.TextBoxFor(model => Model.ReturnHeader.Form941ClientData.ClientEIN, "", new { @tabindex = "1", @datatip = "1029", @class = "ClientEINDetails" })
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" class="spacer10"></td>
+                                </tr>
+                                <tr>
+                                    <td class="labelNameL">
+                                        <label>
+                                            2.   Type of wages, tips, and other compensation:
+                                        </label>
+                                    </td>
+                                    <td class="apifieldname">
+                                        @Html.DropDownListFor(model => Model.ReturnHeader.Form941ClientData.WagesTypeCd, CPEOWageTypeList, "--Select--", new { @tabindex = "2" })
+                                        @*@Html.EnumDropDownListFor(model => model.Form941SchRRecords[0].ReturnData.Form941ClientDetails[i].CPEOWageType, "Select", new { @tabindex = "2" })*@
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" class="spacer10"></td>
+                                </tr>
+                                <tr>
+                                    <td class="labelNameL">
+                                        <label>
+                                            3.  Wages, tips, and other compensation allocated to this client:
+                                        </label>
+                                    </td>
+                                    <td class="apifieldname">
+                                        @Html.TextBoxFor(model => Model.ReturnHeader.Form941ClientData.WagesAmt, new { @maxlength = "17", @tabindex = "3", @datatip = "1030" })
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" class="spacer10"></td>
+                                </tr>
+                                <tr>
+                                    <td class="labelNameL">
+                                        <label>
+                                            4.  Federal income tax withheld from wages, tips, and other compensation allocated to this client:
+                                        </label>
+                                    </td>
+                                    <td class="apifieldname">
+                                        @Html.TextBoxFor(model => model.ReturnHeader.Form941ClientData.FedIncomeTaxWHAmt, new { @maxlength = "17", @tabindex = "4", @datatip = "1031" })
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="spacer10"></td>
+                                </tr>
+                                <tr>
+                                    <td class="labelNameL" id="tdZipCode">
+                                        5e. Total taxable wages & tips:
+                                    </td>
+                                    <td class="apifieldname vaT">
+                                        @Html.TextBoxFor(model => model.ReturnHeader.Form941ClientData.Line5e, new { maxlength = "17", @tabindex = "127" })
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="spacer10"></td>
+                                </tr>
+                                <tr>
+                                    <td class="labelNameL" id="tdZipCode">
+                                        5f. Section 3121(q) Notice and Demand—Tax due on unreported tips:
+                                    </td>
+                                    <td class="apifieldname vaT">
+                                        @Html.TextBoxFor(model => Model.ReturnHeader.Form941ClientData.TaxOnUnreportedTips3121qAmt, new { maxlength = "17", @tabindex = "130" })
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="spacer10"></td>
+                                </tr>
+                                <tr>
+                                    <td class="labelNameL">
+                                        <label>
+                                            11.Qualified small business payroll tax credit for increasing research activities:
+                                        </label>
+                                    </td>
+                                    <td class="apifieldname">
+                                        @Html.TextBoxFor(model => Model.ReturnHeader.Form941ClientData.Line11, new { @tabindex = "14", maxlength = "17", @datatip = "1063" })
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="spacer10"></td>
+                                </tr>
+                                <tr>
+                                    <td class="labelNameL">
+                                        <label>
+                                            12. Total taxes due after adjustments:
+                                        </label>
+                                    </td>
+                                    <td class="apifieldname">
+                                        @Html.TextBoxFor(model => Model.ReturnHeader.Form941ClientData.Line12, new { @tabindex = "14", maxlength = "17", @datatip = "1063" })
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="spacer10"></td>
+                                </tr>
+                                <tr>
+                                    <td class="labelNameL">
+                                        <label>
+                                            13.Total deposits for this quarter, plus any payments made with the return allocated to this client:
+                                        </label>
+                                    </td>
+                                    <td class="apifieldname">
+                                        @Html.TextBoxFor(model => Model.ReturnHeader.Form941ClientData.TotTaxDepositAmt, new { @tabindex = "14", maxlength = "17", @datatip = "1063" })
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="spacer10"></td>
+                                </tr>
+                            </table>
+                        </div>
                        
-
 
                     </div>
                 </div>
@@ -700,7 +853,7 @@
                                     2. Total wages, tips, and other compensation:
                                 </td>
                                 <td class="apifieldname vaT">
-                                    @Html.TextBoxFor(model => model.ReturnData.Form941MainFilerData.WagesAmt, new { maxlength = "17", @class = "form-control" })
+                                    @Html.TextBoxFor(model => Model.ReturnData.Form941MainFilerData.WagesAmt, new { maxlength = "17", @class = "form-control" })
                                 </td>
                             </tr>
                             <tr>
@@ -711,7 +864,7 @@
                                     3. Total Federal Income Tax Withheld from wages, tips, and other compensation:
                                 </td>
                                 <td class="apifieldname vaT">
-                                    @Html.TextBoxFor(model => model.ReturnData.Form941MainFilerData.FedIncomeTaxWHAmt, new { maxlength = "17", @class = "form-control" })
+                                    @Html.TextBoxFor(model => Model.ReturnData.Form941MainFilerData.FedIncomeTaxWHAmt, new { maxlength = "17", @class = "form-control" })
                                 </td>
                             </tr>
                             <tr>
@@ -729,7 +882,7 @@
                                     5e. Total taxable wages & tips:
                                 </td>
                                 <td class="apifieldname vaT">
-                                    @Html.TextBoxFor(model => model.ReturnData.Form941MainFilerData.Line5e, new { maxlength = "17", @class = "form-control", id = "Line5eAmt" })
+                                    @Html.TextBoxFor(model => Model.ReturnData.Form941MainFilerData.Line5e, new { maxlength = "17", @class = "form-control", id = "Line5eAmt" })
                                 </td>
                             </tr>
                             <tr>
@@ -737,7 +890,7 @@
                                     5f. Section 3121(q) Notice and Demand—Tax due on unreported tips:
                                 </td>
                                 <td class="apifieldname vaT">
-                                    @Html.TextBoxFor(model => model.ReturnData.Form941MainFilerData.TaxOnUnreportedTips3121qAmt, new { maxlength = "17", @class = "form-control" })
+                                    @Html.TextBoxFor(model => Model.ReturnData.Form941MainFilerData.TaxOnUnreportedTips3121qAmt, new { maxlength = "17", @class = "form-control" })
                                 </td>
                             </tr>
                             <tr>
@@ -748,7 +901,7 @@
                                     11. Qualified small business payroll tax credit for increasing research activities:
                                 </td>
                                 <td class="apifieldname vaT">
-                                    @Html.TextBoxFor(model => model.ReturnData.Form941MainFilerData.Line11, new { maxlength = "17", @class = "form-control" })
+                                    @Html.TextBoxFor(model => Model.ReturnData.Form941MainFilerData.Line11, new { maxlength = "17", @class = "form-control" })
                                 </td>
                             </tr>
                             <tr>
@@ -759,7 +912,7 @@
                                     12. Total taxes after adjustments and credits:
                                 </td>
                                 <td class="apifieldname vaT">
-                                    @Html.TextBoxFor(model => model.ReturnData.Form941MainFilerData.Line12, new { maxlength = "17", @class = "form-control" })
+                                    @Html.TextBoxFor(model => Model.ReturnData.Form941MainFilerData.Line12, new { maxlength = "17", @class = "form-control" })
                                 </td>
                             </tr>
                             <tr>
@@ -770,7 +923,7 @@
                                     13. Deposits for this quarter:
                                 </td>
                                 <td class="apifieldname vaT">
-                                    @Html.TextBoxFor(model => model.ReturnData.Form941MainFilerData.TotTaxDepositAmt, new { maxlength = "17", @class = "form-control" })
+                                    @Html.TextBoxFor(model => Model.ReturnData.Form941MainFilerData.TotTaxDepositAmt, new { maxlength = "17", @class = "form-control" })
                                 </td>
                             </tr>
                             <tr>
@@ -833,7 +986,6 @@
                                     var form8974ITRDetails = Model.ReturnData != null && Model.ReturnData.Form941MainFilerData != null &&
                                         Model.ReturnData.Form941MainFilerData.Form8974 != null && Model.ReturnData.Form941MainFilerData.Form8974.Form8974IncomeTaxDetails != null ? Model.ReturnData.Form941MainFilerData.Form8974.Form8974IncomeTaxDetails : null;
                                 }
-                                @Html.HiddenFor(model => Model.ReturnHeader.Form941ClientData)
                                 @if (form8974ITRDetails != null)
                                 {
                                     for (int client = 0; client < form8974ITRDetails.Count; client++)
@@ -1512,6 +1664,11 @@
                 </div>
             </div>
 
+            @Html.HiddenFor(model => Model.ReturnHeader.Form941ClientData)
+
+
+
+
 
 
             <div class="panel panel-default">
@@ -1729,6 +1886,7 @@
     </div>
 
 </div>
+
 
 
 <script>

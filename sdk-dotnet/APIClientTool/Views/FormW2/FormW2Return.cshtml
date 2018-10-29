@@ -716,6 +716,7 @@
                 </div>
             </div>
         </div>
+        @Html.HiddenFor(model => model.Business.IsEIN ,new { @Value = "true" });
     }
     <div class="spacer10"></div>
     <div class="taC">
@@ -734,6 +735,7 @@
     });
 
     function GetStatus() {
+        $("#Business_IsEIN").val(true);
         var formdata = $("#createreturnForm").serialize();
         $("#CreateSpinner").show();
         $("#btnCreate").prop("disabled", true);

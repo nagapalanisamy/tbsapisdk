@@ -250,9 +250,11 @@ namespace APIClientTool.Controllers
             {
                 var efileRequest = new EfileStatusGetRequest { SubmissionId = submissionId };
                 var recordIds = APISession.GetRecordIdsBySubmissionId(submissionId);
+                var recordIdsString = string.Empty;
                 if (recordIds != null && recordIds.RecordIds != null && recordIds.RecordIds.Count > 0)
                 {
                     efileRequest.RecordIds = recordIds.RecordIds;
+                    recordIdsString = string.Join(",", recordIds.RecordIds);
                 }
                 var transmitFormW2ResponseJSON = string.Empty;
 
@@ -263,14 +265,14 @@ namespace APIClientTool.Controllers
                 {
                     using (var client = new PublicAPIClient())
                     {
-                        //POST
-                        string requestUri = "FormW2/Status";
+                        //GET
+                        string requestUri = "FormW2/Status?SubmissionId=" + submissionId + "&RecordIds="+ recordIdsString;
 
                         //Get Response
-                        APIGenerateAuthHeader.GenerateAuthHeader(client, requestUri, "POST");
+                        APIGenerateAuthHeader.GenerateAuthHeader(client, requestUri, "GET");
 
                         //Read Response
-                        var _response = client.PostAsJsonAsync(requestUri, efileRequest).Result;
+                        var _response = client.GetAsync(requestUri).Result;
                         if (_response != null && _response.IsSuccessStatusCode)
                         {
                             var createResponse = _response.Content.ReadAsAsync<EfileStatusResponse>().Result;
@@ -304,6 +306,7 @@ namespace APIClientTool.Controllers
             var deleteReturnRequest = new DeleteReturnRequest();
             var deleteReturnResponse = new FormW2DeleteReturnResponse();
             var deleteReturnResponseJSON = string.Empty;
+            var recordIdsString = string.Empty;
             if (submissionId != null && submissionId != Guid.Empty)
             {
                 if (submissionId != null && submissionId != Guid.Empty)
@@ -314,16 +317,17 @@ namespace APIClientTool.Controllers
                     deleteReturnRequest.RecordIds = recordIdsFromSession != null ? recordIdsFromSession.RecordIds : null;
                     if (deleteReturnRequest.RecordIds != null && deleteReturnRequest.RecordIds.Count > 0)
                     {
+                        recordIdsString = string.Join(",", deleteReturnRequest.RecordIds);
                         using (var client = new PublicAPIClient())
                         {
                             //API URL to Delete Form W-2 Return
-                            string requestUri = "FormW2/Delete";
+                            string requestUri = "FormW2/Delete?SubmissionId=" + submissionId + "&RecordIds=" + recordIdsString;
 
                             //Delete
-                            APIGenerateAuthHeader.GenerateAuthHeader(client, requestUri, "POST");
+                            APIGenerateAuthHeader.GenerateAuthHeader(client, requestUri, "DELETE");
 
                             //Get Response
-                            var _response = client.PostAsJsonAsync(requestUri, deleteReturnRequest).Result;
+                            var _response = client.DeleteAsync(requestUri).Result;
                             if (_response != null && _response.IsSuccessStatusCode)
                             {
                                 //Read Response

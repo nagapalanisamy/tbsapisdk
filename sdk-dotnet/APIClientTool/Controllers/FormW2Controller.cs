@@ -93,6 +93,16 @@ namespace APIClientTool.Controllers
         }
         #endregion
 
+        #region Update Form W-2 Return
+        public ActionResult FormW2UpdateReturn()
+        {
+            FormW2UpdateRequest formw2 = new FormW2UpdateRequest();
+            formw2.W2Forms = new List<FormW2>();
+            formw2.W2Forms.Add(new FormW2());
+            return View(formw2);
+        }
+        #endregion
+
         #region Form W-2 Create Return Response Status
         /// <summary>
         /// Function inputs Form W-2 details, POST all those details to the API and returns the response.
@@ -169,6 +179,7 @@ namespace APIClientTool.Controllers
         /// </summary>
         /// <returns>List of all SubmissionIds</returns>
         /// 
+
         #region  EFile Status
         public ActionResult EFileStatus()
         {
@@ -403,6 +414,64 @@ namespace APIClientTool.Controllers
                 }
             }
             return PartialView(getReturnResponseJSON);
+        }
+        #endregion
+
+        #region Form W-2 Create Return Response Status
+        /// <summary>
+        /// Function inputs Form W-2 details, POST all those details to the API and returns the response.
+        /// Successful response contains SubmissionId, StatusCode and RecordSuccessStatus details (Sequence, RecordId, RecordStatus etc)
+        /// Error response contains StatusCode and RecordErrorStatus details (RecordId, Sequence and list of Error information such as Code, Name, Message and Type)
+        /// </summary>
+        /// <param name="formw2">Form W-2 details passed through formw2 parameter</param>
+        /// <returns>W2CreateReturnResponse</returns>
+        public ActionResult _APIUpdateResponseStatus(FormW2UpdateRequest formw2)
+        {
+            //Hardcoded values for Sequence and TaxYear
+            var responseJson = string.Empty;
+            formw2.W2Forms[0].TaxYear = 2017;
+            formw2.W2Forms[0].Sequence = "Record1";
+
+            W2CreateReturnResponse w2response = new W2CreateReturnResponse();
+            // Generate JSON for Form W-2
+            var requestJson = JsonConvert.SerializeObject(formw2, Formatting.Indented);
+
+            using (var client = new PublicAPIClient())
+            {
+                //API URL to Create Form W-2 Return
+                string requestUri = "FormW2/Update";
+
+                //POST
+                APIGenerateAuthHeader.GenerateAuthHeader(client, requestUri, "PUT");
+
+                //Get Response
+                var _response = client.PutAsJsonAsync(requestUri, formw2).Result;
+                if (_response != null && _response.IsSuccessStatusCode)
+                {
+                    //Read Response
+                    var createResponse = _response.Content.ReadAsAsync<W2CreateReturnResponse>().Result;
+                    if (createResponse != null)
+                    {
+                        responseJson = JsonConvert.SerializeObject(createResponse, Formatting.Indented);
+                        //Deserializing JSON (Success Response) to W2CreateReturnResponse object
+                        w2response = new JavaScriptSerializer().Deserialize<W2CreateReturnResponse>(responseJson);
+                        if (w2response.SubmissionId != null && w2response.SubmissionId != Guid.Empty)
+                        {
+                            //Adding W2CreateReturnResponse Response to Session
+                            APISession.AddAPIResponse(w2response);
+                        }
+                    }
+                }
+                else
+                {
+                    var createResponse = _response.Content.ReadAsAsync<Object>().Result;
+                    responseJson = JsonConvert.SerializeObject(createResponse, Formatting.Indented);
+
+                    //Deserializing JSON (Error Response) to W2CreateReturnResponse object
+                    w2response = new JavaScriptSerializer().Deserialize<W2CreateReturnResponse>(responseJson);
+                }
+            }
+            return PartialView(w2response);
         }
         #endregion
 

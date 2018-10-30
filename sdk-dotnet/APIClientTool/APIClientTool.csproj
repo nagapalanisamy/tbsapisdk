@@ -275,6 +275,7 @@
     <Compile Include="ViewModels\FormW2\FormW2ReturnResponse.cs" />
     <Compile Include="ViewModels\BaseModels\SigningAuthority.cs" />
     <Compile Include="ViewModels\BaseModels\TransmitForm.cs" />
+    <Compile Include="ViewModels\FormW2\FormW2UpdateRequest.cs" />
     <Compile Include="ViewModels\FormW2\TransmitFormW2Response.cs" />
     <Compile Include="ViewModels\FormW2\W2CreateReturnRequest.cs" />
     <Compile Include="ViewModels\FormW2\W2FormDetails.cs" />
@@ -380,6 +381,8 @@
     <Content Include="Views\FormW2\GetFormW2.cshtml" />
     <Content Include="Views\FormW2\Delete.cshtml" />
     <Content Include="Views\Form941SCHR\_GetEfileStatusResponse.cshtml" />
+    <Content Include="Views\FormW2\FormW2UpdateReturn.cshtml" />
+    <Content Include="Views\FormW2\_APIUpdateResponseStatus.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />

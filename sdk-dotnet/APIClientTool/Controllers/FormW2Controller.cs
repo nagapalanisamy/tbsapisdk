@@ -277,7 +277,7 @@ namespace APIClientTool.Controllers
                     using (var client = new PublicAPIClient())
                     {
                         //GET
-                        string requestUri = "FormW2/Status?SubmissionId=" + submissionId + "&RecordIds="+ recordIdsString;
+                        string requestUri = "FormW2/Status?SubmissionId=" + submissionId + "&RecordIds=" + recordIdsString;
 
                         //Get Response
                         APIGenerateAuthHeader.GenerateAuthHeader(client, requestUri, "GET");
@@ -417,14 +417,14 @@ namespace APIClientTool.Controllers
         }
         #endregion
 
-        #region Form W-2 Create Return Response Status
+        #region Form W-2 Update Return Response Status
         /// <summary>
-        /// Function inputs Form W-2 details, POST all those details to the API and returns the response.
+        /// Function inputs Form W-2 details, PUT all those details to the API and returns the response.
         /// Successful response contains SubmissionId, StatusCode and RecordSuccessStatus details (Sequence, RecordId, RecordStatus etc)
         /// Error response contains StatusCode and RecordErrorStatus details (RecordId, Sequence and list of Error information such as Code, Name, Message and Type)
         /// </summary>
         /// <param name="formw2">Form W-2 details passed through formw2 parameter</param>
-        /// <returns>W2CreateReturnResponse</returns>
+        /// <returns>W2UpdateReturnResponse</returns>
         public ActionResult _APIUpdateResponseStatus(FormW2UpdateRequest formw2)
         {
             //Hardcoded values for Sequence and TaxYear
@@ -474,6 +474,74 @@ namespace APIClientTool.Controllers
             return PartialView(w2response);
         }
         #endregion
+
+        #region List Form W2
+        /// <summary>
+        /// Function List the Form W2 Return to Efile
+        /// </summary>
+        public ActionResult _ListFormW2(Guid? id, string Ein, int Page, int PageSize, string ES, string FD, string TD)
+        {
+            var getReturnResponse = new FormW2RecordsResponse();
+            var getReturnResponseJSON = string.Empty;
+
+            string requestURI = string.Empty;
+            Guid Bid = id ?? Guid.Empty;
+            if (string.IsNullOrWhiteSpace(ES))
+            {
+                ES = "null";
+            }
+            if (string.IsNullOrWhiteSpace(FD))
+            {
+                FD = "null";
+            }
+            if (string.IsNullOrWhiteSpace(TD))
+            {
+                TD = "null";
+            }
+            requestURI = "?BusinessId=" + Bid + "&EIN=" + Ein + "&Page=" + Page + "&PageSize=" + PageSize + "&EfileStatus=" + ES + "&FromDate=" + FD + "&ToDate=" + TD;
+            using (var client = new PublicAPIClient())
+            {
+                //API URL to Get Form W2 Return
+                string requestUri = "FormW2/List" + requestURI;
+
+                //Get
+                APIGenerateAuthHeader.GenerateAuthHeader(client, requestUri, "GET");
+
+                //Get Response
+                var _response = client.GetAsync(requestUri).Result;
+                if (_response != null && _response.IsSuccessStatusCode)
+                {
+                    //Read Response
+                    var getResponse = _response.Content.ReadAsAsync<FormW2RecordsResponse>().Result;
+                    if (getResponse != null)
+                    {
+                        getReturnResponseJSON = JsonConvert.SerializeObject(getResponse, Formatting.Indented);
+                        getReturnResponse = new JavaScriptSerializer().Deserialize<FormW2RecordsResponse>(getReturnResponseJSON);
+                        ViewData["GetResponseJSON"] = getReturnResponseJSON;
+                        return PartialView();
+                    }
+                }
+                else
+                {
+                    var getResponse = _response.Content.ReadAsAsync<Object>().Result;
+                    getReturnResponseJSON = JsonConvert.SerializeObject(getResponse, Formatting.Indented);
+                    getReturnResponse = new JavaScriptSerializer().Deserialize<FormW2RecordsResponse>(getReturnResponseJSON);
+                    ViewData["GetResponseJSON"] = getReturnResponseJSON;
+                    return PartialView();
+                }
+            }
+            return PartialView(getReturnResponseJSON);
+        }
+        #endregion
+
+        #region List Form W-2 Return
+        public ActionResult GetFormW2List()
+        {
+            FormW2ListRequest formw2list = new FormW2ListRequest();
+            return View(formw2list);
+        }
+        #endregion
+
 
     }
 }

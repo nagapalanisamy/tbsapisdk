@@ -241,6 +241,7 @@
     <Compile Include="ViewModels\Form941SCHR\Form941SchRGetReturnResponse.cs" />
     <Compile Include="ViewModels\Form941SCHR\Form941SCHRStatusResponse.cs" />
     <Compile Include="ViewModels\Form941\Form941GetReturnResponse.cs" />
+    <Compile Include="ViewModels\FormW2\BaseResponseStatus.cs" />
     <Compile Include="ViewModels\FormW2\EfileStatusResponse.cs" />
     <Compile Include="ViewModels\BaseModels\Employee.cs" />
     <Compile Include="ViewModels\BaseModels\EntityBase.cs" />
@@ -272,6 +273,9 @@
     <Compile Include="ViewModels\FormW2\FormW2.cs" />
     <Compile Include="ViewModels\FormW2\FormW2DeleteReturnResponse.cs" />
     <Compile Include="ViewModels\FormW2\FormW2GetReturnResponse.cs" />
+    <Compile Include="ViewModels\FormW2\FormW2ListRequest.cs" />
+    <Compile Include="ViewModels\FormW2\FormW2ListResponse.cs" />
+    <Compile Include="ViewModels\FormW2\FormW2RecordsResponse.cs" />
     <Compile Include="ViewModels\FormW2\FormW2ReturnResponse.cs" />
     <Compile Include="ViewModels\BaseModels\SigningAuthority.cs" />
     <Compile Include="ViewModels\BaseModels\TransmitForm.cs" />
@@ -383,6 +387,8 @@
     <Content Include="Views\Form941SCHR\_GetEfileStatusResponse.cshtml" />
     <Content Include="Views\FormW2\FormW2UpdateReturn.cshtml" />
     <Content Include="Views\FormW2\_APIUpdateResponseStatus.cshtml" />
+    <Content Include="Views\FormW2\GetFormW2List.cshtml" />
+    <Content Include="Views\FormW2\_ListFormW2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />

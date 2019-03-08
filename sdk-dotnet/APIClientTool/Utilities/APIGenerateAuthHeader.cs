@@ -27,7 +27,7 @@ namespace APIClientTool.Utilities
                 string authorizeHeader = !string.IsNullOrWhiteSpace(userToken) ? userToken : string.Empty;
                 client.DefaultRequestHeaders.Add("UserToken", authorizeHeader);
             }
-            string IPAddress = HttpContext.Current.Request.UserHostAddress;
+            string IPAddress = HttpContext.Current.Request.UserHostAddress; // Map Your Public IP
             client.DefaultRequestHeaders.Add("IpAddress", IPAddress);
 
             var utcDate = DateTime.Now.ToUniversalTime().ToString("MM/dd/yyyy hh:mm:ss.fff tt");
